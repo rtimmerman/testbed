@@ -196,11 +196,16 @@ spec:
           volumeMounts:
             - name: apt-config
               mountPath: /apt-config/
+            - name: filestore
+              mountPath: /filestore/
       volumes:
         - name: apt-config
           configMap:
             name: apt-config
             defaultMode: 0755
+        - name: filestore
+          persistentVolumeClaim:
+            claimName: filestore
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -234,11 +239,16 @@ spec:
           volumeMounts:
             - name: apt-config
               mountPath: /apt-config/
+            - name: filestore
+              mountPath: /filestore/
       volumes:
         - name: apt-config
           configMap:
             name: apt-config
             defaultMode: 0755
+        - name: filestore
+          persistentVolumeClaim:
+            claimName: filestore
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -272,11 +282,17 @@ spec:
           volumeMounts:
             - name: apt-config
               mountPath: /apt-config/
+            - name: filestore
+              mountPath: /filestore/
       volumes:
         - name: apt-config
           configMap:
             name: apt-config
             defaultMode: 0755
+        - name: filestore
+          persistentVolumeClaim:
+            claimName: filestore
+          
 ---
 apiVersion: v1
 kind: Service

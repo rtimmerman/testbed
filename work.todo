@@ -1,6 +1,7 @@
 main Tasks:
-    ☐ Update seondary node clusters so that they can all use the filestore @today 
+    ✔ Update seondary node clusters so that they can all use the filestore @today @done (17/07/2020, 09:32:30)
     ☐ Create basic performance monitoring outputs
     ☐ Create dataset for replication
     ☐ Analyse dataset and get back to Stelios with an update on this
     ✔ Create filestore @done (17/07/2020, 08:12:28)
+    ✔ properly designate the primary and secondary nodes (add priority) @high @done (19/07/2020, 14:18:07)

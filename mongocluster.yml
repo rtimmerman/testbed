@@ -92,10 +92,10 @@ data:
     var error = rs.initiate({
       _id: "rs0",
       members: [
-        {_id: 0, host: "mongo-primary-db:27017"},
-        {_id: 1, host: "mongo-secondary-db-1:27017"},
-        {_id: 2, host: "mongo-secondary-db-2:27017"},
-        {_id: 3, host: "mongo-secondary-db-3:27017"}
+        {_id: 0, host: "mongo-primary-db:27017", priority: 2},
+        {_id: 1, host: "mongo-secondary-db-1:27017", priority: 1},
+        {_id: 2, host: "mongo-secondary-db-2:27017", priority: 1},
+        {_id: 3, host: "mongo-secondary-db-3:27017", priority: 1}
       ]
     });
     printjson(error);

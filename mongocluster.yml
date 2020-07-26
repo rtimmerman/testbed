@@ -153,7 +153,7 @@ spec:
             command:
               - "/bin/sh"
               - "-c"
-              - "mongod --config=/config/mongo-replication.yml & /apt-config/app-support.sh; for i in {1..60}; do sleep 1; if nc -z localhost 27017; then echo 'setting up mongo rs'; mongo /config/mongo-rs-config.js; break; fi; done; perl -e 'while(1) { sleep 60; }'"
+              - "mongod --config=/config/mongo-replication.yml & /apt-config/app-support.sh; for i in {1..60}; do sleep 1; if nc -z localhost 27017; then echo 'setting up mongo rs'; mongo /config/mongo-rs-config.js; break; fi; done; python3 /filestore/monitor.py"
             ports:
               - containerPort: 27017
             volumeMounts:
@@ -192,7 +192,7 @@ spec:
           command:
             - "/bin/sh"
             - "-c"
-            - "/apt-config/app-support.sh && mongod --replSet rs0 --bind_ip \\*"
+            - "/apt-config/app-support.sh; python3 /filestore/monitor.py & && mongod --replSet rs0 --bind_ip \\*"
           volumeMounts:
             - name: apt-config
               mountPath: /apt-config/

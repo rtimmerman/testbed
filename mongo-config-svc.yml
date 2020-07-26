@@ -1,0 +1,207 @@
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: dev
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: config-server-1
+  namespace: dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      role:  config-server-1
+  template:
+    metadata:
+      labels:
+        role: config-server-1
+    spec:
+      containers:
+        - name: config-server-1-pod
+          image: mongo
+          command:
+            - 'mongod'
+            - '--configsvr'
+            - '--replSet'
+            - 'configServerRS'
+            - '--bind_ip=*'
+            # - '--dbpath'
+            # - '/var/lib/mongod'
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: config-server-svc-1
+  namespace: dev
+spec:
+  selector:
+      role: config-server-1
+  ports:
+    - port: 27019
+      targetPort: 27019
+  type: ClusterIP
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: config-server-2
+  namespace: dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      role:  config-server-2
+  template:
+    metadata:
+      labels:
+        role: config-server-2
+    spec:
+      containers:
+        - name: config-server-2-pod
+          image: mongo
+          command:
+            - 'mongod'
+            - '--configsvr'
+            - '--replSet'
+            - 'configServerRS'
+            - '--bind_ip'
+            - '*'
+            # - '--dbpath'
+            # - '/var/lib/mongod'
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: config-server-svc-2
+  namespace: dev
+spec:
+  selector:
+      role: config-server-2
+  ports:
+    - port: 27019
+      targetPort: 27019
+  type: ClusterIP
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: config-server-3
+  namespace: dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      role:  config-server-3
+  template:
+    metadata:
+      labels:
+        role: config-server-3
+    spec:
+      containers:
+        - name: config-server-3-pod
+          image: mongo
+          command:
+            - 'mongod'
+            - '--configsvr'
+            - '--replSet'
+            - 'configServerRS'
+            - '--bind_ip'
+            - '*'
+            # - '--dbpath'
+            # - '/var/lib/mongod'
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: config-server-svc-3
+  namespace: dev
+spec:
+  selector:
+      role: config-server-3
+  ports:
+    - port: 27019
+      targetPort: 27019
+  type: ClusterIP
+---
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: script-dir
+  namespace: dev
+spec:
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteMany
+  gcePersistentDisk:
+    pdName: 'script-disk'
+    fsType: ext4
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: scripts-dir-claim
+  namespace: dev
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: ''
+  resources:
+    requests:
+        storage: 10Gi
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: rs-config
+  namespace: dev
+data:
+  shard-configdb.js: |
+    rs.initiate({
+      _id: "configServerRS",
+      configsvr: true,
+      members: [
+          { _id: 0, host: "config-server-svc-1:27019" },
+          { _id: 1, host: "config-server-svc-2:27019" },
+          { _id: 2, host: "config-server-svc-3:27019" }
+      ]
+    });
+  waitscript.pl: |
+    use Socket;
+
+    socket(SOCKET, PF_INET, SOCK_STREAM, (getprotobyname('tcp'))[2]);
+
+    $waiting = 1;
+    while ($waiting) {
+      sleep 1;
+      print "Attempting to connect...\n";
+      connect(SOCKET, pack_sockaddr_in(27019, inet_aton("config-server-svc-1"))) or next;
+      $waiting = 0;
+    }
+    print "Connected!\n";
+
+    print `mongo --host config-server-svc-1 --port 27019 /scripts/shard-configdb.js`;
+---
+kind: Pod
+apiVersion: v1
+metadata:
+  name: configurator-pod
+  namespace: dev
+spec:
+  containers:
+    - name: configurator-container
+      image: mongo
+      command: ['/usr/bin/perl', '/scripts/waitscript.pl']
+      volumeMounts:
+        - name: scripts-dir
+          mountPath: /scripts/
+  volumes:
+    - name: scripts-dir
+      configMap:
+        name: rs-config
+    # - name: scripts-dir
+    #   persistentVolumeClaim:
+    #     claimName: scripts-dir-claim
+  restartPolicy: Never

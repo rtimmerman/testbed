@@ -1,7 +1,17 @@
 main Tasks:
-    ✔ Update seondary node clusters so that they can all use the filestore @today @done (17/07/2020, 09:32:30)
-    ☐ Create basic performance monitoring outputs
-    ☐ Create dataset for replication
-    ☐ Analyse dataset and get back to Stelios with an update on this
-    ✔ Create filestore @done (17/07/2020, 08:12:28)
-    ✔ properly designate the primary and secondary nodes (add priority) @high @done (19/07/2020, 14:18:07)
+    Proving the obvious:
+        Hyphosesis: show a consistent behaviour across nodes.
+        Path 1:
+            Using Compute Kubernetes Clusters / Google Compute
+            Chosen to use MongoDB with replication for initial outing (see mongocluster.yml)
+            ✔ Update seondary node clusters so that they can all use the filestore @today @done (17/07/2020, 09:32:30)
+            ☐ Create basic performance monitoring outputs
+            ☐ Create dataset for replication
+            ☐ Analyse dataset and get back to Stelios with an update on this (python psutil)
+            ✔ Create filestore @done (17/07/2020, 08:12:28)
+            ✔ properly designate the primary and secondary nodes (add priority) @high @done (19/07/2020, 14:18:07)
+            ☐ Create shard variation for parallel processing paradigm (replication alone may not be enough!) @critical 
+                ✔ Create config replication server set. @done (26/07/2020, 02:23:37)
+                ☐  Create shards replication set.
+        Path 2:
+            Set up an Apache Spark environment with primary (master) and secondary (slave) nodes to demonstrate the flow of work from workers back to the ingress point of the master node

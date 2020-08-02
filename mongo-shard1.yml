@@ -1,0 +1,287 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fileserver
+  namespace: dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      role: fileserver
+  template:
+    metadata:
+      labels:
+        role: fileserver
+    spec:
+      containers:
+        - name: nfs-server
+          image: gcr.io/google_containers/volume-nfs:0.8
+          ports:
+            - name: nfs
+              containerPort: 2049
+            - name: mountd
+              containerPort: 20048
+            - name: rpcbind
+              containerPort: 111
+          securityContext:
+            privileged: true
+          volumeMounts:
+            - mountPath: /exports
+              name: export-volume
+      volumes:
+        - name: export-volume
+          gcePersistentDisk:
+            pdName: datastore
+            fsType: ext4
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: fileserver
+  namespace: dev
+spec:
+  ports:
+    - name: nfs
+      port: 2049
+    - name: mountd
+      port: 20048
+    - name: rpcbind
+      port: 111
+  selector:
+    role: fileserver
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nfs
+  namespace: dev
+spec:
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteMany
+  nfs:
+    server: fileserver.dev.svc.cluster.local
+    path: "/"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: filestore
+  namespace: dev
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: ""
+  resources:
+    requests:
+      storage: 10Gi
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mongo-rs-config
+  namespace: dev
+data:
+  mongo-rs-config.js: |
+    var error = rs.initiate({
+      _id: "rs0",
+      members: [
+        {_id: 0, host: "arnold-pri:27018", priority: 2},
+        {_id: 1, host: "arnold-sec-1:27018", priority: 1},
+        {_id: 2, host: "arnold-sec-2:27018", priority: 1}
+      ]
+    });
+    printjson(error);
+  mongo-replication.yml: |
+    sharding:
+      clusterRole:  shardsvr
+    replication:
+      replSetName: "rs0"
+    net:
+      bindIp: "*"
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: apt-config
+  namespace: dev
+data:
+  app-support.sh: |
+    apt update
+    apt install -y netcat python3 python3-pip
+    pip3 install psutil
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: arnold-pri
+  labels:
+    purpose: arnold-pri
+  namespace: dev
+spec:
+  selector:
+    matchLabels:
+      purpose: arnold-pri
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  template:
+      metadata:
+        labels:
+          purpose: arnold-pri
+      spec:
+        terminationGracePeriodSeconds: 5
+        volumes:
+          - name: startup-config
+            configMap:
+              name: mongo-rs-config
+          - name: apt-config
+            configMap:
+              name: apt-config
+              defaultMode: 0755
+          - name: filestore
+            persistentVolumeClaim:
+              claimName: filestore 
+        containers:
+          - image: mongo
+            name: mongo-db-container
+            command:
+              - "/bin/sh"
+              - "-c"
+              - "mongod --config=/config/mongo-replication.yml & /apt-config/app-support.sh; for i in {1..60}; do sleep 1; if nc -z arnold-pri 27018; then echo 'setting up mongo rs:'; break; fi; done; mongo --host arnold-pri:27018 /config/mongo-rs-config.js; python3 /filestore/monitor.py"
+            ports:
+              - containerPort: 27018
+            volumeMounts:
+              - name: startup-config
+                mountPath: /config/
+              - name: apt-config
+                mountPath: /apt-config/
+              - name: filestore
+                mountPath: /filestore/
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: arnold-sec-1
+  labels:
+    purpose: arnold-sec-1
+  namespace: dev  
+spec:
+  selector:
+    matchLabels:
+      purpose: arnold-sec-1
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        purpose: arnold-sec-1
+    spec:
+      terminationGracePeriodSeconds: 5
+      containers:
+        - image: mongo
+          name: mongo-db-container
+          ports:
+            - containerPort: 27018
+          command:
+            - "/bin/sh"
+            - "-c"
+            - "/apt-config/app-support.sh; mongod --shardsvr --replSet rs0 --bind_ip \\*"
+          volumeMounts:
+            - name: apt-config
+              mountPath: /apt-config/
+            - name: filestore
+              mountPath: /filestore/
+      volumes:
+        - name: apt-config
+          configMap:
+            name: apt-config
+            defaultMode: 0755
+        - name: filestore
+          persistentVolumeClaim:
+            claimName: filestore
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: arnold-sec-2
+  labels:
+    purpose: arnold-sec-2
+  namespace: dev
+spec:
+  selector:
+    matchLabels:
+      purpose: arnold-sec-2
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        purpose: arnold-sec-2
+    spec:
+      terminationGracePeriodSeconds: 5
+      containers:
+        - image: mongo
+          name: mongo-db-container
+          ports:
+            - containerPort: 27018
+          command:
+            - "/bin/sh"
+            - "-c"
+            - "/apt-config/app-support.sh && mongod --shardsvr --replSet rs0 --bind_ip \\*"
+          volumeMounts:
+            - name: apt-config
+              mountPath: /apt-config/
+            - name: filestore
+              mountPath: /filestore/
+      volumes:
+        - name: apt-config
+          configMap:
+            name: apt-config
+            defaultMode: 0755
+        - name: filestore
+          persistentVolumeClaim:
+            claimName: filestore
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: arnold-pri
+  namespace: dev
+spec:
+  selector:
+    purpose: arnold-pri
+  ports:
+    - port: 27018
+      targetPort: 27018
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: arnold-sec-1
+  namespace: dev
+spec:
+  selector:
+    purpose: arnold-sec-1
+  ports:
+    - port: 27018
+      targetPort: 27018
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: arnold-sec-2
+  namespace: dev
+spec:
+  selector:
+    purpose: arnold-sec-2
+  ports:
+    - port: 27018
+      targetPort: 27018
+  type: ClusterIP
+---

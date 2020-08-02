@@ -2,6 +2,17 @@ import psutil
 import time
 import socket
 import csv
+import signal
+import sys
+
+
+def terminate(signal, frame):
+    print("Received request to terminate gracefully.")
+    sys.exit(0)
+
+
+signal.signal(signal.SIGTERM, terminate)
+signal.signal(signal.SIGINT, terminate)
 
 hostname = socket.gethostname()
 

@@ -1,0 +1,42 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: startup-config
+  namespace: dev
+data:
+  start.sh: |
+    mongos --configdb 'configServerRS/config-server-svc-1:27019,config-server-svc-2:27019,config-server-svc-3:27019'
+    --bind_ip *
+    --logpath /var/log/mongos.log
+  file2.txt: |
+    foo
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: mongos-1
+  namespace: dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      role:  mongos-1
+  template:
+    metadata:
+      labels:
+        role: mongos-1
+    spec:
+      containers:
+        - name: mongos-1-pod
+          image: mongo
+          command:
+            - 'bin/sh'
+            - '/scripts/start.sh'
+          volumeMounts:
+            - name: scripts-dir
+              mountPath: /scripts/
+      volumes:
+        - name: scripts-dir
+          configMap:
+            name: startup-config
+---

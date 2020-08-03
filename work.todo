@@ -13,5 +13,11 @@ main Tasks:
             ☐ Create shard variation for parallel processing paradigm (replication alone may not be enough!) @critical 
                 ✔ Create config replication server set. @done (26/07/2020, 02:23:37)
                 ☐  Create shards replication set.
+                    ✔ Config Servers @done (02/08/2020, 23:07:07)
+                    ✔ Mongos instance @done (02/08/2020, 23:07:08)
+                    ✔ Shard1 Replica set @done (02/08/2020, 23:07:13)
+                    ✔ Register Shard1 on the mongos instance @done (03/08/2020, 09:02:44)
+                    ☐ Test experiment (distributed Mandelbrot set db calculation run).
+            ☐ Consider Apache Spark too- discuss merits/demerits academically with Stelios @low 
         Path 2:
             Set up an Apache Spark environment with primary (master) and secondary (slave) nodes to demonstrate the flow of work from workers back to the ingress point of the master node

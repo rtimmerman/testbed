@@ -104,6 +104,19 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
+  name: add-shard
+  namespace: dev
+data:
+  add-shard.js: |
+    var error = sh.addShard(
+      "rs0/arnold-pri:27018,arnold-sec-1:27018,arnold-sec-2:27018"
+    );
+
+    printjson(error);
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
   name: apt-config
   namespace: dev
 data:
@@ -285,3 +298,21 @@ spec:
       targetPort: 27018
   type: ClusterIP
 ---
+kind: Pod
+apiVersion: v1
+metadata:
+  name: arnold-configurator-pod
+  namespace: dev
+spec:
+  containers:
+    - name: configurator-container
+      image: mongo
+      command: ['mongo', 'mongos-1-svc:27017/admin','/scripts/add-shard.js']
+      volumeMounts:
+        - name: scripts-dir
+          mountPath: /scripts/
+  volumes:
+    - name: scripts-dir
+      configMap:
+        name: add-shard
+  restartPolicy: Never

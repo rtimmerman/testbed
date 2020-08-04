@@ -5,7 +5,9 @@ metadata:
   namespace: dev
 data:
   start.sh: |
-    mongos --configdb 'configServerRS/config-server-svc-1:27019,config-server-svc-2:27019,config-server-svc-3:27019' --bind_ip \* --logpath '/var/log/mongos.log'
+    apt update && \
+    apt install -y lsof netcat less
+    mongos --configdb 'configServerRS/config-server-svc-1:27019,config-server-svc-2:27019,config-server-svc-3:27019' --bind_ip_all --logpath '/var/log/mongos.log'
   file2.txt: |
     foo
 ---

@@ -113,6 +113,46 @@ data:
     );
 
     printjson(error);
+
+    print("installing cartToPol fn");
+
+    var out = db.system.js.save({
+      _id: 'cartToPol',
+      value: function (x, y, width, height) {
+          return {
+              re: -2 + ((x / width) * 4),
+              im: -2 + ((y / height) * 4)
+          };
+      }
+    });
+
+    printjson(out);
+
+    print("installing mandelbrot fn");
+
+    var out = db.system.js.save({
+      _id: 'mandelbrot',
+      value: function (z, c, iterations) {
+          if (iterations == 0) {
+              return -1;
+          }
+
+          var M = {
+              re: ((z.re * z.re) - (z.im * z.im)) + c.re,
+              im: (2 * (z.im * z.re)) + c.im
+          }
+
+          var M_abs = Math.sqrt((M.re * M.re) + (M.im * M.im));
+
+          if (M_abs > 4.0) {
+              return iterations;
+          }
+
+          return mandelbrot(M, c, iterations - 1);
+      }
+    });
+
+    printjson(out);
 ---
 apiVersion: v1
 kind: ConfigMap

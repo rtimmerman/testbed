@@ -19,5 +19,7 @@ main Tasks:
                     ✔ Register Shard1 on the mongos instance @done (03/08/2020, 09:02:44)
                     ☐ Test experiment (distributed Mandelbrot set db calculation run).
             ☐ Consider Apache Spark too- discuss merits/demerits academically with Stelios @low 
+                MR-strategy 1 no aggregation: db.test.mapReduce(function() {emit(this._id, cartToPol(this.x, this.y, 640, 640)); }, function(key, values) { return Array.sum(values)},{out: {"inline": 1}})
+                MR-stragegy 2 no aggregation: db.test.mapReduce(function() {var zval = cartToPol(this.x, this.y, 32, 32); emit(this._id, {x: this.x, y: this.y, M: mandelbrot(zval, zval, 10)}); }, function(key, values) { return values; },{out: {"inline": 1}})
         Path 2:
             Set up an Apache Spark environment with primary (master) and secondary (slave) nodes to demonstrate the flow of work from workers back to the ingress point of the master node

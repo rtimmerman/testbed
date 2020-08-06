@@ -1,5 +1,6 @@
 import psutil
 import time
+import datetime
 import socket
 import csv
 import signal
@@ -25,6 +26,8 @@ with open("/filestore/perf_{host}.csv".format(host=hostname), 'w') as logfile:
     while True:
         logwriter = csv.writer(logfile)
         logwriter.writerow([
+            time.strftime("%Y-%m-%dT%H:%M:%S %Z"),
+            datetime.datetime.now().strftime("%f"),
             psutil.cpu_percent(),
             psutil.virtual_memory().percent,
             psutil.disk_io_counters().read_count - disk_read_baseline,

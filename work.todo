@@ -7,7 +7,7 @@ main Tasks:
             ✔ Update seondary node clusters so that they can all use the filestore @today @done (17/07/2020, 09:32:30)
             ☐ Create basic performance monitoring outputs
             ☐ Create dataset for replication
-            ☐ Analyse dataset and get back to Stelios with an update on this (python psutil)
+            ✔ Analyse dataset and get back to Stelios with an update on this (python psutil) @done (11/08/2020, 18:38:47)
             ✔ Create filestore @done (17/07/2020, 08:12:28)
             ✔ properly designate the primary and secondary nodes (add priority) @high @done (19/07/2020, 14:18:07)
             ☐ Create shard variation for parallel processing paradigm (replication alone may not be enough!) @critical 
@@ -17,9 +17,36 @@ main Tasks:
                     ✔ Mongos instance @done (02/08/2020, 23:07:08)
                     ✔ Shard1 Replica set @done (02/08/2020, 23:07:13)
                     ✔ Register Shard1 on the mongos instance @done (03/08/2020, 09:02:44)
-                    ☐ Test experiment (distributed Mandelbrot set db calculation run).
+                    ✔ Test experiment (distributed Mandelbrot set db calculation run). @done (11/08/2020, 18:45:27)
             ☐ Consider Apache Spark too- discuss merits/demerits academically with Stelios @low 
                 MR-strategy 1 no aggregation: db.test.mapReduce(function() {emit(this._id, cartToPol(this.x, this.y, 640, 640)); }, function(key, values) { return Array.sum(values)},{out: {"inline": 1}})
                 MR-stragegy 2 no aggregation: db.test.mapReduce(function() {var zval = cartToPol(this.x, this.y, 32, 32); emit(this._id, {x: this.x, y: this.y, M: mandelbrot(zval, zval, 10)}); }, function(key, values) { return values; },{out: {"inline": 1}})
         Path 2:
             Set up an Apache Spark environment with primary (master) and secondary (slave) nodes to demonstrate the flow of work from workers back to the ingress point of the master node
+
+Stelios Catchup 11-08-2020:
+☐ Prometheus + Graffana - speak to Stelios' other student about how to configure this with Kubernetes.  Prometheus - presents a better representation of the data for reporting. Try with this. @high
+
+☐ Writeup a report of the findings, summarise this in a paragraph describing how the process was established (step-by-step), bullet points are fine.  Master document will clean this up.  This will form the progress report for the university. @high
+    - write up the report to avoid losing any key findings and to keep base.
+    
+☐ MongoDB seek out the stats from workload - see how the workload generates (Prometheus should provide this - setup once and then examine the data in more detail)
+    - https://github.com/brianfrankcooper/YCSB/tree/master/mongodb 
+
+Optimisation: databasing - distributed database (logical) - distributed data (spark cluster-like, mongo etc., distribusted hadoopfs etc.)
+        - monitor and flatten curves (optimise).
+
+Demonstrate the problem (here the replication of load data), think of it in a more generic problem of distributed data systems.
+    - Look up literature for these scenarios - lookup profiling, pattern analysis of real-time scenarios.  Consider the workloads they are running.  We can create our workload - publically available workload, can a workload be extended - investigate -inspect how the code was running.
+    e.g. mongodb + javabased workload e.g. look into patterns approved by general public.
+
+☐ Apache Spark - this is next step to investigate.  Readup Stelios' notes on Spark - run Spark on top of GCP too. @high 
+    - use this to critique current approaches to data optimisation flows and etc.
+
+    the Apache Spark runs discrete steps in memory - would be interesting to see how it works in comparison to other systems.
+    Outcome: an optimisation framework.  Start with Map Reduce and move along from there in the development of the optimisation framework(s).
+
+Stelios will be off for a while, contact after start of September.
+
+* Define Optimisation
+* Why MongoDB

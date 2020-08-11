@@ -192,7 +192,7 @@ spec:
           - name: apt-config
             configMap:
               name: apt-config
-              defaultMode: 0755
+              defaultMode: 0777
           - name: filestore
             persistentVolumeClaim:
               claimName: filestore 
@@ -251,7 +251,7 @@ spec:
         - name: apt-config
           configMap:
             name: apt-config
-            defaultMode: 0755
+            defaultMode: 0777
         - name: filestore
           persistentVolumeClaim:
             claimName: filestore
@@ -294,7 +294,7 @@ spec:
         - name: apt-config
           configMap:
             name: apt-config
-            defaultMode: 0755
+            defaultMode: 0777
         - name: filestore
           persistentVolumeClaim:
             claimName: filestore

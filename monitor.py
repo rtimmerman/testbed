@@ -17,9 +17,9 @@ signal.signal(signal.SIGINT, terminate)
 
 hostname = socket.gethostname()
 
-with open("/filestore/perf_{host}.csv".format(host=hostname), 'w') as logfile:
+with open("/filestore/perf_{host}.csv".format(host=hostname), 'w+') as logfile:
     logwriter = csv.writer(logfile)
-    logwriter.writerow(["Processor %", "Memory Free %",
+    logwriter.writerow(["Timestamp", "+ms", "Processor %", "Memory Free %",
                         "Disk Read", "Disk Write"])
     disk_write_baseline = psutil.disk_io_counters().write_count
     disk_read_baseline = psutil.disk_io_counters().read_count

@@ -160,10 +160,44 @@ metadata:
   name: apt-config
   namespace: dev
 data:
-  app-support.sh: |
+  app-support-pri.sh: |
     apt update
     apt install -y netcat python3 python3-pip
     pip3 install psutil
+    mongod --config=/config/mongo-replication.yml --bind_ip_all &
+    for i in {1..60}; do
+       sleep 1
+       echo 'waiting for arnold-pri:27018 ...'
+       if nc -z arnold-pri 27018; then
+        echo 'setting up mongo rs via arnold-pri ...'
+        mongo --host arnold-pri:27018 /config/mongo-rs-config.js
+        echo 'mongo rs configured!'
+        break
+      fi 
+    done
+    #python3 /filestore/monitor.py
+    cd $HOME
+    tar -zxf /filestore/node_exporter-1.0.1.linux-amd64.tar.gz
+    ./node_exporter-1.0.1.linux-amd64/node_exporter --web.listen-address=0.0.0.0:9091
+  app-support-sec.sh: |
+    apt update
+    apt install -y netcat python3 python3-pip
+    pip3 install psutil
+    mongod --shardsvr --replSet rs0 --bind_ip_all &
+    cd $HOME
+    tar -zxf /filestore/node_exporter-1.0.1.linux-amd64.tar.gz
+    ./node_exporter-1.0.1.linux-amd64/node_exporter --web.listen-address=0.0.0.0:9091
+  configurator.sh: |
+    apt update
+    apt install -y netcat
+    for i in {1..60}; do
+      sleep 1
+      if nc -z mongos-1-svc 27017; then
+        echo 'Establishing shards'
+        mongo mongos-1-svc:27017/admin /scripts/add-shard.js
+        break
+      fi
+    done
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -202,9 +236,10 @@ spec:
             command:
               - "/bin/sh"
               - "-c"
-              - "mongod --config=/config/mongo-replication.yml & /apt-config/app-support.sh; for i in {1..60}; do sleep 1; if nc -z arnold-pri 27018; then echo 'setting up mongo rs:'; break; fi; done; mongo --host arnold-pri:27018 /config/mongo-rs-config.js; python3 /filestore/monitor.py"
+              - "/apt-config/app-support-pri.sh"
             ports:
               - containerPort: 27018
+              - containerPort: 9091
             volumeMounts:
               - name: startup-config
                 mountPath: /config/
@@ -238,10 +273,11 @@ spec:
           name: mongo-db-container
           ports:
             - containerPort: 27018
+            - containerPort: 9091
           command:
             - "/bin/sh"
             - "-c"
-            - "/apt-config/app-support.sh; mongod --shardsvr --replSet rs0 --bind_ip \\*"
+            - "/apt-config/app-support-sec.sh"
           volumeMounts:
             - name: apt-config
               mountPath: /apt-config/
@@ -281,10 +317,11 @@ spec:
           name: mongo-db-container
           ports:
             - containerPort: 27018
+            - containerPort: 9091
           command:
             - "/bin/sh"
             - "-c"
-            - "/apt-config/app-support.sh && mongod --shardsvr --replSet rs0 --bind_ip \\*"
+            - "/apt-config/app-support-sec.sh"
           volumeMounts:
             - name: apt-config
               mountPath: /apt-config/
@@ -308,8 +345,12 @@ spec:
   selector:
     purpose: arnold-pri
   ports:
-    - port: 27018
+    - name: mongo
+      port: 27018
       targetPort: 27018
+    - name: node-exporter
+      port: 9091
+      targetPort: 9091
   type: ClusterIP
 ---
 apiVersion: v1
@@ -321,8 +362,12 @@ spec:
   selector:
     purpose: arnold-sec-1
   ports:
-    - port: 27018
+    - name: mongo
+      port: 27018
       targetPort: 27018
+    - name: node-exporter
+      port: 9091
+      targetPort: 9091
   type: ClusterIP
 ---
 apiVersion: v1
@@ -334,8 +379,12 @@ spec:
   selector:
     purpose: arnold-sec-2
   ports:
-    - port: 27018
+    - name: mongo
+      port: 27018
       targetPort: 27018
+    - name: node-exporter
+      port: 9091
+      targetPort: 9091
   type: ClusterIP
 ---
 kind: Pod
@@ -347,11 +396,17 @@ spec:
   containers:
     - name: configurator-container
       image: mongo
-      command: ['mongo', 'mongos-1-svc:27017/admin','/scripts/add-shard.js']
+      command: ['/bin/sh', '-c','/apt-config/configurator.sh']
       volumeMounts:
+        - name: apt-config
+          mountPath: /apt-config/
         - name: scripts-dir
           mountPath: /scripts/
   volumes:
+    - name: apt-config
+      configMap:
+        name: apt-config
+        defaultMode: 0777
     - name: scripts-dir
       configMap:
         name: add-shard

@@ -27,7 +27,7 @@ main Tasks:
 Stelios Catchup 11-08-2020:
 ☐ Prometheus + Graffana - speak to Stelios' other student about how to configure this with Kubernetes.  Prometheus - presents a better representation of the data for reporting. Try with this. @high
 
-☐ Writeup a report of the findings, summarise this in a paragraph describing how the process was established (step-by-step), bullet points are fine.  Master document will clean this up.  This will form the progress report for the university. @high
+✔ Writeup a report of the findings, summarise this in a paragraph describing how the process was established (step-by-step), bullet points are fine.  Master document will clean this up.  This will form the progress report for the university. @high @done (24/08/2020, 10:46:33)
     - write up the report to avoid losing any key findings and to keep base.
     
 ☐ MongoDB seek out the stats from workload - see how the workload generates (Prometheus should provide this - setup once and then examine the data in more detail)

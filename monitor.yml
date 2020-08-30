@@ -61,9 +61,12 @@ metadata:
   name: prometheus-svc
   namespace: dev
 spec:
+  type: LoadBalancer
   selector:
     role: prometheus
   ports:
     - name: prometheus
       port: 9090
       targetPort: 9090
+      # nodePort: 30190
+      protocol: TCP

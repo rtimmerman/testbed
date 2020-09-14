@@ -99,6 +99,16 @@ spec:
           ports:
             - name: grafana
               containerPort: 3000
+          env:
+            - name: GF_DATABASE_PATH
+              value: /data/grafana
+          volumeMounts:
+          - name: data-volume
+            mountPath: /data/
+      volumes:
+        - name: data-volume
+          persistentVolumeClaim:
+            claimName: filestore
 ---
 apiVersion: v1
 kind: Service

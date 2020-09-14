@@ -42,6 +42,7 @@ spec:
           command:
             - '/bin/prometheus'
             - '--config.file=/config/prometheus.yml'
+            - '--storage.tsdb.path=/data/'
           ports:
             - name: prometheus
               containerPort: 9090
@@ -50,10 +51,16 @@ spec:
           volumeMounts:
             - mountPath: /config
               name: config-volume
+            - name: data-volume
+              mountPath: /data/
       volumes:
         - name: config-volume
           configMap:
             name: prometheus-cm
+        - name: data-volume
+          persistentVolumeClaim:
+            claimName: filestore
+
 ---
 apiVersion: v1
 kind: Service

@@ -159,7 +159,7 @@ metadata:
   namespace: dev
 data:
   shard-configdb.js: |
-    rs.initiate({
+    result = rs.initiate({
       _id: "configServerRS",
       configsvr: true,
       members: [
@@ -168,21 +168,40 @@ data:
           { _id: 2, host: "config-server-svc-3:27019", priority: 1 }
       ]
     });
+
+    printjson(result);
   waitscript.pl: |
     use Socket;
 
-    socket(SOCKET, PF_INET, SOCK_STREAM, (getprotobyname('tcp'))[2]);
+    $| = 1;
+
+    socket(SOCKET1, PF_INET, SOCK_STREAM, (getprotobyname('tcp'))[2]);
+    socket(SOCKET2, PF_INET, SOCK_STREAM, (getprotobyname('tcp'))[2]);
+    socket(SOCKET3, PF_INET, SOCK_STREAM, (getprotobyname('tcp'))[2]);
 
     $waiting = 1;
     while ($waiting) {
       sleep 1;
       print "Attempting to connect...\n";
-      connect(SOCKET, pack_sockaddr_in(27019, inet_aton("config-server-svc-1"))) or next;
+      
+      (
+        connect(SOCKET1, pack_sockaddr_in(27019, inet_aton("config-server-svc-1")))
+        and connect(SOCKET2, pack_sockaddr_in(27019, inet_aton("config-server-svc-2")))
+        and connect(SOCKET3, pack_sockaddr_in(27019, inet_aton("config-server-svc-3")))
+      ) or next;
+
       $waiting = 0;
     }
-    print "Connected!\n";
+
+    close(SOCKET1);
+    close(SOCKET2);
+    close(SOCKET3);
+
+    printf "Connected!\n";
 
     print `mongo --host config-server-svc-1 --port 27019 /scripts/shard-configdb.js`;
+
+    exit(0);
 ---
 kind: Pod
 apiVersion: v1

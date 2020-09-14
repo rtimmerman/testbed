@@ -84,15 +84,23 @@ metadata:
   namespace: dev
 data:
   mongo-rs-config.js: |
-    var error = rs.initiate({
-      _id: "rs0",
-      members: [
-        {_id: 0, host: "arnold-pri:27018", priority: 2},
-        {_id: 1, host: "arnold-sec-1:27018", priority: 1},
-        {_id: 2, host: "arnold-sec-2:27018", priority: 1}
-      ]
-    });
-    printjson(error);
+    while (true) {
+      sleep(1000);
+      var result = rs.initiate({
+        _id: "rs0",
+        members: [
+          {_id: 0, host: "arnold-pri:27018", priority: 2},
+          {_id: 1, host: "arnold-sec-1:27018", priority: 1},
+          {_id: 2, host: "arnold-sec-2:27018", priority: 1}
+        ]
+      });
+      printjson(result);
+
+      if (result.ok == 1) {
+        break;
+      }
+    }
+
   mongo-replication.yml: |
     sharding:
       clusterRole:  shardsvr
@@ -108,11 +116,18 @@ metadata:
   namespace: dev
 data:
   add-shard.js: |
-    var error = sh.addShard(
-      "rs0/arnold-pri:27018,arnold-sec-1:27018,arnold-sec-2:27018"
-    );
+    var ok = false;
 
-    printjson(error);
+    while(!ok) {
+      sleep(10000);
+      var error = sh.addShard(
+        "rs0/arnold-pri:27018,arnold-sec-1:27018,arnold-sec-2:27018"
+      );
+
+      ok = (error.ok == 1);
+
+      printjson(error);
+    }
 
     print("installing cartToPol fn");
 
@@ -168,7 +183,7 @@ data:
     for i in {1..60}; do
        sleep 1
        echo 'waiting for arnold-pri:27018 ...'
-       if nc -z arnold-pri 27018; then
+       if `nc -z arnold-pri 27018`; then
         echo 'setting up mongo rs via arnold-pri ...'
         mongo --host arnold-pri:27018 /config/mongo-rs-config.js
         echo 'mongo rs configured!'

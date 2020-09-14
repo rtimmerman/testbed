@@ -25,12 +25,13 @@ main Tasks:
             Set up an Apache Spark environment with primary (master) and secondary (slave) nodes to demonstrate the flow of work from workers back to the ingress point of the master node
 
 Stelios Catchup 11-08-2020:
-☐ Prometheus + Graffana - speak to Stelios' other student about how to configure this with Kubernetes.  Prometheus - presents a better representation of the data for reporting. Try with this. @high
+✔ Prometheus + Graffana - speak to Stelios' other student about how to configure this with Kubernetes.  Prometheus - presents a better representation of the data for reporting. Try with this. @high @done (01/09/2020, 22:59:14)
+    - n.b. incorporated in monitor.yml didn't need help with the setting up of this...
 
 ✔ Writeup a report of the findings, summarise this in a paragraph describing how the process was established (step-by-step), bullet points are fine.  Master document will clean this up.  This will form the progress report for the university. @high @done (24/08/2020, 10:46:33)
     - write up the report to avoid losing any key findings and to keep base.
     
-☐ MongoDB seek out the stats from workload - see how the workload generates (Prometheus should provide this - setup once and then examine the data in more detail)
+✔ MongoDB seek out the stats from workload - see how the workload generates (Prometheus should provide this - setup once and then examine the data in more detail) @done (01/09/2020, 22:58:52)
     - https://github.com/brianfrankcooper/YCSB/tree/master/mongodb 
 
 Optimisation: databasing - distributed database (logical) - distributed data (spark cluster-like, mongo etc., distribusted hadoopfs etc.)

@@ -131,15 +131,15 @@ data:
 
     print("installing cartToPol fn");
 
-    var out = db.system.js.save({
-      _id: 'cartToPol',
-      value: function (x, y, width, height) {
-          return {
-              re: -2 + ((x / width) * 4),
-              im: -2 + ((y / height) * 4)
-          };
-      }
-    });
+      var out = db.system.js.save({
+        _id: 'cartToPol',
+        value: function (x, y, width, height) {
+            return {
+                re: -2 + ((x / width) * 4),
+                im: -2 + ((y / height) * 4)
+            };
+        }
+      });
 
     printjson(out);
 
@@ -179,9 +179,10 @@ data:
     apt update
     apt install -y netcat python3 python3-pip
     pip3 install psutil
-    mongod --config=/config/mongo-replication.yml --bind_ip_all &
+    mkdir -p /filestore/data/arnold-pri
+    mongod --config=/config/mongo-replication.yml --bind_ip_all --dbpath /filestore/data/arnold-pri &
     for i in {1..60}; do
-       sleep 1
+       sleep 10
        echo 'waiting for arnold-pri:27018 ...'
        if `nc -z arnold-pri 27018`; then
         echo 'setting up mongo rs via arnold-pri ...'
@@ -194,11 +195,21 @@ data:
     cd $HOME
     tar -zxf /filestore/node_exporter-1.0.1.linux-amd64.tar.gz
     ./node_exporter-1.0.1.linux-amd64/node_exporter --web.listen-address=0.0.0.0:9091
-  app-support-sec.sh: |
+  app-support-sec-1.sh: |
     apt update
     apt install -y netcat python3 python3-pip
     pip3 install psutil
-    mongod --shardsvr --replSet rs0 --bind_ip_all &
+    mkdir -p /filestore/data/arnold-sec-1
+    mongod --shardsvr --replSet rs0 --bind_ip_all --dbpath /filestore/data/arnold-sec-1 &
+    cd $HOME
+    tar -zxf /filestore/node_exporter-1.0.1.linux-amd64.tar.gz
+    ./node_exporter-1.0.1.linux-amd64/node_exporter --web.listen-address=0.0.0.0:9091
+  app-support-sec-2.sh: |
+    apt update
+    apt install -y netcat python3 python3-pip
+    pip3 install psutil
+    mkdir -p /filestore/data/arnold-sec-2
+    mongod --shardsvr --replSet rs0 --bind_ip_all --dbpath /filestore/data/arnold-sec-2 &
     cd $HOME
     tar -zxf /filestore/node_exporter-1.0.1.linux-amd64.tar.gz
     ./node_exporter-1.0.1.linux-amd64/node_exporter --web.listen-address=0.0.0.0:9091
@@ -292,7 +303,7 @@ spec:
           command:
             - "/bin/sh"
             - "-c"
-            - "/apt-config/app-support-sec.sh"
+            - "/apt-config/app-support-sec-1.sh"
           volumeMounts:
             - name: apt-config
               mountPath: /apt-config/
@@ -336,7 +347,7 @@ spec:
           command:
             - "/bin/sh"
             - "-c"
-            - "/apt-config/app-support-sec.sh"
+            - "/apt-config/app-support-sec-2.sh"
           volumeMounts:
             - name: apt-config
               mountPath: /apt-config/

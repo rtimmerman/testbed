@@ -51,3 +51,28 @@ Stelios will be off for a while, contact after start of September.
 
 * Define Optimisation
 * Why MongoDB
+
+
+---
+15-09-2020:
+
+    Issues spotted with arnold configurator - the rs has a max of 60 tries/sec but it appears to not be good enough since step to configure rs doesn't appear to be run consistently.
+
+    db.createCollection('test')
+    for (y = 0; y < 32; ++y)  { for (x = 0; x < 32; ++x) { db.test.insert({x: x, y: y}) } }
+
+16-09-2020:
+
+    conn = Mongo('arnold-pri:27018');
+    testdb = conn.getDB('test');
+    sh.enableSharding('testdb');
+    sh.shardCollection('testdb.test', {x: 1, y: 1});
+
+17-09-2020:
+    Todo:
+        ☐ Get Prometheus data to persist
+            - look into remote write functionality or investigate weather a scrapping script would be better.  It would be cool if datasets can be re-graphed.  The writer may work better BUT the scraper may be easier to manipulate with a custom query in place.  
+        ☐ Setup the Apache Spark cluster
+
+23-09-2020:
+    

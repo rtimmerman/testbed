@@ -10,9 +10,9 @@ data:
       var result = rs.initiate({
         _id: "rs0",
         members: [
-          {_id: 0, host: "arnold-pri:27018", priority: 2},
-          {_id: 1, host: "arnold-sec-1:27018", priority: 1},
-          {_id: 2, host: "arnold-sec-2:27018", priority: 1}
+          {_id: 0, host: "SHARD_NAME-pri:27018", priority: 2},
+          {_id: 1, host: "SHARD_NAME-sec-1:27018", priority: 1},
+          {_id: 2, host: "SHARD_NAME-sec-2:27018", priority: 1}
         ]
       });
       printjson(result);
@@ -42,7 +42,7 @@ data:
     while(!ok) {
       sleep(10000);
       var error = sh.addShard(
-        "rs0/arnold-pri:27018,arnold-sec-1:27018,arnold-sec-2:27018"
+        "rs0/SHARD_NAME-pri:27018,SHARD_NAME-sec-1:27018,SHARD_NAME-sec-2:27018"
       );
 
       ok = (error.ok == 1);
@@ -100,14 +100,14 @@ data:
     apt update
     apt install -y netcat python3 python3-pip
     pip3 install psutil
-    mkdir -p /filestore/data/arnold-pri
-    mongod --config=/config/mongo-replication.yml --bind_ip_all --dbpath /filestore/data/arnold-pri &
+    mkdir -p /filestore/data/SHARD_NAME-pri
+    mongod --config=/config/mongo-replication.yml --bind_ip_all --dbpath /filestore/data/SHARD_NAME-pri &
     for i in {1..60}; do
        sleep 10
-       echo 'waiting for arnold-pri:27018 ...'
-       if `nc -z arnold-pri 27018`; then
-        echo 'setting up mongo rs via arnold-pri ...'
-        mongo --host arnold-pri:27018 /config/mongo-rs-config.js
+       echo 'waiting for SHARD_NAME-pri:27018 ...'
+       if `nc -z SHARD_NAME-pri 27018`; then
+        echo 'setting up mongo rs via SHARD_NAME-pri ...'
+        mongo --host SHARD_NAME-pri:27018 /config/mongo-rs-config.js
         echo 'mongo rs configured!'
         break
       fi 
@@ -120,8 +120,8 @@ data:
     apt update
     apt install -y netcat python3 python3-pip
     pip3 install psutil
-    mkdir -p /filestore/data/arnold-sec-1
-    mongod --shardsvr --replSet rs0 --bind_ip_all --dbpath /filestore/data/arnold-sec-1 &
+    mkdir -p /filestore/data/SHARD_NAME-sec-1
+    mongod --shardsvr --replSet rs0 --bind_ip_all --dbpath /filestore/data/SHARD_NAME-sec-1 &
     cd $HOME
     tar -zxf /filestore/node_exporter-1.0.1.linux-amd64.tar.gz
     ./node_exporter-1.0.1.linux-amd64/node_exporter --web.listen-address=0.0.0.0:9091
@@ -129,8 +129,8 @@ data:
     apt update
     apt install -y netcat python3 python3-pip
     pip3 install psutil
-    mkdir -p /filestore/data/arnold-sec-2
-    mongod --shardsvr --replSet rs0 --bind_ip_all --dbpath /filestore/data/arnold-sec-2 &
+    mkdir -p /filestore/data/SHARD_NAME-sec-2
+    mongod --shardsvr --replSet rs0 --bind_ip_all --dbpath /filestore/data/SHARD_NAME-sec-2 &
     cd $HOME
     tar -zxf /filestore/node_exporter-1.0.1.linux-amd64.tar.gz
     ./node_exporter-1.0.1.linux-amd64/node_exporter --web.listen-address=0.0.0.0:9091
@@ -149,21 +149,21 @@ data:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: arnold-pri
+  name: SHARD_NAME-pri
   labels:
-    purpose: arnold-pri
+    purpose: SHARD_NAME-pri
   namespace: dev
 spec:
   selector:
     matchLabels:
-      purpose: arnold-pri
+      purpose: SHARD_NAME-pri
   replicas: 1
   strategy:
     type: RollingUpdate
   template:
       metadata:
         labels:
-          purpose: arnold-pri
+          purpose: SHARD_NAME-pri
       spec:
         terminationGracePeriodSeconds: 5
         volumes:
@@ -198,21 +198,21 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: arnold-sec-1
+  name: SHARD_NAME-sec-1
   labels:
-    purpose: arnold-sec-1
+    purpose: SHARD_NAME-sec-1
   namespace: dev  
 spec:
   selector:
     matchLabels:
-      purpose: arnold-sec-1
+      purpose: SHARD_NAME-sec-1
   replicas: 1
   strategy:
     type: RollingUpdate
   template:
     metadata:
       labels:
-        purpose: arnold-sec-1
+        purpose: SHARD_NAME-sec-1
     spec:
       terminationGracePeriodSeconds: 5
       containers:
@@ -242,21 +242,21 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: arnold-sec-2
+  name: SHARD_NAME-sec-2
   labels:
-    purpose: arnold-sec-2
+    purpose: SHARD_NAME-sec-2
   namespace: dev
 spec:
   selector:
     matchLabels:
-      purpose: arnold-sec-2
+      purpose: SHARD_NAME-sec-2
   replicas: 1
   strategy:
     type: RollingUpdate
   template:
     metadata:
       labels:
-        purpose: arnold-sec-2
+        purpose: SHARD_NAME-sec-2
     spec:
       terminationGracePeriodSeconds: 5
       containers:
@@ -286,11 +286,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: arnold-pri
+  name: SHARD_NAME-pri
   namespace: dev
 spec:
   selector:
-    purpose: arnold-pri
+    purpose: SHARD_NAME-pri
   ports:
     - name: mongo
       port: 27018
@@ -303,11 +303,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: arnold-sec-1
+  name: SHARD_NAME-sec-1
   namespace: dev
 spec:
   selector:
-    purpose: arnold-sec-1
+    purpose: SHARD_NAME-sec-1
   ports:
     - name: mongo
       port: 27018
@@ -320,11 +320,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: arnold-sec-2
+  name: SHARD_NAME-sec-2
   namespace: dev
 spec:
   selector:
-    purpose: arnold-sec-2
+    purpose: SHARD_NAME-sec-2
   ports:
     - name: mongo
       port: 27018
@@ -337,7 +337,7 @@ spec:
 kind: Pod
 apiVersion: v1
 metadata:
-  name: arnold-configurator-pod
+  name: SHARD_NAME-configurator-pod
   namespace: dev
 spec:
   containers:

@@ -58,7 +58,7 @@ Stelios will be off for a while, contact after start of September.
 
     Issues spotted with arnold configurator - the rs has a max of 60 tries/sec but it appears to not be good enough since step to configure rs doesn't appear to be run consistently.
 
-    db.createCollection('test')
+    db.createCollection('test');
     for (y = 0; y < 32; ++y)  { for (x = 0; x < 32; ++x) { db.test.insert({x: x, y: y}) } }
 
 16-09-2020:

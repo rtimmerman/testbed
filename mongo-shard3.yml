@@ -1,14 +1,14 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: mongo-rs-config
+  name: mongo-rs-config-calvin
   namespace: dev
 data:
-  mongo-rs-config.js: |
+  mongo-rs-config-calvin.js: |
     while (true) {
       sleep(1000);
       var result = rs.initiate({
-        _id: "rs0",
+        _id: "calvin.rs",
         members: [
           {_id: 0, host: "calvin-pri:27018", priority: 2},
           {_id: 1, host: "calvin-sec-1:27018", priority: 1},
@@ -22,27 +22,27 @@ data:
       }
     }
 
-  mongo-replication.yml: |
+  mongo-replication-calvin.yml: |
     sharding:
       clusterRole:  shardsvr
     replication:
-      replSetName: "rs0"
+      replSetName: "calvin.rs"
     net:
       bindIp: "*"
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: add-shard
+  name: add-shard-calvin
   namespace: dev
 data:
-  add-shard.js: |
+  add-shard-calvin.js: |
     var ok = false;
 
     while(!ok) {
       sleep(10000);
       var error = sh.addShard(
-        "rs0/calvin-pri:27018,calvin-sec-1:27018,calvin-sec-2:27018"
+        "calvin.rs/calvin-pri:27018,calvin-sec-1:27018,calvin-sec-2:27018"
       );
 
       ok = (error.ok == 1);
@@ -93,7 +93,7 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: apt-config
+  name: apt-config-calvin
   namespace: dev
 data:
   app-support-pri.sh: |
@@ -101,13 +101,13 @@ data:
     apt install -y netcat python3 python3-pip
     pip3 install psutil
     mkdir -p /filestore/data/calvin-pri
-    mongod --config=/config/mongo-replication.yml --bind_ip_all --dbpath /filestore/data/calvin-pri &
+    mongod --config /config/mongo-replication-calvin.yml --bind_ip_all --dbpath /filestore/data/calvin-pri &
     for i in {1..60}; do
        sleep 10
        echo 'waiting for calvin-pri:27018 ...'
        if `nc -z calvin-pri 27018`; then
         echo 'setting up mongo rs via calvin-pri ...'
-        mongo --host calvin-pri:27018 /config/mongo-rs-config.js
+        mongo --host calvin-pri:27018 /config/mongo-rs-config-calvin.js
         echo 'mongo rs configured!'
         break
       fi 
@@ -121,7 +121,7 @@ data:
     apt install -y netcat python3 python3-pip
     pip3 install psutil
     mkdir -p /filestore/data/calvin-sec-1
-    mongod --shardsvr --replSet rs0 --bind_ip_all --dbpath /filestore/data/calvin-sec-1 &
+    mongod --shardsvr --replSet calvin.rs --bind_ip_all --dbpath /filestore/data/calvin-sec-1 &
     cd $HOME
     tar -zxf /filestore/node_exporter-1.0.1.linux-amd64.tar.gz
     ./node_exporter-1.0.1.linux-amd64/node_exporter --web.listen-address=0.0.0.0:9091
@@ -130,7 +130,7 @@ data:
     apt install -y netcat python3 python3-pip
     pip3 install psutil
     mkdir -p /filestore/data/calvin-sec-2
-    mongod --shardsvr --replSet rs0 --bind_ip_all --dbpath /filestore/data/calvin-sec-2 &
+    mongod --shardsvr --replSet calvin.rs --bind_ip_all --dbpath /filestore/data/calvin-sec-2 &
     cd $HOME
     tar -zxf /filestore/node_exporter-1.0.1.linux-amd64.tar.gz
     ./node_exporter-1.0.1.linux-amd64/node_exporter --web.listen-address=0.0.0.0:9091
@@ -141,7 +141,7 @@ data:
       sleep 1
       if nc -z mongos-1-svc 27017; then
         echo 'Establishing shards'
-        mongo mongos-1-svc:27017/admin /scripts/add-shard.js
+        mongo mongos-1-svc:27017/admin /scripts/add-shard-calvin.js
         break
       fi
     done
@@ -169,10 +169,10 @@ spec:
         volumes:
           - name: startup-config
             configMap:
-              name: mongo-rs-config
-          - name: apt-config
+              name: mongo-rs-config-calvin
+          - name: apt-config-calvin
             configMap:
-              name: apt-config
+              name: apt-config-calvin
               defaultMode: 0777
           - name: filestore
             persistentVolumeClaim:
@@ -190,7 +190,7 @@ spec:
             volumeMounts:
               - name: startup-config
                 mountPath: /config/
-              - name: apt-config
+              - name: apt-config-calvin
                 mountPath: /apt-config/
               - name: filestore
                 mountPath: /filestore/
@@ -226,14 +226,14 @@ spec:
             - "-c"
             - "/apt-config/app-support-sec-1.sh"
           volumeMounts:
-            - name: apt-config
+            - name: apt-config-calvin
               mountPath: /apt-config/
             - name: filestore
               mountPath: /filestore/
       volumes:
-        - name: apt-config
+        - name: apt-config-calvin
           configMap:
-            name: apt-config
+            name: apt-config-calvin
             defaultMode: 0777
         - name: filestore
           persistentVolumeClaim:
@@ -270,14 +270,14 @@ spec:
             - "-c"
             - "/apt-config/app-support-sec-2.sh"
           volumeMounts:
-            - name: apt-config
+            - name: apt-config-calvin
               mountPath: /apt-config/
             - name: filestore
               mountPath: /filestore/
       volumes:
-        - name: apt-config
+        - name: apt-config-calvin
           configMap:
-            name: apt-config
+            name: apt-config-calvin
             defaultMode: 0777
         - name: filestore
           persistentVolumeClaim:
@@ -341,20 +341,20 @@ metadata:
   namespace: dev
 spec:
   containers:
-    - name: configurator-container
+    - name: calvin-configurator-container
       image: mongo
       command: ['/bin/sh', '-c','/apt-config/configurator.sh']
       volumeMounts:
-        - name: apt-config
+        - name: apt-config-calvin
           mountPath: /apt-config/
-        - name: scripts-dir
+        - name: scripts-dir-calvin
           mountPath: /scripts/
   volumes:
-    - name: apt-config
+    - name: apt-config-calvin
       configMap:
-        name: apt-config
+        name: apt-config-calvin
         defaultMode: 0777
-    - name: scripts-dir
+    - name: scripts-dir-calvin
       configMap:
-        name: add-shard
+        name: add-shard-calvin
   restartPolicy: Never

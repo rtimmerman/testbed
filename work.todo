@@ -75,4 +75,28 @@ Stelios will be off for a while, contact after start of September.
         ☐ Setup the Apache Spark cluster
 
 23-09-2020:
+
+---
+07-01-2021:
+    ☐ Override the init() method for AsyncMongoDbClient to ensure that the data gets distributed across the shards.  use the MongoClient class to control the db.
+    ☐ The db client can be added to the client directly and so therefore, override the use of the python script. See ...
+        `java -cp lib/core-0.5.0.jar:classpath.to.overrides com.yahoo.ycsb.Client`
+        ... for more information.
+        - note that the interface may also be specified with the **parameter file**.
+    ☐ Add a new entry in the ycsb python script to allow the *overriden* class to to be engaged using the python script.
+        - workloads should run in mostly the same way as norm Async.
+        - consider whether or not the non-async client will also benefit from having an override.
+    
+    Example runner command in java:
+        * java -cp lib/core-0.5.0.jar:lib/core-0.5.0.jar:../sharded-ycsb-runner/ycsb-mongo-sharded-db/target/classes/:mongodb-binding/lib/mongodb-binding-0.5.0.jar:mongodb-binding/lib/mongo-java-driver-3.0.3.jar com.yahoo.ycsb.Client -s -P workloads/workloada -p mongodb.url="mongodb://34.65.47.116:27017/ycsb" -db uk.ac.bbk.mongoycsb.ShardedMongo
+
+        run with `-load` to do the load phase and `-t` to run the transactions phase
+---
+2021-01-08 07:40:26 :
+
+Current java run command
+    * java -cp lib/core-0.5.0.jar:lib/core-0.5.0.jar:../sharded-ycsb-runner/ycsb-mongo-sharded-db/target/classes/:mongodb-binding/lib/mongodb-binding-0.5.0.jar:mongodb-binding/lib/mongo-java-driver-3.0.3.jar:lib/jackson-core-asl-1.9.4.jar:lib/jackson-mapper-asl-1.9.4.jar:lib/HdrHistogram-2.1.4.jar:/home/roderick/.m2/repository/jakarta/xml/bind/jakarta.xml.bind-api/2.3.2/jakarta.xml.bind-api-2.3.2.jar com.yahoo.ycsb.Client -s -P workloads/workloada -p mongodb.url="mongodb://34.65.250.215:27017/ycsb" -load -db uk.ac.bbk.mongoycsb.ShardedMongo
+
+2021-01-08 08:16:55 :
+    Remember in mongo collections are dropped like so `db.mycollection.drop()`
     

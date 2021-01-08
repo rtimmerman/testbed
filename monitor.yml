@@ -17,6 +17,18 @@ data:
               - arnold-pri:9091
               - arnold-sec-1:9091
               - arnold-sec-2:9091
+              - bairstow-pri:9091
+              - bairstow-sec-1:9091
+              - bairstow-sec-2:9091
+              - calvin-pri:9091
+              - calvin-sec-1:9091
+              - calvin-sec-2:9091
+              - duncan-pri:9091
+              - duncan-sec-1:9091
+              - duncan-sec-2:9091
+              - elliot-pri:9091
+              - elliot-sec-1:9091
+              - elliot-sec-2:9091
             labels:
               group: experiment-1
 

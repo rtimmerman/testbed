@@ -30,7 +30,7 @@ public class ShardedMongo extends MongoDbClient {
     @Override
     public Status insert(String table, String key, HashMap<String, ByteIterator> values) {
 
-        if (!sharded.containsKey(table) || !sharded.get(table)) {
+        if (!sharded.containsKey(table) || sharded.get(table) == false) {
             // MongoCollection<Document> collection = db.getCollection(table);
             // database.runCommand(new Document("db.runCommand",sh.shardCollection'",
             // database.getName() + "." + table));
@@ -38,16 +38,20 @@ public class ShardedMongo extends MongoDbClient {
             // adminDb.runCommand(new Document("shardCollection", database.getName() + "." +
             // table));
 
-            database.getCollection(table).createIndex(new Document(key, 1));
+            // System.out.println("shard key = " + key);
 
-            adminDb.runCommand(new Document("enableSharding", database.getName()));
+            // database.getCollection(table).createIndex(new Document("_id", 1));
 
-            Document shardCommandParams = new Document();
-            shardCommandParams.append("shardCollection", database.getName() + "." + table);
-            shardCommandParams.append("key", new Document(key, 1));
+            // adminDb.runCommand(new Document("enableSharding", database.getName()));
 
-            adminDb.runCommand(shardCommandParams);
-            sharded.put(table, true);
+            // Document shardCommandParams = new Document();
+            // shardCommandParams.append("shardCollection", database.getName() + "." +
+            // table);
+            // shardCommandParams.append("key", new Document(key, 1));
+            // shardCommandParams.append("key", new Document("_id", "hashed"));
+
+            // adminDb.runCommand(shardCommandParams);
+            // sharded.put(table, true);
         }
 
         return super.insert(table, key, values);
@@ -67,6 +71,15 @@ public class ShardedMongo extends MongoDbClient {
 
         try {
             adminDb = mongoClient.getDatabase("admin");
+
+            adminDb.runCommand(new Document("enableSharding", database.getName()));
+
+            Document shardCommandParams = new Document();
+            shardCommandParams.append("shardCollection", database.getName() + ".usertable");
+            // shardCommandParams.append("key", new Document(key, 1));
+            shardCommandParams.append("key", new Document("_id", "hashed"));
+
+            adminDb.runCommand(shardCommandParams);
         } catch (IllegalArgumentException e) {
 
         }

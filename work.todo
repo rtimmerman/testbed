@@ -70,7 +70,7 @@ Stelios will be off for a while, contact after start of September.
 
 17-09-2020:
     Todo:
-        ☐ Get Prometheus data to persist
+        ✔ Get Prometheus data to persist @done (19/01/2021, 23:52:16)
             - look into remote write functionality or investigate weather a scrapping script would be better.  It would be cool if datasets can be re-graphed.  The writer may work better BUT the scraper may be easier to manipulate with a custom query in place.  
         ☐ Setup the Apache Spark cluster
 
@@ -78,12 +78,12 @@ Stelios will be off for a while, contact after start of September.
 
 ---
 07-01-2021:
-    ☐ Override the init() method for AsyncMongoDbClient to ensure that the data gets distributed across the shards.  use the MongoClient class to control the db.
-    ☐ The db client can be added to the client directly and so therefore, override the use of the python script. See ...
+    ✔ Override the init() method for AsyncMongoDbClient to ensure that the data gets distributed across the shards.  use the MongoClient class to control the db. @done (19/01/2021, 23:51:24)
+    ✔ The db client can be added to the client directly and so therefore, override the use of the python script. See ... @done (19/01/2021, 23:52:00)
         `java -cp lib/core-0.5.0.jar:classpath.to.overrides com.yahoo.ycsb.Client`
         ... for more information.
         - note that the interface may also be specified with the **parameter file**.
-    ☐ Add a new entry in the ycsb python script to allow the *overriden* class to to be engaged using the python script.
+    ✘ Add a new entry in the ycsb python script to allow the *overriden* class to to be engaged using the python script. @cancelled (19/01/2021, 23:52:08)
         - workloads should run in mostly the same way as norm Async.
         - consider whether or not the non-async client will also benefit from having an override.
     
@@ -99,4 +99,11 @@ Current java run command
 
 2021-01-08 08:16:55 :
     Remember in mongo collections are dropped like so `db.mycollection.drop()`
-    
+
+2021-01-19 23:45:17 :
+    ☐ Secure mongodb cluster in light of a hacker's successful entry into the cluster at some stage. @critical 
+    ☐ All load-balanced nodes must have some form of security
+        ☐ Secure mongos @critical 
+        ☐ Consider securing each shard, work on a good scheme for accessing nodes on demand - a Makefile? @high 
+        ☐ Secure Prometheus server @high 
+        ☐ Look into further securing Grafana's access (currently requires a username and password) - default username with custom password in place @low 

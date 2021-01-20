@@ -1330,4 +1330,58 @@ Totals
  Shard arnold.rs contains 18.79% data, 18.8% docs in cluster, avg obj size on shard : 1KiB
 ```
 
-Again popularity is Duncan, Calvin, Elliot, Arnold, and Bairstow as before.
+Again popularity is Duncan, Calvin, Elliot, Bairstow, and Arnold as before.
+
+2021-01-18 11:39:06
+
+narrowing down the metric queries-
+
+node_cpu_seconds_total{instance=~'arnold-.*:9091',mode='user'}
+
+sum by (node, instance) (irate(node_cpu_seconds_total{instance=~'arnold-pri:9091',mode='user'}[1m]))
+
+this one shows spikes
+
+
+2021-01-18 22:51:27
+
+I've noticed that somebody has managed to gain access to the cluster (ip scanning google's ip range) and managed to hold some of the thankfully unimportant data to random
+
+* **Must secure the mongo cluster**
+* **Must secure the K8s infrastructure**
+* **Focus on securing the Google Cloud**
+
+2021-01-18 23:08:41
+
+sum by (node, instance) (rate(node_cpu_seconds_total{instance=~'(arnold-pri|bairstow-pri|calvin-pri|duncan-pri|elliot-pri):9091',mode='user'}[1m])) 
+
+first hump ~ 23:05 - data distribution on cluster (-load)
+second humb ~ 23:07 - data manipulation trail (-t)
+
+2021-01-19 10:24:28
+
+Reconfiguring the cluster to allow for better security
+
+2021-01-19 18:00:32
+
+mongo --tls --tlsCertificateKeyFile /kickstart/localhost.pem --tlsCAFile /kickstart/root-ca.pem localhost:27019
+
+2021-01-19 23:24:01
+
+mongo --tls --tlsCertificateKeyFile /kickstart/config-server.pem --tlsCAFile /kickstart/root-ca.pem --host config-server-svc-1 --port 27019 /kickstart/shard-configdb.js --authenticationDatabase "\$external" --authenticationMechanism MONGODB-X509
+
+2021-01-19 23:41:37
+
+Config servers now have adequate security requiring matching X509 certificates for access and operations
+Next up:
+
+* secure mongos with x.509 - this is critical since this serves as the main entry point to the dataset.
+* secure each shard with x.509
+
+*Note well this solution isn't the ultimate one since the CA is self-signed*
+
+2021-01-20 08:42:43
+
+Mongos configured for secure access and connectivity to config server using certificate.
+
+mongo --tls --tlsCertificateKeyFile /kickstart/mongos-1-svc.pem --tlsCAFile /kickstart/root-ca.pem --authenticationDatabase "\$external" --authenticationMechanism MONGODB-X509 mongos-1-svc:27017

@@ -1368,7 +1368,11 @@ mongo --tls --tlsCertificateKeyFile /kickstart/localhost.pem --tlsCAFile /kickst
 
 2021-01-19 23:24:01
 
+config server connection:
+
+```
 mongo --tls --tlsCertificateKeyFile /kickstart/config-server.pem --tlsCAFile /kickstart/root-ca.pem --host config-server-svc-1 --port 27019 /kickstart/shard-configdb.js --authenticationDatabase "\$external" --authenticationMechanism MONGODB-X509
+```
 
 2021-01-19 23:41:37
 
@@ -1384,4 +1388,14 @@ Next up:
 
 Mongos configured for secure access and connectivity to config server using certificate.
 
+```
 mongo --tls --tlsCertificateKeyFile /kickstart/mongos-1-svc.pem --tlsCAFile /kickstart/root-ca.pem --authenticationDatabase "\$external" --authenticationMechanism MONGODB-X509 mongos-1-svc:27017
+```
+
+2021-01-21 07:23:36
+
+mongo-shard connection:
+
+```
+mongo --tls --tlsCertificateKeyFile /kickstart/arnold-pri.pem --tlsCAFile /kickstart/root-ca.pem --host arnold-pri:27018
+```

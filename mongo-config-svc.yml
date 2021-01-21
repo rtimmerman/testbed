@@ -80,6 +80,7 @@ spec:
             - '/kickstart/config-server-2.pem'
             - '--sslCAFile'
             - '/kickstart/root-ca.pem'
+            - '--sslAllowInvalidCertificates'
             - '--bind_ip'
             - '*'
             # - '--dbpath'
@@ -142,6 +143,7 @@ spec:
             - '/kickstart/config-server-3.pem'
             - '--sslCAFile'
             - '/kickstart/root-ca.pem'
+            - '--sslAllowInvalidCertificates'
             - '--bind_ip'
             - '*'
             #- '--dbpath'
@@ -194,7 +196,7 @@ spec:
   resources:
     requests:
         storage: 10Gi
----
+--- 
 kind: ConfigMap
 apiVersion: v1
 metadata:
@@ -213,6 +215,7 @@ data:
     --sslClusterFile /kickstart/config-server.pem \
     --sslPEMKeyFile /kickstart/config-server.pem \
     --sslCAFile /kickstart/root-ca.pem \
+    --sslAllowInvalidCertificates \
     --bind_ip \*
   add-user.js: |
     // wait for mongod to be present...

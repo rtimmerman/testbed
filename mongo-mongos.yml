@@ -8,7 +8,8 @@ data:
     apt update && \
     apt install -y lsof netcat less
     mongod --bind_ip_all &
-    mongo --norc /kick/start/add-user.js
+    sleep 3
+    mongo --norc /kickstart/add-user.js
     kill -9 $(ps aux | grep mongod | grep bind_ip_all | awk '{print $2}')
 
     mongos --tlsMode requireTLS --tlsCAFile /kickstart/root-ca.pem --tlsCertificateKeyFile /kickstart/mongos-1-svc.pem --configdb 'configServerRS/config-server-svc-1:27019,config-server-svc-2:27019,config-server-svc-3:27019' --clusterAuthMode x509 --bind_ip_all --logpath '/var/log/mongos.log'
@@ -24,28 +25,70 @@ data:
         conn = new Mongo('localhost:27017');
         break;
       } catch (Error) {
+        print("Caught error!");
         print(Error);
       }
       sleep(100);
     }
 
     //conn.setReadPref('primary');
+    print("Setting up mongdb users...");
 
     db = conn.getDB('admin').getSiblingDB('$external');
-    outcome = db.runCommand(
-      {
-        createUser: "CN=config-server-svc-1,OU=ExperimentClients,O=Roderick,O=BBK,L=Southminster,ST=Essex,C=UK",
-        roles: [
-          {role: 'userAdminAnyDatabase', db: 'admin'},
-          {role: 'readWrite', db: 'test'},
-          {role: 'clusterAdmin', db: 'admin'}
-        ],
-        writeConcern: {
-          w: 'majority',
-          wtimeout: 5000
+
+    var outcome = [];
+    outcome.push(
+        db.runCommand(
+        {
+          createUser: "CN=config-server-svc-1,OU=ExperimentClients,O=Roderick,O=BBK,L=Southminster,ST=Essex,C=UK",
+          roles: [
+            {role: 'userAdminAnyDatabase', db: 'admin'},
+            {role: 'readWrite', db: 'test'},
+            {role: 'clusterAdmin', db: 'admin'}
+          ],
+          writeConcern: {
+            w: 'majority',
+            wtimeout: 5000
+          }
         }
-      }
+      )
     );
+
+    outcome.push(
+      db.runCommand(
+        {
+          createUser: "CN=mongos-1-svc,OU=ExperimentServers,O=Roderick,O=BBK,L=Southminster,ST=Essex,C=UK",
+          roles: [
+            {role: 'userAdminAnyDatabase', db: 'admin'},
+            {role: 'readWrite', db: 'test'},
+            {role: 'readWrite', db: 'ycsb'},
+            {role: 'clusterAdmin', db: 'admin'}
+          ],
+          writeConcern: {
+            w: 'majority',
+            wtimeout: 5000
+          }
+        }
+      )
+    );
+
+    outcome.push(
+      db.runCommand(
+        {
+          createUser: "CN=arnold-pri,OU=ExperimentServers,O=Roderick,O=BBK,L=Southmister,ST=Essex,C=UK",
+          roles: [
+            {role: 'userAdminAnyDatabase', db: 'admin'},
+            {role: 'readWrite', db: 'test'},
+            {role: 'clusterAdmin', db: 'admin'}
+          ],
+          writeConcern: {
+            w: 'majority',
+            wtimeout: 5000
+          }
+        }
+      )
+    );
+
     printjson(outcome);
   mongos-sharding.js: |
     use admin;

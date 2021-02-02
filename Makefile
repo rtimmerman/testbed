@@ -25,22 +25,21 @@ update-mongo-host:
 	sudo perl -pi.bak -e "s/^.*mongos-1-svc/`kubectl get services --output=wide --namespace=dev mongos-1-svc | awk 'NR>1{print $4}'` mongos-1-svc/" /etc/hosts
 delete-5-node-mongo:
 	# monitor
-	kubectl delete -f monitor.yml
+	kubectl delete --ignore-not-found --grace-period=1 -f monitor.yml
 
 	# shards
 	for i in {1..5} ; do \
-	do \
-		kubectl delete -f mongo-shard$i.yml ; \
+		kubectl delete --ignore-not-found --grace-period=1 -f mongo-shard$$i.yml ; \
 	done
 
 	# filestore
-	kubectl delete -f filestore.yml
+	kubectl delete --ignore-not-found --grace-period=1 -f filestore.yml
 
 	# mongos
-	kubectl delete -f mongo-mongos.yml
+	kubectl delete --ignore-not-found --grace-period=1 -f mongo-mongos.yml
 
 	# config server
-	kubectl delete -f mongo-config-svc.yml
+	kubectl delete --ignore-not-found --grace-period=1 -f mongo-config-svc.yml
 
 delete-cluster:
 	gcloud container clusters delete cluster-1 --zone europe-west6-b

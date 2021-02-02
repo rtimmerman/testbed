@@ -1399,3 +1399,37 @@ mongo-shard connection:
 ```
 mongo --tls --tlsCertificateKeyFile /kickstart/arnold-pri.pem --tlsCAFile /kickstart/root-ca.pem --host arnold-pri:27018
 ```
+
+2021-01-25 08:01:27
+
+Latest secure job YCSB job submission script
+
+Load:
+```
+java -Djavax.net.ssl.keyStore=./mongodb.pkcs12 -Djavax.net.ssl.keyStorePassword=xiec.gate.r -Djavax.net.ssl.trustStore=./mongodb.pkcs12 -Djavax.net.ssl.trustStorePassword=xiec.gate.r -cp lib/core-0.5.0.jar:lib/core-0.5.0.jar:../sharded-ycsb-runner/ycsb-mongo-sharded-db/target/classes/:mongodb-binding/lib/mongodb-binding-0.5.0.jar:mongodb-binding/lib/mongo-java-driver-3.0.3.jar:lib/jackson-core-asl-1.9.4.jar:lib/jackson-mapper-asl-1.9.4.jar:lib/HdrHistogram-2.1.4.jar:/home/roderick/.m2/repository/jakarta/xml/bind/jakarta.xml.bind-api/2.3.2/jakarta.xml.bind-api-2.3.2.jar com.yahoo.ycsb.Client -s -P workloads/workloada -p mongodb.url="mongodb://mongos-1-svc:27017/ycsb?ssl=true&authMechanism=MONGODB-X509&authSource=\$external" -load -db uk.ac.bbk.mongoycsb.ShardedMongo
+```
+
+Run:
+java -Djavax.net.ssl.keyStore=./mongodb.pkcs12 -Djavax.net.ssl.keyStorePassword=xiec.gate.r -Djavax.net.ssl.trustStore=./mongodb.pkcs12 -Djavax.net.ssl.trustStorePassword=xiec.gate.r -cp lib/core-0.5.0.jar:lib/core-0.5.0.jar:../sharded-ycsb-runner/ycsb-mongo-sharded-db/target/classes/:mongodb-binding/lib/mongodb-binding-0.5.0.jar:mongodb-binding/lib/mongo-java-driver-3.0.3.jar:lib/jackson-core-asl-1.9.4.jar:lib/jackson-mapper-asl-1.9.4.jar:lib/HdrHistogram-2.1.4.jar:/home/roderick/.m2/repository/jakarta/xml/bind/jakarta.xml.bind-api/2.3.2/jakarta.xml.bind-api-2.3.2.jar com.yahoo.ycsb.Client -s -P workloads/workloada -p mongodb.url="mongodb://mongos-1-svc:27017/ycsb?ssl=true&authMechanism=MONGODB-X509&authSource=\$external" -t -db uk.ac.bbk.mongoycsb.ShardedMongo
+
+
+2021-01-25 08:17:53
+
+Shard distribution after 1000 record run:
+
+```
+Totals
+ data : 1.11MiB docs : 1000 chunks : 10
+ Shard duncan.rs contains 21.89% data, 21.9% docs in cluster, avg obj size on shard : 1KiB
+ Shard elliot.rs contains 20% data, 20% docs in cluster, avg obj size on shard : 1KiB
+ Shard bairstow.rs contains 18.8% data, 18.8% docs in cluster, avg obj size on shard : 1KiB
+ Shard arnold.rs contains 18.79% data, 18.8% docs in cluster, avg obj size on shard : 1KiB
+ Shard calvin.rs contains 20.49% data, 20.5% docs in cluster, avg obj size on shard : 1KiB
+```
+
+An **identical** distribution! to the last run.
+
+
+2021-01-26 00:22:41
+node_disk_io_time_seconds_total
+sum by (node, instance) (rate(node_memory_MemFree_bytes{instance=~'(arnold-pri|bairstow-pri|calvin-pri|duncan-pri|elliot-pri):9091'}[5m])) 

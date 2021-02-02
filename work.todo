@@ -101,9 +101,10 @@ Current java run command
     Remember in mongo collections are dropped like so `db.mycollection.drop()`
 
 2021-01-19 23:45:17 :
-    ☐ Secure mongodb cluster in light of a hacker's successful entry into the cluster at some stage. @critical 
+    ✔ Secure mongodb cluster in light of a hacker's successful entry into the cluster at some stage. @critical @done (25/01/2021, 01:12:18)
     ☐ All load-balanced nodes must have some form of security
-        ☐ Secure mongos @critical 
-        ☐ Consider securing each shard, work on a good scheme for accessing nodes on demand - a Makefile? @high 
+        ✔ Secure mongos @critical @done (20/01/2021, 08:58:39)
+        ✔ Consider securing each shard, work on a good scheme for accessing nodes on demand - a Makefile? @high @done (25/01/2021, 01:12:07)
         ☐ Secure Prometheus server @high 
         ☐ Look into further securing Grafana's access (currently requires a username and password) - default username with custom password in place @low 
+        

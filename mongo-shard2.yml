@@ -113,6 +113,7 @@ data:
     pip3 install psutil
     mkdir -p /filestore/data/bairstow-pri
     mongod --bind_ip_all &
+    sleep 3
     mongo --norc /kickstart/add-user.js
     kill -9 $(ps aux | grep mongod | grep bind_ip_all | awk '{print $2}')
 
@@ -218,6 +219,23 @@ data:
         db.runCommand(
         {
           createUser: "CN=bairstow-sec-2,OU=ExperimentClients,O=Roderick,O=BBK,L=Southminster,ST=Essex,C=UK",
+          roles: [
+            {role: 'userAdminAnyDatabase', db: 'admin'},
+            {role: 'readWrite', db: 'test'},
+            {role: 'clusterAdmin', db: 'admin'}
+          ],
+          writeConcern: {
+            w: 'majority',
+            wtimeout: 5000
+          }
+        }
+      )
+    );
+
+    outcome.push(
+        db.runCommand(
+        {
+          createUser: "CN=mongos-1-svc,OU=ExperimentServers,O=Roderick,O=BBK,L=Southminster,ST=Essex,C=UK",
           roles: [
             {role: 'userAdminAnyDatabase', db: 'admin'},
             {role: 'readWrite', db: 'test'},

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="uk.ac.bbk.mongoycsb.AppTest" time="0.014" tests="1" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="uk.ac.bbk.mongoycsb.AppTest" time="0.031" tests="1" errors="1" skipped="0" failures="0">
   <properties>
     <property name="awt.toolkit" value="sun.awt.X11.XToolkit"/>
     <property name="java.specification.version" value="11"/>
     <property name="sun.cpu.isalist" value=""/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
-    <property name="java.class.path" value="/home/roderick/workspace/mongo-cluster/sharded-ycsb-runner/ycsb-mongo-sharded-db/target/test-classes:/home/roderick/workspace/mongo-cluster/sharded-ycsb-runner/ycsb-mongo-sharded-db/target/classes:/home/roderick/.m2/repository/junit/junit/4.11/junit-4.11.jar:/home/roderick/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:/home/roderick/.m2/repository/site/ycsb/core/0.5.0/core-0.5.0.jar:/home/roderick/.m2/repository/site/ycsb/mongodb/0.5.0/mongodb-0.5.0.jar:/home/roderick/.m2/repository/org/mongodb/mongo-java-driver/3.12.7/mongo-java-driver-3.12.7.jar:/home/roderick/.m2/repository/jakarta/xml/bind/jakarta.xml.bind-api/2.3.2/jakarta.xml.bind-api-2.3.2.jar:/home/roderick/.m2/repository/jakarta/activation/jakarta.activation-api/1.2.1/jakarta.activation-api-1.2.1.jar:"/>
+    <property name="java.class.path" value="/home/roderick/workspace/mongo-cluster/sharded-ycsb-runner/ycsb-mongo-sharded-db/target/test-classes:/home/roderick/workspace/mongo-cluster/sharded-ycsb-runner/ycsb-mongo-sharded-db/target/classes:/home/roderick/.m2/repository/junit/junit/4.11/junit-4.11.jar:/home/roderick/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:/home/roderick/.m2/repository/site/ycsb/core/0.17.0/core-0.17.0.jar:/home/roderick/.m2/repository/org/apache/htrace/htrace-core4/4.1.0-incubating/htrace-core4-4.1.0-incubating.jar:/home/roderick/.m2/repository/org/codehaus/jackson/jackson-mapper-asl/1.9.4/jackson-mapper-asl-1.9.4.jar:/home/roderick/.m2/repository/org/codehaus/jackson/jackson-core-asl/1.9.4/jackson-core-asl-1.9.4.jar:/home/roderick/.m2/repository/org/hdrhistogram/HdrHistogram/2.1.4/HdrHistogram-2.1.4.jar:/home/roderick/.m2/repository/org/mongodb/mongo-java-driver/3.12.7/mongo-java-driver-3.12.7.jar:/home/roderick/.m2/repository/jakarta/xml/bind/jakarta.xml.bind-api/2.3.2/jakarta.xml.bind-api-2.3.2.jar:/home/roderick/.m2/repository/jakarta/activation/jakarta.activation-api/1.2.1/jakarta.activation-api-1.2.1.jar:"/>
     <property name="java.vm.vendor" value="Red Hat, Inc."/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="java.vendor.url" value="https://www.redhat.com/"/>
@@ -15,9 +15,9 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="GB"/>
     <property name="sun.boot.library.path" value="/usr/lib/jvm/java-11-openjdk-11.0.9.11-9.fc33.x86_64/lib"/>
-    <property name="sun.java.command" value="/home/roderick/workspace/mongo-cluster/sharded-ycsb-runner/ycsb-mongo-sharded-db/target/surefire/surefirebooter12530292991347589136.jar /home/roderick/workspace/mongo-cluster/sharded-ycsb-runner/ycsb-mongo-sharded-db/target/surefire 2021-01-12T08-00-02_705-jvmRun1 surefire15271505574025675155tmp surefire_015847041882200616189tmp"/>
+    <property name="sun.java.command" value="/home/roderick/workspace/mongo-cluster/sharded-ycsb-runner/ycsb-mongo-sharded-db/target/surefire/surefirebooter2843943986416995810.jar /home/roderick/workspace/mongo-cluster/sharded-ycsb-runner/ycsb-mongo-sharded-db/target/surefire 2021-02-03T07-54-36_299-jvmRun1 surefire2285684007270749909tmp surefire_014047149157029621512tmp"/>
     <property name="jdk.debug" value="release"/>
-    <property name="surefire.test.class.path" value="/home/roderick/workspace/mongo-cluster/sharded-ycsb-runner/ycsb-mongo-sharded-db/target/test-classes:/home/roderick/workspace/mongo-cluster/sharded-ycsb-runner/ycsb-mongo-sharded-db/target/classes:/home/roderick/.m2/repository/junit/junit/4.11/junit-4.11.jar:/home/roderick/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:/home/roderick/.m2/repository/site/ycsb/core/0.5.0/core-0.5.0.jar:/home/roderick/.m2/repository/site/ycsb/mongodb/0.5.0/mongodb-0.5.0.jar:/home/roderick/.m2/repository/org/mongodb/mongo-java-driver/3.12.7/mongo-java-driver-3.12.7.jar:/home/roderick/.m2/repository/jakarta/xml/bind/jakarta.xml.bind-api/2.3.2/jakarta.xml.bind-api-2.3.2.jar:/home/roderick/.m2/repository/jakarta/activation/jakarta.activation-api/1.2.1/jakarta.activation-api-1.2.1.jar:"/>
+    <property name="surefire.test.class.path" value="/home/roderick/workspace/mongo-cluster/sharded-ycsb-runner/ycsb-mongo-sharded-db/target/test-classes:/home/roderick/workspace/mongo-cluster/sharded-ycsb-runner/ycsb-mongo-sharded-db/target/classes:/home/roderick/.m2/repository/junit/junit/4.11/junit-4.11.jar:/home/roderick/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:/home/roderick/.m2/repository/site/ycsb/core/0.17.0/core-0.17.0.jar:/home/roderick/.m2/repository/org/apache/htrace/htrace-core4/4.1.0-incubating/htrace-core4-4.1.0-incubating.jar:/home/roderick/.m2/repository/org/codehaus/jackson/jackson-mapper-asl/1.9.4/jackson-mapper-asl-1.9.4.jar:/home/roderick/.m2/repository/org/codehaus/jackson/jackson-core-asl/1.9.4/jackson-core-asl-1.9.4.jar:/home/roderick/.m2/repository/org/hdrhistogram/HdrHistogram/2.1.4/HdrHistogram-2.1.4.jar:/home/roderick/.m2/repository/org/mongodb/mongo-java-driver/3.12.7/mongo-java-driver-3.12.7.jar:/home/roderick/.m2/repository/jakarta/xml/bind/jakarta.xml.bind-api/2.3.2/jakarta.xml.bind-api-2.3.2.jar:/home/roderick/.m2/repository/jakarta/activation/jakarta.activation-api/1.2.1/jakarta.activation-api-1.2.1.jar:"/>
     <property name="sun.cpu.endian" value="little"/>
     <property name="user.home" value="/home/roderick"/>
     <property name="user.language" value="en"/>
@@ -31,12 +31,12 @@
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.awt.graphicsenv" value="sun.awt.X11GraphicsEnvironment"/>
-    <property name="surefire.real.class.path" value="/home/roderick/workspace/mongo-cluster/sharded-ycsb-runner/ycsb-mongo-sharded-db/target/surefire/surefirebooter12530292991347589136.jar"/>
+    <property name="surefire.real.class.path" value="/home/roderick/workspace/mongo-cluster/sharded-ycsb-runner/ycsb-mongo-sharded-db/target/surefire/surefirebooter2843943986416995810.jar"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="11.0.9.1+11"/>
     <property name="user.name" value="roderick"/>
     <property name="path.separator" value=":"/>
-    <property name="os.version" value="5.9.16-200.fc33.x86_64"/>
+    <property name="os.version" value="5.10.9-201.fc33.x86_64"/>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
     <property name="file.encoding" value="UTF-8"/>
     <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
@@ -57,5 +57,21 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="55.0"/>
   </properties>
-  <testcase name="shouldAnswerWithTrue" classname="uk.ac.bbk.mongoycsb.AppTest" time="0.005"/>
+  <testcase name="shouldAnswerWithTrue" classname="uk.ac.bbk.mongoycsb.AppTest" time="0.007">
+    <error message="Unresolved compilation problems: &#10;	The import site.ycsb.db cannot be resolved&#10;	The import site.ycsb.db cannot be resolved&#10;	MongoDbClient cannot be resolved to a type&#10;	The method insert(String, String, HashMap&lt;String,ByteIterator&gt;) of type ShardedMongo must override or implement a supertype method&#10;	MongoDbClient cannot be resolved to a type&#10;	MongoDbClient cannot be resolved to a type&#10;	The method init() of type ShardedMongo must override or implement a supertype method&#10;	MongoDbClient cannot be resolved to a type&#10;	The method getProperties() is undefined for the type ShardedMongo&#10;	MongoDbClient cannot be resolved to a type&#10;" type="java.lang.Error"><![CDATA[java.lang.Error: 
+Unresolved compilation problems: 
+	The import site.ycsb.db cannot be resolved
+	The import site.ycsb.db cannot be resolved
+	MongoDbClient cannot be resolved to a type
+	The method insert(String, String, HashMap<String,ByteIterator>) of type ShardedMongo must override or implement a supertype method
+	MongoDbClient cannot be resolved to a type
+	MongoDbClient cannot be resolved to a type
+	The method init() of type ShardedMongo must override or implement a supertype method
+	MongoDbClient cannot be resolved to a type
+	The method getProperties() is undefined for the type ShardedMongo
+	MongoDbClient cannot be resolved to a type
+
+	at uk.ac.bbk.mongoycsb.AppTest.shouldAnswerWithTrue(AppTest.java:17)
+]]></error>
+  </testcase>
 </testsuite>

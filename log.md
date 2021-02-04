@@ -1433,3 +1433,11 @@ An **identical** distribution! to the last run.
 2021-01-26 00:22:41
 node_disk_io_time_seconds_total
 sum by (node, instance) (rate(node_memory_MemFree_bytes{instance=~'(arnold-pri|bairstow-pri|calvin-pri|duncan-pri|elliot-pri):9091'}[5m])) 
+
+2021-02-03 08:40:40
+
+Reconfiguring for the latest stable of YCSB:
+
+```
+java -Djavax.net.ssl.keyStore=/home/roderick/workspace/mongo-cluster/ycsb-0.5.0/mongodb.pkcs12 -Djavax.net.ssl.keyStorePassword=xiec.gate.r -Djavax.net.ssl.trustStore=/home/roderick/workspace/mongo-cluster/ycsb-0.5.0/mongodb.pkcs12 -Djavax.net.ssl.trustStorePassword=xiec.gate.r -cp core/target/core-0.17.0.jar:../mongo-cluster/sharded-ycsb-runner/ycsb-mongo-sharded-db/target/classes/:mongodb/target/mongodb-binding-0.17.0.jar:/home/roderick/.m2/repository/org/mongodb/mongo-java-driver/3.12.7/mongo-java-driver-3.12.7.jar:lib/jackson-core-asl-1.9.4.jar:lib/jackson-mapper-asl-1.9.4.jar:/home/roderick/.m2/repository/jakarta/xml/bind/jakarta.xml.bind-api/2.3.2/jakarta.xml.bind-api-2.3.2.jar:/home/roderick/.m2/repository/org/apache/htrace/htrace-core4/4.1.0-incubating/htrace-core4-4.1.0-incubating.jar:/home/roderick/.m2/repository/org/hdrhistogram/HdrHistogram/2.1.4/HdrHistogram-2.1.4.jar site.ycsb.Client -s -P workloads/workloada -p mongodb.url="mongodb://mongos-1-svc:27017/ycsb?ssl=true&authMechanism=MONGODB-X509&authSource=\$external" -load -db uk.ac.bbk.mongoycsb.ShardedMongo
+```

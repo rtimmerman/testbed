@@ -1,4 +1,20 @@
 -------------------------------------------------------------------------------
 Test set: uk.ac.bbk.mongoycsb.AppTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.014 s - in uk.ac.bbk.mongoycsb.AppTest
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.031 s <<< FAILURE! - in uk.ac.bbk.mongoycsb.AppTest
+shouldAnswerWithTrue(uk.ac.bbk.mongoycsb.AppTest)  Time elapsed: 0.007 s  <<< ERROR!
+java.lang.Error: 
+Unresolved compilation problems: 
+	The import site.ycsb.db cannot be resolved
+	The import site.ycsb.db cannot be resolved
+	MongoDbClient cannot be resolved to a type
+	The method insert(String, String, HashMap<String,ByteIterator>) of type ShardedMongo must override or implement a supertype method
+	MongoDbClient cannot be resolved to a type
+	MongoDbClient cannot be resolved to a type
+	The method init() of type ShardedMongo must override or implement a supertype method
+	MongoDbClient cannot be resolved to a type
+	The method getProperties() is undefined for the type ShardedMongo
+	MongoDbClient cannot be resolved to a type
+
+	at uk.ac.bbk.mongoycsb.AppTest.shouldAnswerWithTrue(AppTest.java:17)
+

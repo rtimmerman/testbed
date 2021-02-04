@@ -1,0 +1,10 @@
+version: "3.9"
+services:
+  experiment:
+    build: .
+    volumes:
+      - /home/roderick/.m2:/.m2
+      - ./experiment:/experiment
+      - /home/roderick/workspace/YCSB:/YCSB
+      - /home/roderick/workspace/mongo-cluster/cred-store:/credstore
+      - ./:/ycsb-mongo-sharded-db

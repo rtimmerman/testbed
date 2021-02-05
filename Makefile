@@ -33,17 +33,19 @@ delete-5-node-mongo:
 
 	# shards
 	for i in {1..5} ; do \
-		kubectl delete --ignore-not-found --grace-period=1 -f mongo-shard$$i.yml ; \
+		kubectl delete --force -ignore-not-found --grace-period=1 -f mongo-shard$$i.yml ; \
 	done
-
-	# filestore
-	kubectl delete --ignore-not-found --grace-period=1 -f filestore.yml
 
 	# mongos
 	kubectl delete --ignore-not-found --grace-period=1 -f mongo-mongos.yml
 
 	# config server
 	kubectl delete --ignore-not-found --grace-period=1 -f mongo-config-svc.yml
+
+	# filestore
+	#kubectl patch pvc filestore --namespace=dev -p '{"metadata":{"finalizers": []}}' --type=merge
+	kubectl delete --ignore-not-found --grace-period=1 -f filestore.yml
+
 
 delete-cluster:
 	gcloud container clusters delete cluster-1 --zone europe-west6-b

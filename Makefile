@@ -33,7 +33,7 @@ delete-5-node-mongo:
 
 	# shards
 	for i in {1..5} ; do \
-		kubectl delete --force -ignore-not-found --grace-period=1 -f mongo-shard$$i.yml ; \
+		kubectl delete --ignore-not-found --grace-period=1 -f mongo-shard$$i.yml ; \
 	done
 
 	# mongos

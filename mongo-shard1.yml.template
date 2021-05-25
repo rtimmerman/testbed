@@ -18,7 +18,7 @@ data:
       print("**OUTCOME**");
       printjson(result);
 
-      if (result.ok == 1 || [23].includes(result.code) {
+      if (result.ok == 1 || [23].includes(result.code)) {
         break;
       }
     }
@@ -123,7 +123,7 @@ data:
        echo 'waiting for SHARD_NAME-pri:27018 ...'
        if `nc -z SHARD_NAME-pri 27018`; then
         echo 'setting up mongo rs via SHARD_NAME-pri ...'
-        mongo --tls --tlsCertificateKeyFile /kickstart/SHARD_NAME-pri.pem --tlsCAFile /kickstart/root-ca.pem --authenticationDatabase '$external' --authenticationMechanism MONGODB-X509 --shardsvr --replSet SHARD_NAME.rs --bind_ip_all --host SHARD_NAME-pri:27018 /config/mongo-rs-config-SHARD_NAME.js
+        mongo --tls --tlsCertificateKeyFile /kickstart/SHARD_NAME-pri.pem --tlsCAFile /kickstart/root-ca.pem --authenticationDatabase '$external' --authenticationMechanism MONGODB-X509 SHARD_NAME-pri:27018 /config/mongo-rs-config-SHARD_NAME.js
         echo 'mongo rs configured!'
         break
       fi 

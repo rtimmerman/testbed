@@ -18,7 +18,7 @@ data:
       print("**OUTCOME**");
       printjson(result);
 
-      if (result.ok == 1 || [23].includes(result.code) {
+      if (result.ok == 1 || [23].includes(result.code)) {
         break;
       }
     }
@@ -123,7 +123,7 @@ data:
        echo 'waiting for arnold-pri:27018 ...'
        if `nc -z arnold-pri 27018`; then
         echo 'setting up mongo rs via arnold-pri ...'
-        mongo --tls --tlsCertificateKeyFile /kickstart/arnold-pri.pem --tlsCAFile /kickstart/root-ca.pem --authenticationDatabase '$external' --authenticationMechanism MONGODB-X509 --shardsvr --replSet arnold.rs --bind_ip_all --host arnold-pri:27018 /config/mongo-rs-config-arnold.js
+        mongo --tls --tlsCertificateKeyFile /kickstart/arnold-pri.pem --tlsCAFile /kickstart/root-ca.pem --authenticationDatabase '$external' --authenticationMechanism MONGODB-X509 arnold-pri:27018 /config/mongo-rs-config-arnold.js
         echo 'mongo rs configured!'
         break
       fi 

@@ -18,7 +18,7 @@ data:
       print("**OUTCOME**");
       printjson(result);
 
-      if (result.ok == 1 || [23].includes(result.code) {
+      if (result.ok == 1 || [23].includes(result.code)) {
         break;
       }
     }
@@ -123,7 +123,7 @@ data:
        echo 'waiting for bairstow-pri:27018 ...'
        if `nc -z bairstow-pri 27018`; then
         echo 'setting up mongo rs via bairstow-pri ...'
-        mongo --tls --tlsCertificateKeyFile /kickstart/bairstow-pri.pem --tlsCAFile /kickstart/root-ca.pem --authenticationDatabase '$external' --authenticationMechanism MONGODB-X509 --shardsvr --replSet bairstow.rs --bind_ip_all --host bairstow-pri:27018 /config/mongo-rs-config-bairstow.js
+        mongo --tls --tlsCertificateKeyFile /kickstart/bairstow-pri.pem --tlsCAFile /kickstart/root-ca.pem --authenticationDatabase '$external' --authenticationMechanism MONGODB-X509 bairstow-pri:27018 /config/mongo-rs-config-bairstow.js
         echo 'mongo rs configured!'
         break
       fi 

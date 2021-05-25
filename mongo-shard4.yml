@@ -18,7 +18,7 @@ data:
       print("**OUTCOME**");
       printjson(result);
 
-      if (result.ok == 1 || [23].includes(result.code) {
+      if (result.ok == 1 || [23].includes(result.code)) {
         break;
       }
     }
@@ -123,7 +123,7 @@ data:
        echo 'waiting for duncan-pri:27018 ...'
        if `nc -z duncan-pri 27018`; then
         echo 'setting up mongo rs via duncan-pri ...'
-        mongo --tls --tlsCertificateKeyFile /kickstart/duncan-pri.pem --tlsCAFile /kickstart/root-ca.pem --authenticationDatabase '$external' --authenticationMechanism MONGODB-X509 --shardsvr --replSet duncan.rs --bind_ip_all --host duncan-pri:27018 /config/mongo-rs-config-duncan.js
+        mongo --tls --tlsCertificateKeyFile /kickstart/duncan-pri.pem --tlsCAFile /kickstart/root-ca.pem --authenticationDatabase '$external' --authenticationMechanism MONGODB-X509 duncan-pri:27018 /config/mongo-rs-config-duncan.js
         echo 'mongo rs configured!'
         break
       fi 

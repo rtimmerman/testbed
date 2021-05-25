@@ -18,7 +18,7 @@ data:
       print("**OUTCOME**");
       printjson(result);
 
-      if (result.ok == 1 || [23].includes(result.code) {
+      if (result.ok == 1 || [23].includes(result.code)) {
         break;
       }
     }
@@ -123,7 +123,7 @@ data:
        echo 'waiting for calvin-pri:27018 ...'
        if `nc -z calvin-pri 27018`; then
         echo 'setting up mongo rs via calvin-pri ...'
-        mongo --tls --tlsCertificateKeyFile /kickstart/calvin-pri.pem --tlsCAFile /kickstart/root-ca.pem --authenticationDatabase '$external' --authenticationMechanism MONGODB-X509 --shardsvr --replSet calvin.rs --bind_ip_all --host calvin-pri:27018 /config/mongo-rs-config-calvin.js
+        mongo --tls --tlsCertificateKeyFile /kickstart/calvin-pri.pem --tlsCAFile /kickstart/root-ca.pem --authenticationDatabase '$external' --authenticationMechanism MONGODB-X509 calvin-pri:27018 /config/mongo-rs-config-calvin.js
         echo 'mongo rs configured!'
         break
       fi 

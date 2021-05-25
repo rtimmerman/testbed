@@ -18,7 +18,7 @@ data:
       print("**OUTCOME**");
       printjson(result);
 
-      if (result.ok == 1 || [23].includes(result.code) {
+      if (result.ok == 1 || [23].includes(result.code)) {
         break;
       }
     }
@@ -123,7 +123,7 @@ data:
        echo 'waiting for elliot-pri:27018 ...'
        if `nc -z elliot-pri 27018`; then
         echo 'setting up mongo rs via elliot-pri ...'
-        mongo --tls --tlsCertificateKeyFile /kickstart/elliot-pri.pem --tlsCAFile /kickstart/root-ca.pem --authenticationDatabase '$external' --authenticationMechanism MONGODB-X509 --shardsvr --replSet elliot.rs --bind_ip_all --host elliot-pri:27018 /config/mongo-rs-config-elliot.js
+        mongo --tls --tlsCertificateKeyFile /kickstart/elliot-pri.pem --tlsCAFile /kickstart/root-ca.pem --authenticationDatabase '$external' --authenticationMechanism MONGODB-X509 elliot-pri:27018 /config/mongo-rs-config-elliot.js
         echo 'mongo rs configured!'
         break
       fi 

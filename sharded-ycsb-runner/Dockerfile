@@ -8,7 +8,7 @@ RUN echo "deb http://repo.mongodb.org/apt/debian buster/mongodb-org/4.4 main" | 
 RUN apt-get update
 RUN apt-cache search mongodb
 RUN apt-get -y install mongodb-org-shell
-RUN apt-get -y install openjdk-11-jre-headless
+RUN apt-get -y install openjdk-11-jdk-headless
 #RUN apt-get install openjdk-jdk-11 -y
 
 ENTRYPOINT /bin/sh -c ' while :; do sleep 1; done'

@@ -7,6 +7,9 @@ SHELL ["/bin/bash", "-c"]
 RUN mkdir /root/mandelbrot-generator
 
 COPY mandelbrot-generator /root/mandelbrot-generator
+COPY ./node_exporter-1.0.1.linux-amd64.tar.gz /root/
+COPY ./upscript.sh /root/
+RUN chmod 755 /root/upscript.sh
 
 RUN apt update
 RUN apt install -y openjdk-11-jdk-headless
@@ -15,7 +18,10 @@ RUN curl -s 'https://get.sdkman.io' | bash
 RUN source /root/.bashrc
 RUN source "/root/.sdkman/bin/sdkman-init.sh"
 RUN /bin/bash -c '. /root/.bashrc; sdk install sbt'
-#RUN sdk install scala 2.13.6
 
-ENTRYPOINT /bin/sh -c 'while :; do sleep 1; done'
+WORKDIR /root
+RUN cd /root
+RUN tar -zxf ./node_exporter-1.0.1.linux-amd64.tar.gz
+
+ENTRYPOINT /bin/bash -c /root/upscript.sh 
 

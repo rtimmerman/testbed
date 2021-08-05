@@ -3,6 +3,9 @@ services:
   operator:
     image: operator:1.0
     build: .
+    environment:
+      - ROLE=consumer
+      - TOPIC=test-1
     volumes:
       - .:/app
   kafka-topic-server:

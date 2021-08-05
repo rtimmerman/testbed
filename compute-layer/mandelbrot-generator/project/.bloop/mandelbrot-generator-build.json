@@ -2,16 +2,16 @@
     "version": "1.4.0",
     "project": {
         "name": "mandelbrot-generator-build",
-        "directory": "/home/roderick/scrapbook/scala/mandelbrot-generator/project",
-        "workspaceDir": "/home/roderick/scrapbook/scala/mandelbrot-generator/project",
+        "directory": "/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/project",
+        "workspaceDir": "/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/project",
         "sources": [
-            "/home/roderick/scrapbook/scala/mandelbrot-generator/project/src/main/scala",
-            "/home/roderick/scrapbook/scala/mandelbrot-generator/project/src/main/scala-2.12",
-            "/home/roderick/scrapbook/scala/mandelbrot-generator/project/src/main/scala-2",
-            "/home/roderick/scrapbook/scala/mandelbrot-generator/project/src/main/java",
-            "/home/roderick/scrapbook/scala/mandelbrot-generator/project/src/main/scala-sbt-1.0",
-            "/home/roderick/scrapbook/scala/mandelbrot-generator/project/target/scala-2.12/sbt-1.0/src_managed/main",
-            "/home/roderick/scrapbook/scala/mandelbrot-generator/project/Dependencies.scala"
+            "/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/project/src/main/scala",
+            "/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/project/src/main/scala-2.12",
+            "/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/project/src/main/scala-2",
+            "/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/project/src/main/java",
+            "/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/project/src/main/scala-sbt-1.0",
+            "/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/project/target/scala-2.12/sbt-1.0/src_managed/main",
+            "/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/project/Dependencies.scala"
         ],
         "dependencies": [
             
@@ -106,11 +106,11 @@
             "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/com/squareup/okio/okio/1.17.2/okio-1.17.2.jar",
             "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/com/typesafe/config/1.3.3/config-1.3.3.jar"
         ],
-        "out": "/home/roderick/scrapbook/scala/mandelbrot-generator/project/.bloop/mandelbrot-generator-build",
-        "classesDir": "/home/roderick/scrapbook/scala/mandelbrot-generator/project/.bloop/mandelbrot-generator-build/scala-2.12/sbt-1.0/classes",
+        "out": "/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/project/.bloop/mandelbrot-generator-build",
+        "classesDir": "/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/project/.bloop/mandelbrot-generator-build/scala-2.12/sbt-1.0/classes",
         "resources": [
-            "/home/roderick/scrapbook/scala/mandelbrot-generator/project/src/main/resources",
-            "/home/roderick/scrapbook/scala/mandelbrot-generator/project/target/scala-2.12/sbt-1.0/resource_managed/main"
+            "/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/project/src/main/resources",
+            "/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/project/target/scala-2.12/sbt-1.0/resource_managed/main"
         ],
         "scala": {
             "organization": "org.scala-lang",
@@ -129,7 +129,7 @@
                 "/home/roderick/.sbt/boot/scala-2.12.14/lib/scala-xml_2.12.jar",
                 "/home/roderick/.sbt/boot/scala-2.12.14/lib/scala-compiler.jar"
             ],
-            "analysis": "/home/roderick/scrapbook/scala/mandelbrot-generator/project/target/streams/compile/bloopAnalysisOut/_global/streams/inc_compile_2.12.zip",
+            "analysis": "/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/project/target/streams/compile/bloopAnalysisOut/_global/streams/inc_compile_2.12.zip",
             "setup": {
                 "order": "mixed",
                 "addLibraryToBootClasspath": true,
@@ -204,7 +204,7 @@
             "config": {
                 "home": "/usr/java/jdk-14.0.1",
                 "options": [
-                    "-Duser.dir=/home/roderick/scrapbook/scala/mandelbrot-generator/project"
+                    "-Duser.dir=/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/project"
                 ]
             },
             "mainClass": [

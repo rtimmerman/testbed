@@ -18,6 +18,7 @@
             "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala-library/2.13.5/scala-library-2.13.5.jar",
             "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/apache/kafka/kafka_2.13/2.8.0/kafka_2.13-2.8.0.jar",
             "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/typelevel/spire_2.13/0.17.0/spire_2.13-0.17.0.jar",
+            "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scalanlp/breeze_2.13/1.2/breeze_2.13-1.2.jar",
             "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/apache/kafka/kafka-clients/2.8.0/kafka-clients-2.8.0.jar",
             "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/apache/kafka/kafka-metadata/2.8.0/kafka-metadata-2.8.0.jar",
             "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/apache/kafka/kafka-raft/2.8.0/kafka-raft-2.8.0.jar",
@@ -39,6 +40,13 @@
             "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/typelevel/spire-platform_2.13/0.17.0/spire-platform_2.13-0.17.0.jar",
             "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/typelevel/spire-util_2.13/0.17.0/spire-util_2.13-0.17.0.jar",
             "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/typelevel/algebra_2.13/2.0.1/algebra_2.13-2.0.1.jar",
+            "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scalanlp/breeze-macros_2.13/1.2/breeze-macros_2.13-1.2.jar",
+            "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/com/github/fommil/netlib/core/1.1.2/core-1.1.2.jar",
+            "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/net/sourceforge/f2j/arpack_combined_all/0.1/arpack_combined_all-0.1.jar",
+            "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/net/sf/opencsv/opencsv/2.3/opencsv-2.3.jar",
+            "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/com/github/wendykierp/JTransforms/3.1/JTransforms-3.1.jar",
+            "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/apache/commons/commons-math3/3.5/commons-math3-3.5.jar",
+            "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/com/chuusai/shapeless_2.13/2.3.3/shapeless_2.13-2.3.3.jar",
             "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/com/github/luben/zstd-jni/1.4.9-1/zstd-jni-1.4.9-1.jar",
             "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/lz4/lz4-java/1.7.1/lz4-java-1.7.1.jar",
             "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/xerial/snappy/snappy-java/1.1.8.1/snappy-java-1.1.8.1.jar",
@@ -50,6 +58,7 @@
             "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/io/netty/netty-handler/4.1.50.Final/netty-handler-4.1.50.Final.jar",
             "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/io/netty/netty-transport-native-epoll/4.1.50.Final/netty-transport-native-epoll-4.1.50.Final.jar",
             "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/typelevel/cats-kernel_2.13/2.1.1/cats-kernel_2.13-2.1.1.jar",
+            "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/pl/edu/icm/JLargeArrays/1.5/JLargeArrays-1.5.jar",
             "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/com/thoughtworks/paranamer/paranamer/2.8/paranamer-2.8.jar",
             "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/io/netty/netty-common/4.1.50.Final/netty-common-4.1.50.Final.jar",
             "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/io/netty/netty-resolver/4.1.50.Final/netty-resolver-4.1.50.Final.jar",
@@ -199,6 +208,23 @@
                             "name": "spire_2.13",
                             "classifier": "sources",
                             "path": "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/typelevel/spire_2.13/0.17.0/spire_2.13-0.17.0-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.scalanlp",
+                    "name": "breeze_2.13",
+                    "version": "1.2",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "breeze_2.13",
+                            "path": "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scalanlp/breeze_2.13/1.2/breeze_2.13-1.2.jar"
+                        },
+                        {
+                            "name": "breeze_2.13",
+                            "classifier": "sources",
+                            "path": "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scalanlp/breeze_2.13/1.2/breeze_2.13-1.2-sources.jar"
                         }
                     ]
                 },
@@ -560,6 +586,120 @@
                     ]
                 },
                 {
+                    "organization": "org.scalanlp",
+                    "name": "breeze-macros_2.13",
+                    "version": "1.2",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "breeze-macros_2.13",
+                            "path": "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scalanlp/breeze-macros_2.13/1.2/breeze-macros_2.13-1.2.jar"
+                        },
+                        {
+                            "name": "breeze-macros_2.13",
+                            "classifier": "sources",
+                            "path": "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scalanlp/breeze-macros_2.13/1.2/breeze-macros_2.13-1.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.github.fommil.netlib",
+                    "name": "core",
+                    "version": "1.1.2",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "core",
+                            "path": "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/com/github/fommil/netlib/core/1.1.2/core-1.1.2.jar"
+                        },
+                        {
+                            "name": "core",
+                            "classifier": "sources",
+                            "path": "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/com/github/fommil/netlib/core/1.1.2/core-1.1.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "net.sourceforge.f2j",
+                    "name": "arpack_combined_all",
+                    "version": "0.1",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "arpack_combined_all",
+                            "path": "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/net/sourceforge/f2j/arpack_combined_all/0.1/arpack_combined_all-0.1.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "net.sf.opencsv",
+                    "name": "opencsv",
+                    "version": "2.3",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "opencsv",
+                            "path": "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/net/sf/opencsv/opencsv/2.3/opencsv-2.3.jar"
+                        },
+                        {
+                            "name": "opencsv",
+                            "classifier": "sources",
+                            "path": "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/net/sf/opencsv/opencsv/2.3/opencsv-2.3-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.github.wendykierp",
+                    "name": "JTransforms",
+                    "version": "3.1",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "JTransforms",
+                            "path": "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/com/github/wendykierp/JTransforms/3.1/JTransforms-3.1.jar"
+                        },
+                        {
+                            "name": "JTransforms",
+                            "classifier": "sources",
+                            "path": "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/com/github/wendykierp/JTransforms/3.1/JTransforms-3.1-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.apache.commons",
+                    "name": "commons-math3",
+                    "version": "3.5",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "commons-math3",
+                            "path": "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/apache/commons/commons-math3/3.5/commons-math3-3.5.jar"
+                        },
+                        {
+                            "name": "commons-math3",
+                            "classifier": "sources",
+                            "path": "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/apache/commons/commons-math3/3.5/commons-math3-3.5-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.chuusai",
+                    "name": "shapeless_2.13",
+                    "version": "2.3.3",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "shapeless_2.13",
+                            "path": "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/com/chuusai/shapeless_2.13/2.3.3/shapeless_2.13-2.3.3.jar"
+                        },
+                        {
+                            "name": "shapeless_2.13",
+                            "classifier": "sources",
+                            "path": "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/com/chuusai/shapeless_2.13/2.3.3/shapeless_2.13-2.3.3-sources.jar"
+                        }
+                    ]
+                },
+                {
                     "organization": "com.github.luben",
                     "name": "zstd-jni",
                     "version": "1.4.9-1",
@@ -743,6 +883,23 @@
                             "name": "cats-kernel_2.13",
                             "classifier": "sources",
                             "path": "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/typelevel/cats-kernel_2.13/2.1.1/cats-kernel_2.13-2.1.1-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "pl.edu.icm",
+                    "name": "JLargeArrays",
+                    "version": "1.5",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "JLargeArrays",
+                            "path": "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/pl/edu/icm/JLargeArrays/1.5/JLargeArrays-1.5.jar"
+                        },
+                        {
+                            "name": "JLargeArrays",
+                            "classifier": "sources",
+                            "path": "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/pl/edu/icm/JLargeArrays/1.5/JLargeArrays-1.5-sources.jar"
                         }
                     ]
                 },

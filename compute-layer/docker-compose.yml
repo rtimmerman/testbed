@@ -1,0 +1,13 @@
+version: "3.9"
+services:
+  operator:
+    image: operator:1.0
+    build: .
+    volumes:
+      - .:/app
+  kafka-topic-server:
+    image: kafka-topic-server:0.1
+    build: ./kafka
+    env_file: ./kafka/.env
+    ports:
+      - "9092:9092"

@@ -1231,3 +1231,821 @@ Jul 28, 2021 12:54:00 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancella
 WARNING: Unmatched cancel notification for request id 7109
 Jul 28, 2021 12:54:01 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
 WARNING: Unmatched cancel notification for request id 7115
+Jul 28, 2021 11:00:10 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 7132
+Jul 28, 2021 11:00:11 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 7138
+Jul 28, 2021 11:00:11 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 7143
+Jul 28, 2021 11:00:12 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 7147
+Jul 28, 2021 11:00:28 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 7169
+Jul 28, 2021 11:00:30 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 7174
+Jul 28, 2021 11:00:32 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 7180
+Jul 28, 2021 11:00:39 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 7185
+Jul 28, 2021 11:00:40 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 7191
+[0m2021.07.28 23:01:15 INFO  compiling root (1 scala source)[0m
+[0m2021.07.28 23:01:16 INFO  time: compiled root in 1.28s[0m
+[0m2021.07.28 23:03:40 INFO  compiling root (1 scala source)[0m
+[0m2021.07.28 23:03:42 INFO  Deduplicating compilation of root from bsp client 'Metals 0.10.5' (since 23h 29m 52.401s)[0m
+[0m2021.07.28 23:03:42 INFO  compiling root (1 scala source)[0m
+[0m2021.07.28 23:03:44 INFO  time: compiled root in 1.82s[0m
+Aug 01, 2021 10:40:30 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 7245
+Aug 01, 2021 10:40:32 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 7250
+Aug 01, 2021 10:40:44 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 7257
+Aug 01, 2021 11:14:47 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 7270
+Aug 01, 2021 11:15:04 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 7281
+Aug 01, 2021 11:15:22 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 7316
+[0m2021.08.01 23:17:17 INFO  compiling root (1 scala source)[0m
+[0m2021.08.01 23:17:20 INFO  time: compiled root in 3.1s[0m
+[0m2021.08.01 23:18:36 ERROR scalafmt: /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Mandelbrot.scala:6: error: ( expected but identifier found
+  val topic = if args.length > 2 then args(1) else "test"
+                 ^[0m
+[0m2021.08.01 23:18:36 INFO  compiling root (1 scala source)[0m
+[0m2021.08.01 23:18:36 INFO  time: compiled root in 95ms[0m
+[0m2021.08.01 23:18:40 ERROR scalafmt: /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Mandelbrot.scala:6: error: ( expected but identifier found
+  val topic = if args.length > 2 then args(1) else "test"
+                 ^[0m
+[0m2021.08.01 23:18:40 INFO  compiling root (1 scala source)[0m
+[0m2021.08.01 23:18:40 INFO  time: compiled root in 81ms[0m
+[0m2021.08.01 23:18:49 INFO  compiling root (1 scala source)[0m
+[0m2021.08.01 23:18:49 INFO  time: compiled root in 0.12s[0m
+[0m2021.08.01 23:18:54 INFO  compiling root (1 scala source)[0m
+[0m2021.08.01 23:18:54 INFO  time: compiled root in 0.13s[0m
+[0m2021.08.01 23:19:05 INFO  compiling root (1 scala source)[0m
+[0m2021.08.01 23:19:05 INFO  time: compiled root in 0.1s[0m
+Aug 01, 2021 11:19:08 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 8078
+[0m2021.08.01 23:19:18 INFO  compiling root (3 scala sources)[0m
+[0m2021.08.01 23:19:19 WARN  1 deprecation; re-run with -deprecation for details[0m
+[0m2021.08.01 23:19:19 INFO  time: compiled root in 1.34s[0m
+[0m2021.08.01 23:19:25 INFO  compiling root (1 scala source)[0m
+[0m2021.08.01 23:19:25 WARN  1 deprecation; re-run with -deprecation for details[0m
+[0m2021.08.01 23:19:25 INFO  time: compiled root in 0.83s[0m
+Aug 01, 2021 11:19:30 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 8165
+Aug 01, 2021 11:19:30 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 8171
+Aug 01, 2021 11:19:31 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 8177
+Aug 01, 2021 11:19:39 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 8183
+Aug 01, 2021 11:20:47 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 8210
+[0m2021.08.01 23:21:03 INFO  compiling root (1 scala source)[0m
+[0m2021.08.01 23:21:03 WARN  1 deprecation; re-run with -deprecation for details[0m
+[0m2021.08.01 23:21:03 INFO  time: compiled root in 0.85s[0m
+[0m2021.08.01 23:21:40 INFO  compiling root (1 scala source)[0m
+[0m2021.08.01 23:21:40 INFO  time: compiled root in 0.2s[0m
+[0m2021.08.01 23:21:52 INFO  compiling root (1 scala source)[0m
+[0m2021.08.01 23:21:52 INFO  time: compiled root in 0.23s[0m
+[0m2021.08.01 23:22:19 ERROR scalafmt: /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Consumer.scala:48: error: ) expected but . found
+    topics.add((String) props.get("topic"))
+                             ^[0m
+[0m2021.08.01 23:22:19 INFO  compiling root (1 scala source)[0m
+[0m2021.08.01 23:22:19 INFO  time: compiled root in 73ms[0m
+[0m2021.08.01 23:22:21 ERROR scalafmt: /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Consumer.scala:48: error: ) expected but . found
+    topics.add((String) props.get("topic"))
+                             ^[0m
+[0m2021.08.01 23:22:21 INFO  compiling root (1 scala source)[0m
+[0m2021.08.01 23:22:21 INFO  time: compiled root in 79ms[0m
+[0m2021.08.01 23:22:36 INFO  compiling root (1 scala source)[0m
+[0m2021.08.01 23:22:36 INFO  time: compiled root in 0.19s[0m
+[0m2021.08.01 23:23:01 INFO  compiling root (1 scala source)[0m
+[0m2021.08.01 23:23:01 INFO  time: compiled root in 0.18s[0m
+[0m2021.08.01 23:23:05 INFO  compiling root (1 scala source)[0m
+[0m2021.08.01 23:23:05 INFO  time: compiled root in 0.19s[0m
+[0m2021.08.01 23:23:14 INFO  compiling root (1 scala source)[0m
+[0m2021.08.01 23:23:14 WARN  1 deprecation; re-run with -deprecation for details[0m
+[0m2021.08.01 23:23:14 INFO  time: compiled root in 0.9s[0m
+[0m2021.08.01 23:23:25 INFO  compiling root (1 scala source)[0m
+[0m2021.08.01 23:23:25 INFO  time: compiled root in 0.21s[0m
+[0m2021.08.01 23:23:29 ERROR scalafmt: /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Consumer.scala:48: error: ) expected but . found
+    topics.add((String) props.get("topic"))
+                             ^[0m
+[0m2021.08.01 23:23:29 INFO  compiling root (1 scala source)[0m
+[0m2021.08.01 23:23:29 INFO  time: compiled root in 86ms[0m
+[0m2021.08.01 23:24:01 INFO  compiling root (1 scala source)[0m
+[0m2021.08.01 23:24:01 INFO  time: compiled root in 0.68s[0m
+[0m2021.08.01 23:24:08 INFO  compiling root (1 scala source)[0m
+[0m2021.08.01 23:24:08 INFO  time: compiled root in 0.2s[0m
+[0m2021.08.01 23:24:14 INFO  compiling root (1 scala source)[0m
+[0m2021.08.01 23:24:21 WARN  1 deprecation; re-run with -deprecation for details[0m
+[0m2021.08.01 23:24:21 INFO  time: compiled root in 6.89s[0m
+Aug 01, 2021 11:24:46 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 8765
+Aug 01, 2021 11:24:47 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 8768
+Aug 04, 2021 12:21:58 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 8790
+[0m2021.08.04 00:22:47 INFO  running '/home/roderick/.jabba/jdk/adopt@1.11.0-11/bin/java -Djline.terminal=jline.UnsupportedTerminal -Dsbt.log.noformat=true -Dfile.encoding=UTF-8 -jar /tmp/metals16664269968338024370/sbt-launch.jar -Dbloop.export-jar-classifiers=sources bloopInstall'[0m
+[0m2021.08.04 00:22:48 INFO  [info] welcome to sbt 1.5.4 (AdoptOpenJDK Java 11.0.11)[0m
+[0m2021.08.04 00:22:50 INFO  [info] loading global plugins from /home/roderick/.sbt/1.0/plugins[0m
+[0m2021.08.04 00:22:51 INFO  [info] loading settings for project mandelbrot-generator-build-build from metals.sbt ...[0m
+[0m2021.08.04 00:22:51 INFO  [info] loading project definition from /home/roderick/scrapbook/scala/mandelbrot-generator/project/project[0m
+[0m2021.08.04 00:22:51 INFO  [info] loading settings for project mandelbrot-generator-build from metals.sbt ...[0m
+[0m2021.08.04 00:22:51 INFO  [info] loading project definition from /home/roderick/scrapbook/scala/mandelbrot-generator/project[0m
+[0m2021.08.04 00:22:53 INFO  [success] Generated .bloop/mandelbrot-generator-build.json[0m
+[0m2021.08.04 00:22:53 INFO  [info] compiling 1 Scala source to /home/roderick/scrapbook/scala/mandelbrot-generator/project/target/scala-2.12/sbt-1.0/classes ...[0m
+[0m2021.08.04 00:22:56 INFO  [info] done compiling[0m
+[0m2021.08.04 00:22:56 INFO  [success] Total time: 5 s, completed 4 Aug 2021, 00:22:56[0m
+[0m2021.08.04 00:22:59 INFO  [info] loading settings for project root from build.sbt ...[0m
+[0m2021.08.04 00:22:59 INFO  [info] set current project to mandelbrot-generator (in build file:/home/roderick/scrapbook/scala/mandelbrot-generator/)[0m
+Aug 04, 2021 12:23:08 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 8984
+[0m2021.08.04 00:23:08 INFO  [success] Generated .bloop/root.json[0m
+[0m2021.08.04 00:23:08 INFO  [success] Generated .bloop/root-test.json[0m
+[0m2021.08.04 00:23:08 INFO  [success] Total time: 9 s, completed 4 Aug 2021, 00:23:08[0m
+[0m2021.08.04 00:23:08 INFO  sbt bloopInstall exit: 0[0m
+[0m2021.08.04 00:23:09 INFO  time: ran 'sbt bloopInstall' in 22s[0m
+[0m2021.08.04 00:23:09 INFO  Disconnecting from Bloop session...[0m
+[0m2021.08.04 00:23:09 INFO  Shut down connection with build server.[0m
+[0m2021.08.04 00:23:09 INFO  Shut down connection with build server.[0m
+No more data in the client stdin, exiting...
+No more data in the client stdin, exiting...
+No more data in the server stdin, exiting...
+No more data in the server stdin, exiting...
+[0m2021.08.04 00:23:09 INFO  Attempting to connect to the build server...[0m
+No more data in the server stdin, exiting...
+No more data in the server stdin, exiting...
+Starting the bsp launcher for bloop...
+Opening a bsp server connection with 'bsp --protocol local --socket /tmp/bsp-launcher6284758121296645210/bsp.socket'...
+Waiting for the bsp connection to come up...
+[0m[32m[D][0m Loading workspace settings from bloop.settings.json
+[0m[32m[D][0m Loading 2 projects from '/home/roderick/scrapbook/scala/mandelbrot-generator/.bloop'...
+[0m[32m[D][0m Loading project from '/home/roderick/scrapbook/scala/mandelbrot-generator/.bloop/root.json'
+[0m[32m[D][0m Loading project from '/home/roderick/scrapbook/scala/mandelbrot-generator/.bloop/root-test.json'
+[0m[32m[D][0m Configured SemanticDB in projects 'root', 'root-test'
+[0m[32m[D][0m Waiting for a connection at local:///tmp/bsp-launcher6284758121296645210/bsp.socket...
+The server is listening for incoming connections at local:///tmp/bsp-launcher6284758121296645210/bsp.socket...
+Starting thread that pumps stdin and redirects it to the bsp server...
+Starting thread that pumps server stdout and redirects it to the client stdout...
+[0m2021.08.04 00:23:09 INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /home/roderick/.cache/metals/bsp.trace.json[0m
+[0m2021.08.04 00:23:09 INFO  Attempting to connect to the build server...[0m
+Starting the bsp launcher for bloop...
+Opening a bsp server connection with 'bsp --protocol local --socket /tmp/bsp-launcher1265323792358768170/bsp.socket'...
+Waiting for the bsp connection to come up...
+[0m[32m[D][0m Loading workspace settings from bloop.settings.json
+[0m[32m[D][0m Waiting for a connection at local:///tmp/bsp-launcher1265323792358768170/bsp.socket...
+The server is listening for incoming connections at local:///tmp/bsp-launcher1265323792358768170/bsp.socket...
+Starting thread that pumps stdin and redirects it to the bsp server...
+Starting thread that pumps server stdout and redirects it to the client stdout...
+[0m2021.08.04 00:23:09 INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /home/roderick/.cache/metals/bsp.trace.json[0m
+[0m2021.08.04 00:23:09 INFO  time: Connected to build server in 0.24s[0m
+[0m2021.08.04 00:23:09 INFO  Connected to Build server: Bloop v1.4.8-19-4d9f966b[0m
+[0m2021.08.04 00:23:11 INFO  time: indexed workspace in 2.06s[0m
+[0m2021.08.04 00:23:12 INFO  compiling root-test (1 scala source)[0m
+[0m2021.08.04 00:23:12 INFO  time: compiled root-test in 0.71s[0m
+Aug 04, 2021 12:23:17 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 8990
+Aug 04, 2021 12:23:35 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 9087
+[0m2021.08.04 00:23:36 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 00:23:38 INFO  time: compiled root in 1.25s[0m
+[0m2021.08.04 00:24:25 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 00:24:25 INFO  time: compiled root in 0.7s[0m
+[0m2021.08.04 00:25:09 ERROR scalafmt: /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Producer.scala:31: error: illegal start of simple expression
+  }
+  ^[0m
+[0m2021.08.04 00:25:09 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 00:25:09 INFO  time: compiled root in 85ms[0m
+[0m2021.08.04 00:25:11 ERROR scalafmt: /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Producer.scala:31: error: illegal start of simple expression
+  }
+  ^[0m
+[0m2021.08.04 00:25:11 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 00:25:11 INFO  time: compiled root in 94ms[0m
+[0m2021.08.04 00:25:11 ERROR scalafmt: /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Producer.scala:31: error: illegal start of simple expression
+  }
+  ^[0m
+[0m2021.08.04 00:25:11 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 00:25:11 INFO  time: compiled root in 37ms[0m
+[0m2021.08.04 00:25:36 ERROR scalafmt: /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Producer.scala:31: error: illegal start of simple expression
+  }
+  ^[0m
+[0m2021.08.04 00:25:36 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 00:25:36 INFO  time: compiled root in 81ms[0m
+[0m2021.08.04 00:25:58 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 00:25:58 INFO  time: compiled root in 0.18s[0m
+[0m2021.08.04 00:26:10 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 00:26:10 INFO  time: compiled root in 0.15s[0m
+[0m2021.08.04 00:26:16 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 00:26:16 INFO  time: compiled root in 0.86s[0m
+[0m2021.08.04 00:27:06 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 00:27:06 INFO  time: compiled root in 0.16s[0m
+[0m2021.08.04 00:27:16 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 00:27:16 INFO  time: compiled root in 0.85s[0m
+[0m2021.08.04 00:29:55 ERROR scalafmt: /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Producer.scala:38: error: illegal start of simple expression
+  }
+  ^[0m
+[0m2021.08.04 00:29:55 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 00:29:55 INFO  time: compiled root in 83ms[0m
+[0m2021.08.04 00:33:49 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 00:33:49 INFO  time: compiled root in 0.39s[0m
+[0m2021.08.04 00:33:51 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 00:33:51 INFO  time: compiled root in 0.18s[0m
+[0m2021.08.04 00:34:23 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 00:34:23 INFO  time: compiled root in 0.24s[0m
+[0m2021.08.04 00:34:35 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 00:34:35 INFO  time: compiled root in 0.23s[0m
+[0m2021.08.04 00:34:36 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 00:34:36 INFO  time: compiled root in 0.12s[0m
+[0m2021.08.04 00:34:36 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 00:34:37 INFO  time: compiled root in 0.13s[0m
+[0m2021.08.04 00:34:47 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 00:34:47 INFO  time: compiled root in 0.2s[0m
+[0m2021.08.04 00:34:55 INFO  /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Producer.scala:40:8: stale bloop error: not found: value pos
+      (pos, value) -> {
+       ^^^[0m
+[0m2021.08.04 00:34:55 INFO  /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Producer.scala:40:13: stale bloop error: not found: value value
+      (pos, value) -> {
+            ^^^^^[0m
+[0m2021.08.04 00:34:55 INFO  /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Producer.scala:45:13: stale bloop error: not found: value value
+            value.toString
+            ^^^^^[0m
+[0m2021.08.04 00:34:55 INFO  /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Producer.scala:40:8: stale bloop error: not found: value pos
+      (pos, value) -> {
+       ^^^[0m
+[0m2021.08.04 00:34:55 INFO  /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Producer.scala:40:13: stale bloop error: not found: value value
+      (pos, value) -> {
+            ^^^^^[0m
+[0m2021.08.04 00:34:55 INFO  /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Producer.scala:45:13: stale bloop error: not found: value value
+            value.toString
+            ^^^^^[0m
+[0m2021.08.04 00:34:58 INFO  /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Producer.scala:40:8: stale bloop error: not found: value pos
+      (pos, value) -> {
+       ^^^[0m
+[0m2021.08.04 00:34:58 INFO  /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Producer.scala:40:13: stale bloop error: not found: value value
+      (pos, value) -> {
+            ^^^^^[0m
+[0m2021.08.04 00:34:58 INFO  /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Producer.scala:45:13: stale bloop error: not found: value value
+            value.toString
+            ^^^^^[0m
+[0m2021.08.04 00:34:58 INFO  /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Producer.scala:40:8: stale bloop error: not found: value pos
+      (pos, value) -> {
+       ^^^[0m
+[0m2021.08.04 00:34:58 INFO  /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Producer.scala:40:13: stale bloop error: not found: value value
+      (pos, value) -> {
+            ^^^^^[0m
+[0m2021.08.04 00:34:58 INFO  /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Producer.scala:45:13: stale bloop error: not found: value value
+            value.toString
+            ^^^^^[0m
+[0m2021.08.04 00:36:44 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 00:36:46 INFO  time: compiled root in 1.19s[0m
+[0m2021.08.04 00:37:16 ERROR scalafmt: /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Producer.scala:52: error: ) expected but def found
+  def produceGridPoints() = {
+  ^[0m
+[0m2021.08.04 00:37:16 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 00:37:16 INFO  time: compiled root in 88ms[0m
+[0m2021.08.04 00:37:47 ERROR scalafmt: /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Producer.scala:51: error: ) expected but } found
+  }
+  ^[0m
+[0m2021.08.04 00:37:47 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 00:37:47 INFO  time: compiled root in 0.13s[0m
+[0m2021.08.04 00:38:04 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 00:38:06 INFO  time: compiled root in 1.1s[0m
+[0m2021.08.04 00:38:38 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 00:38:39 INFO  time: compiled root in 1.01s[0m
+[0m2021.08.04 00:40:53 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 00:40:53 INFO  time: compiled root in 0.9s[0m
+[0m2021.08.04 00:41:33 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 00:41:33 INFO  time: compiled root in 0.93s[0m
+[0m2021.08.04 00:42:25 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 00:42:25 INFO  time: compiled root in 0.19s[0m
+[0m2021.08.04 00:42:25 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 00:42:26 INFO  time: compiled root in 0.11s[0m
+[0m2021.08.04 00:42:39 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 00:42:40 INFO  time: compiled root in 1.51s[0m
+[0m2021.08.04 00:43:32 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 00:43:34 INFO  time: compiled root in 1.64s[0m
+[0m2021.08.04 00:43:56 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 00:43:58 INFO  time: compiled root in 1.43s[0m
+[0m2021.08.04 00:44:17 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 00:44:17 INFO  time: compiled root in 0.86s[0m
+[0m2021.08.04 00:44:56 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 00:44:56 INFO  time: compiled root in 0.84s[0m
+[0m2021.08.04 00:45:29 ERROR scalafmt: /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Producer.scala:45: error: illegal start of simple expression
+      if ()
+          ^[0m
+[0m2021.08.04 00:45:29 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 00:45:29 INFO  time: compiled root in 0.11s[0m
+[0m2021.08.04 00:45:30 ERROR scalafmt: /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Producer.scala:45: error: illegal start of simple expression
+      if ()
+          ^[0m
+[0m2021.08.04 00:45:30 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 00:45:30 INFO  time: compiled root in 77ms[0m
+[0m2021.08.04 00:46:06 INFO  /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Producer.scala:45:11: stale bloop error: illegal start of simple expression
+      if ()
+          ^[0m
+[0m2021.08.04 00:46:06 INFO  /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Producer.scala:51:5: stale bloop error: ')' expected but '}' found.
+    }
+    ^[0m
+[0m2021.08.04 00:46:06 INFO  /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Producer.scala:45:11: stale bloop error: illegal start of simple expression
+      if ()
+          ^[0m
+[0m2021.08.04 00:46:06 INFO  /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Producer.scala:51:5: stale bloop error: ')' expected but '}' found.
+    }
+    ^[0m
+[0m2021.08.04 00:47:17 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 00:47:17 INFO  time: compiled root in 0.87s[0m
+[0m2021.08.04 00:47:39 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 00:47:39 INFO  time: compiled root in 0.9s[0m
+[0m2021.08.04 00:47:57 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 00:47:57 INFO  time: compiled root in 0.82s[0m
+[0m2021.08.04 00:49:37 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 00:49:37 INFO  time: compiled root in 0.19s[0m
+[0m2021.08.04 00:49:43 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 00:49:43 INFO  time: compiled root in 0.19s[0m
+[0m2021.08.04 00:49:59 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 00:49:59 INFO  time: compiled root in 0.94s[0m
+[0m2021.08.04 00:50:38 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 00:50:38 INFO  time: compiled root in 0.82s[0m
+[0m2021.08.04 00:50:51 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 00:50:52 INFO  time: compiled root in 1.15s[0m
+[0m2021.08.04 00:50:53 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 00:50:53 INFO  time: compiled root in 0.85s[0m
+Aug 04, 2021 12:51:43 AM scala.meta.internal.pc.CompletionProvider expected$1
+WARNING: offset 1182, count -1, length 2056
+Aug 04, 2021 12:51:59 AM scala.meta.internal.pc.CompilerAccess handleError
+SEVERE: null
+java.lang.NullPointerException
+	at scala.meta.internal.pc.completions.ArgCompletions$ArgCompletion.$anonfun$baseParams$1(ArgCompletions.scala:27)
+	at scala.Option.getOrElse(Option.scala:201)
+	at scala.meta.internal.pc.completions.ArgCompletions$ArgCompletion.baseParams$lzycompute(ArgCompletions.scala:27)
+	at scala.meta.internal.pc.completions.ArgCompletions$ArgCompletion.baseParams(ArgCompletions.scala:23)
+	at scala.meta.internal.pc.completions.ArgCompletions$ArgCompletion.allParams$lzycompute(ArgCompletions.scala:41)
+	at scala.meta.internal.pc.completions.ArgCompletions$ArgCompletion.allParams(ArgCompletions.scala:40)
+	at scala.meta.internal.pc.completions.ArgCompletions$ArgCompletion.params$lzycompute(ArgCompletions.scala:47)
+	at scala.meta.internal.pc.completions.ArgCompletions$ArgCompletion.params(ArgCompletions.scala:46)
+	at scala.meta.internal.pc.completions.ArgCompletions$ArgCompletion.contribute(ArgCompletions.scala:159)
+	at scala.meta.internal.pc.CompletionProvider.expected$1(CompletionProvider.scala:393)
+	at scala.meta.internal.pc.CompletionProvider.safeCompletionsAt(CompletionProvider.scala:474)
+	at scala.meta.internal.pc.CompletionProvider.completions(CompletionProvider.scala:58)
+
+[0m2021.08.04 00:52:24 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 00:52:25 INFO  time: compiled root in 1.08s[0m
+[0m2021.08.04 00:53:19 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 00:53:23 INFO  time: compiled root in 4.81s[0m
+[0m2021.08.04 00:54:26 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 00:54:27 INFO  time: compiled root in 1.06s[0m
+[0m2021.08.04 00:54:55 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 00:54:56 INFO  time: compiled root in 1.06s[0m
+[0m2021.08.04 00:55:30 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 00:55:30 INFO  time: compiled root in 0.22s[0m
+[0m2021.08.04 00:55:30 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 00:55:30 INFO  time: compiled root in 0.16s[0m
+[0m2021.08.04 00:55:32 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 00:55:32 INFO  time: compiled root in 0.12s[0m
+[0m2021.08.04 00:55:32 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 00:55:32 INFO  time: compiled root in 0.17s[0m
+[0m2021.08.04 00:55:33 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 00:55:33 INFO  time: compiled root in 0.14s[0m
+[0m2021.08.04 00:55:33 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 00:55:33 INFO  time: compiled root in 0.11s[0m
+[0m2021.08.04 00:55:35 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 00:55:35 INFO  time: compiled root in 0.16s[0m
+[0m2021.08.04 00:55:35 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 00:55:35 INFO  time: compiled root in 0.13s[0m
+[0m2021.08.04 00:55:39 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 00:55:39 INFO  time: compiled root in 0.23s[0m
+[0m2021.08.04 00:55:40 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 00:55:41 INFO  time: compiled root in 1.01s[0m
+[0m2021.08.04 00:57:52 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 00:57:53 INFO  time: compiled root in 1.05s[0m
+[0m2021.08.04 00:58:11 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 00:58:12 INFO  time: compiled root in 1.46s[0m
+[0m2021.08.04 00:58:38 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 00:58:40 INFO  time: compiled root in 1.55s[0m
+[0m2021.08.04 00:59:04 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 00:59:04 INFO  time: compiled root in 0.86s[0m
+[0m2021.08.04 00:59:34 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 00:59:34 INFO  time: compiled root in 0.92s[0m
+[0m2021.08.04 00:59:44 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 00:59:44 INFO  time: compiled root in 0.9s[0m
+[0m2021.08.04 01:00:39 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 01:00:39 INFO  time: compiled root in 0.91s[0m
+[0m2021.08.04 01:01:04 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 01:01:04 INFO  time: compiled root in 0.14s[0m
+[0m2021.08.04 01:01:10 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 01:01:10 INFO  time: compiled root in 0.97s[0m
+Aug 04, 2021 1:01:30 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 14058
+[0m2021.08.04 01:01:48 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 01:01:48 INFO  time: compiled root in 0.88s[0m
+[0m2021.08.04 01:03:06 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 01:03:06 INFO  time: compiled root in 0.96s[0m
+[0m2021.08.04 01:03:12 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 01:03:13 INFO  time: compiled root in 1.14s[0m
+[0m2021.08.04 01:03:56 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 01:03:56 INFO  time: compiled root in 0.81s[0m
+[0m2021.08.04 01:04:16 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 01:04:16 INFO  time: compiled root in 0.85s[0m
+[0m2021.08.04 01:04:35 INFO  compiling root-test (1 scala source)[0m
+[0m2021.08.04 01:04:35 INFO  time: compiled root-test in 0.18s[0m
+[0m2021.08.04 01:04:35 INFO  compiling root-test (1 scala source)[0m
+[0m2021.08.04 01:04:35 INFO  time: compiled root-test in 98ms[0m
+[0m2021.08.04 01:04:36 INFO  compiling root-test (1 scala source)[0m
+[0m2021.08.04 01:04:36 INFO  time: compiled root-test in 0.12s[0m
+[0m2021.08.04 01:04:36 INFO  compiling root-test (1 scala source)[0m
+[0m2021.08.04 01:04:36 INFO  time: compiled root-test in 80ms[0m
+[0m2021.08.04 01:04:39 INFO  compiling root-test (1 scala source)[0m
+[0m2021.08.04 01:04:39 INFO  time: compiled root-test in 0.13s[0m
+[0m2021.08.04 01:04:39 INFO  compiling root-test (1 scala source)[0m
+[0m2021.08.04 01:04:40 INFO  time: compiled root-test in 0.11s[0m
+[0m2021.08.04 01:04:40 INFO  compiling root-test (1 scala source)[0m
+[0m2021.08.04 01:04:40 INFO  time: compiled root-test in 87ms[0m
+[0m2021.08.04 01:04:44 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 01:04:44 INFO  time: compiled root in 0.83s[0m
+Aug 04, 2021 9:37:17 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 14392
+[0m2021.08.04 21:37:53 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 21:37:53 WARN  1 deprecation; re-run with -deprecation for details[0m
+[0m2021.08.04 21:37:53 INFO  time: compiled root in 0.9s[0m
+Aug 04, 2021 9:38:13 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 14512
+Aug 04, 2021 9:38:19 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 14518
+Aug 04, 2021 9:40:24 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 14588
+[0m2021.08.04 21:40:54 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 21:41:01 INFO  time: compiled root in 6.16s[0m
+[0m2021.08.04 21:41:53 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 21:41:53 INFO  time: compiled root in 0.13s[0m
+[0m2021.08.04 21:41:57 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 21:41:57 INFO  time: compiled root in 0.1s[0m
+[0m2021.08.04 21:41:58 ERROR scalafmt: /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Mandelbrot.scala:11: error: ; expected but ) found
+    Producer.produceGridPoints(topic))
+                                     ^[0m
+[0m2021.08.04 21:41:58 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 21:41:58 INFO  time: compiled root in 0.14s[0m
+[0m2021.08.04 21:42:15 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 21:42:15 INFO  time: compiled root in 99ms[0m
+[0m2021.08.04 21:42:24 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 21:42:24 INFO  time: compiled root in 0.11s[0m
+[0m2021.08.04 21:42:26 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 21:42:26 INFO  time: compiled root in 79ms[0m
+[0m2021.08.04 21:42:36 INFO  /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Mandelbrot.scala:9:32: stale bloop error: no arguments allowed for nullary method produceGridPoints: (): Unit
+    Producer.produceGridPoints("test")
+                               ^^^^^^[0m
+[0m2021.08.04 21:42:36 INFO  /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Mandelbrot.scala:11:32: stale bloop error: no arguments allowed for nullary method produceGridPoints: (): Unit
+    Producer.produceGridPoints(topicPrefix)
+                               ^^^^^^^^^^^[0m
+[0m2021.08.04 21:42:36 INFO  /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Mandelbrot.scala:9:32: stale bloop error: no arguments allowed for nullary method produceGridPoints: (): Unit
+    Producer.produceGridPoints("test")
+                               ^^^^^^[0m
+[0m2021.08.04 21:42:36 INFO  /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Mandelbrot.scala:11:32: stale bloop error: no arguments allowed for nullary method produceGridPoints: (): Unit
+    Producer.produceGridPoints(topicPrefix)
+                               ^^^^^^^^^^^[0m
+[0m2021.08.04 21:42:40 INFO  /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Mandelbrot.scala:9:32: stale bloop error: no arguments allowed for nullary method produceGridPoints: (): Unit
+    Producer.produceGridPoints("test")
+                               ^^^^^^[0m
+[0m2021.08.04 21:42:40 INFO  /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Mandelbrot.scala:11:32: stale bloop error: no arguments allowed for nullary method produceGridPoints: (): Unit
+    Producer.produceGridPoints(topicPrefix)
+                               ^^^^^^^^^^^[0m
+[0m2021.08.04 21:42:40 INFO  /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Mandelbrot.scala:9:32: stale bloop error: no arguments allowed for nullary method produceGridPoints: (): Unit
+    Producer.produceGridPoints("test")
+                               ^^^^^^[0m
+[0m2021.08.04 21:42:40 INFO  /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Mandelbrot.scala:11:32: stale bloop error: no arguments allowed for nullary method produceGridPoints: (): Unit
+    Producer.produceGridPoints(topicPrefix)
+                               ^^^^^^^^^^^[0m
+[0m2021.08.04 21:42:40 INFO  /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Mandelbrot.scala:9:32: stale bloop error: no arguments allowed for nullary method produceGridPoints: (): Unit
+    Producer.produceGridPoints("test")
+                               ^^^^^^[0m
+[0m2021.08.04 21:42:40 INFO  /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Mandelbrot.scala:11:32: stale bloop error: no arguments allowed for nullary method produceGridPoints: (): Unit
+    Producer.produceGridPoints(topicPrefix)
+                               ^^^^^^^^^^^[0m
+[0m2021.08.04 21:42:41 INFO  /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Mandelbrot.scala:9:32: stale bloop error: no arguments allowed for nullary method produceGridPoints: (): Unit
+    Producer.produceGridPoints("test")
+                               ^^^^^^[0m
+[0m2021.08.04 21:42:41 INFO  /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Mandelbrot.scala:11:32: stale bloop error: no arguments allowed for nullary method produceGridPoints: (): Unit
+    Producer.produceGridPoints(topicPrefix)
+                               ^^^^^^^^^^^[0m
+[0m2021.08.04 21:42:40 INFO  /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Mandelbrot.scala:9:32: stale bloop error: no arguments allowed for nullary method produceGridPoints: (): Unit
+    Producer.produceGridPoints("test")
+                               ^^^^^^[0m
+[0m2021.08.04 21:42:40 INFO  /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Mandelbrot.scala:11:32: stale bloop error: no arguments allowed for nullary method produceGridPoints: (): Unit
+    Producer.produceGridPoints(topicPrefix)
+                               ^^^^^^^^^^^[0m
+[0m2021.08.04 21:42:40 INFO  /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Mandelbrot.scala:9:32: stale bloop error: no arguments allowed for nullary method produceGridPoints: (): Unit
+    Producer.produceGridPoints("test")
+                               ^^^^^^[0m
+[0m2021.08.04 21:42:40 INFO  /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Mandelbrot.scala:11:32: stale bloop error: no arguments allowed for nullary method produceGridPoints: (): Unit
+    Producer.produceGridPoints(topicPrefix)
+                               ^^^^^^^^^^^[0m
+[0m2021.08.04 21:42:41 INFO  /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Mandelbrot.scala:9:32: stale bloop error: no arguments allowed for nullary method produceGridPoints: (): Unit
+    Producer.produceGridPoints("test")
+                               ^^^^^^[0m
+[0m2021.08.04 21:42:41 INFO  /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Mandelbrot.scala:11:32: stale bloop error: no arguments allowed for nullary method produceGridPoints: (): Unit
+    Producer.produceGridPoints(topicPrefix)
+                               ^^^^^^^^^^^[0m
+[0m2021.08.04 21:42:41 INFO  /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Mandelbrot.scala:9:32: stale bloop error: no arguments allowed for nullary method produceGridPoints: (): Unit
+    Producer.produceGridPoints("test")
+                               ^^^^^^[0m
+[0m2021.08.04 21:42:41 INFO  /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Mandelbrot.scala:11:32: stale bloop error: no arguments allowed for nullary method produceGridPoints: (): Unit
+    Producer.produceGridPoints(topicPrefix)
+                               ^^^^^^^^^^^[0m
+[0m2021.08.04 21:42:41 INFO  /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Mandelbrot.scala:9:32: stale bloop error: no arguments allowed for nullary method produceGridPoints: (): Unit
+    Producer.produceGridPoints("test")
+                               ^^^^^^[0m
+[0m2021.08.04 21:42:41 INFO  /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Mandelbrot.scala:11:32: stale bloop error: no arguments allowed for nullary method produceGridPoints: (): Unit
+    Producer.produceGridPoints(topicPrefix)
+                               ^^^^^^^^^^^[0m
+[0m2021.08.04 21:42:42 INFO  /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Mandelbrot.scala:9:32: stale bloop error: no arguments allowed for nullary method produceGridPoints: (): Unit
+    Producer.produceGridPoints("test")
+                               ^^^^^^[0m
+[0m2021.08.04 21:42:42 INFO  /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Mandelbrot.scala:11:32: stale bloop error: no arguments allowed for nullary method produceGridPoints: (): Unit
+    Producer.produceGridPoints(topicPrefix)
+                               ^^^^^^^^^^^[0m
+[0m2021.08.04 21:42:41 INFO  /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Mandelbrot.scala:9:32: stale bloop error: no arguments allowed for nullary method produceGridPoints: (): Unit
+    Producer.produceGridPoints("test")
+                               ^^^^^^[0m
+[0m2021.08.04 21:42:41 INFO  /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Mandelbrot.scala:11:32: stale bloop error: no arguments allowed for nullary method produceGridPoints: (): Unit
+    Producer.produceGridPoints(topicPrefix)
+                               ^^^^^^^^^^^[0m
+[0m2021.08.04 21:42:41 INFO  /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Mandelbrot.scala:9:32: stale bloop error: no arguments allowed for nullary method produceGridPoints: (): Unit
+    Producer.produceGridPoints("test")
+                               ^^^^^^[0m
+[0m2021.08.04 21:42:41 INFO  /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Mandelbrot.scala:11:32: stale bloop error: no arguments allowed for nullary method produceGridPoints: (): Unit
+    Producer.produceGridPoints(topicPrefix)
+                               ^^^^^^^^^^^[0m
+[0m2021.08.04 21:42:41 INFO  /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Mandelbrot.scala:9:32: stale bloop error: no arguments allowed for nullary method produceGridPoints: (): Unit
+    Producer.produceGridPoints("test")
+                               ^^^^^^[0m
+[0m2021.08.04 21:42:41 INFO  /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Mandelbrot.scala:11:32: stale bloop error: no arguments allowed for nullary method produceGridPoints: (): Unit
+    Producer.produceGridPoints(topicPrefix)
+                               ^^^^^^^^^^^[0m
+[0m2021.08.04 21:42:42 INFO  /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Mandelbrot.scala:9:32: stale bloop error: no arguments allowed for nullary method produceGridPoints: (): Unit
+    Producer.produceGridPoints("test")
+                               ^^^^^^[0m
+[0m2021.08.04 21:42:42 INFO  /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Mandelbrot.scala:11:32: stale bloop error: no arguments allowed for nullary method produceGridPoints: (): Unit
+    Producer.produceGridPoints(topicPrefix)
+                               ^^^^^^^^^^^[0m
+[0m2021.08.04 21:42:43 INFO  /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Mandelbrot.scala:9:32: stale bloop error: no arguments allowed for nullary method produceGridPoints: (): Unit
+    Producer.produceGridPoints("test")
+                               ^^^^^^[0m
+[0m2021.08.04 21:42:43 INFO  /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Mandelbrot.scala:11:32: stale bloop error: no arguments allowed for nullary method produceGridPoints: (): Unit
+    Producer.produceGridPoints(topicPrefix)
+                               ^^^^^^^^^^^[0m
+[0m2021.08.04 21:42:43 INFO  /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Mandelbrot.scala:9:32: stale bloop error: no arguments allowed for nullary method produceGridPoints: (): Unit
+    Producer.produceGridPoints("test")
+                               ^^^^^^[0m
+[0m2021.08.04 21:42:43 INFO  /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Mandelbrot.scala:11:32: stale bloop error: no arguments allowed for nullary method produceGridPoints: (): Unit
+    Producer.produceGridPoints(topicPrefix)
+                               ^^^^^^^^^^^[0m
+[0m2021.08.04 21:42:43 INFO  /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Mandelbrot.scala:9:32: stale bloop error: no arguments allowed for nullary method produceGridPoints: (): Unit
+    Producer.produceGridPoints("test")
+                               ^^^^^^[0m
+[0m2021.08.04 21:42:43 INFO  /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Mandelbrot.scala:11:32: stale bloop error: no arguments allowed for nullary method produceGridPoints: (): Unit
+    Producer.produceGridPoints(topicPrefix)
+                               ^^^^^^^^^^^[0m
+[0m2021.08.04 21:42:42 INFO  /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Mandelbrot.scala:9:32: stale bloop error: no arguments allowed for nullary method produceGridPoints: (): Unit
+    Producer.produceGridPoints("test")
+                               ^^^^^^[0m
+[0m2021.08.04 21:42:42 INFO  /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Mandelbrot.scala:11:32: stale bloop error: no arguments allowed for nullary method produceGridPoints: (): Unit
+    Producer.produceGridPoints(topicPrefix)
+                               ^^^^^^^^^^^[0m
+[0m2021.08.04 21:42:43 INFO  /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Mandelbrot.scala:9:32: stale bloop error: no arguments allowed for nullary method produceGridPoints: (): Unit
+    Producer.produceGridPoints("test")
+                               ^^^^^^[0m
+[0m2021.08.04 21:42:43 INFO  /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Mandelbrot.scala:11:32: stale bloop error: no arguments allowed for nullary method produceGridPoints: (): Unit
+    Producer.produceGridPoints(topicPrefix)
+                               ^^^^^^^^^^^[0m
+[0m2021.08.04 21:42:42 INFO  /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Mandelbrot.scala:9:32: stale bloop error: no arguments allowed for nullary method produceGridPoints: (): Unit
+    Producer.produceGridPoints("test")
+                               ^^^^^^[0m
+[0m2021.08.04 21:42:42 INFO  /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Mandelbrot.scala:11:32: stale bloop error: no arguments allowed for nullary method produceGridPoints: (): Unit
+    Producer.produceGridPoints(topicPrefix)
+                               ^^^^^^^^^^^[0m
+[0m2021.08.04 21:42:43 INFO  /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Mandelbrot.scala:9:32: stale bloop error: no arguments allowed for nullary method produceGridPoints: (): Unit
+    Producer.produceGridPoints("test")
+                               ^^^^^^[0m
+[0m2021.08.04 21:42:43 INFO  /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Mandelbrot.scala:11:32: stale bloop error: no arguments allowed for nullary method produceGridPoints: (): Unit
+    Producer.produceGridPoints(topicPrefix)
+                               ^^^^^^^^^^^[0m
+[0m2021.08.04 21:42:44 INFO  /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Mandelbrot.scala:9:32: stale bloop error: no arguments allowed for nullary method produceGridPoints: (): Unit
+    Producer.produceGridPoints("test")
+                               ^^^^^^[0m
+[0m2021.08.04 21:42:44 INFO  /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Mandelbrot.scala:11:32: stale bloop error: no arguments allowed for nullary method produceGridPoints: (): Unit
+    Producer.produceGridPoints(topicPrefix)
+                               ^^^^^^^^^^^[0m
+[0m2021.08.04 21:42:44 INFO  /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Mandelbrot.scala:9:32: stale bloop error: no arguments allowed for nullary method produceGridPoints: (): Unit
+    Producer.produceGridPoints("test")
+                               ^^^^^^[0m
+[0m2021.08.04 21:42:44 INFO  /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Mandelbrot.scala:11:32: stale bloop error: no arguments allowed for nullary method produceGridPoints: (): Unit
+    Producer.produceGridPoints(topicPrefix)
+                               ^^^^^^^^^^^[0m
+[0m2021.08.04 21:42:44 INFO  /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Mandelbrot.scala:9:32: stale bloop error: no arguments allowed for nullary method produceGridPoints: (): Unit
+    Producer.produceGridPoints("test")
+                               ^^^^^^[0m
+[0m2021.08.04 21:42:44 INFO  /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Mandelbrot.scala:11:32: stale bloop error: no arguments allowed for nullary method produceGridPoints: (): Unit
+    Producer.produceGridPoints(topicPrefix)
+                               ^^^^^^^^^^^[0m
+[0m2021.08.04 21:43:18 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 21:43:18 INFO  time: compiled root in 0.12s[0m
+[0m2021.08.04 21:43:18 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 21:43:18 INFO  time: compiled root in 57ms[0m
+[0m2021.08.04 21:43:36 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 21:43:36 INFO  time: compiled root in 96ms[0m
+[0m2021.08.04 21:43:45 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 21:43:45 INFO  time: compiled root in 78ms[0m
+[0m2021.08.04 21:43:53 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 21:43:53 INFO  time: compiled root in 0.11s[0m
+[0m2021.08.04 21:43:54 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 21:43:54 INFO  time: compiled root in 71ms[0m
+[0m2021.08.04 21:43:59 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 21:43:59 INFO  time: compiled root in 82ms[0m
+[0m2021.08.04 21:43:59 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 21:43:59 INFO  time: compiled root in 54ms[0m
+[0m2021.08.04 21:44:03 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 21:44:03 INFO  time: compiled root in 73ms[0m
+[0m2021.08.04 21:44:05 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 21:44:05 INFO  time: compiled root in 67ms[0m
+[0m2021.08.04 21:44:12 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 21:44:12 INFO  time: compiled root in 76ms[0m
+Aug 04, 2021 9:44:16 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 15451
+[0m2021.08.04 21:44:28 INFO  compiling root (3 scala sources)[0m
+[0m2021.08.04 21:44:28 INFO  time: compiled root in 0.35s[0m
+[0m2021.08.04 21:44:34 INFO  compiling root (3 scala sources)[0m
+[0m2021.08.04 21:44:34 INFO  time: compiled root in 0.38s[0m
+[0m2021.08.04 21:44:34 INFO  compiling root (3 scala sources)[0m
+[0m2021.08.04 21:44:34 INFO  time: compiled root in 0.26s[0m
+[0m2021.08.04 21:44:36 INFO  compiling root (3 scala sources)[0m
+[0m2021.08.04 21:44:36 INFO  time: compiled root in 0.34s[0m
+Aug 04, 2021 9:44:48 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 15556
+[0m2021.08.04 21:45:10 INFO  compiling root (3 scala sources)[0m
+[0m2021.08.04 21:45:10 INFO  time: compiled root in 0.23s[0m
+[0m2021.08.04 21:45:24 INFO  compiling root (3 scala sources)[0m
+[0m2021.08.04 21:45:24 INFO  time: compiled root in 0.26s[0m
+[0m2021.08.04 21:45:24 INFO  compiling root (3 scala sources)[0m
+[0m2021.08.04 21:45:24 INFO  time: compiled root in 0.22s[0m
+[0m2021.08.04 21:45:36 INFO  compiling root (3 scala sources)[0m
+[0m2021.08.04 21:45:36 INFO  time: compiled root in 0.24s[0m
+[0m2021.08.04 21:45:37 INFO  compiling root (3 scala sources)[0m
+[0m2021.08.04 21:45:37 INFO  time: compiled root in 0.27s[0m
+[0m2021.08.04 21:45:38 INFO  compiling root (3 scala sources)[0m
+[0m2021.08.04 21:45:38 INFO  time: compiled root in 0.21s[0m
+[0m2021.08.04 21:45:39 INFO  compiling root (3 scala sources)[0m
+[0m2021.08.04 21:45:39 INFO  time: compiled root in 0.21s[0m
+[0m2021.08.04 21:45:39 INFO  compiling root (3 scala sources)[0m
+[0m2021.08.04 21:45:39 INFO  time: compiled root in 0.22s[0m
+[0m2021.08.04 21:45:39 INFO  compiling root (3 scala sources)[0m
+[0m2021.08.04 21:45:40 INFO  time: compiled root in 0.21s[0m
+[0m2021.08.04 21:45:42 INFO  compiling root (3 scala sources)[0m
+[0m2021.08.04 21:45:42 INFO  time: compiled root in 0.33s[0m
+[0m2021.08.04 21:45:42 INFO  compiling root (3 scala sources)[0m
+[0m2021.08.04 21:45:42 INFO  time: compiled root in 0.17s[0m
+[0m2021.08.04 21:45:42 INFO  compiling root (3 scala sources)[0m
+[0m2021.08.04 21:45:42 INFO  time: compiled root in 0.23s[0m
+Aug 04, 2021 9:45:46 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 15738
+[0m2021.08.04 21:45:46 INFO  compiling root (3 scala sources)[0m
+[0m2021.08.04 21:45:46 INFO  time: compiled root in 0.22s[0m
+[0m2021.08.04 21:45:57 INFO  compiling root (3 scala sources)[0m
+[0m2021.08.04 21:45:58 WARN  1 deprecation; re-run with -deprecation for details[0m
+[0m2021.08.04 21:45:58 INFO  time: compiled root in 1.2s[0m
+Aug 04, 2021 9:46:00 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 15767
+Aug 04, 2021 9:47:39 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 15792
+[0m2021.08.04 21:47:50 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 21:47:54 INFO  time: compiled root in 3.76s[0m
+Aug 04, 2021 9:48:30 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 15821
+[0m2021.08.04 21:49:16 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 21:49:18 INFO  time: compiled root in 1.84s[0m
+[0m2021.08.04 21:49:58 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 21:49:58 INFO  time: compiled root in 0.95s[0m
+[0m2021.08.04 21:50:07 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 21:50:08 INFO  time: compiled root in 1.05s[0m
+[0m2021.08.04 21:50:10 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 21:50:10 INFO  time: compiled root in 0.89s[0m
+[0m2021.08.04 21:50:15 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 21:50:15 INFO  time: compiled root in 0.8s[0m
+Aug 04, 2021 9:53:38 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 16320
+Aug 04, 2021 9:55:06 PM scala.meta.internal.pc.CompletionProvider expected$1
+WARNING: offset 317, count -1, length 552
+[0m2021.08.04 21:55:13 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 21:55:13 INFO  time: compiled root in 0.41s[0m
+[0m2021.08.04 21:55:18 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 21:55:19 INFO  time: compiled root in 1.09s[0m
+[0m2021.08.04 21:56:52 ERROR scalafmt: /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Mandelbrot.scala:6: error: ) expected but val found
+  val topic =
+  ^[0m
+[0m2021.08.04 21:56:52 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 21:56:52 INFO  time: compiled root in 0.14s[0m
+[0m2021.08.04 21:56:52 ERROR scalafmt: /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Mandelbrot.scala:6: error: ) expected but val found
+  val topic =
+  ^[0m
+[0m2021.08.04 21:56:52 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 21:56:52 INFO  time: compiled root in 39ms[0m
+[0m2021.08.04 21:56:53 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 21:56:53 INFO  time: compiled root in 0.74s[0m
+[0m2021.08.04 21:57:14 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 21:57:15 INFO  time: compiled root in 1.05s[0m
+[0m2021.08.04 21:57:37 ERROR scalafmt: /home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala/example/Mandelbrot.scala:8: error: = expected but <- found
+  val topicPrefix <-
+                  ^[0m
+[0m2021.08.04 21:57:37 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 21:57:37 INFO  time: compiled root in 94ms[0m
+[0m2021.08.04 21:58:36 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 21:58:36 INFO  time: compiled root in 0.82s[0m
+[0m2021.08.04 21:58:38 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 21:58:38 INFO  time: compiled root in 0.86s[0m
+[0m2021.08.04 21:58:59 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 21:59:00 INFO  time: compiled root in 1.03s[0m
+[0m2021.08.04 21:59:05 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 21:59:05 INFO  time: compiled root in 0.79s[0m
+Aug 04, 2021 9:59:38 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 16858
+[0m2021.08.04 22:01:09 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 22:01:11 INFO  time: compiled root in 1.43s[0m
+[0m2021.08.04 22:01:26 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 22:01:26 INFO  time: compiled root in 0.84s[0m
+[0m2021.08.04 22:01:27 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 22:01:27 INFO  time: compiled root in 0.48s[0m
+[0m2021.08.04 22:01:27 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 22:01:29 INFO  time: compiled root in 0.57s[0m
+[0m2021.08.04 22:02:55 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 22:02:58 INFO  time: compiled root in 3.41s[0m
+[0m2021.08.04 22:03:27 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 22:03:29 INFO  time: compiled root in 1.48s[0m
+[0m2021.08.04 22:05:59 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 22:06:01 INFO  time: compiled root in 1.41s[0m
+Aug 04, 2021 10:11:13 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 17259
+Aug 04, 2021 10:11:20 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 17274
+[0m2021.08.04 22:13:13 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 22:13:18 WARN  1 deprecation; re-run with -deprecation for details[0m
+[0m2021.08.04 22:13:18 INFO  time: compiled root in 5.27s[0m
+[0m2021.08.04 22:13:23 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 22:13:23 WARN  1 deprecation; re-run with -deprecation for details[0m
+[0m2021.08.04 22:13:23 INFO  time: compiled root in 0.87s[0m
+Aug 04, 2021 10:13:27 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 17555
+[0m2021.08.04 22:13:37 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 22:13:37 WARN  1 deprecation; re-run with -deprecation for details[0m
+[0m2021.08.04 22:13:37 INFO  time: compiled root in 0.84s[0m
+[0m2021.08.04 22:17:12 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 22:17:13 WARN  1 deprecation; re-run with -deprecation for details[0m
+[0m2021.08.04 22:17:13 INFO  time: compiled root in 1.44s[0m
+[0m2021.08.04 22:21:29 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 22:21:31 WARN  1 deprecation; re-run with -deprecation for details[0m
+[0m2021.08.04 22:21:31 INFO  time: compiled root in 1.77s[0m
+[0m2021.08.04 22:21:55 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 22:21:56 WARN  1 deprecation; re-run with -deprecation for details[0m
+[0m2021.08.04 22:21:56 INFO  time: compiled root in 1.23s[0m
+[0m2021.08.04 22:22:09 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 22:22:09 WARN  1 deprecation; re-run with -deprecation for details[0m
+[0m2021.08.04 22:22:09 INFO  time: compiled root in 0.97s[0m
+Aug 04, 2021 10:22:43 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 17756
+Aug 04, 2021 10:22:43 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 17758
+Aug 04, 2021 10:22:43 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 17760
+Aug 04, 2021 10:22:43 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 17761
+Aug 04, 2021 10:22:43 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 17759
+Aug 04, 2021 10:22:43 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 17762
+Aug 04, 2021 10:22:44 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 17768
+Aug 04, 2021 10:22:50 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 17774
+Aug 04, 2021 10:24:13 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 17800
+[0m2021.08.04 22:24:25 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 22:24:28 WARN  1 deprecation; re-run with -deprecation for details[0m
+[0m2021.08.04 22:24:28 INFO  time: compiled root in 3.43s[0m
+[0m2021.08.04 22:26:02 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 22:26:03 WARN  1 deprecation; re-run with -deprecation for details[0m
+[0m2021.08.04 22:26:03 INFO  time: compiled root in 1.25s[0m
+[0m2021.08.04 22:26:19 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 22:26:19 WARN  1 deprecation; re-run with -deprecation for details[0m
+[0m2021.08.04 22:26:19 INFO  time: compiled root in 0.81s[0m
+Aug 04, 2021 10:27:45 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 17977
+[0m2021.08.04 22:27:47 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 22:27:51 WARN  1 deprecation; re-run with -deprecation for details[0m
+[0m2021.08.04 22:27:51 INFO  time: compiled root in 3.33s[0m
+[0m2021.08.04 22:27:53 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 22:27:54 WARN  1 deprecation; re-run with -deprecation for details[0m
+[0m2021.08.04 22:27:54 INFO  time: compiled root in 1.17s[0m
+[0m2021.08.04 22:28:02 INFO  compiling root (1 scala source)[0m
+[0m2021.08.04 22:28:02 WARN  1 deprecation; re-run with -deprecation for details[0m
+[0m2021.08.04 22:28:02 INFO  time: compiled root in 0.96s[0m

@@ -2,11 +2,16 @@ package example
 import java.util.Properties
 
 object Mandelbrot extends App with Greeting {
-  println(args)
+
+  val topic =
+    if (args(0).equals("consumer") && args.length > 1) args(1) else "test"
+  val topicPrefix =
+    if (args(0).equals("producer") && args.length > 1) args(1) else "test"
+
   if (args(0).equals("producer"))
-    Producer.produceGridPoints()
-  else
-    Consumer.consume()
+    Producer.produceGridPoints(topicPrefix)
+  else if (args(0).equals("consumer"))
+    Consumer.consume(topic)
 
   println(greeting)
 }
@@ -14,4 +19,3 @@ object Mandelbrot extends App with Greeting {
 trait Greeting {
   lazy val greeting: String = "hello"
 }
-

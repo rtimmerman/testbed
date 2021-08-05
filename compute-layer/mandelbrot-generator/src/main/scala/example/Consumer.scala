@@ -22,7 +22,7 @@ object Consumer {
     process(M, c, iterations - 1)
   }
 
-  def consume() = {
+  def consume(topic: String) = {
     val props = new Properties()
     props.put("bootstrap.servers", "kafka-topic-server:9092")
     props.put(
@@ -40,12 +40,14 @@ object Consumer {
 
     props.put(
       "topic",
-      "test"
+      topic
     )
+
+    println(s"Consuming from ${topic}")
 
     val consumer = new KafkaConsumer[String, String](props);
     var topics = new java.util.ArrayList[String]()
-    topics.add("test")
+    topics.add(props.get("topic").asInstanceOf[String])
 
     consumer.subscribe(topics)
     while (true) {
@@ -53,8 +55,7 @@ object Consumer {
       if (work != null)
         work.forEach(record => {
           //println(record.key() + " = " + record.value())
-
-          ("""([0-9.-]+)\+([0-9.-]+)""".r)
+          ("""([0-9.-]+)\s*\+\s*([0-9.-]+)""".r)
             .findAllIn(record.value)
             .matchData foreach { m =>
             {
@@ -62,10 +63,11 @@ object Consumer {
                 new Complex[Double](m.group(1).toDouble, m.group(2).toDouble)
 
               val res = process(z, z, 10)
-              if (m.group(1).toDouble >= 2.0)
+              /*if (m.group(1).toDouble >= 2.0)
                 println(if (res > -1) "." else " ")
               else
-                print(if (res > -1) "." else " ")
+                print(if (res > -1) "." else " ")*/
+              println(res) // todo output this.
             }
           }
         })

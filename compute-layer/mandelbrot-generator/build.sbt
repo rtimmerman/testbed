@@ -15,3 +15,4 @@ lazy val root = (project in file("."))
 
 libraryDependencies += "org.apache.kafka" %% "kafka" % "2.8.0"
 libraryDependencies += "org.typelevel" %% "spire" % "0.17.0"
+libraryDependencies += "org.scalanlp" %% "breeze" % "1.2"

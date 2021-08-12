@@ -2,14 +2,14 @@
     "version": "1.4.0",
     "project": {
         "name": "root",
-        "directory": "/home/roderick/scrapbook/scala/mandelbrot-generator",
-        "workspaceDir": "/home/roderick/scrapbook/scala/mandelbrot-generator",
+        "directory": "/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator",
+        "workspaceDir": "/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator",
         "sources": [
-            "/home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala",
-            "/home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala-2.13",
-            "/home/roderick/scrapbook/scala/mandelbrot-generator/src/main/scala-2",
-            "/home/roderick/scrapbook/scala/mandelbrot-generator/src/main/java",
-            "/home/roderick/scrapbook/scala/mandelbrot-generator/target/scala-2.13/src_managed/main"
+            "/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/src/main/scala",
+            "/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/src/main/scala-2.13",
+            "/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/src/main/scala-2",
+            "/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/src/main/java",
+            "/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/target/scala-2.13/src_managed/main"
         ],
         "dependencies": [
             
@@ -19,6 +19,7 @@
             "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/apache/kafka/kafka_2.13/2.8.0/kafka_2.13-2.8.0.jar",
             "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/typelevel/spire_2.13/0.17.0/spire_2.13-0.17.0.jar",
             "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scalanlp/breeze_2.13/1.2/breeze_2.13-1.2.jar",
+            "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/mongodb/scala/mongo-scala-driver_2.13/4.3.1/mongo-scala-driver_2.13-4.3.1.jar",
             "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/apache/kafka/kafka-clients/2.8.0/kafka-clients-2.8.0.jar",
             "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/apache/kafka/kafka-metadata/2.8.0/kafka-metadata-2.8.0.jar",
             "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/apache/kafka/kafka-raft/2.8.0/kafka-raft-2.8.0.jar",
@@ -47,6 +48,8 @@
             "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/com/github/wendykierp/JTransforms/3.1/JTransforms-3.1.jar",
             "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/apache/commons/commons-math3/3.5/commons-math3-3.5.jar",
             "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/com/chuusai/shapeless_2.13/2.3.3/shapeless_2.13-2.3.3.jar",
+            "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/mongodb/scala/mongo-scala-bson_2.13/4.3.1/mongo-scala-bson_2.13-4.3.1.jar",
+            "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/mongodb/mongodb-driver-reactivestreams/4.3.1/mongodb-driver-reactivestreams-4.3.1.jar",
             "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/com/github/luben/zstd-jni/1.4.9-1/zstd-jni-1.4.9-1.jar",
             "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/lz4/lz4-java/1.7.1/lz4-java-1.7.1.jar",
             "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/xerial/snappy/snappy-java/1.1.8.1/snappy-java-1.1.8.1.jar",
@@ -59,6 +62,10 @@
             "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/io/netty/netty-transport-native-epoll/4.1.50.Final/netty-transport-native-epoll-4.1.50.Final.jar",
             "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/typelevel/cats-kernel_2.13/2.1.1/cats-kernel_2.13-2.1.1.jar",
             "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/pl/edu/icm/JLargeArrays/1.5/JLargeArrays-1.5.jar",
+            "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/mongodb/bson/4.3.1/bson-4.3.1.jar",
+            "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/mongodb/mongodb-driver-core/4.3.1/mongodb-driver-core-4.3.1.jar",
+            "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/reactivestreams/reactive-streams/1.0.2/reactive-streams-1.0.2.jar",
+            "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/io/projectreactor/reactor-core/3.2.22.RELEASE/reactor-core-3.2.22.RELEASE.jar",
             "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/com/thoughtworks/paranamer/paranamer/2.8/paranamer-2.8.jar",
             "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/io/netty/netty-common/4.1.50.Final/netty-common-4.1.50.Final.jar",
             "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/io/netty/netty-resolver/4.1.50.Final/netty-resolver-4.1.50.Final.jar",
@@ -67,11 +74,11 @@
             "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/io/netty/netty-codec/4.1.50.Final/netty-codec-4.1.50.Final.jar",
             "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/io/netty/netty-transport-native-unix-common/4.1.50.Final/netty-transport-native-unix-common-4.1.50.Final.jar"
         ],
-        "out": "/home/roderick/scrapbook/scala/mandelbrot-generator/.bloop/root",
-        "classesDir": "/home/roderick/scrapbook/scala/mandelbrot-generator/.bloop/root/scala-2.13/classes",
+        "out": "/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/.bloop/root",
+        "classesDir": "/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/.bloop/root/scala-2.13/classes",
         "resources": [
-            "/home/roderick/scrapbook/scala/mandelbrot-generator/src/main/resources",
-            "/home/roderick/scrapbook/scala/mandelbrot-generator/target/scala-2.13/resource_managed/main"
+            "/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/src/main/resources",
+            "/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/target/scala-2.13/resource_managed/main"
         ],
         "scala": {
             "organization": "org.scala-lang",
@@ -87,7 +94,7 @@
                 "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/jline/jline/3.19.0/jline-3.19.0.jar",
                 "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/net/java/dev/jna/jna/5.3.1/jna-5.3.1.jar"
             ],
-            "analysis": "/home/roderick/scrapbook/scala/mandelbrot-generator/target/streams/compile/bloopAnalysisOut/_global/streams/inc_compile_2.13.zip",
+            "analysis": "/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/target/streams/compile/bloopAnalysisOut/_global/streams/inc_compile_2.13.zip",
             "setup": {
                 "order": "mixed",
                 "addLibraryToBootClasspath": true,
@@ -151,7 +158,9 @@
             "config": {
                 "home": "/home/roderick/.jabba/jdk/adopt@1.11.0-11",
                 "options": [
-                    "-Duser.dir=/home/roderick/scrapbook/scala/mandelbrot-generator"
+                    "-Duser.dir=/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator",
+                    "-Djavax.net.ssl.keyStore=/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/bbk.ac.uk.p12",
+                    "-Djavax.net.ssl.keyStorePassword=xiec.gate.r"
                 ]
             },
             "mainClass": [
@@ -225,6 +234,23 @@
                             "name": "breeze_2.13",
                             "classifier": "sources",
                             "path": "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scalanlp/breeze_2.13/1.2/breeze_2.13-1.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.mongodb.scala",
+                    "name": "mongo-scala-driver_2.13",
+                    "version": "4.3.1",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "mongo-scala-driver_2.13",
+                            "path": "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/mongodb/scala/mongo-scala-driver_2.13/4.3.1/mongo-scala-driver_2.13-4.3.1.jar"
+                        },
+                        {
+                            "name": "mongo-scala-driver_2.13",
+                            "classifier": "sources",
+                            "path": "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/mongodb/scala/mongo-scala-driver_2.13/4.3.1/mongo-scala-driver_2.13-4.3.1-sources.jar"
                         }
                     ]
                 },
@@ -700,6 +726,40 @@
                     ]
                 },
                 {
+                    "organization": "org.mongodb.scala",
+                    "name": "mongo-scala-bson_2.13",
+                    "version": "4.3.1",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "mongo-scala-bson_2.13",
+                            "path": "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/mongodb/scala/mongo-scala-bson_2.13/4.3.1/mongo-scala-bson_2.13-4.3.1.jar"
+                        },
+                        {
+                            "name": "mongo-scala-bson_2.13",
+                            "classifier": "sources",
+                            "path": "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/mongodb/scala/mongo-scala-bson_2.13/4.3.1/mongo-scala-bson_2.13-4.3.1-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.mongodb",
+                    "name": "mongodb-driver-reactivestreams",
+                    "version": "4.3.1",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "mongodb-driver-reactivestreams",
+                            "path": "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/mongodb/mongodb-driver-reactivestreams/4.3.1/mongodb-driver-reactivestreams-4.3.1.jar"
+                        },
+                        {
+                            "name": "mongodb-driver-reactivestreams",
+                            "classifier": "sources",
+                            "path": "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/mongodb/mongodb-driver-reactivestreams/4.3.1/mongodb-driver-reactivestreams-4.3.1-sources.jar"
+                        }
+                    ]
+                },
+                {
                     "organization": "com.github.luben",
                     "name": "zstd-jni",
                     "version": "1.4.9-1",
@@ -900,6 +960,74 @@
                             "name": "JLargeArrays",
                             "classifier": "sources",
                             "path": "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/pl/edu/icm/JLargeArrays/1.5/JLargeArrays-1.5-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.mongodb",
+                    "name": "bson",
+                    "version": "4.3.1",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "bson",
+                            "path": "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/mongodb/bson/4.3.1/bson-4.3.1.jar"
+                        },
+                        {
+                            "name": "bson",
+                            "classifier": "sources",
+                            "path": "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/mongodb/bson/4.3.1/bson-4.3.1-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.mongodb",
+                    "name": "mongodb-driver-core",
+                    "version": "4.3.1",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "mongodb-driver-core",
+                            "path": "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/mongodb/mongodb-driver-core/4.3.1/mongodb-driver-core-4.3.1.jar"
+                        },
+                        {
+                            "name": "mongodb-driver-core",
+                            "classifier": "sources",
+                            "path": "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/mongodb/mongodb-driver-core/4.3.1/mongodb-driver-core-4.3.1-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.reactivestreams",
+                    "name": "reactive-streams",
+                    "version": "1.0.2",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "reactive-streams",
+                            "path": "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/reactivestreams/reactive-streams/1.0.2/reactive-streams-1.0.2.jar"
+                        },
+                        {
+                            "name": "reactive-streams",
+                            "classifier": "sources",
+                            "path": "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/reactivestreams/reactive-streams/1.0.2/reactive-streams-1.0.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "io.projectreactor",
+                    "name": "reactor-core",
+                    "version": "3.2.22.RELEASE",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "reactor-core",
+                            "path": "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/io/projectreactor/reactor-core/3.2.22.RELEASE/reactor-core-3.2.22.RELEASE.jar"
+                        },
+                        {
+                            "name": "reactor-core",
+                            "classifier": "sources",
+                            "path": "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/io/projectreactor/reactor-core/3.2.22.RELEASE/reactor-core-3.2.22.RELEASE-sources.jar"
                         }
                     ]
                 },

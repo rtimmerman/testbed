@@ -75,6 +75,22 @@ data:
     outcome.push(
       db.runCommand(
         {
+          createUser: "CN=localhost,OU=ExperimentClients,O=Roderick,O=Outside,L=Southminster,ST=Essex,C=UK",
+          roles: [
+            {role: 'readWrite', db: 'test'},
+            {role: 'readWrite', db: 'mandelbrot'}
+          ],
+          writeConcern: {
+            w: 'majority',
+            wtimeout: 5000
+          }
+        }
+      )
+    );
+
+    outcome.push(
+      db.runCommand(
+        {
           createUser: "CN=arnold-pri,OU=ExperimentServers,O=Roderick,O=BBK,L=Southmister,ST=Essex,C=UK",
           roles: [
             {role: 'userAdminAnyDatabase', db: 'admin'},

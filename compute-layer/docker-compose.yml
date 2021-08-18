@@ -1,11 +1,18 @@
 version: "3.9"
 services:
-  operator:
+  producer-shell:
+    image: operator:1.0
+    build: .
+    environment:
+      - ROLE=producer-shell
+  consumer:
     image: operator:1.0
     build: .
     environment:
       - ROLE=consumer
       - TOPIC=test-1
+      - TRUSTSTORE_PATH=/root/mandelbrot-generator/test.ts
+      - KEYSTORE_PATH=/root/mandelbrot-generator/test.ks
     volumes:
       - .:/app
   kafka-topic-server:

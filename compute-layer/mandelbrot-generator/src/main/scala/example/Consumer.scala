@@ -15,8 +15,11 @@ import javax.net.ssl.KeyManagerFactory
 import java.security.KeyStore
 import javax.net.ssl.TrustManagerFactory
 import java.security.SecureRandom
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
 object Consumer {
+  val logger = LoggerFactory.getLogger(Consumer.getClass.getName)
 
   var mongoDbClient: MongoClient = null
 
@@ -68,9 +71,9 @@ object Consumer {
 
     while (true) {
       val work = consumer.poll(1000)
-      if (work != null)
+      if (work != null) {
         work.forEach(record => {
-          //println(record.key() + " = " + record.value())
+          println(record.key() + " = " + record.value())
           ("""([0-9.-]+)\s*\+\s*([0-9.-]+)""".r)
             .findAllIn(record.value)
             .matchData foreach { m =>
@@ -78,7 +81,7 @@ object Consumer {
               val z =
                 new Complex[Double](m.group(1).toDouble, m.group(2).toDouble)
 
-              val res = process(z, z, 10)
+              val res = process(z, z, 10) /* TODO: iterations should also come from the workflow */
 
               val outcome = mongoDbClient
                 .getDatabase("mandelbrot")
@@ -102,6 +105,7 @@ object Consumer {
             }
           }
         })
+      }
     }
   }
 
@@ -124,7 +128,8 @@ object Consumer {
     val keyStore = KeyStore.getInstance(KeyStore.getDefaultType())
     keyStore.load(
       new java.io.FileInputStream(
-        "/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/test.ks"
+        sys.env.getOrElse("KEYSTORE_PATH", "missing_keystore")
+        // "/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/test.ks"
       ),
       "xiec.gate.r".toCharArray()
     )
@@ -132,7 +137,8 @@ object Consumer {
     val trustStore = KeyStore.getInstance(KeyStore.getDefaultType())
     trustStore.load(
       new java.io.FileInputStream(
-        "/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/test.ts"
+        sys.env.getOrElse("TRUSTSTORE_PATH", "missing_truststore")
+        // "home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/test.ts"
       ),
       "xiec.gate.r".toCharArray()
     )

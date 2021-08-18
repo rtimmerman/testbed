@@ -63,7 +63,9 @@ object Producer {
       "transaction-id-1"
     )
     val producer = new KafkaProducer[String, String](props)
+    println("HERE 1")
     producer.initTransactions()
+    println("HERE 2")
     //val record =
     //  new ProducerRecord[String, String]("test", "test-key", "test value")
     gridWorkStream(producer, topicPrefix)

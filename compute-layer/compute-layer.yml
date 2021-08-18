@@ -3,29 +3,31 @@ apiVersion: v1
 kind: Namespace
 metadata:
   name: dev
+### Deployments ###
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata: 
   name: kafka-topic-server
   labels:
-    purpose: topic-server
+    purpose: kafka-topic-server
     role: kafka
   namespace: dev
 spec:
   selector:
     matchLabels:
       role: kafka
-      purpose: topic-server
+      purpose: kafka-topic-server
   replicas: 1
   strategy:
     type: RollingUpdate
   template:
     metadata:
       labels:
-        purpose: topic-server
+        purpose: kafka-topic-server
         role: kafka
     spec:
+      hostname: kafka-topic-server
       terminationGracePeriodSeconds: 5
       containers:
         - image: eu.gcr.io/research-310823/kafka-topic-server:0.1
@@ -34,6 +36,556 @@ spec:
             - containerPort: 9092
             - containerPort: 2181
 ---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: consumer-0
+  labels:
+    purpose: consumer-0
+  namespace: dev
+spec:
+  selector:
+    matchLabels:
+      purpose: consumer-0
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        purpose: consumer-0
+    spec:
+      terminationGracePeriodSeconds: 5
+      containers:
+        - image: eu.gcr.io/research-310823/operator:1.0
+          imagePullPolicy: Always
+          name: consumer-0-container
+          env:
+            - {name: ROLE, value: consumer}
+            - {name: TOPIC, value:  test-0}
+            - {name: TRUSTSTORE_PATH, value: /root/mandelbrot-generator/test.ts}
+            - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
+          ports:
+            - containerPort: 9091
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: consumer-1
+  labels:
+    purpose: consumer-1
+  namespace: dev
+spec:
+  selector:
+    matchLabels:
+      purpose: consumer-1
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        purpose: consumer-1
+    spec:
+      terminationGracePeriodSeconds: 5
+      containers:
+        - image: eu.gcr.io/research-310823/operator:1.0
+          imagePullPolicy: Always
+          name: consumer-1-container
+          env:
+            - {name: ROLE, value: consumer}
+            - {name: TOPIC, value:  test-1}
+            - {name: TRUSTSTORE_PATH, value: /root/mandelbrot-generator/test.ts}
+            - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
+          ports:
+            - containerPort: 9091
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: consumer-2
+  labels:
+    purpose: consumer-2
+  namespace: dev
+spec:
+  selector:
+    matchLabels:
+      purpose: consumer-2
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        purpose: consumer-2
+    spec:
+      terminationGracePeriodSeconds: 5
+      containers:
+        - image: eu.gcr.io/research-310823/operator:1.0
+          imagePullPolicy: Always
+          name: consumer-2-container
+          env:
+            - {name: ROLE, value: consumer}
+            - {name: TOPIC, value:  test-2}
+            - {name: TRUSTSTORE_PATH, value: /root/mandelbrot-generator/test.ts}
+            - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
+          ports:
+            - containerPort: 9091
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: consumer-3
+  labels:
+    purpose: consumer-3
+  namespace: dev
+spec:
+  selector:
+    matchLabels:
+      purpose: consumer-3
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        purpose: consumer-3
+    spec:
+      terminationGracePeriodSeconds: 5
+      containers:
+        - image: eu.gcr.io/research-310823/operator:1.0
+          imagePullPolicy: Always
+          name: consumer-3-container
+          env:
+            - {name: ROLE, value: consumer}
+            - {name: TOPIC, value:  test-3}
+            - {name: TRUSTSTORE_PATH, value: /root/mandelbrot-generator/test.ts}
+            - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
+          ports:
+            - containerPort: 9091
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: consumer-4
+  labels:
+    purpose: consumer-4
+  namespace: dev
+spec:
+  selector:
+    matchLabels:
+      purpose: consumer-4
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        purpose: consumer-4
+    spec:
+      terminationGracePeriodSeconds: 5
+      containers:
+        - image: eu.gcr.io/research-310823/operator:1.0
+          imagePullPolicy: Always
+          name: consumer-4-container
+          env:
+            - {name: ROLE, value: consumer}
+            - {name: TOPIC, value:  test-4}
+            - {name: TRUSTSTORE_PATH, value: /root/mandelbrot-generator/test.ts}
+            - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
+          ports:
+            - containerPort: 9091
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: consumer-5
+  labels:
+    purpose: consumer-5
+  namespace: dev
+spec:
+  selector:
+    matchLabels:
+      purpose: consumer-5
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        purpose: consumer-5
+    spec:
+      terminationGracePeriodSeconds: 5
+      containers:
+        - image: eu.gcr.io/research-310823/operator:1.0
+          imagePullPolicy: Always
+          name: consumer-5-container
+          env:
+            - {name: ROLE, value: consumer}
+            - {name: TOPIC, value:  test-5}
+            - {name: TRUSTSTORE_PATH, value: /root/mandelbrot-generator/test.ts}
+            - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
+          ports:
+            - containerPort: 9091
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: consumer-6
+  labels:
+    purpose: consumer-6
+  namespace: dev
+spec:
+  selector:
+    matchLabels:
+      purpose: consumer-6
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        purpose: consumer-6
+    spec:
+      terminationGracePeriodSeconds: 6
+      containers:
+        - image: eu.gcr.io/research-310823/operator:1.0
+          imagePullPolicy: Always
+          name: consumer-6-container
+          env:
+            - {name: ROLE, value: consumer}
+            - {name: TOPIC, value:  test-6}
+            - {name: TRUSTSTORE_PATH, value: /root/mandelbrot-generator/test.ts}
+            - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
+          ports:
+            - containerPort: 9091
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: consumer-7
+  labels:
+    purpose: consumer-7
+  namespace: dev
+spec:
+  selector:
+    matchLabels:
+      purpose: consumer-7
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        purpose: consumer-7
+    spec:
+      terminationGracePeriodSeconds: 5
+      containers:
+        - image: eu.gcr.io/research-310823/operator:1.0
+          imagePullPolicy: Always
+          name: consumer-7-container
+          env:
+            - {name: ROLE, value: consumer}
+            - {name: TOPIC, value:  test-7}
+            - {name: TRUSTSTORE_PATH, value: /root/mandelbrot-generator/test.ts}
+            - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
+          ports:
+            - containerPort: 9091
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: consumer-8
+  labels:
+    purpose: consumer-8
+  namespace: dev
+spec:
+  selector:
+    matchLabels:
+      purpose: consumer-8
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        purpose: consumer-8
+    spec:
+      terminationGracePeriodSeconds: 5
+      containers:
+        - image: eu.gcr.io/research-310823/operator:1.0
+          imagePullPolicy: Always
+          name: consumer-8-container
+          env:
+            - {name: ROLE, value: consumer}
+            - {name: TOPIC, value:  test-8}
+            - {name: TRUSTSTORE_PATH, value: /root/mandelbrot-generator/test.ts}
+            - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
+          ports:
+            - containerPort: 9091
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: consumer-9
+  labels:
+    purpose: consumer-9
+  namespace: dev
+spec:
+  selector:
+    matchLabels:
+      purpose: consumer-9
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        purpose: consumer-9
+    spec:
+      terminationGracePeriodSeconds: 5
+      containers:
+        - image: eu.gcr.io/research-310823/operator:1.0
+          imagePullPolicy: Always
+          name: consumer-9-container
+          env:
+            - {name: ROLE, value: consumer}
+            - {name: TOPIC, value:  test-0}
+            - {name: TRUSTSTORE_PATH, value: /root/mandelbrot-generator/test.ts}
+            - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
+          ports:
+            - containerPort: 9091
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: consumer-10
+  labels:
+    purpose: consumer-10
+  namespace: dev
+spec:
+  selector:
+    matchLabels:
+      purpose: consumer-10
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        purpose: consumer-10
+    spec:
+      terminationGracePeriodSeconds: 5
+      containers:
+        - image: eu.gcr.io/research-310823/operator:1.0
+          imagePullPolicy: Always
+          name: consumer-10-container
+          env:
+            - {name: ROLE, value: consumer}
+            - {name: TOPIC, value:  test-10}
+            - {name: TRUSTSTORE_PATH, value: /root/mandelbrot-generator/test.ts}
+            - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
+          ports:
+            - containerPort: 9091
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: consumer-11
+  labels:
+    purpose: consumer-11
+  namespace: dev
+spec:
+  selector:
+    matchLabels:
+      purpose: consumer-11
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        purpose: consumer-11
+    spec:
+      terminationGracePeriodSeconds: 5
+      containers:
+        - image: eu.gcr.io/research-310823/operator:1.0
+          imagePullPolicy: Always
+          name: consumer-11-container
+          env:
+            - {name: ROLE, value: consumer}
+            - {name: TOPIC, value:  test-11}
+            - {name: TRUSTSTORE_PATH, value: /root/mandelbrot-generator/test.ts}
+            - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
+          ports:
+            - containerPort: 9091
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: consumer-12
+  labels:
+    purpose: consumer-12
+  namespace: dev
+spec:
+  selector:
+    matchLabels:
+      purpose: consumer-12
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        purpose: consumer-12
+    spec:
+      terminationGracePeriodSeconds: 5
+      containers:
+        - image: eu.gcr.io/research-310823/operator:1.0
+          imagePullPolicy: Always
+          name: consumer-12-container
+          env:
+            - {name: ROLE, value: consumer}
+            - {name: TOPIC, value:  test-12}
+            - {name: TRUSTSTORE_PATH, value: /root/mandelbrot-generator/test.ts}
+            - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
+          ports:
+            - containerPort: 9091
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: consumer-13
+  labels:
+    purpose: consumer-13
+  namespace: dev
+spec:
+  selector:
+    matchLabels:
+      purpose: consumer-13
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        purpose: consumer-13
+    spec:
+      terminationGracePeriodSeconds: 5
+      containers:
+        - image: eu.gcr.io/research-310823/operator:1.0
+          imagePullPolicy: Always
+          name: consumer-13-container
+          env:
+            - {name: ROLE, value: consumer}
+            - {name: TOPIC, value:  test-13}
+            - {name: TRUSTSTORE_PATH, value: /root/mandelbrot-generator/test.ts}
+            - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
+          ports:
+            - containerPort: 9091
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: consumer-14
+  labels:
+    purpose: consumer-14
+  namespace: dev
+spec:
+  selector:
+    matchLabels:
+      purpose: consumer-14
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        purpose: consumer-14
+    spec:
+      terminationGracePeriodSeconds: 5
+      containers:
+        - image: eu.gcr.io/research-310823/operator:1.0
+          imagePullPolicy: Always
+          name: consumer-14-container
+          env:
+            - {name: ROLE, value: consumer}
+            - {name: TOPIC, value:  test-14}
+            - {name: TRUSTSTORE_PATH, value: /root/mandelbrot-generator/test.ts}
+            - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
+          ports:
+            - containerPort: 9091
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: consumer-15
+  labels:
+    purpose: consumer-15
+  namespace: dev
+spec:
+  selector:
+    matchLabels:
+      purpose: consumer-15
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        purpose: consumer-15
+    spec:
+      terminationGracePeriodSeconds: 5
+      containers:
+        - image: eu.gcr.io/research-310823/operator:1.0
+          imagePullPolicy: Always
+          name: consumer-15-container
+          env:
+            - {name: ROLE, value: consumer}
+            - {name: TOPIC, value:  test-15}
+            - {name: TRUSTSTORE_PATH, value: /root/mandelbrot-generator/test.ts}
+            - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
+          ports:
+            - containerPort: 9091
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: producer-shell
+  labels:
+    purpose: producer-shell
+  namespace: dev
+spec:
+  selector:
+    matchLabels:
+      purpose: producer-shell
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        purpose: producer-shell
+    spec:
+      terminationGracePeriodSeconds: 5
+      containers:
+        - image: eu.gcr.io/research-310823/operator:1.0
+          imagePullPolicy: Always
+          name: producer-shell
+          env:
+            - {name: ROLE, value: producer-shell}
+          ports:
+            - containerPort: 9091
+
+
+### Services ###
+
+---
 apiVersion: v1
 kind: Service
 metadata:
@@ -41,37 +593,229 @@ metadata:
   namespace: dev
 spec:
   selector:
-    role: kafka-topic-server
+    purpose: kafka-topic-server
   ports:
     - port: 9092
       targetPort: 9092
-  type: ClusterIP
+  type: LoadBalancer
 ---
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: v1
+kind: Service
 metadata:
   name: consumer-0
-  labels:
-    purpose: consumer
   namespace: dev
 spec:
   selector:
-    matchLabels:
-      purpose: consumer
-  replicas: 1
-  strategy:
-    type: RollingUpdate
-  template:
-    metadata:
-      labels:
-        purpose: consumer
-    spec:
-      terminationGracePeriodSeconds: 5
-      containers:
-        - image: eu.gcr.io/research-310823/operator:1.0
-          name: consumer-0-container
-          env:
-            - {name: ROLE, value: consumer}
-            - {name: TOPIC, value:  test-0}
-          ports:
-            - containerPort: 9091
+    purpose: consumer-0
+  ports:
+    - port: 9091
+      targetPort: 9091
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: consumer-1
+  namespace: dev
+spec:
+  selector:
+    purpose: consumer-0
+  ports:
+    - port: 9091
+      targetPort: 9091
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: consumer-2
+  namespace: dev
+spec:
+  selector:
+    purpose: consumer-0
+  ports:
+    - port: 9091
+      targetPort: 9091
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: consumer-3
+  namespace: dev
+spec:
+  selector:
+    purpose: consumer-3
+  ports:
+    - port: 9091
+      targetPort: 9091
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: consumer-4
+  namespace: dev
+spec:
+  selector:
+    purpose: consumer-4
+  ports:
+    - port: 9091
+      targetPort: 9091
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: consumer-5
+  namespace: dev
+spec:
+  selector:
+    purpose: consumer-5
+  ports:
+    - port: 9091
+      targetPort: 9091
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: consumer-6
+  namespace: dev
+spec:
+  selector:
+    purpose: consumer-6
+  ports:
+    - port: 9091
+      targetPort: 9091
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: consumer-7
+  namespace: dev
+spec:
+  selector:
+    purpose: consumer-7
+  ports:
+    - port: 9091
+      targetPort: 9091
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: consumer-8
+  namespace: dev
+spec:
+  selector:
+    purpose: consumer-8
+  ports:
+    - port: 9091
+      targetPort: 9091
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: consumer-9
+  namespace: dev
+spec:
+  selector:
+    purpose: consumer-9
+  ports:
+    - port: 9091
+      targetPort: 9091
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: consumer-10
+  namespace: dev
+spec:
+  selector:
+    purpose: consumer-10
+  ports:
+    - port: 9091
+      targetPort: 9091
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: consumer-11
+  namespace: dev
+spec:
+  selector:
+    purpose: consumer-11
+  ports:
+    - port: 9091
+      targetPort: 9091
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: consumer-12
+  namespace: dev
+spec:
+  selector:
+    purpose: consumer-12
+  ports:
+    - port: 9091
+      targetPort: 9091
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: consumer-13
+  namespace: dev
+spec:
+  selector:
+    purpose: consumer-13
+  ports:
+    - port: 9091
+      targetPort: 9091
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: consumer-14
+  namespace: dev
+spec:
+  selector:
+    purpose: consumer-14
+  ports:
+    - port: 9091
+      targetPort: 9091
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: consumer-15
+  namespace: dev
+spec:
+  selector:
+    purpose: consumer-15
+  ports:
+    - port: 9091
+      targetPort: 9091
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: producer-shell
+  namespace: dev
+spec:
+  selector:
+    purpose: producer-shell
+  ports:
+    - port: 9091
+      targetPort: 9091
+  type: ClusterIP

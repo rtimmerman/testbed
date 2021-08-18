@@ -29,6 +29,22 @@ data:
               - elliot-pri:9091
               - elliot-sec-1:9091
               - elliot-sec-2:9091
+              - consumer-0:9091
+              - consumer-1:9091
+              - consumer-2:9091
+              - consumer-3:9091
+              - consumer-4:9091
+              - consumer-5:9091
+              - consumer-6:9091
+              - consumer-7:9091
+              - consumer-8:9091
+              - consumer-9:9091
+              - consumer-10:9091
+              - consumer-11:9091
+              - consumer-12:9091
+              - consumer-13:9091
+              - consumer-14:9091
+              - consumer-15:9091
             labels:
               group: experiment-1
 

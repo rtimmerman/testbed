@@ -17,6 +17,10 @@ libraryDependencies += "org.apache.kafka" %% "kafka" % "2.8.0"
 libraryDependencies += "org.typelevel" %% "spire" % "0.17.0"
 libraryDependencies += "org.scalanlp" %% "breeze" % "1.2"
 libraryDependencies += "org.mongodb.scala" %% "mongo-scala-driver" % "4.3.1"
+// https://mvnrepository.com/artifact/org.slf4j/slf4j-api
+libraryDependencies += "org.slf4j" % "slf4j-api" % "1.7.32"
+// https://mvnrepository.com/artifact/org.slf4j/slf4j-simple
+libraryDependencies += "org.slf4j" % "slf4j-simple" % "1.7.32"
 
 fork := true
 // run / javaOptions += "-Djavax.net.debug=all"

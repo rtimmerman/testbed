@@ -3950,3 +3950,146 @@ WARNING: Unmatched cancel notification for request id 8807
 [0m2021.08.12 08:05:13 INFO  compiling root (1 scala source)[0m
 [0m2021.08.12 08:05:14 WARN  1 deprecation; re-run with -deprecation for details[0m
 [0m2021.08.12 08:05:14 INFO  time: compiled root in 1.09s[0m
+Aug 12, 2021 11:00:37 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 9166
+[0m2021.08.12 23:04:00 INFO  Started: Metals version 0.10.5 in workspace '/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator' for client Visual Studio Code 1.58.2.[0m
+[0m2021.08.12 23:04:03 INFO  time: initialize in 2.23s[0m
+[0m2021.08.12 23:04:07 INFO  Attempting to connect to the build server...[0m
+Starting the bsp launcher for bloop...
+Opening a bsp server connection with 'bsp --protocol local --socket /tmp/bsp-launcher15122858024324605118/bsp.socket'...
+Waiting for the bsp connection to come up...
+[0m2021.08.12 23:04:06 WARN  no build target for: /home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/src/main/scala/example/Consumer.scala[0m
+[0m2021.08.12 23:04:06 WARN  no build target for: /home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/build.sbt[0m
+[0m2021.08.12 23:04:07 INFO  skipping build import with status 'Installed'[0m
+[0m[32m[D][0m Loading workspace settings from bloop.settings.json
+[0m[32m[D][0m Waiting for a connection at local:///tmp/bsp-launcher15122858024324605118/bsp.socket...
+The server is listening for incoming connections at local:///tmp/bsp-launcher15122858024324605118/bsp.socket...
+Starting thread that pumps stdin and redirects it to the bsp server...
+Starting thread that pumps server stdout and redirects it to the client stdout...
+[0m2021.08.12 23:04:07 INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /home/roderick/.cache/metals/bsp.trace.json[0m
+[0m2021.08.12 23:04:07 INFO  Attempting to connect to the build server...[0m
+Starting the bsp launcher for bloop...
+Opening a bsp server connection with 'bsp --protocol local --socket /tmp/bsp-launcher4215781050365927780/bsp.socket'...
+Waiting for the bsp connection to come up...
+[0m[32m[D][0m Loading workspace settings from bloop.settings.json
+[0m[32m[D][0m Waiting for a connection at local:///tmp/bsp-launcher4215781050365927780/bsp.socket...
+The server is listening for incoming connections at local:///tmp/bsp-launcher4215781050365927780/bsp.socket...
+Starting thread that pumps stdin and redirects it to the bsp server...
+Starting thread that pumps server stdout and redirects it to the client stdout...
+[0m2021.08.12 23:04:07 INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /home/roderick/.cache/metals/bsp.trace.json[0m
+[0m2021.08.12 23:04:07 INFO  time: Connected to build server in 0.7s[0m
+[0m2021.08.12 23:04:07 INFO  Connected to Build server: Bloop v1.4.8-19-4d9f966b[0m
+[0m2021.08.12 23:04:11 INFO  no build target: using presentation compiler with only scala-library: 2.12.14[0m
+[0m2021.08.12 23:04:12 INFO  no build target: using presentation compiler with only scala-library: 2.12.14[0m
+[0m2021.08.12 23:04:14 INFO  time: code lens generation in 7.54s[0m
+[0m2021.08.12 23:04:17 INFO  time: indexed workspace in 5.66s[0m
+[0m2021.08.12 23:04:19 INFO  compiling root-test (1 scala source)[0m
+[0m2021.08.12 23:04:19 INFO  time: compiled root-test in 0.71s[0m
+Aug 12, 2021 11:19:04 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 37
+Aug 12, 2021 11:19:42 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 183
+[0m2021.08.12 23:19:43 INFO  compiling root (1 scala source)[0m
+[0m2021.08.12 23:19:46 INFO  time: compiled root in 2.47s[0m
+[0m2021.08.12 23:19:46 INFO  compiling root (1 scala source)[0m
+[0m2021.08.12 23:19:47 INFO  time: compiled root in 0.96s[0m
+[0m2021.08.12 23:19:58 INFO  compiling root (1 scala source)[0m
+[0m2021.08.12 23:19:58 INFO  time: compiled root in 0.29s[0m
+[0m2021.08.12 23:20:28 INFO  compiling root (1 scala source)[0m
+[0m2021.08.12 23:20:28 INFO  time: compiled root in 0.3s[0m
+Aug 12, 2021 11:20:31 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 293
+[0m2021.08.12 23:21:06 INFO  compiling root (1 scala source)[0m
+[0m2021.08.12 23:21:06 INFO  time: compiled root in 0.29s[0m
+[0m2021.08.12 23:21:32 INFO  compiling root (1 scala source)[0m
+[0m2021.08.12 23:21:34 WARN  1 deprecation; re-run with -deprecation for details[0m
+[0m2021.08.12 23:21:34 INFO  time: compiled root in 2.25s[0m
+[0m2021.08.12 23:21:51 INFO  compiling root (1 scala source)[0m
+[0m2021.08.12 23:21:52 WARN  1 deprecation; re-run with -deprecation for details[0m
+[0m2021.08.12 23:21:52 INFO  time: compiled root in 1.08s[0m
+Aug 12, 2021 11:21:58 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 442
+[0m2021.08.12 23:21:59 INFO  compiling root (1 scala source)[0m
+[0m2021.08.12 23:22:00 WARN  1 deprecation; re-run with -deprecation for details[0m
+[0m2021.08.12 23:22:00 INFO  time: compiled root in 1.19s[0m
+[0m2021.08.12 23:22:26 ERROR scalafmt: /home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/src/main/scala/example/Consumer.scala:142: error: ) expected but val found
+    val keyManagerFactory =
+    ^[0m
+[0m2021.08.12 23:22:26 INFO  compiling root (1 scala source)[0m
+[0m2021.08.12 23:22:26 INFO  time: compiled root in 0.1s[0m
+[0m2021.08.12 23:22:26 ERROR scalafmt: /home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/src/main/scala/example/Consumer.scala:142: error: ) expected but val found
+    val keyManagerFactory =
+    ^[0m
+[0m2021.08.12 23:22:26 INFO  compiling root (1 scala source)[0m
+[0m2021.08.12 23:22:26 INFO  time: compiled root in 45ms[0m
+[0m2021.08.12 23:22:29 ERROR scalafmt: /home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/src/main/scala/example/Consumer.scala:142: error: ) expected but val found
+    val keyManagerFactory =
+    ^[0m
+[0m2021.08.12 23:22:29 INFO  compiling root (1 scala source)[0m
+[0m2021.08.12 23:22:29 INFO  time: compiled root in 0.1s[0m
+[0m2021.08.12 23:22:50 ERROR scalafmt: /home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/src/main/scala/example/Consumer.scala:142: error: ) expected but val found
+    val keyManagerFactory =
+    ^[0m
+[0m2021.08.12 23:22:50 INFO  compiling root (1 scala source)[0m
+[0m2021.08.12 23:22:50 INFO  time: compiled root in 0.1s[0m
+[0m2021.08.12 23:22:51 INFO  compiling root (1 scala source)[0m
+[0m2021.08.12 23:22:52 WARN  1 deprecation; re-run with -deprecation for details[0m
+[0m2021.08.12 23:22:52 INFO  time: compiled root in 1.22s[0m
+[0m2021.08.18 08:58:05 INFO  Started: Metals version 0.10.5 in workspace '/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator' for client Visual Studio Code 1.59.0.[0m
+[0m2021.08.18 08:58:10 INFO  time: initialize in 5.56s[0m
+[0m2021.08.18 08:58:15 INFO  Attempting to connect to the build server...[0m
+Starting the bsp launcher for bloop...
+Opening a bsp server connection with 'bsp --protocol local --socket /tmp/bsp-launcher3603734788339672307/bsp.socket'...
+Waiting for the bsp connection to come up...
+[0m2021.08.18 08:58:15 WARN  no build target for: /home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/src/main/scala/example/Consumer.scala[0m
+Waiting for the bsp connection to come up...
+Waiting for the bsp connection to come up...
+Waiting for the bsp connection to come up...
+Waiting for the bsp connection to come up...
+No server running at 127.0.0.1:8212, let's fire one...
+Resolving ch.epfl.scala:bloop-frontend_2.12:1.4.8-19-4d9f966b...
+Starting bloop server at 127.0.0.1:8212...
+Attempting a connection to the server...
+Attempting a connection to the server...
+Attempting a connection to the server...
+Attempting a connection to the server...
+Attempting a connection to the server...
+Attempting a connection to the server...
+[0m[32m[D][0m Loading workspace settings from bloop.settings.json
+[0m[32m[D][0m Loading 2 projects from '/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/.bloop'...
+[0m[32m[D][0m Loading project from '/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/.bloop/root-test.json'
+[0m[32m[D][0m Loading project from '/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/.bloop/root.json'
+[0m[32m[D][0m Cache miss for scala instance org.scala-lang:scala-compiler:2.13.5.
+[0m[32m[D][0m   => /home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/net/java/dev/jna/jna/5.3.1/jna-5.3.1.jar
+[0m[32m[D][0m   => /home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/jline/jline/3.19.0/jline-3.19.0.jar
+[0m[32m[D][0m   => /home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala-compiler/2.13.5/scala-compiler-2.13.5.jar
+[0m[32m[D][0m   => /home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala-library/2.13.5/scala-library-2.13.5.jar
+[0m[32m[D][0m   => /home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.13.5/scala-reflect-2.13.5.jar
+[0m[32m[D][0m Configured SemanticDB in projects 'root', 'root-test'
+[0m[32m[D][0m Missing analysis file for project 'root-test'
+[0m[32m[D][0m Loading previous analysis for 'root' from '/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/target/streams/compile/bloopAnalysisOut/_global/streams/inc_compile_2.13.zip'.
+[0m[32m[D][0m Waiting for a connection at local:///tmp/bsp-launcher3603734788339672307/bsp.socket...
+The server is listening for incoming connections at local:///tmp/bsp-launcher3603734788339672307/bsp.socket...
+Starting thread that pumps stdin and redirects it to the bsp server...
+Starting thread that pumps server stdout and redirects it to the client stdout...
+[0m2021.08.18 08:58:20 INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /home/roderick/.cache/metals/bsp.trace.json[0m
+[0m2021.08.18 08:58:20 INFO  Attempting to connect to the build server...[0m
+Starting the bsp launcher for bloop...
+Opening a bsp server connection with 'bsp --protocol local --socket /tmp/bsp-launcher5402352151692479458/bsp.socket'...
+Waiting for the bsp connection to come up...
+[0m[32m[D][0m Loading workspace settings from bloop.settings.json
+[0m[32m[D][0m Waiting for a connection at local:///tmp/bsp-launcher5402352151692479458/bsp.socket...
+The server is listening for incoming connections at local:///tmp/bsp-launcher5402352151692479458/bsp.socket...
+Starting thread that pumps stdin and redirects it to the bsp server...
+Starting thread that pumps server stdout and redirects it to the client stdout...
+[0m2021.08.18 08:58:20 INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /home/roderick/.cache/metals/bsp.trace.json[0m
+[0m2021.08.18 08:58:20 INFO  time: Connected to build server in 4.9s[0m
+[0m2021.08.18 08:58:20 INFO  Connected to Build server: Bloop v1.4.8-19-4d9f966b[0m
+[0m2021.08.18 08:58:21 INFO  no build target: using presentation compiler with only scala-library: 2.12.14[0m
+[0m2021.08.18 08:58:22 INFO  time: Imported build in 0.21s[0m
+[0m2021.08.18 08:58:25 INFO  time: indexed workspace in 3.58s[0m
+[0m2021.08.18 08:58:26 INFO  compiling root (3 scala sources)[0m
+[0m2021.08.18 08:58:35 WARN  1 deprecation; re-run with -deprecation for details[0m
+[0m2021.08.18 08:58:35 INFO  compiling root-test (1 scala source)[0m
+[0m2021.08.18 08:58:35 INFO  time: compiled root in 8.98s[0m
+[0m2021.08.18 08:58:35 INFO  time: compiled root-test in 0.52s[0m

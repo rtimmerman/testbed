@@ -74,14 +74,18 @@ object Consumer {
       if (work != null) {
         work.forEach(record => {
           println(record.key() + " = " + record.value())
-          ("""([0-9.-]+)\s*\+\s*([0-9.-]+)""".r)
+          ("""([0-9.-]+)\s*\+\s*([0-9.-]+);([0-9]+)""".r)
             .findAllIn(record.value)
             .matchData foreach { m =>
             {
               val z =
                 new Complex[Double](m.group(1).toDouble, m.group(2).toDouble)
 
-              val res = process(z, z, 10) /* TODO: iterations should also come from the workflow */
+              val res = process(
+                z,
+                z,
+                m.group(3).toInt
+              ) /* TODO: iterations should also come from the workflow */
 
               val outcome = mongoDbClient
                 .getDatabase("mandelbrot")

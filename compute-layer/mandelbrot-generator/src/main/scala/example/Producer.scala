@@ -8,7 +8,8 @@ import breeze.linalg._
 object Producer {
   def gridWorkStream(
       kafkaProducer: KafkaProducer[String, String],
-      topicPrefix: String
+      topicPrefix: String,
+      iterations: Int
   ) = {
 
     val data =
@@ -36,7 +37,7 @@ object Producer {
           new ProducerRecord[String, String](
             topic,
             "coordinate",
-            value.toString
+            value.toString + ";" + iterations
           )
         )
       })
@@ -47,7 +48,7 @@ object Producer {
     kafkaProducer.close()
   }
 
-  def produceGridPoints(topicPrefix: String) = {
+  def produceGridPoints(topicPrefix: String, iterations: Int) = {
     val props = new Properties()
     props.put("bootstrap.servers", "kafka-topic-server:9092")
     props.put(
@@ -63,12 +64,10 @@ object Producer {
       "transaction-id-1"
     )
     val producer = new KafkaProducer[String, String](props)
-    println("HERE 1")
     producer.initTransactions()
-    println("HERE 2")
     //val record =
     //  new ProducerRecord[String, String]("test", "test-key", "test value")
-    gridWorkStream(producer, topicPrefix)
+    gridWorkStream(producer, topicPrefix, iterations)
     producer.close()
 
   }

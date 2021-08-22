@@ -20,6 +20,8 @@
             "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/typelevel/spire_2.13/0.17.0/spire_2.13-0.17.0.jar",
             "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scalanlp/breeze_2.13/1.2/breeze_2.13-1.2.jar",
             "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/mongodb/scala/mongo-scala-driver_2.13/4.3.1/mongo-scala-driver_2.13-4.3.1.jar",
+            "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/slf4j/slf4j-api/1.7.32/slf4j-api-1.7.32.jar",
+            "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/slf4j/slf4j-simple/1.7.32/slf4j-simple-1.7.32.jar",
             "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/apache/kafka/kafka-clients/2.8.0/kafka-clients-2.8.0.jar",
             "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/apache/kafka/kafka-metadata/2.8.0/kafka-metadata-2.8.0.jar",
             "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/apache/kafka/kafka-raft/2.8.0/kafka-raft-2.8.0.jar",
@@ -34,7 +36,6 @@
             "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/modules/scala-java8-compat_2.13/0.9.1/scala-java8-compat_2.13-0.9.1.jar",
             "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.13.5/scala-reflect-2.13.5.jar",
             "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/com/typesafe/scala-logging/scala-logging_2.13/3.9.2/scala-logging_2.13-3.9.2.jar",
-            "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/slf4j/slf4j-api/1.7.30/slf4j-api-1.7.30.jar",
             "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/apache/zookeeper/zookeeper/3.5.9/zookeeper-3.5.9.jar",
             "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/commons-cli/commons-cli/1.4/commons-cli-1.4.jar",
             "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/typelevel/spire-macros_2.13/0.17.0/spire-macros_2.13-0.17.0.jar",
@@ -251,6 +252,40 @@
                             "name": "mongo-scala-driver_2.13",
                             "classifier": "sources",
                             "path": "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/mongodb/scala/mongo-scala-driver_2.13/4.3.1/mongo-scala-driver_2.13-4.3.1-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.slf4j",
+                    "name": "slf4j-api",
+                    "version": "1.7.32",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "slf4j-api",
+                            "path": "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/slf4j/slf4j-api/1.7.32/slf4j-api-1.7.32.jar"
+                        },
+                        {
+                            "name": "slf4j-api",
+                            "classifier": "sources",
+                            "path": "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/slf4j/slf4j-api/1.7.32/slf4j-api-1.7.32-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.slf4j",
+                    "name": "slf4j-simple",
+                    "version": "1.7.32",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "slf4j-simple",
+                            "path": "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/slf4j/slf4j-simple/1.7.32/slf4j-simple-1.7.32.jar"
+                        },
+                        {
+                            "name": "slf4j-simple",
+                            "classifier": "sources",
+                            "path": "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/slf4j/slf4j-simple/1.7.32/slf4j-simple-1.7.32-sources.jar"
                         }
                     ]
                 },
@@ -489,23 +524,6 @@
                             "name": "scala-logging_2.13",
                             "classifier": "sources",
                             "path": "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/com/typesafe/scala-logging/scala-logging_2.13/3.9.2/scala-logging_2.13-3.9.2-sources.jar"
-                        }
-                    ]
-                },
-                {
-                    "organization": "org.slf4j",
-                    "name": "slf4j-api",
-                    "version": "1.7.30",
-                    "configurations": "default",
-                    "artifacts": [
-                        {
-                            "name": "slf4j-api",
-                            "path": "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/slf4j/slf4j-api/1.7.30/slf4j-api-1.7.30.jar"
-                        },
-                        {
-                            "name": "slf4j-api",
-                            "classifier": "sources",
-                            "path": "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/slf4j/slf4j-api/1.7.30/slf4j-api-1.7.30-sources.jar"
                         }
                     ]
                 },

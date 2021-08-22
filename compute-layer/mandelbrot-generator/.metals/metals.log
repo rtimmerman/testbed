@@ -4093,3 +4093,166 @@ Starting thread that pumps server stdout and redirects it to the client stdout..
 [0m2021.08.18 08:58:35 INFO  compiling root-test (1 scala source)[0m
 [0m2021.08.18 08:58:35 INFO  time: compiled root in 8.98s[0m
 [0m2021.08.18 08:58:35 INFO  time: compiled root-test in 0.52s[0m
+[0m2021.08.22 16:41:50 INFO  running '/home/roderick/.jabba/jdk/adopt@1.11.0-11/bin/java -Djline.terminal=jline.UnsupportedTerminal -Dsbt.log.noformat=true -Dfile.encoding=UTF-8 -jar /tmp/metals8215836593080564576/sbt-launch.jar -Dbloop.export-jar-classifiers=sources bloopInstall'[0m
+[0m2021.08.22 16:41:54 INFO  [info] welcome to sbt 1.5.4 (AdoptOpenJDK Java 11.0.11)[0m
+[0m2021.08.22 16:41:58 INFO  [info] loading global plugins from /home/roderick/.sbt/1.0/plugins[0m
+[0m2021.08.22 16:42:01 INFO  [info] loading settings for project mandelbrot-generator-build-build from metals.sbt ...[0m
+[0m2021.08.22 16:42:01 INFO  [info] loading project definition from /home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/project/project[0m
+[0m2021.08.22 16:42:01 INFO  [info] loading settings for project mandelbrot-generator-build from metals.sbt ...[0m
+[0m2021.08.22 16:42:02 INFO  [info] loading project definition from /home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/project[0m
+[0m2021.08.22 16:42:07 INFO  [success] Generated .bloop/mandelbrot-generator-build.json[0m
+[0m2021.08.22 16:42:07 INFO  [info] compiling 1 Scala source to /home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/project/target/scala-2.12/sbt-1.0/classes ...[0m
+Aug 22, 2021 4:42:15 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 51
+[0m2021.08.22 16:42:15 INFO  compiling root (1 scala source)[0m
+[0m2021.08.22 16:42:16 INFO  [info] done compiling[0m
+[0m2021.08.22 16:42:16 INFO  [success] Total time: 13 s, completed 22 Aug 2021, 16:42:16[0m
+Aug 22, 2021 4:42:24 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 79
+[0m2021.08.22 16:42:24 INFO  time: compiled root in 8.88s[0m
+[0m2021.08.22 16:42:32 INFO  [info] loading settings for project root from build.sbt ...[0m
+[0m2021.08.22 16:42:32 INFO  [info] set current project to mandelbrot-generator (in build file:/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/)[0m
+Aug 22, 2021 4:42:34 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 96
+[0m2021.08.22 16:42:43 INFO  [success] Generated .bloop/root-test.json[0m
+[0m2021.08.22 16:42:43 INFO  [success] Generated .bloop/root.json[0m
+[0m2021.08.22 16:42:43 INFO  [success] Total time: 10 s, completed 22 Aug 2021, 16:42:43[0m
+[0m2021.08.22 16:42:43 INFO  sbt bloopInstall exit: 0[0m
+[0m2021.08.22 16:42:44 INFO  time: ran 'sbt bloopInstall' in 53s[0m
+[0m2021.08.22 16:42:44 INFO  Disconnecting from Bloop session...[0m
+[0m2021.08.22 16:42:44 INFO  Shut down connection with build server.[0m
+[0m2021.08.22 16:42:44 INFO  Shut down connection with build server.[0m
+No more data in the client stdin, exiting...
+No more data in the client stdin, exiting...
+[0m2021.08.22 16:42:44 INFO  Attempting to connect to the build server...[0m
+Starting the bsp launcher for bloop...
+Opening a bsp server connection with 'bsp --protocol local --socket /tmp/bsp-launcher10416340233184475408/bsp.socket'...
+Waiting for the bsp connection to come up...
+No more data in the server stdin, exiting...
+No more data in the server stdin, exiting...
+No more data in the server stdin, exiting...
+[0m[32m[D][0m Loading workspace settings from bloop.settings.json
+[0m[32m[D][0m Loading 2 projects from '/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/.bloop'...
+[0m[32m[D][0m Loading project from '/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/.bloop/root-test.json'
+[0m[32m[D][0m Loading project from '/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/.bloop/root.json'
+[0m[32m[D][0m Configured SemanticDB in projects 'root', 'root-test'
+[0m[32m[D][0m Waiting for a connection at local:///tmp/bsp-launcher10416340233184475408/bsp.socket...
+The server is listening for incoming connections at local:///tmp/bsp-launcher10416340233184475408/bsp.socket...
+Starting thread that pumps stdin and redirects it to the bsp server...
+Starting thread that pumps server stdout and redirects it to the client stdout...
+[0m2021.08.22 16:42:44 INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /home/roderick/.cache/metals/bsp.trace.json[0m
+[0m2021.08.22 16:42:44 INFO  Attempting to connect to the build server...[0m
+Starting the bsp launcher for bloop...
+Opening a bsp server connection with 'bsp --protocol local --socket /tmp/bsp-launcher15981617476182984906/bsp.socket'...
+Waiting for the bsp connection to come up...
+[0m[32m[D][0m Loading workspace settings from bloop.settings.json
+[0m[32m[D][0m Waiting for a connection at local:///tmp/bsp-launcher15981617476182984906/bsp.socket...
+The server is listening for incoming connections at local:///tmp/bsp-launcher15981617476182984906/bsp.socket...
+Starting thread that pumps stdin and redirects it to the bsp server...
+Starting thread that pumps server stdout and redirects it to the client stdout...
+[0m2021.08.22 16:42:44 INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /home/roderick/.cache/metals/bsp.trace.json[0m
+[0m2021.08.22 16:42:44 INFO  time: Connected to build server in 0.23s[0m
+[0m2021.08.22 16:42:44 INFO  Connected to Build server: Bloop v1.4.8-19-4d9f966b[0m
+Caught unexpected io exception handling event for /home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/src/test/scala-2
+java.nio.file.NoSuchFileException: /home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/src/test/scala-2
+	at com.swoval.files.NativeDirectoryLister.fillResults(NativeDirectoryLister.java:93)
+	at com.swoval.files.NativeDirectoryLister.apply(NativeDirectoryLister.java:48)
+	at com.swoval.files.SimpleFileTreeView$Lister.impl(SimpleFileTreeView.java:149)
+	at com.swoval.files.SimpleFileTreeView$Lister.fillResults(SimpleFileTreeView.java:140)
+	at com.swoval.files.SimpleFileTreeView.list(SimpleFileTreeView.java:50)
+	at com.swoval.files.CachedDirectoryImpl.init(CachedDirectoryImpl.java:568)
+	at com.swoval.files.CachedDirectoryImpl.init(CachedDirectoryImpl.java:557)
+	at com.swoval.files.FileCacheDirectoryTree.newCachedDirectory(FileCacheDirectoryTree.java:623)
+	at com.swoval.files.FileCacheDirectoryTree.handleEvent(FileCacheDirectoryTree.java:298)
+	at com.swoval.files.FileTreeRepositories$1.onNext(FileTreeRepositories.java:79)
+	at com.swoval.files.FileTreeRepositories$1.onNext(FileTreeRepositories.java:73)
+	at com.swoval.files.Observers.onNext(Observers.java:31)
+	at com.swoval.files.NioPathWatcher.runCallbacks(NioPathWatcher.java:423)
+	at com.swoval.files.NioPathWatcher.handleEvent(NioPathWatcher.java:447)
+	at com.swoval.files.NioPathWatcher.access$300(NioPathWatcher.java:35)
+	at com.swoval.files.NioPathWatcher$2.accept(NioPathWatcher.java:108)
+	at com.swoval.files.NioPathWatcher$2.accept(NioPathWatcher.java:102)
+	at com.swoval.files.NioPathWatcherService$2.run(NioPathWatcherService.java:95)
+[0m2021.08.22 16:42:47 INFO  time: indexed workspace in 2.81s[0m
+[0m2021.08.22 16:42:48 INFO  compiling root (1 scala source)[0m
+[0m2021.08.22 16:42:50 WARN  1 deprecation; re-run with -deprecation for details[0m
+[0m2021.08.22 16:42:50 INFO  time: compiled root in 2.62s[0m
+[0m2021.08.22 16:42:50 INFO  compiling root-test (1 scala source)[0m
+[0m2021.08.22 16:42:50 INFO  time: compiled root-test in 0.35s[0m
+[0m2021.08.22 16:44:39 INFO  compiling root (1 scala source)[0m
+[0m2021.08.22 16:44:42 WARN  1 deprecation; re-run with -deprecation for details[0m
+[0m2021.08.22 16:44:42 INFO  time: compiled root in 2.92s[0m
+Aug 22, 2021 4:44:57 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 281
+[0m2021.08.22 16:45:30 INFO  compiling root (1 scala source)[0m
+[0m2021.08.22 16:45:32 WARN  1 deprecation; re-run with -deprecation for details[0m
+[0m2021.08.22 16:45:32 INFO  time: compiled root in 2.76s[0m
+Aug 22, 2021 4:45:34 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 400
+[0m2021.08.22 16:46:36 INFO  compiling root (1 scala source)[0m
+[0m2021.08.22 16:46:36 INFO  time: compiled root in 0.65s[0m
+[0m2021.08.22 16:46:39 INFO  compiling root (1 scala source)[0m
+[0m2021.08.22 16:46:39 INFO  time: compiled root in 0.55s[0m
+[0m2021.08.22 16:46:51 INFO  compiling root (1 scala source)[0m
+[0m2021.08.22 16:46:51 INFO  time: compiled root in 0.59s[0m
+[0m2021.08.22 16:47:02 INFO  compiling root (1 scala source)[0m
+[0m2021.08.22 16:47:02 INFO  time: compiled root in 0.62s[0m
+[0m2021.08.22 16:47:24 ERROR scalafmt: /home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/src/main/scala/example/Producer.scala:51: error: : expected but ) found
+  def produceGridPoints(topicPrefix: String, iterations) = {
+                                                       ^[0m
+[0m2021.08.22 16:47:24 INFO  compiling root (1 scala source)[0m
+[0m2021.08.22 16:47:24 ERROR scalafmt: /home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/src/main/scala/example/Producer.scala:51: error: : expected but ) found
+  def produceGridPoints(topicPrefix: String, iterations) = {
+                                                       ^[0m
+[0m2021.08.22 16:47:24 INFO  time: compiled root in 0.34s[0m
+[0m2021.08.22 16:47:24 INFO  compiling root (1 scala source)[0m
+[0m2021.08.22 16:47:24 INFO  time: compiled root in 99ms[0m
+[0m2021.08.22 16:47:29 INFO  compiling root (1 scala source)[0m
+Aug 22, 2021 4:47:31 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 790
+[0m2021.08.22 16:47:31 INFO  Deduplicating compilation of root from bsp client 'Metals 0.10.5' (since 4m 46.858s)[0m
+[0m2021.08.22 16:47:31 INFO  compiling root (1 scala source)[0m
+[0m2021.08.22 16:47:32 INFO  time: compiled root in 0.96s[0m
+[0m2021.08.22 16:47:32 INFO  compiling root (1 scala source)[0m
+[0m2021.08.22 16:47:32 INFO  time: compiled root in 839μs[0m
+[0m2021.08.22 16:47:32 INFO  compiling root (1 scala source)[0m
+[0m2021.08.22 16:47:32 INFO  time: compiled root in 0.1s[0m
+[0m2021.08.22 16:47:32 INFO  compiling root (1 scala source)[0m
+[0m2021.08.22 16:47:33 INFO  time: compiled root in 1.03s[0m
+[0m2021.08.22 16:47:33 INFO  compiling root (1 scala source)[0m
+[0m2021.08.22 16:47:33 INFO  time: compiled root in 0.13s[0m
+[0m2021.08.22 16:47:35 INFO  compiling root (1 scala source)[0m
+[0m2021.08.22 16:47:37 INFO  time: compiled root in 2.61s[0m
+[0m2021.08.22 16:47:37 INFO  compiling root (1 scala source)[0m
+[0m2021.08.22 16:47:37 INFO  time: compiled root in 0.21s[0m
+[0m2021.08.22 16:47:37 INFO  compiling root (1 scala source)[0m
+[0m2021.08.22 16:47:39 INFO  time: compiled root in 1.07s[0m
+[0m2021.08.22 16:47:39 INFO  compiling root (1 scala source)[0m
+[0m2021.08.22 16:47:39 INFO  time: compiled root in 0.17s[0m
+[0m2021.08.22 16:47:41 INFO  compiling root (1 scala source)[0m
+[0m2021.08.22 16:47:42 INFO  Deduplicating compilation of root from bsp client 'Metals 0.10.5' (since 4m 57.836s)[0m
+[0m2021.08.22 16:47:42 INFO  compiling root (1 scala source)[0m
+[0m2021.08.22 16:47:44 INFO  time: compiled root in 1.72s[0m
+[0m2021.08.22 16:47:44 INFO  compiling root (1 scala source)[0m
+[0m2021.08.22 16:47:44 INFO  time: compiled root in 4ms[0m
+[0m2021.08.22 16:47:44 INFO  compiling root (1 scala source)[0m
+[0m2021.08.22 16:47:44 INFO  time: compiled root in 94ms[0m
+[0m2021.08.22 16:47:44 INFO  compiling root (1 scala source)[0m
+[0m2021.08.22 16:47:44 INFO  time: compiled root in 0.58s[0m
+[0m2021.08.22 16:47:44 INFO  compiling root (1 scala source)[0m
+[0m2021.08.22 16:47:44 INFO  time: compiled root in 0.11s[0m
+[0m2021.08.22 16:47:49 INFO  compiling root (1 scala source)[0m
+[0m2021.08.22 16:47:51 INFO  time: compiled root in 2.34s[0m
+[0m2021.08.22 16:47:51 INFO  compiling root (1 scala source)[0m
+[0m2021.08.22 16:47:51 INFO  time: compiled root in 0.13s[0m
+[0m2021.08.22 16:48:41 INFO  compiling root (3 scala sources)[0m
+[0m2021.08.22 16:48:44 WARN  1 deprecation; re-run with -deprecation for details[0m
+[0m2021.08.22 16:48:44 INFO  time: compiled root in 3.64s[0m
+[0m2021.08.22 16:49:00 INFO  compiling root (1 scala source)[0m
+[0m2021.08.22 16:49:00 INFO  time: compiled root in 0.39s[0m
+[0m2021.08.22 16:49:00 INFO  compiling root (1 scala source)[0m
+[0m2021.08.22 16:49:00 INFO  time: compiled root in 0.26s[0m
+[0m2021.08.22 16:51:18 INFO  compiling root (1 scala source)[0m
+[0m2021.08.22 16:51:20 INFO  time: compiled root in 2.15s[0m
+[0m2021.08.22 16:51:38 INFO  compiling root (1 scala source)[0m
+[0m2021.08.22 16:51:39 INFO  time: compiled root in 1.58s[0m

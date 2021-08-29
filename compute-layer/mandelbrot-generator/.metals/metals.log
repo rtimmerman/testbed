@@ -4256,3 +4256,44 @@ WARNING: Unmatched cancel notification for request id 790
 [0m2021.08.22 16:51:20 INFO  time: compiled root in 2.15s[0m
 [0m2021.08.22 16:51:38 INFO  compiling root (1 scala source)[0m
 [0m2021.08.22 16:51:39 INFO  time: compiled root in 1.58s[0m
+Aug 22, 2021 5:00:25 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1210
+Aug 22, 2021 5:00:30 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1216
+[0m2021.08.22 17:00:45 INFO  compiling root-test (1 scala source)[0m
+[0m2021.08.22 17:00:45 INFO  time: compiled root-test in 0.63s[0m
+[0m2021.08.22 17:01:18 INFO  compiling root-test (2 scala sources)[0m
+[0m2021.08.22 17:01:18 INFO  time: compiled root-test in 0.38s[0m
+[0m2021.08.22 17:01:18 INFO  compiling root-test (2 scala sources)[0m
+[0m2021.08.22 17:01:18 INFO  time: compiled root-test in 0.17s[0m
+Aug 22, 2021 5:01:21 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1236
+Aug 22, 2021 5:01:28 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1245
+[0m2021.08.22 17:01:37 INFO  compiling root-test (2 scala sources)[0m
+[0m2021.08.22 17:01:37 INFO  time: compiled root-test in 0.24s[0m
+Aug 22, 2021 5:02:04 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1338
+[0m2021.08.22 17:02:13 INFO  compiling root-test (2 scala sources)[0m
+[0m2021.08.22 17:02:13 INFO  time: compiled root-test in 0.38s[0m
+[0m2021.08.22 17:02:14 ERROR code navigation does not work for the file '/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/src/test/scala/example/ConsumerSpec.scala' because the SemanticDB file '/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/.bloop/root/bloop-bsp-clients-classes/test-classes-Metals-TP7daebSRIW2PrJo0jA7LQ==/META-INF/semanticdb/src/test/scala/example/ConsumerSpec.scala.semanticdb' doesn't exist. There can be many reasons for this error. [0m
+[0m2021.08.22 17:02:16 ERROR code navigation does not work for the file '/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/src/test/scala/example/ConsumerSpec.scala' because the SemanticDB file '/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/.bloop/root/bloop-bsp-clients-classes/test-classes-Metals-TP7daebSRIW2PrJo0jA7LQ==/META-INF/semanticdb/src/test/scala/example/ConsumerSpec.scala.semanticdb' doesn't exist. There can be many reasons for this error. [0m
+[0m2021.08.22 17:02:22 ERROR code navigation does not work for the file '/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/src/test/scala/example/ConsumerSpec.scala' because the SemanticDB file '/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/.bloop/root/bloop-bsp-clients-classes/test-classes-Metals-TP7daebSRIW2PrJo0jA7LQ==/META-INF/semanticdb/src/test/scala/example/ConsumerSpec.scala.semanticdb' doesn't exist. There can be many reasons for this error. [0m
+[0m2021.08.22 17:02:22 ERROR code navigation does not work for the file '/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/src/test/scala/example/ConsumerSpec.scala' because the SemanticDB file '/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/.bloop/root/bloop-bsp-clients-classes/test-classes-Metals-TP7daebSRIW2PrJo0jA7LQ==/META-INF/semanticdb/src/test/scala/example/ConsumerSpec.scala.semanticdb' doesn't exist. There can be many reasons for this error. [0m
+[0m2021.08.22 17:02:32 ERROR code navigation does not work for the file '/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/src/test/scala/example/ConsumerSpec.scala' because the SemanticDB file '/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/.bloop/root/bloop-bsp-clients-classes/test-classes-Metals-TP7daebSRIW2PrJo0jA7LQ==/META-INF/semanticdb/src/test/scala/example/ConsumerSpec.scala.semanticdb' doesn't exist. There can be many reasons for this error. [0m
+[0m2021.08.22 17:02:32 ERROR code navigation does not work for the file '/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/src/test/scala/example/ConsumerSpec.scala' because the SemanticDB file '/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/.bloop/root/bloop-bsp-clients-classes/test-classes-Metals-TP7daebSRIW2PrJo0jA7LQ==/META-INF/semanticdb/src/test/scala/example/ConsumerSpec.scala.semanticdb' doesn't exist. There can be many reasons for this error. [0m
+[0m2021.08.22 17:02:32 ERROR code navigation does not work for the file '/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/src/test/scala/example/ConsumerSpec.scala' because the SemanticDB file '/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/.bloop/root/bloop-bsp-clients-classes/test-classes-Metals-TP7daebSRIW2PrJo0jA7LQ==/META-INF/semanticdb/src/test/scala/example/ConsumerSpec.scala.semanticdb' doesn't exist. There can be many reasons for this error. [0m
+[0m2021.08.22 17:02:34 ERROR code navigation does not work for the file '/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/src/test/scala/example/ConsumerSpec.scala' because the SemanticDB file '/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/.bloop/root/bloop-bsp-clients-classes/test-classes-Metals-TP7daebSRIW2PrJo0jA7LQ==/META-INF/semanticdb/src/test/scala/example/ConsumerSpec.scala.semanticdb' doesn't exist. There can be many reasons for this error. [0m
+Aug 22, 2021 5:02:37 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1419
+Aug 22, 2021 5:03:13 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1426
+[0m2021.08.22 17:03:15 INFO  compiling root-test (2 scala sources)[0m
+[0m2021.08.22 17:03:15 INFO  time: compiled root-test in 0.29s[0m
+[0m2021.08.22 17:03:18 INFO  compiling root-test (2 scala sources)[0m
+[0m2021.08.22 17:03:18 INFO  time: compiled root-test in 0.24s[0m
+Aug 22, 2021 5:34:17 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1439
+[0m2021.08.22 17:43:58 INFO  compiling root (1 scala source)[0m
+[0m2021.08.22 17:44:02 WARN  1 deprecation; re-run with -deprecation for details[0m
+[0m2021.08.22 17:44:02 INFO  time: compiled root in 3.8s[0m

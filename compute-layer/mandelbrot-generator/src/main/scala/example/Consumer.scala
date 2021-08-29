@@ -74,7 +74,7 @@ object Consumer {
       if (work != null) {
         work.forEach(record => {
           println(record.key() + " = " + record.value())
-          ("""([0-9.-]+)\s*\+\s*([0-9.-]+);([0-9]+)""".r)
+          ("""([0-9.-]+)\s*\+\s*([0-9.-]+)i;([0-9]+)""".r)
             .findAllIn(record.value)
             .matchData foreach { m =>
             {

@@ -35,6 +35,8 @@ spec:
           ports:
             - containerPort: 9092
             - containerPort: 2181
+      nodeSelector:
+        cloud.google.com/gke-nodepool: default-pool
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -67,6 +69,8 @@ spec:
             - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
           ports:
             - containerPort: 9091
+      nodeSelector:
+        cloud.google.com/gke-nodepool: compute-pool-0
 
 ---
 apiVersion: apps/v1
@@ -100,7 +104,8 @@ spec:
             - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
           ports:
             - containerPort: 9091
-
+      nodeSelector:
+        cloud.google.com/gke-nodepool: compute-pool-1
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -133,7 +138,8 @@ spec:
             - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
           ports:
             - containerPort: 9091
-
+      nodeSelector:
+        cloud.google.com/gke-nodepool: compute-pool-2
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -166,6 +172,8 @@ spec:
             - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
           ports:
             - containerPort: 9091
+      nodeSelector:
+        cloud.google.com/gke-nodepool: compute-pool-3
 
 ---
 apiVersion: apps/v1
@@ -199,6 +207,8 @@ spec:
             - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
           ports:
             - containerPort: 9091
+      nodeSelector:
+        cloud.google.com/gke-nodepool: compute-pool-4
 
 ---
 apiVersion: apps/v1
@@ -232,6 +242,8 @@ spec:
             - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
           ports:
             - containerPort: 9091
+      nodeSelector:
+        cloud.google.com/gke-nodepool: compute-pool-5
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -264,6 +276,8 @@ spec:
             - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
           ports:
             - containerPort: 9091
+      nodeSelector:
+        cloud.google.com/gke-nodepool: compute-pool-6
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -296,6 +310,9 @@ spec:
             - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
           ports:
             - containerPort: 9091
+      nodeSelector:
+        cloud.google.com/gke-nodepool: compute-pool-7
+
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -328,6 +345,9 @@ spec:
             - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
           ports:
             - containerPort: 9091
+      nodeSelector:
+        cloud.google.com/gke-nodepool: compute-pool-8
+
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -360,6 +380,8 @@ spec:
             - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
           ports:
             - containerPort: 9091
+      nodeSelector:
+        cloud.google.com/gke-nodepool: compute-pool-9
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -392,6 +414,8 @@ spec:
             - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
           ports:
             - containerPort: 9091
+      nodeSelector:
+        cloud.google.com/gke-nodepool: compute-pool-10
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -424,6 +448,8 @@ spec:
             - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
           ports:
             - containerPort: 9091
+      nodeSelector:
+        cloud.google.com/gke-nodepool: compute-pool-11
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -456,6 +482,8 @@ spec:
             - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
           ports:
             - containerPort: 9091
+      nodeSelector:
+        cloud.google.com/gke-nodepool: compute-pool-12
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -488,6 +516,8 @@ spec:
             - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
           ports:
             - containerPort: 9091
+      nodeSelector:
+        cloud.google.com/gke-nodepool: compute-pool-13
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -520,6 +550,9 @@ spec:
             - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
           ports:
             - containerPort: 9091
+      nodeSelector:
+        cloud.google.com/gke-nodepool: compute-pool-14
+
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -552,6 +585,8 @@ spec:
             - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
           ports:
             - containerPort: 9091
+      nodeSelector:
+        cloud.google.com/gke-nodepool: compute-pool-15
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -581,7 +616,8 @@ spec:
             - {name: ROLE, value: producer-shell}
           ports:
             - containerPort: 9091
-
+      nodeSelector:
+        cloud.google.com/gke-nodepool: compute-pool-0
 
 ### Services ###
 

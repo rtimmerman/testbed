@@ -299,6 +299,8 @@ spec:
         - name: kickstart-dir
           configMap:
             name: startup-config
+      nodeSelector:
+        cloud.google.com/gke-nodepool: default-pool
 ---
 kind: Service
 apiVersion: v1

@@ -33,6 +33,8 @@ spec:
           configMap:
             name: rs-config
             defaultMode: 0777
+      nodeSelector:
+        cloud.google.com/gke-nodepool: default-pool
 ---
 kind: Service
 apiVersion: v1
@@ -93,6 +95,8 @@ spec:
             name: rs-config
             defaultMode: 0777
           # - '/var/lib/mongod'
+      nodeSelector:
+        cloud.google.com/gke-nodepool: default-pool
 ---
 kind: Service
 apiVersion: v1
@@ -156,6 +160,8 @@ spec:
           configMap:
             name: rs-config
             defaultMode: 0777
+      nodeSelector:
+        cloud.google.com/gke-nodepool: default-pool
 ---
 kind: Service
 apiVersion: v1
@@ -751,3 +757,5 @@ spec:
     #   persistentVolumeClaim:
     #     claimName: scripts-dir-claim
   restartPolicy: Never
+  nodeSelector:
+    cloud.google.com/gke-nodepool: default-pool

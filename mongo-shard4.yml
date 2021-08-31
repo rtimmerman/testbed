@@ -810,6 +810,8 @@ spec:
                 mountPath: /kickstart/
               - name: filestore
                 mountPath: /filestore/
+        nodeSelector:
+          cloud.google.com/gke-nodepool: default-pool
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -854,6 +856,8 @@ spec:
         - name: filestore
           persistentVolumeClaim:
             claimName: filestore
+      nodeSelector:
+        cloud.google.com/gke-nodepool: default-pool
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -898,6 +902,8 @@ spec:
         - name: filestore
           persistentVolumeClaim:
             claimName: filestore
+      nodeSelector:
+        cloud.google.com/gke-nodepool: default-pool
 ---
 apiVersion: v1
 kind: Service
@@ -974,3 +980,5 @@ spec:
       configMap:
         name: add-shard-duncan
   restartPolicy: Never
+  nodeSelector:
+    cloud.google.com/gke-nodepool: default-pool

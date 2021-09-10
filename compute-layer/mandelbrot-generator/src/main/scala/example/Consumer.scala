@@ -1,22 +1,19 @@
 package example
-import java.util.Properties
-import org.apache.kafka.clients.consumer._
-import spire.math._
-import spire.implicits._
-import spire.algebra._
-import org.mongodb.scala._
-import org.bson.BsonValue
 import com.mongodb
-import mongodb.client.result._
-import javax.net.ssl.SSLContext
-import java.security.KeyFactory
-import javax.net.ssl.KeyManager
-import javax.net.ssl.KeyManagerFactory
-import java.security.KeyStore
-import javax.net.ssl.TrustManagerFactory
-import java.security.SecureRandom
-import org.slf4j.Logger
+import org.apache.kafka.clients.consumer._
+import org.mongodb.scala._
+import org.mongodb.scala.model.{UpdateOneModel, UpdateOptions}
 import org.slf4j.LoggerFactory
+import spire.implicits._
+import spire.math._
+
+import java.security.{KeyStore, SecureRandom}
+import java.util.Properties
+import javax.net.ssl.{KeyManagerFactory, SSLContext, TrustManagerFactory}
+import scala.collection.mutable
+import scala.collection.mutable.ListBuffer
+import scala.concurrent.Await
+import scala.concurrent.duration.Duration
 
 object Consumer {
   val logger = LoggerFactory.getLogger(Consumer.getClass.getName)
@@ -71,7 +68,11 @@ object Consumer {
 
     while (true) {
       val work = consumer.poll(1000)
+
       if (work != null) {
+        val writes = ListBuffer[UpdateOneModel[Nothing]]()
+        val insert = mutable.Queue[UpdateOneModel[Nothing]]()
+
         work.forEach(record => {
           println(record.key() + " = " + record.value())
           ("""([0-9.-]+)\s*\+\s*([0-9.-]+)i;([0-9]+)""".r)
@@ -85,21 +86,44 @@ object Consumer {
                 z,
                 z,
                 m.group(3).toInt
-              ) /* TODO: iterations should also come from the workflow */
-
-              val outcome = mongoDbClient
-                .getDatabase("mandelbrot")
-                .getCollection("run0")
-                .insertOne(
-                  Document("r" -> m.group(1), "i" -> m.group(2), "value" -> res)
-                )
-
-              outcome.subscribe(
-                (e: Throwable) => {
-                  throw e
-                },
-                () => {}
               )
+
+              // val outcome = run0db.insertOne(
+              //   Document("r" -> m.group(1), "i" -> m.group(2), "value" -> res)
+              //
+              Await.result(
+                run0db
+                  .updateOne(
+                    Document("r" -> m.group(1), "i" -> m.group(2)),
+                    Document(
+                      "$set" -> Document(
+                        "r" -> m.group(1),
+                        "i" -> m.group(2),
+                        "value" -> res
+                      )
+                    ),
+                    UpdateOptions().upsert(true)
+                  )
+                  .toFuture,
+                Duration.Inf
+              )
+//
+//              val outcome = run0db.updateOne(
+//                Document("r" -> m.group(1), "i" -> m.group(2)),
+//                Updates.combine(
+//                  Updates.set("r", m.group(1)),
+//                  Updates.set("i", m.group(2)),
+//                  Updates.set("value", res)
+//                ),
+//                UpdateOptions().upsert(true)
+//              )
+
+//              outcome.subscribe(
+//                (e: Throwable) => {
+//                  throw e
+//                },
+//                () => {}
+//              )
 
               /*if (m.group(1).toDouble >= 2.0)
                 println(if (res > -1) "." else " ")

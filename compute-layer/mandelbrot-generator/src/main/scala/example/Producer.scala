@@ -24,24 +24,27 @@ object Producer {
     var lot = 0
 
     kafkaProducer.beginTransaction()
-    for (x <- 0 to 401 by 26) {
-      print(s"Sending lot ${lot} ")
-      val limit = if (x + 26 > 401) 400 else x + 26
-      val entries = plane(x to limit, x to limit).toArray
+    for (y <- 0 to 401 by 26) {
       val topic = s"${topicPrefix}-${lot}"
+      val ylimit = if (y + 26 > 401) 400 else y + 26
+      print(s"Sending lot ${lot} ")
 
-      println(s"(${entries.length} entries to ${topic})")
-      entries.foreach(value => {
-        //println(value.toString())
-        kafkaProducer.send(
-          new ProducerRecord[String, String](
-            topic,
-            "coordinate",
-            value.toString + ";" + iterations
+      for (x <- 0 to 401 by 26) {
+        val xlimit = if (x + 26 > 401) 400 else x + 26
+        val entries = plane(x to xlimit, y to ylimit).toArray
+
+        println(s"(${entries.length} entries to ${topic})")
+        entries.foreach(value => {
+          //println(value.toString())
+          kafkaProducer.send(
+            new ProducerRecord[String, String](
+              topic,
+              "coordinate",
+              value.toString + ";" + iterations
+            )
           )
-        )
-      })
-
+        })
+      }
       lot += 1
     }
 

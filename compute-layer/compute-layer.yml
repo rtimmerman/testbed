@@ -43,19 +43,22 @@ kind: Deployment
 metadata:
   name: consumer-0
   labels:
-    purpose: consumer-0
+    purpose: consumer
+    role: consumer-0
   namespace: dev
 spec:
   selector:
     matchLabels:
-      purpose: consumer-0
+      purpose: consumer
+      role: consumer-0
   replicas: 1
   strategy:
     type: RollingUpdate
   template:
     metadata:
       labels:
-        purpose: consumer-0
+        purpose: consumer
+        role: consumer-0
     spec:
       terminationGracePeriodSeconds: 5
       containers:
@@ -78,19 +81,22 @@ kind: Deployment
 metadata:
   name: consumer-1
   labels:
-    purpose: consumer-1
+    purpose: consumer
+    role: consumer-1
   namespace: dev
 spec:
   selector:
     matchLabels:
-      purpose: consumer-1
+      purpose: consumer
+      role: consumer-1
   replicas: 1
   strategy:
     type: RollingUpdate
   template:
     metadata:
       labels:
-        purpose: consumer-1
+        purpose: consumer
+        role: consumer-1
     spec:
       terminationGracePeriodSeconds: 5
       containers:
@@ -112,19 +118,22 @@ kind: Deployment
 metadata:
   name: consumer-2
   labels:
-    purpose: consumer-2
+    purpose: consumer
+    role: consumer-2
   namespace: dev
 spec:
   selector:
     matchLabels:
-      purpose: consumer-2
+      purpose: consumer
+      role: consumer-2
   replicas: 1
   strategy:
     type: RollingUpdate
   template:
     metadata:
       labels:
-        purpose: consumer-2
+        purpose: consumer
+        role: consumer-2
     spec:
       terminationGracePeriodSeconds: 5
       containers:
@@ -146,19 +155,22 @@ kind: Deployment
 metadata:
   name: consumer-3
   labels:
-    purpose: consumer-3
+    purpose: consumer
+    role: consumer-3
   namespace: dev
 spec:
   selector:
     matchLabels:
-      purpose: consumer-3
+      purpose: consumer
+      role: consumer-3
   replicas: 1
   strategy:
     type: RollingUpdate
   template:
     metadata:
       labels:
-        purpose: consumer-3
+        purpose: consumer
+        role: consumer-3
     spec:
       terminationGracePeriodSeconds: 5
       containers:
@@ -181,19 +193,22 @@ kind: Deployment
 metadata:
   name: consumer-4
   labels:
-    purpose: consumer-4
+    purpose: consumer
+    role: consumer-4
   namespace: dev
 spec:
   selector:
     matchLabels:
-      purpose: consumer-4
+      purpose: consumer
+      role: consumer-4
   replicas: 1
   strategy:
     type: RollingUpdate
   template:
     metadata:
       labels:
-        purpose: consumer-4
+        purpose: consumer
+        role: consumer-4
     spec:
       terminationGracePeriodSeconds: 5
       containers:
@@ -216,19 +231,22 @@ kind: Deployment
 metadata:
   name: consumer-5
   labels:
-    purpose: consumer-5
+    purpose: consumer
+    role: consumer-5
   namespace: dev
 spec:
   selector:
     matchLabels:
-      purpose: consumer-5
+      purpose: consumer
+      role: consumer-5
   replicas: 1
   strategy:
     type: RollingUpdate
   template:
     metadata:
       labels:
-        purpose: consumer-5
+        purpose: consumer
+        role: consumer-5
     spec:
       terminationGracePeriodSeconds: 5
       containers:
@@ -250,19 +268,22 @@ kind: Deployment
 metadata:
   name: consumer-6
   labels:
-    purpose: consumer-6
+    purpose: consumer
+    role: consumer-6
   namespace: dev
 spec:
   selector:
     matchLabels:
-      purpose: consumer-6
+      purpose: consumer
+      role: consumer-6
   replicas: 1
   strategy:
     type: RollingUpdate
   template:
     metadata:
       labels:
-        purpose: consumer-6
+        purpose: consumer
+        role: consumer-6
     spec:
       terminationGracePeriodSeconds: 6
       containers:
@@ -284,19 +305,22 @@ kind: Deployment
 metadata:
   name: consumer-7
   labels:
-    purpose: consumer-7
+    purpose: consumer
+    role: consumer-7
   namespace: dev
 spec:
   selector:
     matchLabels:
-      purpose: consumer-7
+      purpose: consumer
+      role: consumer-7
   replicas: 1
   strategy:
     type: RollingUpdate
   template:
     metadata:
       labels:
-        purpose: consumer-7
+        purpose: consumer
+        role: consumer-7
     spec:
       terminationGracePeriodSeconds: 5
       containers:
@@ -319,19 +343,22 @@ kind: Deployment
 metadata:
   name: consumer-8
   labels:
-    purpose: consumer-8
+    purpose: consumer
+    role: consumer-8
   namespace: dev
 spec:
   selector:
     matchLabels:
-      purpose: consumer-8
+      purpose: consumer
+      role: consumer-8
   replicas: 1
   strategy:
     type: RollingUpdate
   template:
     metadata:
       labels:
-        purpose: consumer-8
+        purpose: consumer
+        role: consumer-8
     spec:
       terminationGracePeriodSeconds: 5
       containers:
@@ -354,19 +381,22 @@ kind: Deployment
 metadata:
   name: consumer-9
   labels:
-    purpose: consumer-9
+    purpose: consumer
+    role: consumer-9
   namespace: dev
 spec:
   selector:
     matchLabels:
-      purpose: consumer-9
+      purpose: consumer
+      role: consumer-9
   replicas: 1
   strategy:
     type: RollingUpdate
   template:
     metadata:
       labels:
-        purpose: consumer-9
+        purpose: consumer
+        role: consumer-9
     spec:
       terminationGracePeriodSeconds: 5
       containers:
@@ -375,7 +405,7 @@ spec:
           name: consumer-9-container
           env:
             - {name: ROLE, value: consumer}
-            - {name: TOPIC, value:  test-0}
+            - {name: TOPIC, value:  test-9}
             - {name: TRUSTSTORE_PATH, value: /root/mandelbrot-generator/test.ts}
             - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
           ports:
@@ -388,19 +418,22 @@ kind: Deployment
 metadata:
   name: consumer-10
   labels:
-    purpose: consumer-10
+    purpose: consumer
+    role: consumer-10
   namespace: dev
 spec:
   selector:
     matchLabels:
-      purpose: consumer-10
+      purpose: consumer
+      role: consumer-10
   replicas: 1
   strategy:
     type: RollingUpdate
   template:
     metadata:
       labels:
-        purpose: consumer-10
+        purpose: consumer
+        role: consumer-10
     spec:
       terminationGracePeriodSeconds: 5
       containers:
@@ -422,19 +455,22 @@ kind: Deployment
 metadata:
   name: consumer-11
   labels:
-    purpose: consumer-11
+    purpose: consumer
+    role: consumer-11
   namespace: dev
 spec:
   selector:
     matchLabels:
-      purpose: consumer-11
+      purpose: consumer
+      role: consumer-11
   replicas: 1
   strategy:
     type: RollingUpdate
   template:
     metadata:
       labels:
-        purpose: consumer-11
+        purpose: consumer
+        role: consumer-11
     spec:
       terminationGracePeriodSeconds: 5
       containers:
@@ -456,19 +492,22 @@ kind: Deployment
 metadata:
   name: consumer-12
   labels:
-    purpose: consumer-12
+    purpose: consumer
+    role: consumer-12
   namespace: dev
 spec:
   selector:
     matchLabels:
-      purpose: consumer-12
+      purpose: consumer
+      role: consumer-12
   replicas: 1
   strategy:
     type: RollingUpdate
   template:
     metadata:
       labels:
-        purpose: consumer-12
+        purpose: consumer
+        role: consumer-12
     spec:
       terminationGracePeriodSeconds: 5
       containers:
@@ -490,19 +529,22 @@ kind: Deployment
 metadata:
   name: consumer-13
   labels:
-    purpose: consumer-13
+    purpose: consumer
+    role: consumer-13
   namespace: dev
 spec:
   selector:
     matchLabels:
-      purpose: consumer-13
+      purpose: consumer
+      role: consumer-13
   replicas: 1
   strategy:
     type: RollingUpdate
   template:
     metadata:
       labels:
-        purpose: consumer-13
+        purpose: consumer
+        role: consumer-13
     spec:
       terminationGracePeriodSeconds: 5
       containers:
@@ -524,19 +566,22 @@ kind: Deployment
 metadata:
   name: consumer-14
   labels:
-    purpose: consumer-14
+    purpose: consumer
+    role: consumer-14
   namespace: dev
 spec:
   selector:
     matchLabels:
-      purpose: consumer-14
+      purpose: consumer
+      role: consumer-14
   replicas: 1
   strategy:
     type: RollingUpdate
   template:
     metadata:
       labels:
-        purpose: consumer-14
+        purpose: consumer
+        role: consumer-14
     spec:
       terminationGracePeriodSeconds: 5
       containers:
@@ -559,19 +604,21 @@ kind: Deployment
 metadata:
   name: consumer-15
   labels:
-    purpose: consumer-15
+    purpose: consumer
+    role: consumer-15
   namespace: dev
 spec:
   selector:
     matchLabels:
-      purpose: consumer-15
+      role: consumer-15
   replicas: 1
   strategy:
     type: RollingUpdate
   template:
     metadata:
       labels:
-        purpose: consumer-15
+        purpose: consumer
+        role: consumer-15
     spec:
       terminationGracePeriodSeconds: 5
       containers:
@@ -642,7 +689,7 @@ metadata:
   namespace: dev
 spec:
   selector:
-    purpose: consumer-0
+    role: consumer-0
   ports:
     - port: 9091
       targetPort: 9091
@@ -655,7 +702,7 @@ metadata:
   namespace: dev
 spec:
   selector:
-    purpose: consumer-0
+    role: consumer-1
   ports:
     - port: 9091
       targetPort: 9091
@@ -668,7 +715,7 @@ metadata:
   namespace: dev
 spec:
   selector:
-    purpose: consumer-0
+    role: consumer-2
   ports:
     - port: 9091
       targetPort: 9091
@@ -681,7 +728,7 @@ metadata:
   namespace: dev
 spec:
   selector:
-    purpose: consumer-3
+    role: consumer-3
   ports:
     - port: 9091
       targetPort: 9091
@@ -694,7 +741,7 @@ metadata:
   namespace: dev
 spec:
   selector:
-    purpose: consumer-4
+    role: consumer-4
   ports:
     - port: 9091
       targetPort: 9091
@@ -707,7 +754,7 @@ metadata:
   namespace: dev
 spec:
   selector:
-    purpose: consumer-5
+    role: consumer-5
   ports:
     - port: 9091
       targetPort: 9091
@@ -720,7 +767,7 @@ metadata:
   namespace: dev
 spec:
   selector:
-    purpose: consumer-6
+    role: consumer-6
   ports:
     - port: 9091
       targetPort: 9091
@@ -733,7 +780,7 @@ metadata:
   namespace: dev
 spec:
   selector:
-    purpose: consumer-7
+    role: consumer-7
   ports:
     - port: 9091
       targetPort: 9091
@@ -746,7 +793,7 @@ metadata:
   namespace: dev
 spec:
   selector:
-    purpose: consumer-8
+    role: consumer-8
   ports:
     - port: 9091
       targetPort: 9091
@@ -759,7 +806,7 @@ metadata:
   namespace: dev
 spec:
   selector:
-    purpose: consumer-9
+    role: consumer-9
   ports:
     - port: 9091
       targetPort: 9091
@@ -772,7 +819,7 @@ metadata:
   namespace: dev
 spec:
   selector:
-    purpose: consumer-10
+    role: consumer-10
   ports:
     - port: 9091
       targetPort: 9091
@@ -785,7 +832,7 @@ metadata:
   namespace: dev
 spec:
   selector:
-    purpose: consumer-11
+    role: consumer-11
   ports:
     - port: 9091
       targetPort: 9091
@@ -798,7 +845,7 @@ metadata:
   namespace: dev
 spec:
   selector:
-    purpose: consumer-12
+    role: consumer-12
   ports:
     - port: 9091
       targetPort: 9091
@@ -811,7 +858,7 @@ metadata:
   namespace: dev
 spec:
   selector:
-    purpose: consumer-13
+    role: consumer-13
   ports:
     - port: 9091
       targetPort: 9091
@@ -824,7 +871,7 @@ metadata:
   namespace: dev
 spec:
   selector:
-    purpose: consumer-14
+    role: consumer-14
   ports:
     - port: 9091
       targetPort: 9091
@@ -837,7 +884,7 @@ metadata:
   namespace: dev
 spec:
   selector:
-    purpose: consumer-15
+    role: consumer-15
   ports:
     - port: 9091
       targetPort: 9091

@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/mandelbrot-generator.iml" filepath="$PROJECT_DIR$/mandelbrot-generator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mandelbrot-generator.iml" filepath="$PROJECT_DIR$/.idea/modules/mandelbrot-generator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mandelbrot-generator-build.iml" filepath="$PROJECT_DIR$/.idea/modules/mandelbrot-generator-build.iml" />
     </modules>
   </component>
 </project>

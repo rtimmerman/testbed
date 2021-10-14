@@ -15,6 +15,10 @@ import scala.collection.mutable.ListBuffer
 import scala.concurrent.Await
 import scala.concurrent.duration.Duration
 
+import java.time.OffsetDateTime
+import java.time.ZoneOffset
+import java.time.format.DateTimeFormatter
+
 object Consumer {
   val logger = LoggerFactory.getLogger(Consumer.getClass.getName)
 
@@ -99,7 +103,9 @@ object Consumer {
                       "$set" -> Document(
                         "r" -> m.group(1),
                         "i" -> m.group(2),
-                        "value" -> res
+                        "value" -> res,
+                        "fromTopic" -> topic,
+                        "modifiedAt" -> OffsetDateTime.now(ZoneOffset.UTC).format(DateTimeFormatter.ISO_DATE_TIME)
                       )
                     ),
                     UpdateOptions().upsert(true)

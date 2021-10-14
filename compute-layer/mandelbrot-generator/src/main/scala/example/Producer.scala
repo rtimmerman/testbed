@@ -21,31 +21,31 @@ object Producer {
 
     val plane = breeze.linalg.DenseMatrix.create(401, 401, data.toArray)
 
-    var lot = 0
+    var lot: Int = 0
 
     kafkaProducer.beginTransaction()
-    for (y <- 0 to 401 by 26) {
+    for (x <- 0 to 399 by 100; y <- 0 to 399 by 100) {
       val topic = s"${topicPrefix}-${lot}"
-      val ylimit = if (y + 26 > 401) 400 else y + 26
+      val ylimit = if (y + 100 >= 400) 400 else y + 100
       print(s"Sending lot ${lot} ")
 
-      for (x <- 0 to 401 by 26) {
-        val xlimit = if (x + 26 > 401) 400 else x + 26
-        val entries = plane(x to xlimit, y to ylimit).toArray
+      val xlimit = if (x + 100 >= 400) 400 else x + 100
+      val entries = plane(x to xlimit, y to ylimit).toArray
 
-        println(s"(${entries.length} entries to ${topic})")
-        entries.foreach(value => {
-          //println(value.toString())
-          kafkaProducer.send(
-            new ProducerRecord[String, String](
-              topic,
-              "coordinate",
-              value.toString + ";" + iterations
-            )
+      println(s"(${entries.length} entries to ${topic})")
+      entries.foreach(value => {
+        //println(value.toString())
+        kafkaProducer.send(
+          new ProducerRecord[String, String](
+            topic,
+            "coordinate",
+            value.toString + ";" + iterations
           )
-        })
-      }
-      lot += 1
+        )
+      })
+
+      lot = if (((x + y) % 100) == 0) lot + 1 else lot
+
     }
 
     kafkaProducer.close()

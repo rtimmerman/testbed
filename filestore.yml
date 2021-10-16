@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: nfs-server
-          image: gcr.io/google_containers/volume-nfs:0.8
+          image: itsthenetwork/nfs-server-alpine
           ports:
             - name: nfs
               containerPort: 2049
@@ -28,11 +28,13 @@ spec:
           volumeMounts:
             - mountPath: /exports
               name: export-volume
+          env:
+                  - {name: SHARED_DIRECTORY, value: /exports}
       volumes:
         - name: export-volume
-          gcePersistentDisk:
-            pdName: datastore
-            fsType: ext4
+          hostPath:
+            path: /home/roderick/experiment-data
+            type: Directory
 ---
 apiVersion: v1
 kind: Service

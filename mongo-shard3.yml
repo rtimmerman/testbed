@@ -791,8 +791,9 @@ spec:
               name: kickstart-calvin
               defaultMode: 0777
           - name: filestore
-            persistentVolumeClaim:
-              claimName: filestore 
+            hostPath:
+              path: /home/roderick/experiment-data
+              type: Directory
         containers:
           - image: mongo
             name: mongo-db-container
@@ -810,8 +811,6 @@ spec:
                 mountPath: /kickstart/
               - name: filestore
                 mountPath: /filestore/
-        nodeSelector:
-          cloud.google.com/gke-nodepool: default-pool
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -847,7 +846,9 @@ spec:
             - name: kickstart-calvin
               mountPath: /kickstart/
             - name: filestore
-              mountPath: /filestore/
+              hostPath:
+                path: /home/roderick/experiment-data
+                type: Directory
       volumes:
         - name: kickstart-calvin
           configMap:
@@ -856,8 +857,6 @@ spec:
         - name: filestore
           persistentVolumeClaim:
             claimName: filestore
-      nodeSelector:
-        cloud.google.com/gke-nodepool: default-pool
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -893,7 +892,9 @@ spec:
             - name: kickstart-calvin
               mountPath: /kickstart/
             - name: filestore
-              mountPath: /filestore/
+              hostPath:
+                path: /home/roderick/experiment-data
+                type: Directory
       volumes:
         - name: kickstart-calvin
           configMap:
@@ -902,8 +903,6 @@ spec:
         - name: filestore
           persistentVolumeClaim:
             claimName: filestore
-      nodeSelector:
-        cloud.google.com/gke-nodepool: default-pool
 ---
 apiVersion: v1
 kind: Service
@@ -980,5 +979,3 @@ spec:
       configMap:
         name: add-shard-calvin
   restartPolicy: Never
-  nodeSelector:
-    cloud.google.com/gke-nodepool: default-pool

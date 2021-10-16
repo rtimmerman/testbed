@@ -791,8 +791,9 @@ spec:
               name: kickstart-duncan
               defaultMode: 0777
           - name: filestore
-            persistentVolumeClaim:
-              claimName: filestore 
+            hostPath:
+              path: /home/roderick/experiment-data
+              type: Directory
         containers:
           - image: mongo
             name: mongo-db-container
@@ -810,8 +811,6 @@ spec:
                 mountPath: /kickstart/
               - name: filestore
                 mountPath: /filestore/
-        nodeSelector:
-          cloud.google.com/gke-nodepool: default-pool
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -847,7 +846,9 @@ spec:
             - name: kickstart-duncan
               mountPath: /kickstart/
             - name: filestore
-              mountPath: /filestore/
+              hostPath:
+                path: /home/roderick/experiment-data
+                type: Directory
       volumes:
         - name: kickstart-duncan
           configMap:
@@ -856,8 +857,6 @@ spec:
         - name: filestore
           persistentVolumeClaim:
             claimName: filestore
-      nodeSelector:
-        cloud.google.com/gke-nodepool: default-pool
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -900,10 +899,9 @@ spec:
             name: kickstart-duncan
             defaultMode: 0777
         - name: filestore
-          persistentVolumeClaim:
-            claimName: filestore
-      nodeSelector:
-        cloud.google.com/gke-nodepool: default-pool
+          hostPath:
+            path: /home/roderick/experiment-data
+            type: Directory
 ---
 apiVersion: v1
 kind: Service
@@ -980,5 +978,3 @@ spec:
       configMap:
         name: add-shard-duncan
   restartPolicy: Never
-  nodeSelector:
-    cloud.google.com/gke-nodepool: default-pool

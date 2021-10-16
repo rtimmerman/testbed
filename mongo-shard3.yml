@@ -846,17 +846,16 @@ spec:
             - name: kickstart-calvin
               mountPath: /kickstart/
             - name: filestore
-              hostPath:
-                path: /home/roderick/experiment-data
-                type: Directory
+              mountPath: /filestore/
       volumes:
         - name: kickstart-calvin
           configMap:
             name: kickstart-calvin
             defaultMode: 0777
         - name: filestore
-          persistentVolumeClaim:
-            claimName: filestore
+          hostPath:
+            path: /home/roderick/experiment-data
+            type: Directory
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -892,17 +891,17 @@ spec:
             - name: kickstart-calvin
               mountPath: /kickstart/
             - name: filestore
-              hostPath:
-                path: /home/roderick/experiment-data
-                type: Directory
+              mountPath: /filestore/
       volumes:
         - name: kickstart-calvin
           configMap:
             name: kickstart-calvin
             defaultMode: 0777
         - name: filestore
-          persistentVolumeClaim:
-            claimName: filestore
+          hostPath:
+            path: /home/roderick/experiment-data
+            type: Directory
+
 ---
 apiVersion: v1
 kind: Service

@@ -236,7 +236,7 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
         - image: operator:1.0
-          imagePullPolicy: Always
+          imagePullPolicy: Never
           name: consumer-5-container
           env:
             - {name: ROLE, value: consumer}

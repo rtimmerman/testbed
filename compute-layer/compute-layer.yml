@@ -61,7 +61,7 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
         - image: operator:1.0
-          imagePullPolicy: Always
+          imagePullPolicy: Never
           name: consumer-0-container
           env:
             - {name: ROLE, value: consumer}
@@ -96,7 +96,7 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
         - image: operator:1.0
-          imagePullPolicy: Always
+          imagePullPolicy: Never
           name: consumer-1-container
           env:
             - {name: ROLE, value: consumer}
@@ -131,7 +131,7 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
         - image: operator:1.0
-          imagePullPolicy: Always
+          imagePullPolicy: Never
           name: consumer-2-container
           env:
             - {name: ROLE, value: consumer}
@@ -166,7 +166,7 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
         - image: operator:1.0
-          imagePullPolicy: Always
+          imagePullPolicy: Never
           name: consumer-3-container
           env:
             - {name: ROLE, value: consumer}
@@ -201,7 +201,7 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
         - image: operator:1.0
-          imagePullPolicy: Always
+          imagePullPolicy: Never
           name: consumer-4-container
           env:
             - {name: ROLE, value: consumer}
@@ -271,7 +271,7 @@ spec:
       terminationGracePeriodSeconds: 6
       containers:
         - image: operator:1.0
-          imagePullPolicy: Always
+          imagePullPolicy: Never
           name: consumer-6-container
           env:
             - {name: ROLE, value: consumer}
@@ -306,7 +306,7 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
         - image: operator:1.0
-          imagePullPolicy: Always
+          imagePullPolicy: Never
           name: consumer-7-container
           env:
             - {name: ROLE, value: consumer}
@@ -341,7 +341,7 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
         - image: operator:1.0
-          imagePullPolicy: Always
+          imagePullPolicy: Never
           name: consumer-8-container
           env:
             - {name: ROLE, value: consumer}
@@ -376,7 +376,7 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
         - image: operator:1.0
-          imagePullPolicy: Always
+          imagePullPolicy: Never
           name: consumer-9-container
           env:
             - {name: ROLE, value: consumer}
@@ -411,7 +411,7 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
         - image: operator:1.0
-          imagePullPolicy: Always
+          imagePullPolicy: Never
           name: consumer-10-container
           env:
             - {name: ROLE, value: consumer}
@@ -446,7 +446,7 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
         - image: operator:1.0
-          imagePullPolicy: Always
+          imagePullPolicy: Never
           name: consumer-11-container
           env:
             - {name: ROLE, value: consumer}
@@ -481,7 +481,7 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
         - image: operator:1.0
-          imagePullPolicy: Always
+          imagePullPolicy: Never
           name: consumer-12-container
           env:
             - {name: ROLE, value: consumer}
@@ -516,7 +516,7 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
         - image: operator:1.0
-          imagePullPolicy: Always
+          imagePullPolicy: Never
           name: consumer-13-container
           env:
             - {name: ROLE, value: consumer}
@@ -551,7 +551,7 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
         - image: operator:1.0
-          imagePullPolicy: Always
+          imagePullPolicy: Never
           name: consumer-14-container
           env:
             - {name: ROLE, value: consumer}
@@ -585,7 +585,7 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
         - image: operator:1.0
-          imagePullPolicy: Always
+          imagePullPolicy: Never
           name: consumer-15-container
           env:
             - {name: ROLE, value: consumer}
@@ -617,7 +617,7 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
         - image: operator:1.0
-          imagePullPolicy: Always
+          imagePullPolicy: Never
           name: producer-shell
           env:
             - {name: ROLE, value: producer-shell}

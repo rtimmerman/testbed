@@ -811,6 +811,8 @@ spec:
                 mountPath: /kickstart/
               - name: filestore
                 mountPath: /filestore/
+      nodeSelector:
+        kubernetes.io/hostname: mongo-shard-3
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -856,6 +858,8 @@ spec:
           hostPath:
             path: /home/roderick/experiment-data
             type: Directory
+      nodeSelector:
+        kubernetes.io/hostname: mongo-shard-3
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -901,6 +905,8 @@ spec:
           hostPath:
             path: /home/roderick/experiment-data
             type: Directory
+      nodeSelector:
+        kubernetes.io/hostname: mongo-shard-3
 
 ---
 apiVersion: v1
@@ -978,3 +984,5 @@ spec:
       configMap:
         name: add-shard-calvin
   restartPolicy: Never
+  nodeSelector:
+    kubernetes.io/hostname: mongo-shard-3

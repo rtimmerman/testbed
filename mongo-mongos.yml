@@ -299,8 +299,9 @@ spec:
         - name: kickstart-dir
           configMap:
             name: startup-config
-            #nodeSelector:
-            #cloud.google.com/gke-nodepool: default-pool
+      nodeSelector:
+        kubernetes.io/hostname: rrt-general-services
+
 ---
 kind: Service
 apiVersion: v1

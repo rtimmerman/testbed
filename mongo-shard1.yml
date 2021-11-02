@@ -814,8 +814,9 @@ spec:
                 mountPath: /kickstart/
               - name: filestore
                 mountPath: /filestore/
-                #nodeSelector:
-                #cloud.google.com/gke-nodepool: default-pool
+      nodeSelector:
+        kubernetes.io/hostname: mongo-shard-1
+
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -860,9 +861,8 @@ spec:
         - name: filestore
           hostPath:
            path: /home/roderick/experiment-data
-           type: Directory
-            #nodeSelector:
-            #cloud.google.com/gke-nodepool: default-pool
+      nodeSelector:
+        kubernetes.io/hostname: mongo-shard-1
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -908,8 +908,8 @@ spec:
           hostPath:
             path: /home/roderick/experiment-data
             type: Directory
-            #nodeSelector:
-            #cloud.google.com/gke-nodepool: default-pool
+      nodeSelector:
+        kubernetes.io/hostname: mongo-shard-1
 ---
 apiVersion: v1
 kind: Service
@@ -986,6 +986,6 @@ spec:
       configMap:
         name: add-shard-arnold
   restartPolicy: Never
-  #  nodeSelector:
-  # cloud.google.com/gke-nodepool: default-pool
+  nodeSelector:
+    kubernetes.io/hostname: mongo-shard-1
 

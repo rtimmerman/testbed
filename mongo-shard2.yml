@@ -810,7 +810,9 @@ spec:
               - name: kickstart-bairstow
                 mountPath: /kickstart/
               - name: filestore
-                mountPath: /filestore/
+               mountPath: /filestore/
+        nodeSelector:
+          kubernetes.io/hostname: mongo-shard-2
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -856,7 +858,8 @@ spec:
           hostPath:
             path: /home/roderick/experiment-data
             type: Directory
-
+      nodeSelector:
+        kubernetes.io/hostname: mongo-shard-2
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -902,7 +905,8 @@ spec:
           hostPath:
             path: /home/roderick/experiment-data
             type: Directory
-
+      nodeSelector:
+        kubernetes.io/hostname: mongo-shard-2
 ---
 apiVersion: v1
 kind: Service
@@ -979,3 +983,5 @@ spec:
       configMap:
         name: add-shard-bairstow
   restartPolicy: Never
+  nodeSelector:
+    kubernetes.io/hostname: mongo-shard-2

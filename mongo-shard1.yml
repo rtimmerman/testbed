@@ -814,8 +814,8 @@ spec:
                 mountPath: /kickstart/
               - name: filestore
                 mountPath: /filestore/
-      nodeSelector:
-        kubernetes.io/hostname: mongo-shard-1
+        nodeSelector:
+          kubernetes.io/hostname: mongo-shard-1
 
 ---
 apiVersion: apps/v1

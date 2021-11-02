@@ -905,8 +905,8 @@ spec:
           hostPath:
             path: /home/roderick/experiment-data
             type: Directory
-        nodeSelector:
-          kubernetes.io/hostname: mongo-shard-4
+      nodeSelector:
+        kubernetes.io/hostname: mongo-shard-4
 ---
 apiVersion: v1
 kind: Service

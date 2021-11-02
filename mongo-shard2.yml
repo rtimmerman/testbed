@@ -810,7 +810,7 @@ spec:
               - name: kickstart-bairstow
                 mountPath: /kickstart/
               - name: filestore
-               mountPath: /filestore/
+                mountPath: /filestore/
         nodeSelector:
           kubernetes.io/hostname: mongo-shard-2
 ---

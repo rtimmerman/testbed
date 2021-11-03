@@ -35,6 +35,10 @@ spec:
           hostPath:
             path: /home/roderick/experiment-data
             type: Directory
+      nodeSelector:
+        kubernetes.io/hostname: rrt-general-services
+
+
 ---
 apiVersion: v1
 kind: Service

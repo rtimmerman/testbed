@@ -651,6 +651,8 @@ spec:
             - {name: ROLE, value: producer-shell}
           ports:
             - containerPort: 9091
+      nodeSelector:
+        kubernetes.io/hostname: rrt-general-services
 
 ### Services ###
 

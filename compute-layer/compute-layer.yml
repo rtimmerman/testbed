@@ -31,7 +31,6 @@ spec:
             - containerPort: 2181
       nodeSelector:
         kubernetes.io/hostname: rrt-general-services
-
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -104,8 +103,8 @@ spec:
             - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
           ports:
             - containerPort: 9091
-        nodeSelector:
-          kubernetes.io/hostname: compute-node-2
+      nodeSelector:
+        kubernetes.io/hostname: compute-node-2
 ---
 apiVersion: apps/v1
 kind: Deployment

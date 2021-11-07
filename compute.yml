@@ -1,0 +1,23 @@
+---
+apiVersion: autoscaling/v2beta2
+kind: Deployment
+metadata:
+  name: compute-autoscale
+  labels:
+    purpose: compute-autoscale
+  namespace: dev
+spec:
+  selector:
+    matchLabels:
+      purpose: compute-autoscale
+  minReplicas: 5
+  maxReplicas: 10
+metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 60
+status:
+  

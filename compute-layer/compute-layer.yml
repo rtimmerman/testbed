@@ -1,7 +1,7 @@
----
-apiVersion: v1
-kind: Namespace
-metadata:
+#---
+#apiVersion: v1
+#kind: Namespace
+#metadata:
   name: dev
 ### Deployments ###
 ---
@@ -35,6 +35,9 @@ spec:
           ports:
             - containerPort: 9092
             - containerPort: 2181
+      nodeSelector:
+        kubernetes.io/hostname: rrt-general-services
+
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -70,6 +73,8 @@ spec:
             - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
           ports:
             - containerPort: 9091
+      nodeSelector:
+        kubernetes.io/hostname: compute-node-1
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -105,6 +110,8 @@ spec:
             - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
           ports:
             - containerPort: 9091
+        nodeSelector:
+          kubernetes.io/hostname: compute-node-2
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -140,6 +147,8 @@ spec:
             - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
           ports:
             - containerPort: 9091
+      nodeSelector:
+        kubernetes.io/hostname: compute-node-3
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -175,6 +184,8 @@ spec:
             - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
           ports:
             - containerPort: 9091
+      nodeSelector:
+        kubernetes.io/hostname: compute-node-4
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -210,6 +221,8 @@ spec:
             - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
           ports:
             - containerPort: 9091
+      nodeSelector:
+        kubernetes.io/hostname: compute-node-5
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -245,6 +258,8 @@ spec:
             - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
           ports:
             - containerPort: 9091
+      nodeSelector:
+        kubernetes.io/hostname: compute-node-6
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -280,6 +295,8 @@ spec:
             - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
           ports:
             - containerPort: 9091
+      nodeSelector:
+        kubernetes.io/hostname: compute-node-7
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -315,6 +332,8 @@ spec:
             - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
           ports:
             - containerPort: 9091
+      nodeSelector:
+        kubernetes.io/hostname: compute-node-8
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -350,6 +369,8 @@ spec:
             - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
           ports:
             - containerPort: 9091
+      nodeSelector:
+        kubernetes.io/hostname: compute-node-9
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -385,6 +406,8 @@ spec:
             - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
           ports:
             - containerPort: 9091
+      nodeSelector:
+        kubernetes.io/hostname: compute-node-10
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -420,6 +443,8 @@ spec:
             - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
           ports:
             - containerPort: 9091
+      nodeSelector:
+        kubernetes.io/hostname: compute-node-11
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -455,6 +480,8 @@ spec:
             - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
           ports:
             - containerPort: 9091
+      nodeSelector:
+        kubernetes.io/hostname: compute-node-12
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -490,6 +517,8 @@ spec:
             - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
           ports:
             - containerPort: 9091
+      nodeSelector:
+        kubernetes.io/hostname: compute-node-13
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -525,6 +554,8 @@ spec:
             - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
           ports:
             - containerPort: 9091
+      nodeSelector:
+        kubernetes.io/hostname: compute-node-14
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -560,6 +591,8 @@ spec:
             - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
           ports:
             - containerPort: 9091
+      nodeSelector:
+        kubernetes.io/hostname: compute-node-15
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -594,6 +627,8 @@ spec:
             - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
           ports:
             - containerPort: 9091
+      nodeSelector:
+        kubernetes.io/hostname: compute-node-16
 ---
 apiVersion: apps/v1
 kind: Deployment

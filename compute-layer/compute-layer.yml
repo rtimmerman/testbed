@@ -353,8 +353,8 @@ spec:
     spec:
       terminationGracePeriodSeconds: 5
       containers:
-        - image: operator:1.0
-          imagePullPolicy: Never
+        - image: rrt-general-services:32000/operator:1.0
+          imagePullPolicy: IfNotPresent
           name: consumer-8-container
           env:
             - {name: ROLE, value: consumer}

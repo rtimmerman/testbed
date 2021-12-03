@@ -1,28 +1,26 @@
 package example
-import com.mongodb
+
 import org.apache.kafka.clients.consumer._
+import org.apache.kafka.clients.producer.{KafkaProducer, ProducerRecord}
 import org.mongodb.scala._
 import org.mongodb.scala.model.{UpdateOneModel, UpdateOptions}
 import org.slf4j.LoggerFactory
 import spire.implicits._
 import spire.math._
 
-import java.security.{KeyStore, SecureRandom}
-import java.util.Properties
+import java.util.{Date, Properties}
 import javax.net.ssl.{KeyManagerFactory, SSLContext, TrustManagerFactory}
 import scala.collection.mutable
 import scala.collection.mutable.ListBuffer
+import scala.jdk.CollectionConverters._
 import scala.concurrent.Await
 import scala.concurrent.duration.Duration
-
 import java.time.OffsetDateTime
 import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
 
 object Consumer {
   val logger = LoggerFactory.getLogger(Consumer.getClass.getName)
-
-  var mongoDbClient: MongoClient = null
 
   def process(z: Complex[Double], c: Complex[Double], iterations: Int): Int = {
     if (iterations < 1) {
@@ -60,15 +58,27 @@ object Consumer {
       topic
     )
 
+    val dataOutProps = new Properties();
+    dataOutProps.put("bootstrap.servers", "kafka-topic-server:9092")
+    dataOutProps.put(
+      "key.serializer",
+      "org.apache.kafka.common.serialization.StringSerializer"
+    )
+    dataOutProps.put(
+      "value.serializer",
+      "org.apache.kafka.common.serialization.StringSerializer"
+    )
+    dataOutProps.put("transactional.id", "transaction-id-1")
+
     println(s"Consuming from ${topic}")
 
     val consumer = new KafkaConsumer[String, String](props);
+    val resultProducer = new KafkaProducer[String, String](dataOutProps)
+    resultProducer.initTransactions()
     var topics = new java.util.ArrayList[String]()
     topics.add(props.get("topic").asInstanceOf[String])
 
     consumer.subscribe(topics)
-
-    val run0db = mongoDbClient.getDatabase("mandelbrot").getCollection("run0")
 
     while (true) {
       val work = consumer.poll(1000)
@@ -79,7 +89,7 @@ object Consumer {
 
         work.forEach(record => {
           println(record.key() + " = " + record.value())
-          ("""([0-9.-]+)\s*\+\s*([0-9.-]+)i;([0-9]+)""".r)
+          ("""([0-9.-]+)\s*\+\s*([0-9.-]+)i;([0-9]+);(.*?)""".r)
             .findAllIn(record.value)
             .matchData foreach { m =>
             {
@@ -92,50 +102,34 @@ object Consumer {
                 m.group(3).toInt
               )
 
-              // val outcome = run0db.insertOne(
-              //   Document("r" -> m.group(1), "i" -> m.group(2), "value" -> res)
-              //
-              Await.result(
-                run0db
-                  .updateOne(
-                    Document("r" -> m.group(1), "i" -> m.group(2)),
-                    Document(
-                      "$set" -> Document(
-                        "r" -> m.group(1),
-                        "i" -> m.group(2),
-                        "value" -> res,
-                        "fromTopic" -> topic,
-                        "modifiedAt" -> OffsetDateTime.now(ZoneOffset.UTC).format(DateTimeFormatter.ISO_DATE_TIME)
-                      )
-                    ),
-                    UpdateOptions().upsert(true)
-                  )
-                  .toFuture,
-                Duration.Inf
+              resultProducer.beginTransaction()
+
+              val upsertDocument = Document(
+                "$set" -> Document(
+                  "r" -> m.group(1),
+                  "i" -> m.group(2),
+                  "value" -> res,
+                  "fromTopic" -> topic,
+                  "modifiedAt" -> new Date(),
+                  "uuid" -> m.group(4)
+                )
               )
-//
-//              val outcome = run0db.updateOne(
-//                Document("r" -> m.group(1), "i" -> m.group(2)),
-//                Updates.combine(
-//                  Updates.set("r", m.group(1)),
-//                  Updates.set("i", m.group(2)),
-//                  Updates.set("value", res)
-//                ),
-//                UpdateOptions().upsert(true)
-//              )
 
-//              outcome.subscribe(
-//                (e: Throwable) => {
-//                  throw e
-//                },
-//                () => {}
-//              )
+              val r = m.group(1)
+              val i = m.group(2)
+              val uuid = m.group(4)
+              val datestamp =
+                (new Date()).toString() //todo make the datastamp here nicer
 
-              /*if (m.group(1).toDouble >= 2.0)
-                println(if (res > -1) "." else " ")
-              else
-                print(if (res > -1) "." else " ")*/
-              // println(res)
+              resultProducer.send(
+                new ProducerRecord[String, String](
+                  "result",
+                  s"$r:$i",
+                  s"value=$res;uuid=$uuid;topic=$topic;computeDateStamp=$datestamp;"
+                )
+              )
+
+              resultProducer.commitTransaction()
             }
           }
         })
@@ -143,82 +137,4 @@ object Consumer {
     }
   }
 
-  def getMongoDbClient(): MongoClient = {
-    // connect to the mongodb instance
-
-    if (mongoDbClient != null) {
-      return mongoDbClient
-    }
-
-    println("attempting to connect")
-
-    val uri =
-      "mongodb://mongos-1-svc:27017/mandelbrot?authenticationDatabase=$external&authMechanism=MONGODB-X509"
-
-    val cred = MongoCredential.createMongoX509Credential(
-      "CN=localhost,OU=ExperimentClients,O=Roderick,O=Outside,L=Southmister,ST=Essex,C=UK"
-    )
-
-    val keyStore = KeyStore.getInstance(KeyStore.getDefaultType())
-    keyStore.load(
-      new java.io.FileInputStream(
-        sys.env.getOrElse("KEYSTORE_PATH", "missing_keystore")
-        // "/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/test.ks"
-      ),
-      "xiec.gate.r".toCharArray()
-    )
-
-    val trustStore = KeyStore.getInstance(KeyStore.getDefaultType())
-    trustStore.load(
-      new java.io.FileInputStream(
-        sys.env.getOrElse("TRUSTSTORE_PATH", "missing_truststore")
-        // "home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/test.ts"
-      ),
-      "xiec.gate.r".toCharArray()
-    )
-
-    val keyManagerFactory =
-      KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm())
-    keyManagerFactory.init(keyStore, "xiec.gate.r".toCharArray())
-
-    val trustManagerFactory =
-      TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm())
-    trustManagerFactory.init(trustStore)
-
-    val sslContext = SSLContext.getInstance("TLS")
-    sslContext.init(
-      keyManagerFactory.getKeyManagers(),
-      trustManagerFactory.getTrustManagers(),
-      new SecureRandom()
-    )
-
-    val dbSettings = MongoClientSettings
-      .builder()
-      .applyConnectionString(ConnectionString(uri))
-      .applyToSslSettings((builder) => {
-        builder.enabled(true).invalidHostNameAllowed(true).context(sslContext)
-      })
-      .credential(cred)
-      .writeConcern(mongodb.WriteConcern.ACKNOWLEDGED)
-      .build()
-
-    mongoDbClient = MongoClient(dbSettings);
-
-    mongoDbClient
-
-    /*println(db.listDatabaseNames().foreach(println));
-    val dataset = Document("r" -> -2, "i" -> -2, "value" -> 3)
-
-    val outcome =
-      db.getDatabase("mandelbrot").getCollection("run0").insertOne(dataset)
-
-    outcome
-      .collect()
-      .subscribe(
-        (e: Throwable) => { println("error: " + e + ", " + e.getCause()) },
-        () => { println("Complete") }
-      )*/
-  }
-
-  mongoDbClient = getMongoDbClient()
 }

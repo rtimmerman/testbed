@@ -11,6 +11,8 @@ lazy val root = (project in file("."))
     libraryDependencies += scalaTest % Test
   )
 
+resolvers += "confluent" at "https://packages.confluent.io/maven/"
+
 // See https://www.scala-sbt.org/1.x/docs/Using-Sonatype.html for instructions on how to publish to Sonatype.
 
 libraryDependencies += "org.apache.kafka" %% "kafka" % "2.8.0"
@@ -21,6 +23,10 @@ libraryDependencies += "org.mongodb.scala" %% "mongo-scala-driver" % "4.3.1"
 libraryDependencies += "org.slf4j" % "slf4j-api" % "1.7.32"
 // https://mvnrepository.com/artifact/org.slf4j/slf4j-simple
 libraryDependencies += "org.slf4j" % "slf4j-simple" % "1.7.32"
+// https://mvnrepository.com/artifact/org.apache.avro/avro
+libraryDependencies += "org.apache.avro" % "avro" % "1.11.0"
+// https://mvnrepository.com/artifact/io.confluent/kafka-avro-serializer
+libraryDependencies += "io.confluent" % "kafka-avro-serializer" % "7.0.0"
 
 fork := true
 // run / javaOptions += "-Djavax.net.debug=all"

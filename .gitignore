@@ -5,3 +5,11 @@ ycsb*
 *.crt
 *.csr
 *.key
+*.idea
+*.metals
+*.log
+.bloop/
+.bsp/
+*.tgz
+target/
+data/

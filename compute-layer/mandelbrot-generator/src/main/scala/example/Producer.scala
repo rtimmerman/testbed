@@ -1,9 +1,10 @@
 package example
-import java.util.Properties
+import java.util.{Properties, UUID}
 import org.apache.kafka.clients.producer._
-
 import breeze.math._
 import breeze.linalg._
+
+import java.security.MessageDigest;
 
 object Producer {
   def gridWorkStream(
@@ -32,6 +33,8 @@ object Producer {
       val xlimit = if (x + 100 >= 400) 400 else x + 100
       val entries = plane(x to xlimit, y to ylimit).toArray
 
+      val runUUID = UUID.randomUUID()
+
       println(s"(${entries.length} entries to ${topic})")
       entries.foreach(value => {
         //println(value.toString())
@@ -39,7 +42,7 @@ object Producer {
           new ProducerRecord[String, String](
             topic,
             "coordinate",
-            value.toString + ";" + iterations
+            value.toString + ";" + iterations + ";" + runUUID.toString
           )
         )
       })

@@ -14,6 +14,8 @@ object Mandelbrot extends App with Greeting {
     Producer.produceGridPoints(topicPrefix, iterations)
   else if (args(0).equals("consumer"))
     Consumer.consume(topic)
+  else if (args(0).equals("data-writer-consumer"))
+    DataWriter.consume(topic)
 
   println(greeting)
 }

@@ -1,23 +1,17 @@
 package example
 import com.mongodb
 import org.apache.kafka.clients.consumer._
+import org.mongodb.scala._
+import org.mongodb.scala.model.UpdateOneModel
 import org.slf4j.LoggerFactory
 
 import java.security.{KeyStore, SecureRandom}
+import java.util.{Date, Properties}
 import javax.net.ssl.{KeyManagerFactory, SSLContext, TrustManagerFactory}
-import org.mongodb.scala._
-import org.mongodb.scala.model.{UpdateOneModel, UpdateOptions}
-
-import scala.concurrent.Await
-import scala.concurrent.duration.Duration
 import scala.collection.mutable
 import scala.collection.mutable.ListBuffer
-import java.time.OffsetDateTime
-import java.time.ZoneOffset
-import java.time.format.DateTimeFormatter
-import org.slf4j.LoggerFactory
-
-import java.util.Properties
+import scala.concurrent.Await
+import scala.concurrent.duration.Duration
 
 
 object DataWriter {
@@ -27,17 +21,21 @@ object DataWriter {
 
   def writeData(record: ConsumerRecord[String, String]) {
     //"a=1;b=2;c=d;d=4".split(";").toList.map(v => {v.split("=").toList}).collect {case List(a: String, b: String) => (a, b)}.toMap
-    val keyComponents = ("([0-9.-]+)".r).findAllIn(record.key).matchData.toArray
+    //"[-]?[0-9.]+".r
+    val keyComponents = "[-]?[0-9.]+".r.findAllIn(record.key).matchData.toArray
+    val r = keyComponents(0)
+    val i = keyComponents(1)
     val valueComponents = record.value.split(";").toList.map(v => { v.split("=").toList }).collect {case List(k: String, v: String) => (k, v)}.toMap
 
     val upsertDocument = Document(
       "$set" -> Document(
-        "r" -> "", //todo fix the key components
-        "i" -> "",
+        "r" -> r.toString(),
+        "i" -> i.toString(),
         "value" -> valueComponents.get("value"),
         "fromTopic" -> valueComponents.get("topic"),
-        "modifiedAt" -> "",
-        "uuid" -> valueComponents.get("uuid")
+        "modifiedAt" -> new Date(),
+        "runUuid" -> valueComponents.get("uuid"),
+        "computeDateStamp" -> valueComponents.get("computeDatestamp")
       )
     )
 

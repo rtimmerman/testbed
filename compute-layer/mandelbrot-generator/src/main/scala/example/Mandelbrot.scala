@@ -3,8 +3,12 @@ import java.util.Properties
 
 object Mandelbrot extends App with Greeting {
 
-  val topic =
-    if (args(0).equals("consumer") && args.length > 1) args(1) else "test"
+  val topic = args(0) match {
+    case "consumer" => args(1)
+    case "data-write-consumer" => args(1)
+    case _ => "test"
+  }
+
   val topicPrefix =
     if (args(0).equals("producer") && args.length > 1) args(1) else "test"
   val iterations =

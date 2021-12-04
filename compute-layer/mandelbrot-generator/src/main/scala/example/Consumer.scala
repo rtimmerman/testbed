@@ -2,22 +2,14 @@ package example
 
 import org.apache.kafka.clients.consumer._
 import org.apache.kafka.clients.producer.{KafkaProducer, ProducerRecord}
-import org.mongodb.scala._
-import org.mongodb.scala.model.{UpdateOneModel, UpdateOptions}
+import org.mongodb.scala.model.UpdateOneModel
 import org.slf4j.LoggerFactory
 import spire.implicits._
 import spire.math._
 
 import java.util.{Date, Properties}
-import javax.net.ssl.{KeyManagerFactory, SSLContext, TrustManagerFactory}
 import scala.collection.mutable
 import scala.collection.mutable.ListBuffer
-import scala.jdk.CollectionConverters._
-import scala.concurrent.Await
-import scala.concurrent.duration.Duration
-import java.time.OffsetDateTime
-import java.time.ZoneOffset
-import java.time.format.DateTimeFormatter
 
 object Consumer {
   val logger = LoggerFactory.getLogger(Consumer.getClass.getName)
@@ -103,17 +95,6 @@ object Consumer {
               )
 
               resultProducer.beginTransaction()
-
-              val upsertDocument = Document(
-                "$set" -> Document(
-                  "r" -> m.group(1),
-                  "i" -> m.group(2),
-                  "value" -> res,
-                  "fromTopic" -> topic,
-                  "modifiedAt" -> new Date(),
-                  "uuid" -> m.group(4)
-                )
-              )
 
               val r = m.group(1)
               val i = m.group(2)

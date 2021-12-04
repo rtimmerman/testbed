@@ -2,7 +2,7 @@
 source /root/.bashrc
 
 cd /root/mandelbrot-generator
-if [ ${ROLE} = "consumer" ] || [ ${ROLE} = "producer" ]; then 
+if [ ${ROLE} = "consumer" ] || ${ROLE} = "data-writer-consumer" || [ ${ROLE} = "producer" ]; then 
     echo "** launching a ${ROLE} node **"
     setsid sbt "run ${ROLE} ${TOPIC}" &
 

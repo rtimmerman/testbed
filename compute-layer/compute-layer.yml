@@ -36,7 +36,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: data-writer-0
+  name: data-writer-consumer-0
   labels:
     purpose: data-writer-consumer
     role: data-writer-consumer-0

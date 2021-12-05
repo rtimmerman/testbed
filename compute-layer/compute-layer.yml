@@ -44,7 +44,7 @@ metadata:
 spec:
   selector:
     matchLabels:
-      purpose: data-write-consumer
+      purpose: data-writer-consumer
       role: data-writer-consumer-0
   replicas: 1
   strategy:

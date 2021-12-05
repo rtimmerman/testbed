@@ -4,9 +4,9 @@ import java.util.Properties
 object Mandelbrot extends App with Greeting {
 
   val topic = args(0) match {
-    case "consumer" => args(1)
-    case "data-write-consumer" => args(1)
-    case _ => "test"
+    case "consumer"             => args(1)
+    case "data-writer-consumer" => args(1)
+    case _                      => "test"
   }
 
   val topicPrefix =

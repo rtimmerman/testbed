@@ -59,7 +59,7 @@ spec:
       containers:
         - image: rrt-general-services:32000/operator:1.0
           imagePullPolicy: IfNotPresent
-          name: consumer-0-container
+          name: data-write-consumer-0-container
           env:
             - {name: ROLE, value: data-writer-consumer}
             - {name: TOPIC, value:  result}

@@ -13,11 +13,11 @@ import scala.collection.mutable.ListBuffer
 import scala.concurrent.Await
 import scala.concurrent.duration.Duration
 
-
 object DataWriter {
   val logger = LoggerFactory.getLogger(DataWriter.getClass().getName())
 
-  val run0db: MongoCollection[Document] = mongoDbClient().getDatabase("mandelbrot").getCollection("run0")
+  val run0db: MongoCollection[Document] =
+    mongoDbClient().getDatabase("mandelbrot").getCollection("run0")
 
   def writeData(record: ConsumerRecord[String, String]) {
     //"a=1;b=2;c=d;d=4".split(";").toList.map(v => {v.split("=").toList}).collect {case List(a: String, b: String) => (a, b)}.toMap
@@ -25,7 +25,12 @@ object DataWriter {
     val keyComponents = "[-]?[0-9.]+".r.findAllIn(record.key).matchData.toArray
     val r = keyComponents(0)
     val i = keyComponents(1)
-    val valueComponents = record.value.split(";").toList.map(v => { v.split("=").toList }).collect {case List(k: String, v: String) => (k, v)}.toMap
+    val valueComponents = record.value
+      .split(";")
+      .toList
+      .map(v => { v.split("=").toList })
+      .collect { case List(k: String, v: String) => (k, v) }
+      .toMap
 
     val upsertDocument = Document(
       "$set" -> Document(
@@ -39,10 +44,17 @@ object DataWriter {
       )
     )
 
-    Await.result(run0db.updateOne(
-      Document("r" -> "", "i" -> ""),
-      upsertDocument
-    ).toFuture(), Duration.Inf)
+    Await.result(
+      run0db
+        .updateOne(
+          Document("r" -> r.toString(), "i" -> i.toString()),
+          upsertDocument
+        )
+        .toFuture(),
+      Duration.Inf
+    )
+
+    logger.info(s"Entry << ${record.key} | ${record.value} >> upserted.")
   }
 
   def consume(topic: String) = {

@@ -60,7 +60,7 @@ object Consumer {
       "value.serializer",
       "org.apache.kafka.common.serialization.StringSerializer"
     )
-    dataOutProps.put("transactional.id", "transaction-id-1")
+    dataOutProps.put("transactional.id", s"dw-transaction-id-$topic")
 
     println(s"Consuming from ${topic}")
 

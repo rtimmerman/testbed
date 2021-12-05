@@ -25,7 +25,7 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
         - image: rrt-general-services:32000/kafka-topic-server:0.1
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           name: kafka-topic-server
           ports:
             - containerPort: 9092
@@ -58,8 +58,8 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
         - image: rrt-general-services:32000/operator:1.0
-          imagePullPolicy: IfNotPresent
-          name: data-write-consumer-0-container
+          imagePullPolicy: Always
+          name: data-writer-consumer-0-container
           env:
             - {name: ROLE, value: data-writer-consumer}
             - {name: TOPIC, value:  result}
@@ -95,7 +95,7 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
         - image: rrt-general-services:32000/operator:1.0
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           name: consumer-0-container
           env:
             - {name: ROLE, value: consumer}
@@ -132,7 +132,7 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
         - image: rrt-general-services:32000/operator:1.0
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           name: consumer-1-container
           env:
             - {name: ROLE, value: consumer}
@@ -169,7 +169,7 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
         - image: rrt-general-services:32000/operator:1.0
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           name: consumer-2-container
           env:
             - {name: ROLE, value: consumer}
@@ -206,7 +206,7 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
         - image: rrt-general-services:32000/operator:1.0
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           name: consumer-3-container
           env:
             - {name: ROLE, value: consumer}
@@ -243,7 +243,7 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
         - image: rrt-general-services:32000/operator:1.0
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           name: consumer-4-container
           env:
             - {name: ROLE, value: consumer}
@@ -280,7 +280,7 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
         - image: rrt-general-services:32000/operator:1.0
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           name: consumer-5-container
           env:
             - {name: ROLE, value: consumer}
@@ -317,7 +317,7 @@ spec:
       terminationGracePeriodSeconds: 6
       containers:
         - image: rrt-general-services:32000/operator:1.0
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           name: consumer-6-container
           env:
             - {name: ROLE, value: consumer}
@@ -354,7 +354,7 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
         - image: rrt-general-services:32000/operator:1.0
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           name: consumer-7-container
           env:
             - {name: ROLE, value: consumer}
@@ -391,7 +391,7 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
         - image: rrt-general-services:32000/operator:1.0
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           name: consumer-8-container
           env:
             - {name: ROLE, value: consumer}
@@ -428,7 +428,7 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
         - image: rrt-general-services:32000/operator:1.0
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           name: consumer-9-container
           env:
             - {name: ROLE, value: consumer}
@@ -465,7 +465,7 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
         - image: rrt-general-services:32000/operator:1.0
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           name: consumer-10-container
           env:
             - {name: ROLE, value: consumer}
@@ -502,7 +502,7 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
         - image: rrt-general-services:32000/operator:1.0
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           name: consumer-11-container
           env:
             - {name: ROLE, value: consumer}
@@ -539,7 +539,7 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
         - image: rrt-general-services:32000/operator:1.0
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           name: consumer-12-container
           env:
             - {name: ROLE, value: consumer}
@@ -576,7 +576,7 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
         - image: rrt-general-services:32000/operator:1.0
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           name: consumer-13-container
           env:
             - {name: ROLE, value: consumer}
@@ -613,7 +613,7 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
         - image: rrt-general-services:32000/operator:1.0
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           name: consumer-14-container
           env:
             - {name: ROLE, value: consumer}
@@ -649,7 +649,7 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
         - image: rrt-general-services:32000/operator:1.0
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           name: consumer-15-container
           env:
             - {name: ROLE, value: consumer}
@@ -683,7 +683,7 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
         - image: rrt-general-services:32000/operator:1.0
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           name: producer-shell
           env:
             - {name: ROLE, value: producer-shell}

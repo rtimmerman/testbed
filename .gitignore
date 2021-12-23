@@ -6,10 +6,13 @@ ycsb*
 *.csr
 *.key
 *.idea
-*.metals
+**/*.metals
 *.log
-.bloop/
+.bsp/
+**/.bloop
+**/project
 .bsp/
 *.tgz
 target/
 data/
+project/

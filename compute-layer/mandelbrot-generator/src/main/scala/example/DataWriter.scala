@@ -12,6 +12,8 @@ import scala.collection.mutable
 import scala.collection.mutable.ListBuffer
 import scala.concurrent.Await
 import scala.concurrent.duration.Duration
+import scala.concurrent.ExecutionContext
+import java.util.concurrent.Executors
 
 object DataWriter {
   val logger = LoggerFactory.getLogger(DataWriter.getClass().getName())
@@ -77,6 +79,9 @@ object DataWriter {
     val consumer = new KafkaConsumer[String, String](props);
     consumer.subscribe(topics)
 
+    implicit val ec =
+      ExecutionContext.fromExecutor(Executors.newFixedThreadPool(10))
+
     while (true) {
       val work = consumer.poll(1000)
 
@@ -85,10 +90,15 @@ object DataWriter {
         val insert = mutable.Queue[UpdateOneModel[Nothing]]()
 
         work.forEach(record => {
-          writeData(record)
+          Future {
+            writeData(record)
+          }
         })
+
+        Await.ready()
       }
     }
+
   }
 
   def mongoDbClient(): MongoClient = {

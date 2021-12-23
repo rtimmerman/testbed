@@ -13,24 +13,34 @@ object Producer {
       iterations: Int
   ) = {
 
+    // static factor at 1000, in future this could be dynamically established instead (via an arg)
+    val factor = 1e3.intValue()
+    val divf = 1 / factor
+
     val data =
       for (
-        r <- BigDecimal(-2.0) to BigDecimal(2.0) by 0.01;
-        i <- BigDecimal(-2.0) to BigDecimal(2.0) by 0.01
+        r <- BigDecimal(-2.0) to BigDecimal(2.0) by divf;
+        i <- BigDecimal(-2.0) to BigDecimal(2.0) by divf
       )
         yield breeze.math.Complex(r.toDouble, i.toDouble)
 
-    val plane = breeze.linalg.DenseMatrix.create(401, 401, data.toArray)
+    val plane = breeze.linalg.DenseMatrix.create(
+      4 * factor + 1,
+      4 * factor + 1,
+      data.toArray
+    )
 
     var lot: Int = 0
 
     kafkaProducer.beginTransaction()
-    for (x <- 0 to 399 by 100; y <- 0 to 399 by 100) {
+    for (
+      x <- 0 to (4 * factor - 1) by factor; y <- 0 to (4 * factor - 1) by factor
+    ) {
       val topic = s"${topicPrefix}-${lot}"
-      val ylimit = if (y + 100 >= 400) 400 else y + 100
+      val ylimit = if (y + factor >= (4 * factor)) 4 * factor else y + factor
       print(s"Sending lot ${lot} ")
 
-      val xlimit = if (x + 100 >= 400) 400 else x + 100
+      val xlimit = if (x + factor >= (4 * factor)) 4 * factor else x + factor
       val entries = plane(x to xlimit, y to ylimit).toArray
 
       val runUUID = UUID.randomUUID()
@@ -47,7 +57,7 @@ object Producer {
         )
       })
 
-      lot = if (((x + y) % 100) == 0) lot + 1 else lot
+      lot = if (((x + y) % factor) == 0) lot + 1 else lot
 
     }
 

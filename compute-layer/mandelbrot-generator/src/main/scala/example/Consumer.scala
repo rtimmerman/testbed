@@ -62,6 +62,9 @@ object Consumer {
     )
     dataOutProps.put("transactional.id", s"dw-transaction-id-$topic")
 
+    dataOutProps.put("retries", "10")
+    dataOutProps.put("retry.backoff.ms", "5000")
+
     println(s"Consuming from ${topic}")
 
     val consumer = new KafkaConsumer[String, String](props);

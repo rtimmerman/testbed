@@ -13,7 +13,9 @@ import scala.collection.mutable.ListBuffer
 import scala.concurrent.Await
 import scala.concurrent.duration.Duration
 import scala.concurrent.ExecutionContext
+import scala.concurrent.Future
 import java.util.concurrent.Executors
+import scala.concurrent.duration._
 
 object DataWriter {
   val logger = LoggerFactory.getLogger(DataWriter.getClass().getName())
@@ -27,6 +29,9 @@ object DataWriter {
     val keyComponents = "[-]?[0-9.]+".r.findAllIn(record.key).matchData.toArray
     val r = keyComponents(0)
     val i = keyComponents(1)
+
+    logger.debug(s"Received record data: ${record.value}")
+
     val valueComponents = record.value
       .split(";")
       .toList
@@ -89,13 +94,37 @@ object DataWriter {
         val writes = ListBuffer[UpdateOneModel[Nothing]]()
         val insert = mutable.Queue[UpdateOneModel[Nothing]]()
 
-        work.forEach(record => {
-          Future {
+        val f1 = Future {
+          if (work.records(topic).iterator().hasNext()) writeData(work.records(topic).iterator().next())
+        }
+
+        val f2 = Future {
+          if (work.records(topic).iterator().hasNext()) writeData(work.records(topic).iterator().next())
+        }
+
+        val f3 = Future {
+          if (work.records(topic).iterator().hasNext()) writeData(work.records(topic).iterator().next())
+        }
+
+        val f4 = Future {
+          if (work.records(topic).iterator().hasNext()) writeData(work.records(topic).iterator().next())
+        }
+
+        val f5 = Future {
+          if (work.records(topic).iterator().hasNext()) writeData(work.records(topic).iterator().next())
+        }
+
+        val futures = Future.sequence(List(f1, f2, f3, f4, f5))
+        Await.result(futures, 60.seconds)
+
+        /*work.forEach(record => {
+          val future = Future {
             writeData(record)
           }
-        })
 
-        Await.ready()
+          Await.ready(future, 60.seconds)
+        })*/
+
       }
     }
 

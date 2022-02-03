@@ -4689,3 +4689,2197 @@ WARNING: Unmatched cancel notification for request id 4554
 [0m2021.09.07 12:00:51 INFO  compiling root (1 scala source)[0m
 [0m2021.09.07 12:00:53 WARN  1 deprecation; re-run with -deprecation for details[0m
 [0m2021.09.07 12:00:53 INFO  time: compiled root in 1.83s[0m
+[0m2021.12.06 22:49:11 INFO  Started: Metals version 0.10.9 in workspace '/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator' for client Visual Studio Code 1.62.3.[0m
+[0m2021.12.06 22:49:14 INFO  time: initialize in 3.41s[0m
+[0m2021.12.06 22:49:19 INFO  Attempting to connect to the build server...[0m
+Starting the bsp launcher for bloop...
+Opening a bsp server connection with 'bsp --protocol local --socket /tmp/bsp-launcher15461749479427908116/bsp.socket'...
+Waiting for the bsp connection to come up...
+Waiting for the bsp connection to come up...
+[0m[32m[D][0m Loading workspace settings from bloop.settings.json
+[0m[32m[D][0m Loading 2 projects from '/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/.bloop'...
+[0m[32m[D][0m Loading project from '/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/.bloop/root-test.json'
+[0m[32m[D][0m Loading project from '/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/.bloop/root.json'
+[0m[32m[D][0m Cache miss for scala instance org.scala-lang:scala-compiler:2.13.5.
+[0m[32m[D][0m   => /home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/net/java/dev/jna/jna/5.3.1/jna-5.3.1.jar
+[0m[32m[D][0m   => /home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/jline/jline/3.19.0/jline-3.19.0.jar
+[0m[32m[D][0m   => /home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala-compiler/2.13.5/scala-compiler-2.13.5.jar
+[0m[32m[D][0m   => /home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala-library/2.13.5/scala-library-2.13.5.jar
+[0m[32m[D][0m   => /home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.13.5/scala-reflect-2.13.5.jar
+[0m[32m[D][0m Configured Scala SemanticDB in projects 'root', 'root-test'
+[0m[32m[D][0m Missing analysis file for project 'root-test'
+[0m[32m[D][0m Loading previous analysis for 'root' from '/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/target/streams/compile/bloopAnalysisOut/_global/streams/inc_compile_2.13.zip'.
+[0m[32m[D][0m Waiting for a connection at local:///tmp/bsp-launcher15461749479427908116/bsp.socket...
+The server is listening for incoming connections at local:///tmp/bsp-launcher15461749479427908116/bsp.socket...
+Starting thread that pumps stdin and redirects it to the bsp server...
+Starting thread that pumps server stdout and redirects it to the client stdout...
+[0m2021.12.06 22:49:20 INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /home/roderick/.cache/metals/bsp.trace.json[0m
+[0m2021.12.06 22:49:24 INFO  running '/home/roderick/.jabba/jdk/adopt@1.11.0-11/bin/java -Djline.terminal=jline.UnsupportedTerminal -Dsbt.log.noformat=true -Dfile.encoding=UTF-8 -jar /tmp/metals11548000917059979970/sbt-launch.jar -Dbloop.export-jar-classifiers=sources bloopInstall'[0m
+[0m2021.12.06 22:49:25 WARN  no build target for: /home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/project/metals.sbt[0m
+[0m2021.12.06 22:49:25 WARN  no build target for: /home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/project/project/metals.sbt[0m
+[0m2021.12.06 22:49:25 INFO  skipping build import with status 'Started'[0m
+[0m2021.12.06 22:49:27 INFO  Attempting to connect to the build server...[0m
+Starting the bsp launcher for bloop...
+Opening a bsp server connection with 'bsp --protocol local --socket /tmp/bsp-launcher10248895487710079978/bsp.socket'...
+Waiting for the bsp connection to come up...
+[0m2021.12.06 22:49:27 INFO  [info] welcome to sbt 1.5.4 (AdoptOpenJDK Java 11.0.11)[0m
+[0m[32m[D][0m Loading workspace settings from bloop.settings.json
+[0m[32m[D][0m Waiting for a connection at local:///tmp/bsp-launcher10248895487710079978/bsp.socket...
+The server is listening for incoming connections at local:///tmp/bsp-launcher10248895487710079978/bsp.socket...
+Starting thread that pumps stdin and redirects it to the bsp server...
+Starting thread that pumps server stdout and redirects it to the client stdout...
+[0m2021.12.06 22:49:27 INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /home/roderick/.cache/metals/bsp.trace.json[0m
+[0m2021.12.06 22:49:31 INFO  time: Connected to build server in 12s[0m
+[0m2021.12.06 22:49:31 INFO  Connected to Build server: Bloop v1.4.11[0m
+[0m2021.12.06 22:49:31 INFO  [info] loading global plugins from /home/roderick/.sbt/1.0/plugins[0m
+[0m2021.12.06 22:49:33 INFO  no build target: using presentation compiler with only scala-library: 3.1.0[0m
+[0m2021.12.06 22:49:35 INFO  time: Imported build in 0.21s[0m
+[0m2021.12.06 22:49:38 INFO  [info] loading settings for project mandelbrot-generator-build-build from metals.sbt ...[0m
+[0m2021.12.06 22:49:38 INFO  [info] loading project definition from /home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/project/project[0m
+[0m2021.12.06 22:49:41 INFO  no build target: using presentation compiler with only scala-library: 3.1.0[0m
+[0m2021.12.06 22:49:42 INFO  [info] loading settings for project mandelbrot-generator-build from metals.sbt ...[0m
+[0m2021.12.06 22:49:42 INFO  [info] loading project definition from /home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/project[0m
+[0m2021.12.06 22:49:47 INFO  [success] Generated .bloop/mandelbrot-generator-build.json[0m
+[0m2021.12.06 22:49:47 INFO  [info] compiling 1 Scala source to /home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/project/target/scala-2.12/sbt-1.0/classes ...[0m
+[0m2021.12.06 22:49:50 INFO  time: indexed workspace in 15s[0m
+[0m2021.12.06 22:49:52 INFO  [info] done compiling[0m
+[0m2021.12.06 22:49:52 INFO  [success] Total time: 10 s, completed 6 Dec 2021, 22:49:53[0m
+[0m2021.12.06 22:49:53 INFO  no build target: using presentation compiler with only scala-library: 2.13.5[0m
+[0m2021.12.06 22:49:57 INFO  [info] loading settings for project root from build.sbt ...[0m
+[0m2021.12.06 22:49:57 INFO  [info] set current project to mandelbrot-generator (in build file:/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/)[0m
+[0m2021.12.06 22:49:59 INFO  [success] Generated .bloop/root.json[0m
+[0m2021.12.06 22:49:59 INFO  [success] Generated .bloop/root-test.json[0m
+[0m2021.12.06 22:49:59 INFO  [success] Total time: 1 s, completed 6 Dec 2021, 22:49:59[0m
+[0m2021.12.06 22:49:59 INFO  time: ran 'sbt bloopInstall' in 34s[0m
+[0m2021.12.06 22:49:59 INFO  Disconnecting from Bloop session...[0m
+[0m2021.12.06 22:49:59 INFO  Shut down connection with build server.[0m
+No more data in the client stdin, exiting...
+[0m2021.12.06 22:49:59 INFO  Shut down connection with build server.[0m
+No more data in the server stdin, exiting...
+No more data in the client stdin, exiting...
+[0m2021.12.06 22:49:59 INFO  Attempting to connect to the build server...[0m
+No more data in the server stdin, exiting...
+No more data in the server stdin, exiting...
+Starting the bsp launcher for bloop...
+Opening a bsp server connection with 'bsp --protocol local --socket /tmp/bsp-launcher12418037822249381763/bsp.socket'...
+Waiting for the bsp connection to come up...
+[0m[32m[D][0m Loading workspace settings from bloop.settings.json
+[0m[32m[D][0m Loading 2 projects from '/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/.bloop'...
+[0m[32m[D][0m Loading project from '/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/.bloop/root.json'
+[0m[32m[D][0m Loading project from '/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/.bloop/root-test.json'
+[0m[32m[D][0m Configured Scala SemanticDB in projects 'root-test', 'root'
+[0m[32m[D][0m Waiting for a connection at local:///tmp/bsp-launcher12418037822249381763/bsp.socket...
+The server is listening for incoming connections at local:///tmp/bsp-launcher12418037822249381763/bsp.socket...
+Starting thread that pumps stdin and redirects it to the bsp server...
+Starting thread that pumps server stdout and redirects it to the client stdout...
+[0m2021.12.06 22:49:59 INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /home/roderick/.cache/metals/bsp.trace.json[0m
+[0m2021.12.06 22:49:59 INFO  Attempting to connect to the build server...[0m
+Starting the bsp launcher for bloop...
+Opening a bsp server connection with 'bsp --protocol local --socket /tmp/bsp-launcher16008104519168476454/bsp.socket'...
+Waiting for the bsp connection to come up...
+[0m[32m[D][0m Loading workspace settings from bloop.settings.json
+[0m[32m[D][0m Waiting for a connection at local:///tmp/bsp-launcher16008104519168476454/bsp.socket...
+The server is listening for incoming connections at local:///tmp/bsp-launcher16008104519168476454/bsp.socket...
+Starting thread that pumps stdin and redirects it to the bsp server...
+Starting thread that pumps server stdout and redirects it to the client stdout...
+[0m2021.12.06 22:49:59 INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /home/roderick/.cache/metals/bsp.trace.json[0m
+[0m2021.12.06 22:49:59 INFO  time: Connected to build server in 0.14s[0m
+[0m2021.12.06 22:49:59 INFO  Connected to Build server: Bloop v1.4.11[0m
+[0m2021.12.06 22:50:02 INFO  time: indexed workspace in 2.81s[0m
+[0m2021.12.06 22:50:04 INFO  no build target: using presentation compiler with only scala-library: 2.13.5[0m
+error: /home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/.metals/.tmp/.metals/.tmp/Main1666757018345624739.scala is not a file
+[0m2021.12.06 22:50:33 INFO  compiling mandelbrot-generator-build (1 scala source)[0m
+[0m2021.12.06 22:50:42 INFO  time: compiled mandelbrot-generator-build in 9.27s[0m
+[0m2021.12.06 22:50:42 INFO  compiling root (4 scala sources)[0m
+[0m2021.12.06 22:50:53 WARN  2 deprecations[0m
+[0m2021.12.06 22:50:53 WARN  1 deprecation (since 2.13.0)[0m
+[0m2021.12.06 22:50:53 WARN  3 deprecations in total; re-run with -deprecation for details[0m
+[0m2021.12.06 22:50:53 INFO  time: compiled root in 11s[0m
+[0m2021.12.06 22:50:53 INFO  compiling root-test (2 scala sources)[0m
+[0m2021.12.06 22:50:55 INFO  time: compiled root-test in 1.06s[0m
+Dec 06, 2021 10:51:06 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 65
+Dec 06, 2021 10:54:23 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 407
+[0m2021.12.06 22:54:23 INFO  compiling root (1 scala source)[0m
+[0m2021.12.06 22:54:25 INFO  time: compiled root in 2.34s[0m
+[0m2021.12.06 22:54:31 INFO  compiling root (1 scala source)[0m
+[0m2021.12.06 22:54:33 INFO  time: compiled root in 2.15s[0m
+[0m2021.12.06 22:57:12 ERROR scalafmt: /home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/src/main/scala/example/Producer.scala:22: error: illegal start of simple pattern
+      )
+      ^[0m
+[0m2021.12.06 22:57:12 INFO  compiling root (1 scala source)[0m
+[0m2021.12.06 22:57:12 INFO  time: compiled root in 0.43s[0m
+[0m2021.12.06 22:57:26 ERROR scalafmt: /home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/src/main/scala/example/Producer.scala:21: error: ) expected but <- found
+        i <- BigDecimal(-2.0) to BigDecimal(2.0) by (1 / factor)
+          ^[0m
+[0m2021.12.06 22:57:26 INFO  compiling root (1 scala source)[0m
+[0m2021.12.06 22:57:26 INFO  time: compiled root in 0.19s[0m
+[0m2021.12.06 22:58:23 INFO  compiling root (1 scala source)[0m
+[0m2021.12.06 22:58:25 INFO  time: compiled root in 1.9s[0m
+[0m2021.12.06 22:59:18 INFO  compiling root (1 scala source)[0m
+[0m2021.12.06 22:59:21 INFO  time: compiled root in 2.5s[0m
+[0m2021.12.06 22:59:59 INFO  compiling root (1 scala source)[0m
+[0m2021.12.06 23:00:00 INFO  time: compiled root in 1.32s[0m
+[0m2021.12.06 23:00:31 INFO  compiling root (1 scala source)[0m
+[0m2021.12.06 23:00:31 INFO  time: compiled root in 0.96s[0m
+[0m2021.12.06 23:01:02 INFO  compiling root (1 scala source)[0m
+[0m2021.12.06 23:01:02 INFO  time: compiled root in 0.89s[0m
+[0m2021.12.06 23:01:08 INFO  compiling root (1 scala source)[0m
+[0m2021.12.06 23:01:09 INFO  time: compiled root in 1.08s[0m
+[0m2021.12.06 23:01:19 INFO  compiling root (1 scala source)[0m
+[0m2021.12.06 23:01:19 INFO  time: compiled root in 0.87s[0m
+[0m2021.12.06 23:03:02 INFO  compiling root (1 scala source)[0m
+[0m2021.12.06 23:03:03 INFO  time: compiled root in 1.08s[0m
+[0m2021.12.06 23:12:22 INFO  compiling root (1 scala source)[0m
+[0m2021.12.06 23:12:24 INFO  time: compiled root in 1.36s[0m
+[0m2021.12.06 23:12:31 INFO  compiling root (1 scala source)[0m
+[0m2021.12.06 23:12:31 INFO  time: compiled root in 0.93s[0m
+[0m2021.12.06 23:12:37 INFO  compiling root (1 scala source)[0m
+[0m2021.12.06 23:12:37 INFO  time: compiled root in 0.97s[0m
+[0m2021.12.06 23:12:46 INFO  compiling root (1 scala source)[0m
+[0m2021.12.06 23:12:46 INFO  time: compiled root in 0.88s[0m
+Dec 06, 2021 11:13:51 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1763
+Dec 06, 2021 11:16:33 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1822
+Dec 06, 2021 11:16:33 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1824
+Dec 06, 2021 11:16:33 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1823
+[0m2021.12.06 23:18:07 INFO  compiling root (1 scala source)[0m
+[0m2021.12.06 23:18:07 INFO  time: compiled root in 0.4s[0m
+[0m2021.12.06 23:18:29 INFO  compiling root (1 scala source)[0m
+[0m2021.12.06 23:18:29 INFO  time: compiled root in 0.25s[0m
+[0m2021.12.06 23:18:48 INFO  compiling root (1 scala source)[0m
+[0m2021.12.06 23:18:50 INFO  time: compiled root in 2.11s[0m
+Dec 06, 2021 11:19:00 PM scala.meta.internal.pc.CompilerAccess retryWithCleanCompiler
+INFO: compiler crashed due to an error in the Scala compiler, retrying with new compiler instance.
+Dec 06, 2021 11:19:00 PM scala.meta.internal.pc.CompilerAccess handleError
+SEVERE: null
+java.lang.NullPointerException
+	at scala.reflect.internal.Definitions$DefinitionsClass.isByNameParamType(Definitions.scala:419)
+	at scala.reflect.internal.TreeInfo.isStableIdent(TreeInfo.scala:140)
+	at scala.reflect.internal.TreeInfo.isStableIdentifier(TreeInfo.scala:113)
+	at scala.reflect.internal.TreeInfo.isPath(TreeInfo.scala:102)
+	at scala.tools.nsc.interactive.Global.stabilizedType(Global.scala:964)
+	at scala.tools.nsc.interactive.Global.typedTreeAt(Global.scala:812)
+	at scala.meta.internal.pc.SignatureHelpProvider.signatureHelp(SignatureHelpProvider.scala:23)
+
+[0m2021.12.06 23:19:13 INFO  compiling root (1 scala source)[0m
+[0m2021.12.06 23:19:14 WARN  1 deprecation[0m
+[0m2021.12.06 23:19:14 WARN  1 deprecation (since 2.13.0)[0m
+[0m2021.12.06 23:19:14 WARN  2 deprecations in total; re-run with -deprecation for details[0m
+[0m2021.12.06 23:19:14 INFO  time: compiled root in 1.2s[0m
+Dec 06, 2021 11:20:20 PM scala.meta.internal.pc.CompilerAccess retryWithCleanCompiler
+INFO: compiler crashed due to an error in the Scala compiler, retrying with new compiler instance.
+Dec 06, 2021 11:20:20 PM scala.meta.internal.pc.CompilerAccess handleError
+SEVERE: null
+java.lang.NullPointerException
+	at scala.reflect.internal.Definitions$DefinitionsClass.isByNameParamType(Definitions.scala:419)
+	at scala.reflect.internal.TreeInfo.isStableIdent(TreeInfo.scala:140)
+	at scala.reflect.internal.TreeInfo.isStableIdentifier(TreeInfo.scala:113)
+	at scala.reflect.internal.TreeInfo.isPath(TreeInfo.scala:102)
+	at scala.tools.nsc.interactive.Global.stabilizedType(Global.scala:964)
+	at scala.tools.nsc.interactive.Global.typedTreeAt(Global.scala:812)
+	at scala.meta.internal.pc.SignatureHelpProvider.signatureHelp(SignatureHelpProvider.scala:23)
+
+[0m2021.12.06 23:20:22 INFO  compiling root (1 scala source)[0m
+[0m2021.12.06 23:20:22 INFO  time: compiled root in 0.34s[0m
+[0m2021.12.06 23:20:32 INFO  compiling root (1 scala source)[0m
+[0m2021.12.06 23:20:32 INFO  time: compiled root in 0.24s[0m
+[0m2021.12.06 23:20:33 INFO  compiling root (1 scala source)[0m
+[0m2021.12.06 23:20:33 INFO  time: compiled root in 0.31s[0m
+[0m2021.12.06 23:21:00 INFO  compiling root (1 scala source)[0m
+[0m2021.12.06 23:21:00 INFO  time: compiled root in 0.23s[0m
+[0m2021.12.06 23:21:13 INFO  compiling root (1 scala source)[0m
+[0m2021.12.06 23:21:13 INFO  time: compiled root in 0.23s[0m
+Dec 06, 2021 11:21:19 PM scala.meta.internal.pc.CompilerAccess retryWithCleanCompiler
+INFO: compiler crashed due to an error in the Scala compiler, retrying with new compiler instance.
+Dec 06, 2021 11:21:19 PM scala.meta.internal.pc.CompilerAccess handleError
+SEVERE: null
+java.lang.NullPointerException
+	at scala.reflect.internal.Definitions$DefinitionsClass.isByNameParamType(Definitions.scala:419)
+	at scala.reflect.internal.TreeInfo.isStableIdent(TreeInfo.scala:140)
+	at scala.reflect.internal.TreeInfo.isStableIdentifier(TreeInfo.scala:113)
+	at scala.reflect.internal.TreeInfo.isPath(TreeInfo.scala:102)
+	at scala.tools.nsc.interactive.Global.stabilizedType(Global.scala:964)
+	at scala.tools.nsc.interactive.Global.typedTreeAt(Global.scala:812)
+	at scala.meta.internal.pc.SignatureHelpProvider.signatureHelp(SignatureHelpProvider.scala:23)
+
+[0m2021.12.06 23:21:29 INFO  compiling root (1 scala source)[0m
+[0m2021.12.06 23:21:29 INFO  time: compiled root in 0.24s[0m
+[0m2021.12.06 23:21:40 INFO  compiling root (1 scala source)[0m
+[0m2021.12.06 23:21:40 INFO  time: compiled root in 0.34s[0m
+[0m2021.12.06 23:21:52 INFO  compiling root (1 scala source)[0m
+[0m2021.12.06 23:21:52 INFO  time: compiled root in 0.21s[0m
+[0m2021.12.06 23:22:03 INFO  compiling root (1 scala source)[0m
+[0m2021.12.06 23:22:04 WARN  1 deprecation[0m
+[0m2021.12.06 23:22:04 WARN  3 deprecations (since 2.13.0)[0m
+[0m2021.12.06 23:22:04 WARN  4 deprecations in total; re-run with -deprecation for details[0m
+[0m2021.12.06 23:22:04 INFO  time: compiled root in 1.05s[0m
+[0m2021.12.06 23:22:35 ERROR scalafmt: /home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/src/main/scala/example/DataWriter.scala:102: error: ) expected but } found
+      }
+      ^[0m
+[0m2021.12.06 23:22:35 INFO  compiling root (1 scala source)[0m
+[0m2021.12.06 23:22:35 INFO  time: compiled root in 81ms[0m
+[0m2021.12.06 23:22:35 ERROR scalafmt: /home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/src/main/scala/example/DataWriter.scala:102: error: ) expected but } found
+      }
+      ^[0m
+[0m2021.12.06 23:22:35 INFO  compiling root (1 scala source)[0m
+[0m2021.12.06 23:22:35 INFO  time: compiled root in 52ms[0m
+Dec 06, 2021 11:24:59 PM scala.meta.internal.pc.CompletionProvider expected$1
+WARNING: offset 3109, count -1, length 5084
+[0m2021.12.06 23:25:02 INFO  compiling root (1 scala source)[0m
+[0m2021.12.06 23:25:02 INFO  time: compiled root in 0.34s[0m
+[0m2021.12.06 23:25:56 ERROR scalafmt: /home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/src/main/scala/example/DataWriter.scala:100: error: illegal start of simple expression
+            yield Future {
+            ^[0m
+[0m2021.12.06 23:25:56 INFO  compiling root (1 scala source)[0m
+[0m2021.12.06 23:25:56 INFO  time: compiled root in 98ms[0m
+[0m2021.12.06 23:26:04 INFO  compiling root (1 scala source)[0m
+[0m2021.12.06 23:26:04 INFO  time: compiled root in 0.34s[0m
+[0m2021.12.06 23:26:11 INFO  compiling root (1 scala source)[0m
+[0m2021.12.06 23:26:11 INFO  time: compiled root in 0.24s[0m
+[0m2021.12.06 23:26:15 INFO  compiling root (1 scala source)[0m
+[0m2021.12.06 23:26:15 INFO  time: compiled root in 0.18s[0m
+[0m2021.12.06 23:28:13 INFO  compiling root (1 scala source)[0m
+[0m2021.12.06 23:28:13 INFO  time: compiled root in 0.47s[0m
+[0m2021.12.06 23:28:23 INFO  compiling root (1 scala source)[0m
+[0m2021.12.06 23:28:23 INFO  time: compiled root in 0.23s[0m
+[0m2021.12.06 23:28:27 INFO  compiling root (1 scala source)[0m
+[0m2021.12.06 23:28:27 INFO  time: compiled root in 0.25s[0m
+[0m2021.12.06 23:28:28 INFO  compiling root (1 scala source)[0m
+[0m2021.12.06 23:28:28 INFO  time: compiled root in 0.18s[0m
+[0m2021.12.06 23:28:31 INFO  compiling root (1 scala source)[0m
+[0m2021.12.06 23:28:31 INFO  time: compiled root in 0.17s[0m
+[0m2021.12.06 23:28:35 INFO  compiling root (1 scala source)[0m
+[0m2021.12.06 23:28:35 INFO  time: compiled root in 0.19s[0m
+[0m2021.12.06 23:30:24 INFO  compiling root (1 scala source)[0m
+[0m2021.12.06 23:30:24 INFO  time: compiled root in 0.22s[0m
+[0m2021.12.23 12:13:18 INFO  Started: Metals version 0.10.9 in workspace '/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator' for client Visual Studio Code 1.63.2.[0m
+[0m2021.12.23 12:13:22 INFO  time: initialize in 4.31s[0m
+[0m2021.12.23 12:13:27 INFO  Attempting to connect to the build server...[0m
+Starting the bsp launcher for bloop...
+Opening a bsp server connection with 'bsp --protocol local --socket /tmp/bsp-launcher11605103956761775293/bsp.socket'...
+Waiting for the bsp connection to come up...
+[0m2021.12.23 12:13:27 INFO  skipping build import with status 'Installed'[0m
+Waiting for the bsp connection to come up...
+Waiting for the bsp connection to come up...
+Waiting for the bsp connection to come up...
+Waiting for the bsp connection to come up...
+Waiting for the bsp connection to come up...
+Waiting for the bsp connection to come up...
+Waiting for the bsp connection to come up...
+No server running at 127.0.0.1:8212, let's fire one...
+Resolving ch.epfl.scala:bloop-frontend_2.12:1.4.11...
+Starting bloop server at 127.0.0.1:8212...
+Attempting a connection to the server...
+Attempting a connection to the server...
+Attempting a connection to the server...
+Attempting a connection to the server...
+Attempting a connection to the server...
+Attempting a connection to the server...
+Attempting a connection to the server...
+Attempting a connection to the server...
+Attempting a connection to the server...
+[0m[32m[D][0m Loading workspace settings from bloop.settings.json
+[0m[32m[D][0m Loading 2 projects from '/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/.bloop'...
+[0m[32m[D][0m Loading project from '/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/.bloop/root.json'
+[0m[32m[D][0m Loading project from '/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/.bloop/root-test.json'
+[0m[32m[D][0m Cache miss for scala instance org.scala-lang:scala-compiler:2.13.5.
+[0m[32m[D][0m   => /home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/net/java/dev/jna/jna/5.3.1/jna-5.3.1.jar
+[0m[32m[D][0m   => /home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/jline/jline/3.19.0/jline-3.19.0.jar
+[0m[32m[D][0m   => /home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala-compiler/2.13.5/scala-compiler-2.13.5.jar
+[0m[32m[D][0m   => /home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala-library/2.13.5/scala-library-2.13.5.jar
+[0m[32m[D][0m   => /home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.13.5/scala-reflect-2.13.5.jar
+[0m[32m[D][0m Configured Scala SemanticDB in projects 'root', 'root-test'
+[0m[32m[D][0m Loading previous analysis for 'root-test' from '/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/target/streams/test/bloopAnalysisOut/_global/streams/inc_compile_2.13.zip'.
+[0m[32m[D][0m Loading previous analysis for 'root' from '/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/target/streams/compile/bloopAnalysisOut/_global/streams/inc_compile_2.13.zip'.
+[0m[32m[D][0m Waiting for a connection at local:///tmp/bsp-launcher11605103956761775293/bsp.socket...
+The server is listening for incoming connections at local:///tmp/bsp-launcher11605103956761775293/bsp.socket...
+Starting thread that pumps stdin and redirects it to the bsp server...
+Starting thread that pumps server stdout and redirects it to the client stdout...
+[0m2021.12.23 12:13:34 INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /home/roderick/.cache/metals/bsp.trace.json[0m
+[0m2021.12.23 12:13:34 INFO  Attempting to connect to the build server...[0m
+Starting the bsp launcher for bloop...
+Opening a bsp server connection with 'bsp --protocol local --socket /tmp/bsp-launcher7092241510668951763/bsp.socket'...
+Waiting for the bsp connection to come up...
+[0m[32m[D][0m Loading workspace settings from bloop.settings.json
+[0m[32m[D][0m Waiting for a connection at local:///tmp/bsp-launcher7092241510668951763/bsp.socket...
+The server is listening for incoming connections at local:///tmp/bsp-launcher7092241510668951763/bsp.socket...
+Starting thread that pumps stdin and redirects it to the bsp server...
+Starting thread that pumps server stdout and redirects it to the client stdout...
+[0m2021.12.23 12:13:35 INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /home/roderick/.cache/metals/bsp.trace.json[0m
+[0m2021.12.23 12:13:35 INFO  time: Connected to build server in 8.4s[0m
+[0m2021.12.23 12:13:35 INFO  Connected to Build server: Bloop v1.4.11[0m
+[0m2021.12.23 12:13:35 INFO  time: Imported build in 0.21s[0m
+[0m2021.12.23 12:13:39 INFO  time: indexed workspace in 3.43s[0m
+[0m2021.12.23 12:13:40 INFO  compiling root (1 scala source)[0m
+[0m2021.12.23 12:13:43 INFO  no build target: using presentation compiler with only scala-library: 2.13.5[0m
+Dec 23, 2021 12:13:50 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleNotification
+WARNING: Notification threw an exception: {
+  "jsonrpc": "2.0",
+  "method": "build/taskFinish",
+  "params": {
+    "taskId": {
+      "id": "1"
+    },
+    "eventTime": 1640261624280,
+    "message": "Compiled \u0027root\u0027",
+    "status": 2,
+    "dataKind": "compile-report",
+    "data": {
+      "target": {
+        "uri": "file:/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/?id\u003droot"
+      },
+      "errors": 2,
+      "warnings": 0,
+      "isNoOp": false,
+      "isLastCycle": true
+    }
+  }
+}
+java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
+	at org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint.lambda$null$0(GenericEndpoint.java:67)
+	at org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint.notify(GenericEndpoint.java:152)
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.handleNotification(RemoteEndpoint.java:220)
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.consume(RemoteEndpoint.java:187)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.handleMessage(StreamMessageProducer.java:194)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.listen(StreamMessageProducer.java:94)
+	at org.eclipse.lsp4j.jsonrpc.json.ConcurrentMessageProcessor.run(ConcurrentMessageProcessor.java:113)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: java.lang.reflect.InvocationTargetException
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint.lambda$null$0(GenericEndpoint.java:65)
+	... 11 more
+Caused by: java.lang.NullPointerException
+	at scala.meta.internal.metals.Compilers.$anonfun$didCompile$1(Compilers.scala:227)
+	at scala.meta.internal.metals.Compilers.$anonfun$didCompile$1$adapted(Compilers.scala:227)
+	at scala.Option.foreach(Option.scala:407)
+	at scala.meta.internal.metals.Compilers.didCompile(Compilers.scala:227)
+	at scala.meta.internal.metals.MetalsLanguageServer.$anonfun$updateWorkspaceDirectory$10(MetalsLanguageServer.scala:407)
+	at scala.meta.internal.metals.MetalsLanguageServer.$anonfun$updateWorkspaceDirectory$10$adapted(MetalsLanguageServer.scala:405)
+	at scala.meta.internal.metals.ForwardingMetalsBuildClient.$anonfun$buildTaskFinish$2(ForwardingMetalsBuildClient.scala:172)
+	at scala.Option.foreach(Option.scala:407)
+	at scala.meta.internal.metals.ForwardingMetalsBuildClient.$anonfun$buildTaskFinish$1(ForwardingMetalsBuildClient.scala:169)
+	at scala.meta.internal.metals.ForwardingMetalsBuildClient.$anonfun$buildTaskFinish$1$adapted(ForwardingMetalsBuildClient.scala:168)
+	at scala.Option.foreach(Option.scala:407)
+	at scala.meta.internal.metals.ForwardingMetalsBuildClient.buildTaskFinish(ForwardingMetalsBuildClient.scala:168)
+	... 16 more
+
+[0m2021.12.23 12:13:50 INFO  compiling root (1 scala source)[0m
+[0m2021.12.23 12:13:51 INFO  time: compiled root in 1.13s[0m
+[0m2021.12.23 12:14:25 INFO  compiling root (1 scala source)[0m
+[0m2021.12.23 12:14:25 INFO  time: compiled root in 0.88s[0m
+[0m2021.12.23 12:14:25 INFO  compiling root (1 scala source)[0m
+[0m2021.12.23 12:14:26 INFO  time: compiled root in 0.41s[0m
+[0m2021.12.23 12:31:59 INFO  shutting down Metals[0m
+[0m2021.12.23 12:32:00 INFO  Shut down connection with build server.[0m
+[0m2021.12.23 12:32:00 INFO  Shut down connection with build server.[0m
+No more data in the client stdin, exiting...
+No more data in the client stdin, exiting...
+No more data in the server stdin, exiting...
+No more data in the server stdin, exiting...
+No more data in the server stdin, exiting...
+No more data in the server stdin, exiting...
+Dec 23, 2021 12:32:00 PM org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer fireStreamClosed
+INFO: The input stream was closed.
+java.nio.channels.ClosedByInterruptException
+	at java.base/java.nio.channels.spi.AbstractInterruptibleChannel.end(AbstractInterruptibleChannel.java:199)
+	at java.base/sun.nio.ch.SourceChannelImpl.endRead(SourceChannelImpl.java:241)
+	at java.base/sun.nio.ch.SourceChannelImpl.read(SourceChannelImpl.java:259)
+	at java.base/sun.nio.ch.ChannelInputStream.read(ChannelInputStream.java:59)
+	at java.base/sun.nio.ch.ChannelInputStream.read(ChannelInputStream.java:109)
+	at java.base/sun.nio.ch.ChannelInputStream.read(ChannelInputStream.java:103)
+	at java.base/java.io.InputStream.read(InputStream.java:205)
+	at java.base/sun.nio.ch.ChannelInputStream.read(ChannelInputStream.java:81)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.listen(StreamMessageProducer.java:79)
+	at org.eclipse.lsp4j.jsonrpc.json.ConcurrentMessageProcessor.run(ConcurrentMessageProcessor.java:113)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+
+Dec 23, 2021 12:32:00 PM org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer fireStreamClosed
+INFO: The input stream was closed.
+java.nio.channels.ClosedByInterruptException
+	at java.base/java.nio.channels.spi.AbstractInterruptibleChannel.end(AbstractInterruptibleChannel.java:199)
+	at java.base/sun.nio.ch.SourceChannelImpl.endRead(SourceChannelImpl.java:241)
+	at java.base/sun.nio.ch.SourceChannelImpl.read(SourceChannelImpl.java:259)
+	at java.base/sun.nio.ch.ChannelInputStream.read(ChannelInputStream.java:59)
+	at java.base/sun.nio.ch.ChannelInputStream.read(ChannelInputStream.java:109)
+	at java.base/sun.nio.ch.ChannelInputStream.read(ChannelInputStream.java:103)
+	at java.base/java.io.InputStream.read(InputStream.java:205)
+	at java.base/sun.nio.ch.ChannelInputStream.read(ChannelInputStream.java:81)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.listen(StreamMessageProducer.java:79)
+	at org.eclipse.lsp4j.jsonrpc.json.ConcurrentMessageProcessor.run(ConcurrentMessageProcessor.java:113)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+
+[0m2022.01.04 20:59:37 INFO  Started: Metals version 0.10.9 in workspace '/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator' for client Visual Studio Code 1.63.2.[0m
+[0m2022.01.04 20:59:41 INFO  time: initialize in 4.31s[0m
+[0m2022.01.04 20:59:42 INFO  Attempting to connect to the build server...[0m
+Starting the bsp launcher for bloop...
+Opening a bsp server connection with 'bsp --protocol local --socket /tmp/bsp-launcher16268866681265805330/bsp.socket'...
+Waiting for the bsp connection to come up...
+[0m2022.01.04 20:59:42 INFO  skipping build import with status 'Installed'[0m
+Waiting for the bsp connection to come up...
+Waiting for the bsp connection to come up...
+Waiting for the bsp connection to come up...
+No server running at 127.0.0.1:8212, let's fire one...
+Resolving ch.epfl.scala:bloop-frontend_2.12:1.4.11...
+Starting bloop server at 127.0.0.1:8212...
+Attempting a connection to the server...
+Attempting a connection to the server...
+Attempting a connection to the server...
+Attempting a connection to the server...
+Attempting a connection to the server...
+[0m[32m[D][0m Loading workspace settings from bloop.settings.json
+[0m[32m[D][0m Loading 2 projects from '/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/.bloop'...
+[0m[32m[D][0m Loading project from '/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/.bloop/root-test.json'
+[0m[32m[D][0m Loading project from '/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/.bloop/root.json'
+[0m[32m[D][0m Cache miss for scala instance org.scala-lang:scala-compiler:2.13.5.
+[0m[32m[D][0m   => /home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/net/java/dev/jna/jna/5.3.1/jna-5.3.1.jar
+[0m[32m[D][0m   => /home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/jline/jline/3.19.0/jline-3.19.0.jar
+[0m[32m[D][0m   => /home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala-compiler/2.13.5/scala-compiler-2.13.5.jar
+[0m[32m[D][0m   => /home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala-library/2.13.5/scala-library-2.13.5.jar
+[0m[32m[D][0m   => /home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.13.5/scala-reflect-2.13.5.jar
+[0m[32m[D][0m Configured Scala SemanticDB in projects 'root-test', 'root'
+[0m[32m[D][0m Loading previous analysis for 'root-test' from '/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/target/streams/test/bloopAnalysisOut/_global/streams/inc_compile_2.13.zip'.
+[0m[32m[D][0m Loading previous analysis for 'root' from '/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/target/streams/compile/bloopAnalysisOut/_global/streams/inc_compile_2.13.zip'.
+[0m[32m[D][0m Waiting for a connection at local:///tmp/bsp-launcher16268866681265805330/bsp.socket...
+The server is listening for incoming connections at local:///tmp/bsp-launcher16268866681265805330/bsp.socket...
+Starting thread that pumps stdin and redirects it to the bsp server...
+Starting thread that pumps server stdout and redirects it to the client stdout...
+[0m2022.01.04 20:59:46 INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /home/roderick/.cache/metals/bsp.trace.json[0m
+[0m2022.01.04 20:59:46 INFO  Attempting to connect to the build server...[0m
+Starting the bsp launcher for bloop...
+Opening a bsp server connection with 'bsp --protocol local --socket /tmp/bsp-launcher2701966423358465306/bsp.socket'...
+Waiting for the bsp connection to come up...
+[0m[32m[D][0m Loading workspace settings from bloop.settings.json
+[0m[32m[D][0m Waiting for a connection at local:///tmp/bsp-launcher2701966423358465306/bsp.socket...
+The server is listening for incoming connections at local:///tmp/bsp-launcher2701966423358465306/bsp.socket...
+Starting thread that pumps stdin and redirects it to the bsp server...
+Starting thread that pumps server stdout and redirects it to the client stdout...
+[0m2022.01.04 20:59:47 INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /home/roderick/.cache/metals/bsp.trace.json[0m
+[0m2022.01.04 20:59:47 INFO  time: Connected to build server in 4.58s[0m
+[0m2022.01.04 20:59:47 INFO  Connected to Build server: Bloop v1.4.11[0m
+[0m2022.01.04 20:59:47 INFO  no build target: using presentation compiler with only scala-library: 3.1.0[0m
+[0m2022.01.04 20:59:47 INFO  time: code lens generation in 5.88s[0m
+[0m2022.01.04 20:59:48 INFO  time: Imported build in 0.13s[0m
+[0m2022.01.04 20:59:51 INFO  time: indexed workspace in 2.52s[0m
+[0m2022.01.04 20:59:52 INFO  compiling root (1 scala source)[0m
+[0m2022.01.04 20:59:54 INFO  no build target: using presentation compiler with only scala-library: 2.13.5[0m
+[0m2022.01.04 20:59:56 INFO  time: compiled root in 4.05s[0m
+[0m2022.01.04 20:59:56 INFO  compiling root (1 scala source)[0m
+[0m2022.01.04 20:59:57 INFO  time: compiled root in 0.99s[0m
+Jan 10, 2022 12:34:29 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTrace
+Jan 10, 2022 12:34:30 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTrace
+Jan 10, 2022 12:34:31 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTrace
+Jan 10, 2022 12:34:33 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTrace
+Jan 10, 2022 12:34:34 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTrace
+[0m2022.01.10 00:34:42 INFO  compiling root (1 scala source)[0m
+[0m2022.01.10 00:34:42 INFO  time: compiled root in 0.99s[0m
+Jan 10, 2022 12:35:22 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTrace
+Jan 10, 2022 12:35:24 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTrace
+[0m2022.01.12 11:50:47 INFO  shutting down Metals[0m
+[0m2022.01.12 11:50:47 INFO  Shut down connection with build server.[0m
+[0m2022.01.12 11:50:47 INFO  Shut down connection with build server.[0m
+No more data in the client stdin, exiting...
+No more data in the client stdin, exiting...
+No more data in the server stdin, exiting...
+No more data in the server stdin, exiting...
+No more data in the server stdin, exiting...
+No more data in the server stdin, exiting...
+[0m2022.01.13 22:45:24 INFO  Started: Metals version 0.10.9 in workspace '/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator' for client Visual Studio Code 1.63.2.[0m
+[0m2022.01.13 22:45:28 INFO  time: initialize in 3.86s[0m
+[0m2022.01.13 22:45:29 INFO  Attempting to connect to the build server...[0m
+Starting the bsp launcher for bloop...
+Opening a bsp server connection with 'bsp --protocol local --socket /tmp/bsp-launcher15344102634126881970/bsp.socket'...
+Waiting for the bsp connection to come up...
+[0m2022.01.13 22:45:29 INFO  skipping build import with status 'Installed'[0m
+Waiting for the bsp connection to come up...
+Waiting for the bsp connection to come up...
+Waiting for the bsp connection to come up...
+Waiting for the bsp connection to come up...
+Waiting for the bsp connection to come up...
+No server running at 127.0.0.1:8212, let's fire one...
+Resolving ch.epfl.scala:bloop-frontend_2.12:1.4.11...
+Starting bloop server at 127.0.0.1:8212...
+Attempting a connection to the server...
+Attempting a connection to the server...
+Attempting a connection to the server...
+Attempting a connection to the server...
+Attempting a connection to the server...
+Attempting a connection to the server...
+[0m[32m[D][0m Loading workspace settings from bloop.settings.json
+[0m[32m[D][0m Loading 2 projects from '/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/.bloop'...
+[0m[32m[D][0m Loading project from '/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/.bloop/root-test.json'
+[0m[32m[D][0m Loading project from '/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/.bloop/root.json'
+[0m[32m[D][0m Cache miss for scala instance org.scala-lang:scala-compiler:2.13.5.
+[0m[32m[D][0m   => /home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/net/java/dev/jna/jna/5.3.1/jna-5.3.1.jar
+[0m[32m[D][0m   => /home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/jline/jline/3.19.0/jline-3.19.0.jar
+[0m[32m[D][0m   => /home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala-compiler/2.13.5/scala-compiler-2.13.5.jar
+[0m[32m[D][0m   => /home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala-library/2.13.5/scala-library-2.13.5.jar
+[0m[32m[D][0m   => /home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.13.5/scala-reflect-2.13.5.jar
+[0m[32m[D][0m Configured Scala SemanticDB in projects 'root-test', 'root'
+[0m[32m[D][0m Loading previous analysis for 'root-test' from '/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/target/streams/test/bloopAnalysisOut/_global/streams/inc_compile_2.13.zip'.
+[0m[32m[D][0m Loading previous analysis for 'root' from '/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/target/streams/compile/bloopAnalysisOut/_global/streams/inc_compile_2.13.zip'.
+[0m[32m[D][0m Waiting for a connection at local:///tmp/bsp-launcher15344102634126881970/bsp.socket...
+The server is listening for incoming connections at local:///tmp/bsp-launcher15344102634126881970/bsp.socket...
+Starting thread that pumps stdin and redirects it to the bsp server...
+Starting thread that pumps server stdout and redirects it to the client stdout...
+[0m2022.01.13 22:45:34 INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /home/roderick/.cache/metals/bsp.trace.json[0m
+[0m2022.01.13 22:45:34 INFO  Attempting to connect to the build server...[0m
+Starting the bsp launcher for bloop...
+Opening a bsp server connection with 'bsp --protocol local --socket /tmp/bsp-launcher12625798404044618983/bsp.socket'...
+Waiting for the bsp connection to come up...
+[0m[32m[D][0m Loading workspace settings from bloop.settings.json
+[0m[32m[D][0m Waiting for a connection at local:///tmp/bsp-launcher12625798404044618983/bsp.socket...
+The server is listening for incoming connections at local:///tmp/bsp-launcher12625798404044618983/bsp.socket...
+Starting thread that pumps stdin and redirects it to the bsp server...
+Starting thread that pumps server stdout and redirects it to the client stdout...
+[0m2022.01.13 22:45:35 INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /home/roderick/.cache/metals/bsp.trace.json[0m
+[0m2022.01.13 22:45:35 INFO  time: Connected to build server in 5.99s[0m
+[0m2022.01.13 22:45:35 INFO  Connected to Build server: Bloop v1.4.11[0m
+[0m2022.01.13 22:45:35 INFO  no build target: using presentation compiler with only scala-library: 3.1.0[0m
+[0m2022.01.13 22:45:35 INFO  time: code lens generation in 7.12s[0m
+[0m2022.01.13 22:45:36 INFO  time: Imported build in 0.13s[0m
+[0m2022.01.13 22:45:38 INFO  time: indexed workspace in 2.08s[0m
+[0m2022.01.13 22:45:39 INFO  compiling root (1 scala source)[0m
+[0m2022.01.13 22:45:40 INFO  no build target: using presentation compiler with only scala-library: 2.13.5[0m
+[0m2022.01.13 22:45:42 INFO  time: compiled root in 3.09s[0m
+[0m2022.01.13 22:45:42 INFO  compiling root (1 scala source)[0m
+[0m2022.01.13 22:45:43 INFO  time: compiled root in 0.84s[0m
+[0m2022.01.13 22:46:09 INFO  compiling root (1 scala source)[0m
+[0m2022.01.13 22:46:09 INFO  time: compiled root in 0.81s[0m
+[0m2022.01.13 22:49:40 INFO  compiling root (1 scala source)[0m
+[0m2022.01.13 22:49:40 INFO  time: compiled root in 0.99s[0m
+Jan 13, 2022 10:50:29 PM scala.meta.internal.pc.CompletionProvider expected$1
+WARNING: offset 3137, count -1, length 3253
+[0m2022.01.13 22:50:30 INFO  compiling root (1 scala source)[0m
+[0m2022.01.13 22:50:30 INFO  time: compiled root in 0.75s[0m
+[0m2022.01.13 22:52:47 INFO  compiling root (2 scala sources)[0m
+Jan 13, 2022 10:52:49 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 356
+Jan 13, 2022 10:52:49 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 357
+[0m2022.01.13 22:52:49 INFO  time: compiled root in 1.64s[0m
+[0m2022.01.13 22:53:22 INFO  /home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/src/main/scala/example/Consumer.scala:65:5: stale bloop error: not found: value dataOutProp
+    dataOutProp.put("retries", 10)
+    ^^^^^^^^^^^[0m
+[0m2022.01.13 22:53:22 INFO  /home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/src/main/scala/example/Consumer.scala:65:5: stale bloop error: not found: value dataOutProp
+    dataOutProp.put("retries", 10)
+    ^^^^^^^^^^^[0m
+[0m2022.01.13 22:53:37 INFO  compiling root (2 scala sources)[0m
+[0m2022.01.13 22:53:37 INFO  time: compiled root in 0.82s[0m
+[0m2022.01.13 22:53:37 INFO  compiling root (2 scala sources)[0m
+[0m2022.01.13 22:53:38 INFO  time: compiled root in 0.83s[0m
+[0m2022.01.13 22:53:40 INFO  compiling root (2 scala sources)[0m
+[0m2022.01.13 22:53:40 INFO  time: compiled root in 0.87s[0m
+[0m2022.01.13 22:53:42 INFO  compiling root (2 scala sources)[0m
+[0m2022.01.13 22:53:42 INFO  time: compiled root in 0.8s[0m
+[0m2022.01.13 22:53:42 INFO  compiling root (2 scala sources)[0m
+[0m2022.01.13 22:53:44 INFO  time: compiled root in 0.93s[0m
+[0m2022.01.17 15:36:25 INFO  shutting down Metals[0m
+No more data in the client stdin, exiting...
+No more data in the client stdin, exiting...
+Jan 17, 2022 3:36:25 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint notify
+INFO: Failed to send notification message.
+org.eclipse.lsp4j.jsonrpc.JsonRpcException: java.nio.channels.AsynchronousCloseException
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageConsumer.consume(StreamMessageConsumer.java:72)
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.notify(RemoteEndpoint.java:126)
+	at org.eclipse.lsp4j.jsonrpc.services.EndpointProxy.invoke(EndpointProxy.java:88)
+	at com.sun.proxy.$Proxy11.onBuildExit(Unknown Source)
+	at scala.meta.internal.metals.BuildServerConnection.$anonfun$shutdown$1(BuildServerConnection.scala:104)
+	at scala.meta.internal.metals.BuildServerConnection.$anonfun$shutdown$1$adapted(BuildServerConnection.scala:100)
+	at scala.util.Success.$anonfun$map$1(Try.scala:255)
+	at scala.util.Success.map(Try.scala:213)
+	at scala.concurrent.Future.$anonfun$map$1(Future.scala:292)
+	at scala.concurrent.impl.Promise.liftedTree1$1(Promise.scala:33)
+	at scala.concurrent.impl.Promise.$anonfun$transform$1(Promise.scala:33)
+	at scala.concurrent.impl.CallbackRunnable.run(Promise.scala:64)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: java.nio.channels.AsynchronousCloseException
+	at java.base/java.nio.channels.spi.AbstractInterruptibleChannel.end(AbstractInterruptibleChannel.java:202)
+	at java.base/sun.nio.ch.SinkChannelImpl.endWrite(SinkChannelImpl.java:241)
+	at java.base/sun.nio.ch.SinkChannelImpl.write(SinkChannelImpl.java:259)
+	at java.base/java.nio.channels.Channels.writeFullyImpl(Channels.java:74)
+	at java.base/java.nio.channels.Channels.writeFully(Channels.java:94)
+	at java.base/java.nio.channels.Channels$1.write(Channels.java:172)
+	at java.base/java.io.OutputStream.write(OutputStream.java:122)
+	at java.base/java.nio.channels.Channels$1.write(Channels.java:152)
+	at scala.meta.internal.metals.ClosableOutputStream.write(ClosableOutputStream.scala:26)
+	at java.base/java.io.FilterOutputStream.write(FilterOutputStream.java:137)
+	at java.base/java.io.FilterOutputStream.write(FilterOutputStream.java:108)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageConsumer.consume(StreamMessageConsumer.java:67)
+	... 14 more
+
+[0m2022.01.17 15:36:25 INFO  Shut down connection with build server.[0mJan 17, 2022 3:36:25 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint notify
+INFO: Failed to send notification message.
+org.eclipse.lsp4j.jsonrpc.JsonRpcException: java.nio.channels.AsynchronousCloseException
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageConsumer.consume(StreamMessageConsumer.java:72)
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.notify(RemoteEndpoint.java:126)
+	at org.eclipse.lsp4j.jsonrpc.services.EndpointProxy.invoke(EndpointProxy.java:88)
+	at com.sun.proxy.$Proxy11.onBuildExit(Unknown Source)
+	at scala.meta.internal.metals.BuildServerConnection.$anonfun$shutdown$1(BuildServerConnection.scala:104)
+	at scala.meta.internal.metals.BuildServerConnection.$anonfun$shutdown$1$adapted(BuildServerConnection.scala:100)
+	at scala.util.Success.$anonfun$map$1(Try.scala:255)
+	at scala.util.Success.map(Try.scala:213)
+	at scala.concurrent.Future.$anonfun$map$1(Future.scala:292)
+	at scala.concurrent.impl.Promise.liftedTree1$1(Promise.scala:33)
+	at scala.concurrent.impl.Promise.$anonfun$transform$1(Promise.scala:33)
+	at scala.concurrent.impl.CallbackRunnable.run(Promise.scala:64)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: java.nio.channels.AsynchronousCloseException
+	at java.base/java.nio.channels.spi.AbstractInterruptibleChannel.end(AbstractInterruptibleChannel.java:202)
+	at java.base/sun.nio.ch.SinkChannelImpl.endWrite(SinkChannelImpl.java:241)
+	at java.base/sun.nio.ch.SinkChannelImpl.write(SinkChannelImpl.java:259)
+	at java.base/java.nio.channels.Channels.writeFullyImpl(Channels.java:74)
+	at java.base/java.nio.channels.Channels.writeFully(Channels.java:94)
+	at java.base/java.nio.channels.Channels$1.write(Channels.java:172)
+	at java.base/java.io.OutputStream.write(OutputStream.java:122)
+	at java.base/java.nio.channels.Channels$1.write(Channels.java:152)
+	at scala.meta.internal.metals.ClosableOutputStream.write(ClosableOutputStream.scala:26)
+	at java.base/java.io.FilterOutputStream.write(FilterOutputStream.java:137)
+	at java.base/java.io.FilterOutputStream.write(FilterOutputStream.java:108)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageConsumer.consume(StreamMessageConsumer.java:67)
+	... 14 more
+
+
+[0m2022.01.17 15:36:25 INFO  Shut down connection with build server.[0m
+Jan 17, 2022 3:36:25 PM org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer fireStreamClosed
+INFO: The input stream was closed.
+java.nio.channels.ClosedByInterruptException
+	at java.base/java.nio.channels.spi.AbstractInterruptibleChannel.end(AbstractInterruptibleChannel.java:199)
+	at java.base/sun.nio.ch.SourceChannelImpl.endRead(SourceChannelImpl.java:241)
+	at java.base/sun.nio.ch.SourceChannelImpl.read(SourceChannelImpl.java:259)
+	at java.base/sun.nio.ch.ChannelInputStream.read(ChannelInputStream.java:59)
+	at java.base/sun.nio.ch.ChannelInputStream.read(ChannelInputStream.java:109)
+	at java.base/sun.nio.ch.ChannelInputStream.read(ChannelInputStream.java:103)
+	at java.base/java.io.InputStream.read(InputStream.java:205)
+	at java.base/sun.nio.ch.ChannelInputStream.read(ChannelInputStream.java:81)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.listen(StreamMessageProducer.java:79)
+	at org.eclipse.lsp4j.jsonrpc.json.ConcurrentMessageProcessor.run(ConcurrentMessageProcessor.java:113)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+
+Jan 17, 2022 3:36:25 PM org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer fireStreamClosed
+INFO: The input stream was closed.
+java.nio.channels.ClosedByInterruptException
+	at java.base/java.nio.channels.spi.AbstractInterruptibleChannel.end(AbstractInterruptibleChannel.java:199)
+	at java.base/sun.nio.ch.SourceChannelImpl.endRead(SourceChannelImpl.java:241)
+	at java.base/sun.nio.ch.SourceChannelImpl.read(SourceChannelImpl.java:259)
+	at java.base/sun.nio.ch.ChannelInputStream.read(ChannelInputStream.java:59)
+	at java.base/sun.nio.ch.ChannelInputStream.read(ChannelInputStream.java:109)
+	at java.base/sun.nio.ch.ChannelInputStream.read(ChannelInputStream.java:103)
+	at java.base/java.io.InputStream.read(InputStream.java:205)
+	at java.base/sun.nio.ch.ChannelInputStream.read(ChannelInputStream.java:81)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.listen(StreamMessageProducer.java:79)
+	at org.eclipse.lsp4j.jsonrpc.json.ConcurrentMessageProcessor.run(ConcurrentMessageProcessor.java:113)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+
+2022.01.31 23:29:08 INFO  tracing is disabled for protocol LSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/.metals/lsp.trace.json or /home/roderick/.cache/metals/lsp.trace.json
+2022.01.31 23:29:09 INFO  logging to file /home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/.metals/metals.log
+2022.01.31 23:29:09 INFO  Started: Metals version 0.11.0 in workspace '/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator' for client Visual Studio Code 1.63.2.
+2022.01.31 23:29:09 INFO  Parse release: 11.0.11
+2022.01.31 23:29:13 INFO  time: initialize in 4.85s
+2022.01.31 23:29:14 INFO  Attempting to connect to the build server...
+2022.01.31 23:29:13 INFO  skipping build import with status 'Installed'
+2022.01.31 23:29:20 INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/.metals/bsp.trace.json or /home/roderick/.cache/metals/bsp.trace.json
+2022.01.31 23:29:28 INFO  no build target found for /home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/src/main/scala/example/Consumer.scala. Using presentation compiler with project's scala-library version: 3.1.0
+2022.01.31 23:29:30 INFO  time: code lens generation in 14s
+2022.01.31 23:29:34 INFO  Attempting to connect to the build server...
+2022.01.31 23:29:34 INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/project/.metals/bsp.trace.json or /home/roderick/.cache/metals/bsp.trace.json
+2022.01.31 23:29:41 INFO  time: Connected to build server in 26s
+2022.01.31 23:29:41 INFO  Connected to Build server: Bloop v1.4.12
+2022.01.31 23:29:41 INFO  time: Imported build in 0.14s
+2022.01.31 23:29:45 INFO  time: indexed workspace in 4.39s
+2022.01.31 23:29:46 INFO  compiling root (4 scala sources)
+2022.01.31 23:29:50 INFO  time: compiled root in 4.44s
+2022.01.31 23:29:50 INFO  compiling root (4 scala sources)
+2022.01.31 23:29:52 INFO  time: compiled root in 1.5s
+2022.02.01 00:13:31 WARN  Could not load snapshot text for semanticdb
+2022.02.01 00:13:32 WARN  Could not load snapshot text for semanticdb
+2022.02.01 00:13:31 WARN  Could not load snapshot text for semanticdb
+2022.02.01 00:13:33 INFO  compiling root (4 scala sources)
+2022.02.01 00:13:34 WARN  Could not load snapshot text for semanticdb
+2022.02.01 00:13:34 WARN  Could not load snapshot text for semanticdb
+2022.02.01 00:13:35 INFO  time: compiled root in 1.51s
+2022.02.01 00:13:34 WARN  Could not load snapshot text for semanticdb
+2022.02.01 00:13:35 WARN  Could not load snapshot text for semanticdb
+2022.02.01 00:13:35 WARN  Could not load snapshot text for semanticdb
+2022.02.01 00:13:35 WARN  Could not load snapshot text for semanticdb
+2022.02.01 00:13:40 WARN  Could not load snapshot text for semanticdb
+2022.02.01 00:13:55 INFO  compiling root (4 scala sources)
+2022.02.01 00:13:56 INFO  time: compiled root in 1.26s
+Feb 02, 2022 10:23:42 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 46
+2022.02.02 22:23:43 INFO  compiling root (4 scala sources)
+2022.02.02 22:23:43 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:23:44 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:23:44 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:23:46 INFO  time: compiled root in 3.45s
+2022.02.02 22:23:46 INFO  compiling root (4 scala sources)
+2022.02.02 22:23:48 INFO  time: compiled root in 1.46s
+2022.02.02 22:24:08 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:24:13 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:24:13 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:24:16 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:24:16 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:24:20 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:24:22 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:24:23 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:24:23 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:24:23 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:24:25 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:24:25 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:24:26 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:24:26 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:24:26 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:24:26 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:24:27 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:24:30 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:24:30 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:24:30 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:24:31 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:24:48 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:24:48 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:24:48 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:24:48 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:24:48 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:24:49 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:24:50 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:24:50 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:24:50 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:24:50 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:24:51 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:24:51 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:24:51 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:24:51 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:24:53 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:24:53 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:24:53 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:24:53 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:24:53 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:24:53 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:24:53 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:24:53 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:24:53 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:24:54 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:24:54 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:24:55 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:24:54 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:24:55 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:24:55 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:24:55 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:24:56 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:24:57 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:24:57 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:24:57 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:24:58 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:24:58 WARN  Could not load snapshot text for semanticdb
+Feb 02, 2022 10:24:59 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 169
+2022.02.02 22:24:59 WARN  Could not load snapshot text for semanticdb
+Feb 02, 2022 10:24:59 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 171
+2022.02.02 22:24:59 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:24:59 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:24:59 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:24:59 WARN  Could not load snapshot text for semanticdb
+Feb 02, 2022 10:25:00 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 180
+2022.02.02 22:25:00 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:25:00 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:25:00 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:25:00 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:25:00 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:25:01 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:25:02 INFO  compiling root (4 scala sources)
+2022.02.02 22:25:03 INFO  time: compiled root in 1.14s
+2022.02.02 22:25:03 INFO  compiling root (4 scala sources)
+2022.02.02 22:25:03 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:25:03 INFO  time: compiled root in 0.94s
+2022.02.02 22:25:04 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:25:06 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:25:06 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:25:06 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:25:33 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:25:36 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:25:36 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:25:36 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:27:10 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:27:35 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:27:40 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:27:46 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:27:47 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:27:46 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:27:48 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:27:48 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:27:48 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:27:48 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:27:48 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:27:49 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:27:49 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:27:49 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:27:55 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:27:56 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:27:55 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:27:56 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:27:57 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:27:57 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:27:57 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:27:57 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:27:57 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:27:57 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:27:57 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:27:58 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:27:58 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:27:58 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:28:01 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:28:01 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:28:08 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:28:08 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:28:08 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:28:12 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:28:12 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:28:12 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:28:12 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:28:12 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:28:12 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:28:12 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:28:12 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:28:13 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:28:14 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:28:14 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:28:13 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:28:14 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:28:14 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:28:15 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:28:14 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:28:15 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:28:15 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:28:15 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:28:16 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:28:16 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:28:17 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:28:17 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:28:23 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:28:23 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:28:23 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:28:23 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:28:23 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:28:23 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:28:26 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:28:42 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:28:45 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:28:46 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:28:48 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:28:48 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:28:48 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:28:49 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:28:49 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:28:49 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:28:49 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:28:50 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:28:50 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:28:50 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:28:52 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:28:52 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:28:56 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:28:59 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:28:59 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:28:59 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:28:59 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:28:59 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:28:59 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:28:59 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:28:59 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:29:01 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:29:01 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:29:02 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:29:02 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:29:02 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:29:02 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:29:03 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:29:04 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:29:04 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:29:04 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:29:04 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:29:07 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:29:07 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:29:07 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:29:07 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:29:07 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:29:08 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:29:08 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:29:08 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:29:08 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:29:10 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:29:10 INFO  compiling root (4 scala sources)
+2022.02.02 22:29:10 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:29:11 INFO  time: compiled root in 1.06s
+2022.02.02 22:29:13 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:29:16 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:29:17 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:29:17 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:29:18 ERROR scalafmt: /home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/src/main/scala/example/DataWriter.scala:99: error: ; expected but ) found
+        )
+        ^
+2022.02.02 22:29:18 INFO  compiling root (4 scala sources)
+2022.02.02 22:29:18 INFO  time: compiled root in 0.19s
+Feb 02, 2022 10:29:19 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint fallbackResponseError
+SEVERE: Internal error: scala.meta.internal.metals.debug.DebugProvider$WorkspaceErrorsException$: Cannot run class, since the workspace has errors.
+java.util.concurrent.CompletionException: scala.meta.internal.metals.debug.DebugProvider$WorkspaceErrorsException$: Cannot run class, since the workspace has errors.
+	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:331)
+	at java.base/java.util.concurrent.CompletableFuture.uniAcceptNow(CompletableFuture.java:743)
+	at java.base/java.util.concurrent.CompletableFuture.uniAcceptStage(CompletableFuture.java:731)
+	at java.base/java.util.concurrent.CompletableFuture.thenAcceptAsync(CompletableFuture.java:2112)
+	at scala.concurrent.java8.FuturesConvertersImpl$CF.thenAccept(FutureConvertersImpl.scala:37)
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.handleRequest(RemoteEndpoint.java:279)
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.consume(RemoteEndpoint.java:190)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.handleMessage(StreamMessageProducer.java:194)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.listen(StreamMessageProducer.java:94)
+	at org.eclipse.lsp4j.jsonrpc.json.ConcurrentMessageProcessor.run(ConcurrentMessageProcessor.java:113)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: scala.meta.internal.metals.debug.DebugProvider$WorkspaceErrorsException$: Cannot run class, since the workspace has errors.
+	at scala.meta.internal.metals.debug.DebugProvider$WorkspaceErrorsException$.<clinit>(DebugProvider.scala)
+	at scala.meta.internal.metals.debug.DebugProvider.debugDiscovery(DebugProvider.scala:363)
+	at scala.meta.internal.metals.MetalsLanguageServer.executeCommand(MetalsLanguageServer.scala:1777)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint.lambda$null$0(GenericEndpoint.java:65)
+	at org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint.request(GenericEndpoint.java:120)
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.handleRequest(RemoteEndpoint.java:261)
+	... 9 more
+
+2022.02.02 22:29:22 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:29:24 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:29:24 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:29:24 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:29:25 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:29:25 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:29:24 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:29:26 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:29:25 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:29:25 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:29:26 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:29:26 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:29:26 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:29:28 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:29:42 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:29:46 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:29:46 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:29:47 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:29:47 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:29:48 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:29:49 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:29:49 INFO  compiling root (4 scala sources)
+2022.02.02 22:29:48 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:29:49 INFO  time: compiled root in 0.84s
+2022.02.02 22:29:59 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:30:01 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:30:01 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:30:01 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:30:02 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:30:02 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:30:02 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:30:02 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:30:02 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:30:02 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:30:06 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:30:06 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:30:38 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:30:39 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:30:41 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:30:41 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:30:41 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:30:41 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:30:41 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:30:41 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:30:42 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:30:42 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:30:42 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:30:42 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:30:42 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:30:43 INFO  compiling root (4 scala sources)
+2022.02.02 22:30:44 INFO  time: compiled root in 1.16s
+2022.02.02 22:30:47 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:30:48 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:30:48 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:30:48 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:30:48 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:30:48 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:30:48 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:30:48 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:30:49 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:30:49 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:30:50 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:30:49 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:30:49 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:30:50 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:30:49 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:30:51 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:30:51 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:30:51 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:30:51 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:31:02 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:31:04 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:31:04 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:31:04 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:31:04 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:31:04 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:31:04 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:31:05 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:31:05 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:31:05 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:31:05 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:31:05 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:31:05 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:31:05 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:31:06 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:31:06 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:31:07 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:31:06 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:31:06 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:31:07 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:31:07 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:31:07 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:31:09 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:31:09 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:31:10 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:31:09 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:31:09 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:31:09 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:31:10 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:31:14 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:31:14 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:31:15 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:31:15 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:31:17 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:32:33 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:32:36 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:32:36 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:32:37 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:32:38 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:32:39 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:32:39 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:32:38 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:32:42 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:32:42 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:32:42 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:32:42 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:32:43 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:32:43 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:32:43 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:32:44 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:32:44 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:32:44 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:32:45 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:32:45 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:32:44 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:32:46 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:32:45 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:32:46 INFO  compiling root (4 scala sources)
+2022.02.02 22:32:48 INFO  time: compiled root in 1.36s
+2022.02.02 22:33:04 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:33:08 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:33:08 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:33:11 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:33:11 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:33:11 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:33:11 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:33:11 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:33:11 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:33:15 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:33:15 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:33:18 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:33:18 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:33:19 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:33:19 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:33:19 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:33:19 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:33:19 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:33:19 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:33:20 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:33:20 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:33:21 INFO  compiling root (4 scala sources)
+2022.02.02 22:33:22 INFO  time: compiled root in 1.07s
+2022.02.02 22:35:38 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:35:40 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:35:41 INFO  compiling root (4 scala sources)
+2022.02.02 22:35:42 INFO  time: compiled root in 1.03s
+2022.02.02 22:35:43 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:35:44 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:35:50 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:35:53 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:35:53 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:35:54 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:35:54 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:35:54 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:35:55 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:35:57 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:35:57 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:35:57 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:35:57 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:35:57 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:35:57 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:35:58 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:35:57 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:35:58 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:35:59 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:35:59 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:35:59 INFO  compiling root (4 scala sources)
+2022.02.02 22:35:59 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:36:00 INFO  time: compiled root in 1.62s
+2022.02.02 22:36:04 INFO  compiling root (4 scala sources)
+2022.02.02 22:36:04 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:36:04 INFO  time: compiled root in 0.53s
+2022.02.02 22:36:07 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:38:18 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:38:18 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:38:19 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:38:19 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:38:21 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:38:22 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:38:24 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:38:24 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:38:24 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:38:24 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:38:24 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:38:26 INFO  compiling root (4 scala sources)
+2022.02.02 22:38:26 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:38:26 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:38:26 INFO  time: compiled root in 0.5s
+2022.02.02 22:38:27 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:38:27 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:38:27 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:38:27 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:38:29 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:38:29 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:38:29 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:38:30 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:38:29 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:38:30 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:38:30 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:38:31 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:38:31 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:38:31 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:38:34 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:38:34 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:38:35 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:38:35 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:38:35 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:38:35 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:38:35 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:38:35 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:38:40 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:38:40 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:38:42 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:38:42 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:38:47 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:38:47 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:38:49 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:38:49 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:38:51 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:38:51 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:38:51 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:38:51 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:38:53 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:38:53 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:38:53 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:38:53 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:38:53 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:38:53 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:38:53 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:38:54 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:38:54 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:38:54 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:38:54 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:38:54 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:38:55 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:38:55 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:38:56 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:38:57 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:38:56 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:38:57 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:38:58 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:38:58 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:39:01 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:39:41 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:39:43 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:39:44 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:39:45 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:39:44 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:39:45 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:39:46 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:39:46 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:39:47 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:39:47 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:39:48 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:39:48 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:39:50 INFO  compiling root (4 scala sources)
+2022.02.02 22:39:50 INFO  time: compiled root in 0.44s
+2022.02.02 22:40:16 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:40:16 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:40:17 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:40:17 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:40:17 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:40:18 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:40:18 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:40:18 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:40:18 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:40:19 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:40:18 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:40:19 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:40:19 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:40:19 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:40:19 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:40:33 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:40:34 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:40:34 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:40:34 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:40:34 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:40:34 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:40:35 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:40:34 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:40:35 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:40:35 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:40:35 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:40:36 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:40:36 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:40:36 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:40:38 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:40:38 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:40:39 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:40:39 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:40:39 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:40:39 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:41:28 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:41:28 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:41:28 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:41:28 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:41:28 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:41:28 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:41:28 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:41:29 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:41:29 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:41:31 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:41:31 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:41:32 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:41:32 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:41:32 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:41:32 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:41:32 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:41:32 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:41:32 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:41:33 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:41:33 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:41:34 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:41:34 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:41:35 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:41:35 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:41:36 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:41:35 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:41:36 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:41:36 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:41:36 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:41:36 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:41:37 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:41:38 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:41:38 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:41:38 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:41:38 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:41:38 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:41:39 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:41:40 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:41:40 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:41:40 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:41:40 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:41:40 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:41:41 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:41:42 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:41:42 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:41:42 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:41:42 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:41:42 INFO  compiling root (4 scala sources)
+2022.02.02 22:41:43 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:41:43 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:41:42 INFO  time: compiled root in 0.49s
+2022.02.02 22:41:42 INFO  compiling root (4 scala sources)
+2022.02.02 22:41:44 INFO  time: compiled root in 0.35s
+2022.02.02 22:41:44 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:41:52 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:41:54 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:41:56 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:41:58 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:42:13 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:42:14 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:42:14 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:42:20 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:42:20 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:42:35 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:42:41 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:42:42 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:42:43 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:42:43 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:42:43 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:42:44 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:42:44 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:42:44 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:42:44 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:42:46 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:42:47 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:42:46 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:42:46 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:42:48 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:42:48 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:42:49 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:42:49 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:42:49 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:42:49 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:42:50 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:42:50 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:42:49 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:42:51 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:43:27 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:43:27 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:43:27 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:43:27 INFO  compiling root (4 scala sources)
+2022.02.02 22:43:27 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:43:27 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:43:28 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:43:27 INFO  time: compiled root in 0.74s
+2022.02.02 22:43:28 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:43:30 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:43:30 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:43:31 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:43:31 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:43:32 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:43:32 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:43:32 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:43:31 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:43:34 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:43:34 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:43:34 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:43:35 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:43:35 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:43:35 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:43:35 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:43:36 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:43:36 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:43:37 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:43:37 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:43:37 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:43:37 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:43:39 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:43:39 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:43:39 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:43:39 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:43:40 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:43:40 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:43:41 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:43:40 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:43:42 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:43:42 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:43:42 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:43:43 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:43:43 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:43:43 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:43:43 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:43:43 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:43:44 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:43:43 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:43:45 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:43:45 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:43:45 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:43:45 ERROR scalafmt: /home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/src/main/scala/example/DataWriter.scala:93: error: = expected but \n found
+        var futures
+                   ^
+2022.02.02 22:43:45 INFO  compiling root (4 scala sources)
+2022.02.02 22:43:45 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:43:45 INFO  time: compiled root in 0.11s
+2022.02.02 22:43:46 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:43:46 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:43:47 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:43:47 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:43:49 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:43:53 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:43:53 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:43:54 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:43:54 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:43:55 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:43:55 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:43:55 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:43:56 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:43:56 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:43:57 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:43:57 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:43:58 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:43:58 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:43:59 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:43:59 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:43:59 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:43:59 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:43:59 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:00 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:00 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:01 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:01 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:03 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:03 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:04 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:04 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:04 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:04 WARN  Could not load snapshot text for semanticdb
+Feb 02, 2022 10:44:05 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1374
+Feb 02, 2022 10:44:05 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1376
+2022.02.02 22:44:05 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:05 WARN  Could not load snapshot text for semanticdb
+something's wrong: no file:///home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/src/main/scala/example/DataWriter.scala in List[<error>]RangePosition(file:///home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/src/main/scala/example/DataWriter.scala, 2940, 2940, 2954)
+2022.02.02 22:44:07 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:07 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:08 WARN  Could not load snapshot text for semanticdb
+something's wrong: no file:///home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/src/main/scala/example/DataWriter.scala in List[<error>]RangePosition(file:///home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/src/main/scala/example/DataWriter.scala, 2940, 2940, 2947)
+2022.02.02 22:44:08 WARN  Could not load snapshot text for semanticdb
+something's wrong: no file:///home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/src/main/scala/example/DataWriter.scala in List[<error>]RangePosition(file:///home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/src/main/scala/example/DataWriter.scala, 2940, 2940, 2948)
+2022.02.02 22:44:08 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:08 WARN  Could not load snapshot text for semanticdb
+something's wrong: no file:///home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/src/main/scala/example/DataWriter.scala in List[<error>]RangePosition(file:///home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/src/main/scala/example/DataWriter.scala, 2940, 2940, 2949)
+2022.02.02 22:44:09 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:09 WARN  Could not load snapshot text for semanticdb
+something's wrong: no file:///home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/src/main/scala/example/DataWriter.scala in List[<error>]RangePosition(file:///home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/src/main/scala/example/DataWriter.scala, 2940, 2940, 2950)
+2022.02.02 22:44:09 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:10 WARN  Could not load snapshot text for semanticdb
+something's wrong: no file:///home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/src/main/scala/example/DataWriter.scala in List[<error>]RangePosition(file:///home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/src/main/scala/example/DataWriter.scala, 2940, 2940, 2951)
+2022.02.02 22:44:11 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:11 WARN  Could not load snapshot text for semanticdb
+something's wrong: no file:///home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/src/main/scala/example/DataWriter.scala in List[<error>]RangePosition(file:///home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/src/main/scala/example/DataWriter.scala, 2940, 2940, 2952)
+2022.02.02 22:44:10 WARN  Could not load snapshot text for semanticdb
+something's wrong: no file:///home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/src/main/scala/example/DataWriter.scala in List[<error>]RangePosition(file:///home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/src/main/scala/example/DataWriter.scala, 2940, 2940, 2952)
+something's wrong: no file:///home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/src/main/scala/example/DataWriter.scala in List[<error>]RangePosition(file:///home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/src/main/scala/example/DataWriter.scala, 2940, 2940, 2952)
+2022.02.02 22:44:12 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:12 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:13 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:13 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:13 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:13 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:13 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:14 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:14 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:16 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:16 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:16 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:16 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:16 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:16 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:16 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:16 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:18 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:18 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:18 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:18 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:18 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:18 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:18 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:19 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:19 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:20 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:20 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:22 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:22 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:23 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:23 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:25 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:25 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:26 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:25 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:27 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:27 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:27 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:28 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:28 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:28 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:28 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:28 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:28 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:29 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:28 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:29 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:29 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:29 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:29 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:29 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:29 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:30 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:30 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:33 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:34 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:34 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:35 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:35 INFO  compiling root (4 scala sources)
+2022.02.02 22:44:35 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:35 INFO  time: compiled root in 0.61s
+2022.02.02 22:44:38 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:38 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:38 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:40 ERROR scalafmt: /home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/src/main/scala/example/DataWriter.scala:93: error: identifier expected but ] found
+        var futures: List[Future] = new List[]()
+                                             ^
+2022.02.02 22:44:40 INFO  compiling root (4 scala sources)
+2022.02.02 22:44:40 INFO  time: compiled root in 0.11s
+2022.02.02 22:44:42 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:44 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:44 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:44 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:44 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:44 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:44 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:44 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:45 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:46 INFO  compiling root (4 scala sources)
+2022.02.02 22:44:46 INFO  time: compiled root in 0.57s
+2022.02.02 22:44:47 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:53 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:54 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:54 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:54 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:54 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:44:55 INFO  compiling root (4 scala sources)
+2022.02.02 22:44:55 INFO  time: compiled root in 0.42s
+2022.02.02 22:45:16 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:45:16 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:45:17 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:45:16 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:45:17 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:45:18 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:45:17 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:45:18 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:45:19 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:45:19 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:45:18 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:45:19 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:45:19 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:45:19 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:45:20 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:45:20 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:45:20 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:45:20 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:45:20 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:45:24 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:45:50 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:46:00 WARN  Could not load snapshot text for semanticdb
+something's wrong: no file:///home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/src/main/scala/example/DataWriter.scala in scala.concurrent.Future[<error>]RangePosition(file:///home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/src/main/scala/example/DataWriter.scala, 2945, 2945, 2961)
+2022.02.02 22:46:02 WARN  Could not load snapshot text for semanticdb
+something's wrong: no file:///home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/src/main/scala/example/DataWriter.scala in scala.concurrent.Future[<error>]RangePosition(file:///home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/src/main/scala/example/DataWriter.scala, 2945, 2945, 2976)
+2022.02.02 22:46:02 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:46:02 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:46:03 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:46:02 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:46:03 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:46:03 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:46:03 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:46:03 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:46:03 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:46:03 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:46:04 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:46:04 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:46:04 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:46:04 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:46:04 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:46:05 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:46:05 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:46:05 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:46:05 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:46:05 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:46:07 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:46:07 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:46:08 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:46:09 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:46:09 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:46:10 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:46:09 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:46:11 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:46:11 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:46:11 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:46:13 INFO  compiling root (4 scala sources)
+2022.02.02 22:46:13 INFO  time: compiled root in 0.38s
+2022.02.02 22:46:15 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:47:10 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:47:13 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:47:13 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:47:13 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:47:13 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:47:13 INFO  compiling root (4 scala sources)
+2022.02.02 22:47:13 INFO  time: compiled root in 0.36s
+2022.02.02 22:47:30 INFO  compiling root (4 scala sources)
+2022.02.02 22:47:30 INFO  time: compiled root in 0.36s
+2022.02.02 22:47:33 INFO  compiling root (4 scala sources)
+2022.02.02 22:47:33 INFO  time: compiled root in 0.37s
+2022.02.02 22:49:41 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:49:41 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:49:41 INFO  compiling root (4 scala sources)
+2022.02.02 22:49:41 INFO  time: compiled root in 0.4s
+2022.02.02 22:49:54 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:49:54 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:49:57 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:49:57 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:49:57 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:50:03 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:50:36 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:50:40 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:50:42 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:50:42 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:50:42 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:50:43 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:50:42 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:50:43 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:50:43 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:50:43 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:50:43 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:50:44 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:50:43 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:50:47 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:50:47 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:50:47 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:50:47 WARN  Could not load snapshot text for semanticdb
+Feb 02, 2022 10:50:47 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1783
+2022.02.02 22:50:47 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:50:47 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:50:47 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:50:47 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:50:47 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:50:48 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:50:48 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:50:48 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:50:49 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:50:48 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:50:49 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:50:50 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:50:50 INFO  compiling root (4 scala sources)
+2022.02.02 22:50:50 INFO  time: compiled root in 0.4s
+2022.02.02 22:50:50 INFO  compiling root (4 scala sources)
+2022.02.02 22:50:50 INFO  time: compiled root in 0.33s
+2022.02.02 22:51:18 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:51:19 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:51:19 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:51:19 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:51:20 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:51:21 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:51:20 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:51:20 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:51:22 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:51:22 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:51:22 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:51:22 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:51:22 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:51:23 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:51:23 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:51:25 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:51:28 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:51:28 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:51:28 ERROR scalafmt: /home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/src/main/scala/example/DataWriter.scala:97: error: ) expected but } found
+        }))
+        ^
+2022.02.02 22:51:28 INFO  compiling root (4 scala sources)
+2022.02.02 22:51:28 INFO  time: compiled root in 92ms
+2022.02.02 22:51:32 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:51:32 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:51:32 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:51:32 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:51:32 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:51:33 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:51:33 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:51:38 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:51:38 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:51:41 ERROR scalafmt: /home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/src/main/scala/example/DataWriter.scala:98: error: } expected but ) found
+        )
+        ^
+2022.02.02 22:51:41 INFO  compiling root (4 scala sources)
+2022.02.02 22:51:41 INFO  time: compiled root in 0.11s
+2022.02.02 22:51:47 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:51:47 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:51:48 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:51:47 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:51:48 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:51:47 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:51:48 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:51:48 INFO  compiling root (4 scala sources)
+2022.02.02 22:51:48 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:51:48 INFO  time: compiled root in 0.43s
+2022.02.02 22:51:50 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:51:51 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:51:52 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:51:52 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:51:55 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:51:55 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:51:55 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:51:55 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:51:57 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:51:58 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:51:58 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:51:58 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:51:58 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:51:59 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:51:58 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:51:59 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:00 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:00 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:00 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:00 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:00 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:00 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:01 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:02 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:02 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:03 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:02 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:02 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:04 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:04 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:04 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:04 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:05 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:05 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:05 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:05 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:05 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:06 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:08 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:08 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:09 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:09 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:09 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:09 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:10 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:10 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:10 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:10 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:11 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:11 INFO  compiling root (4 scala sources)
+2022.02.02 22:52:11 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:11 INFO  time: compiled root in 0.57s
+2022.02.02 22:52:12 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:14 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:14 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:15 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:15 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:21 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:21 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:21 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:21 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:21 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:22 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:22 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:22 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:22 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:22 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:22 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:23 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:23 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:23 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:22 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:22 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:24 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:25 INFO  compiling root (4 scala sources)
+2022.02.02 22:52:25 INFO  time: compiled root in 0.34s
+2022.02.02 22:52:28 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:28 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:29 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:28 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:29 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:29 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:29 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:29 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:29 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:29 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:29 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:29 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:29 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:29 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:29 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:30 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:31 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:31 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:31 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:32 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:32 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:32 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:32 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:32 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:32 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:32 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:32 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:33 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:33 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:34 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:34 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:35 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:35 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:35 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:35 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:36 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:36 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:36 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:36 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:37 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:37 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:37 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:37 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:37 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:37 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:38 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:38 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:40 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:40 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:40 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:40 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:45 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:45 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:46 INFO  compiling root (4 scala sources)
+2022.02.02 22:52:46 INFO  time: compiled root in 0.41s
+2022.02.02 22:52:47 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:48 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:48 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:48 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:48 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:50 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:51 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:52 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:52 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:52 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:52 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:53 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:55 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:55 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:55 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:55 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:55 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:56 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:56 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:56 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:56 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:52:58 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:53:00 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:53:00 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:53:00 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:53:00 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:53:01 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:53:00 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:53:00 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:53:00 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:53:01 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:53:01 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:53:02 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:53:02 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:53:02 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:53:02 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:53:03 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:53:02 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:53:03 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:53:04 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:53:04 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:53:04 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:53:04 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:53:04 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:53:04 WARN  Could not load snapshot text for semanticdb
+2022.02.02 22:53:07 INFO  compiling root (4 scala sources)
+2022.02.02 22:53:09 WARN  2 deprecations
+2022.02.02 22:53:09 WARN  1 deprecation (since 2.13.0)
+2022.02.02 22:53:09 WARN  3 deprecations in total; re-run with -deprecation for details
+2022.02.02 22:53:09 INFO  time: compiled root in 2.95s
+Feb 02, 2022 10:56:03 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 2591
+Feb 02, 2022 10:56:23 PM scala.meta.internal.pc.CompletionProvider expected$1
+WARNING: offset 2994, count -1, length 5132
+Feb 03, 2022 12:11:43 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 2761
+2022.02.03 00:29:16 INFO  compiling root (1 scala source)
+2022.02.03 00:29:16 INFO  time: compiled root in 0.55s
+Feb 03, 2022 12:30:10 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 3330
+2022.02.03 00:30:44 INFO  compiling root (1 scala source)
+2022.02.03 00:30:44 INFO  time: compiled root in 0.45s
+2022.02.03 00:31:21 INFO  compiling root (1 scala source)
+2022.02.03 00:31:23 WARN  1 deprecation
+2022.02.03 00:31:23 WARN  1 deprecation (since 2.13.0)
+2022.02.03 00:31:23 WARN  2 deprecations in total; re-run with -deprecation for details
+2022.02.03 00:31:23 INFO  time: compiled root in 1.87s
+2022.02.03 00:32:11 INFO  compiling root (1 scala source)
+2022.02.03 00:32:12 WARN  1 deprecation
+2022.02.03 00:32:12 WARN  1 deprecation (since 2.13.0)
+2022.02.03 00:32:12 WARN  2 deprecations in total; re-run with -deprecation for details
+2022.02.03 00:32:12 INFO  time: compiled root in 1.3s
+2022.02.03 00:32:17 INFO  compiling root (1 scala source)
+2022.02.03 00:32:18 WARN  1 deprecation
+2022.02.03 00:32:18 WARN  1 deprecation (since 2.13.0)
+2022.02.03 00:32:18 WARN  2 deprecations in total; re-run with -deprecation for details
+2022.02.03 00:32:18 INFO  time: compiled root in 1.2s
+Feb 03, 2022 12:32:53 AM scala.meta.internal.pc.CompilerAccess handleError
+SEVERE: null
+java.lang.NullPointerException
+	at scala.meta.internal.pc.completions.ArgCompletions$ArgCompletion.$anonfun$baseParams$1(ArgCompletions.scala:27)
+	at scala.Option.getOrElse(Option.scala:201)
+	at scala.meta.internal.pc.completions.ArgCompletions$ArgCompletion.baseParams$lzycompute(ArgCompletions.scala:27)
+	at scala.meta.internal.pc.completions.ArgCompletions$ArgCompletion.baseParams(ArgCompletions.scala:23)
+	at scala.meta.internal.pc.completions.ArgCompletions$ArgCompletion.allParams$lzycompute(ArgCompletions.scala:41)
+	at scala.meta.internal.pc.completions.ArgCompletions$ArgCompletion.allParams(ArgCompletions.scala:40)
+	at scala.meta.internal.pc.completions.ArgCompletions$ArgCompletion.params$lzycompute(ArgCompletions.scala:47)
+	at scala.meta.internal.pc.completions.ArgCompletions$ArgCompletion.params(ArgCompletions.scala:46)
+	at scala.meta.internal.pc.completions.ArgCompletions$ArgCompletion.contribute(ArgCompletions.scala:159)
+	at scala.meta.internal.pc.CompletionProvider.expected$1(CompletionProvider.scala:400)
+	at scala.meta.internal.pc.CompletionProvider.safeCompletionsAt(CompletionProvider.scala:481)
+	at scala.meta.internal.pc.CompletionProvider.completions(CompletionProvider.scala:58)
+
+Feb 03, 2022 12:32:54 AM scala.meta.internal.pc.CompilerAccess handleError
+SEVERE: null
+java.lang.NullPointerException
+	at scala.meta.internal.pc.completions.ArgCompletions$ArgCompletion.$anonfun$baseParams$1(ArgCompletions.scala:27)
+	at scala.Option.getOrElse(Option.scala:201)
+	at scala.meta.internal.pc.completions.ArgCompletions$ArgCompletion.baseParams$lzycompute(ArgCompletions.scala:27)
+	at scala.meta.internal.pc.completions.ArgCompletions$ArgCompletion.baseParams(ArgCompletions.scala:23)
+	at scala.meta.internal.pc.completions.ArgCompletions$ArgCompletion.allParams$lzycompute(ArgCompletions.scala:41)
+	at scala.meta.internal.pc.completions.ArgCompletions$ArgCompletion.allParams(ArgCompletions.scala:40)
+	at scala.meta.internal.pc.completions.ArgCompletions$ArgCompletion.params$lzycompute(ArgCompletions.scala:47)
+	at scala.meta.internal.pc.completions.ArgCompletions$ArgCompletion.params(ArgCompletions.scala:46)
+	at scala.meta.internal.pc.completions.ArgCompletions$ArgCompletion.contribute(ArgCompletions.scala:159)
+	at scala.meta.internal.pc.CompletionProvider.expected$1(CompletionProvider.scala:400)
+	at scala.meta.internal.pc.CompletionProvider.safeCompletionsAt(CompletionProvider.scala:481)
+	at scala.meta.internal.pc.CompletionProvider.completions(CompletionProvider.scala:58)
+
+Feb 03, 2022 12:32:55 AM scala.meta.internal.pc.CompilerAccess handleError
+SEVERE: null
+java.lang.NullPointerException
+	at scala.meta.internal.pc.completions.ArgCompletions$ArgCompletion.$anonfun$baseParams$1(ArgCompletions.scala:27)
+	at scala.Option.getOrElse(Option.scala:201)
+	at scala.meta.internal.pc.completions.ArgCompletions$ArgCompletion.baseParams$lzycompute(ArgCompletions.scala:27)
+	at scala.meta.internal.pc.completions.ArgCompletions$ArgCompletion.baseParams(ArgCompletions.scala:23)
+	at scala.meta.internal.pc.completions.ArgCompletions$ArgCompletion.allParams$lzycompute(ArgCompletions.scala:41)
+	at scala.meta.internal.pc.completions.ArgCompletions$ArgCompletion.allParams(ArgCompletions.scala:40)
+	at scala.meta.internal.pc.completions.ArgCompletions$ArgCompletion.params$lzycompute(ArgCompletions.scala:47)
+	at scala.meta.internal.pc.completions.ArgCompletions$ArgCompletion.params(ArgCompletions.scala:46)
+	at scala.meta.internal.pc.completions.ArgCompletions$ArgCompletion.contribute(ArgCompletions.scala:159)
+	at scala.meta.internal.pc.CompletionProvider.expected$1(CompletionProvider.scala:400)
+	at scala.meta.internal.pc.CompletionProvider.safeCompletionsAt(CompletionProvider.scala:481)
+	at scala.meta.internal.pc.CompletionProvider.completions(CompletionProvider.scala:58)
+
+Feb 03, 2022 12:32:57 AM scala.meta.internal.pc.CompilerAccess handleError
+SEVERE: null
+java.lang.NullPointerException
+	at scala.meta.internal.pc.completions.ArgCompletions$ArgCompletion.$anonfun$baseParams$1(ArgCompletions.scala:27)
+	at scala.Option.getOrElse(Option.scala:201)
+	at scala.meta.internal.pc.completions.ArgCompletions$ArgCompletion.baseParams$lzycompute(ArgCompletions.scala:27)
+	at scala.meta.internal.pc.completions.ArgCompletions$ArgCompletion.baseParams(ArgCompletions.scala:23)
+	at scala.meta.internal.pc.completions.ArgCompletions$ArgCompletion.allParams$lzycompute(ArgCompletions.scala:41)
+	at scala.meta.internal.pc.completions.ArgCompletions$ArgCompletion.allParams(ArgCompletions.scala:40)
+	at scala.meta.internal.pc.completions.ArgCompletions$ArgCompletion.params$lzycompute(ArgCompletions.scala:47)
+	at scala.meta.internal.pc.completions.ArgCompletions$ArgCompletion.params(ArgCompletions.scala:46)
+	at scala.meta.internal.pc.completions.ArgCompletions$ArgCompletion.contribute(ArgCompletions.scala:159)
+	at scala.meta.internal.pc.CompletionProvider.expected$1(CompletionProvider.scala:400)
+	at scala.meta.internal.pc.CompletionProvider.safeCompletionsAt(CompletionProvider.scala:481)
+	at scala.meta.internal.pc.CompletionProvider.completions(CompletionProvider.scala:58)
+
+Feb 03, 2022 12:32:59 AM scala.meta.internal.pc.CompilerAccess handleError
+SEVERE: null
+java.lang.NullPointerException
+	at scala.meta.internal.pc.completions.ArgCompletions$ArgCompletion.$anonfun$baseParams$1(ArgCompletions.scala:27)
+	at scala.Option.getOrElse(Option.scala:201)
+	at scala.meta.internal.pc.completions.ArgCompletions$ArgCompletion.baseParams$lzycompute(ArgCompletions.scala:27)
+	at scala.meta.internal.pc.completions.ArgCompletions$ArgCompletion.baseParams(ArgCompletions.scala:23)
+	at scala.meta.internal.pc.completions.ArgCompletions$ArgCompletion.allParams$lzycompute(ArgCompletions.scala:41)
+	at scala.meta.internal.pc.completions.ArgCompletions$ArgCompletion.allParams(ArgCompletions.scala:40)
+	at scala.meta.internal.pc.completions.ArgCompletions$ArgCompletion.params$lzycompute(ArgCompletions.scala:47)
+	at scala.meta.internal.pc.completions.ArgCompletions$ArgCompletion.params(ArgCompletions.scala:46)
+	at scala.meta.internal.pc.completions.ArgCompletions$ArgCompletion.contribute(ArgCompletions.scala:159)
+	at scala.meta.internal.pc.CompletionProvider.expected$1(CompletionProvider.scala:400)
+	at scala.meta.internal.pc.CompletionProvider.safeCompletionsAt(CompletionProvider.scala:481)
+	at scala.meta.internal.pc.CompletionProvider.completions(CompletionProvider.scala:58)
+
+2022.02.03 00:33:00 INFO  compiling root (1 scala source)
+2022.02.03 00:33:00 INFO  time: compiled root in 0.31s
+2022.02.03 00:33:07 INFO  compiling root (1 scala source)
+2022.02.03 00:33:09 WARN  1 deprecation
+2022.02.03 00:33:09 WARN  1 deprecation (since 2.13.0)
+2022.02.03 00:33:09 WARN  2 deprecations in total; re-run with -deprecation for details
+2022.02.03 00:33:09 INFO  time: compiled root in 1.24s
+2022.02.03 00:33:17 INFO  compiling root (1 scala source)
+2022.02.03 00:33:17 WARN  1 deprecation
+2022.02.03 00:33:17 WARN  1 deprecation (since 2.13.0)
+2022.02.03 00:33:17 WARN  2 deprecations in total; re-run with -deprecation for details
+2022.02.03 00:33:18 INFO  time: compiled root in 1.01s
+2022.02.03 00:33:22 INFO  compiling root (1 scala source)
+2022.02.03 00:33:23 WARN  1 deprecation
+2022.02.03 00:33:23 WARN  1 deprecation (since 2.13.0)
+2022.02.03 00:33:23 WARN  2 deprecations in total; re-run with -deprecation for details
+2022.02.03 00:33:23 INFO  time: compiled root in 1.07s
+2022.02.03 00:33:25 INFO  compiling root-test (2 scala sources)
+2022.02.03 00:33:27 INFO  time: compiled root-test in 1.83s
+2022.02.03 00:35:16 INFO  compiling root (1 scala source)
+2022.02.03 00:35:18 WARN  1 deprecation
+2022.02.03 00:35:18 WARN  1 deprecation (since 2.13.0)
+2022.02.03 00:35:18 WARN  2 deprecations in total; re-run with -deprecation for details
+2022.02.03 00:35:18 INFO  time: compiled root in 1.72s
+2022.02.03 00:50:07 INFO  tracing is disabled for protocol LSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/.metals/lsp.trace.json or /home/roderick/.cache/metals/lsp.trace.json
+2022.02.03 00:50:09 INFO  logging to file /home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/.metals/metals.log
+2022.02.03 00:50:09 INFO  Started: Metals version 0.11.0 in workspace '/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator' for client Visual Studio Code 1.63.2.
+2022.02.03 00:50:09 INFO  Parse release: 11.0.11
+2022.02.03 00:50:12 INFO  time: initialize in 3.14s
+2022.02.03 00:50:16 INFO  Attempting to connect to the build server...
+2022.02.03 00:50:16 INFO  skipping build import with status 'Installed'
+2022.02.03 00:50:17 INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/.metals/bsp.trace.json or /home/roderick/.cache/metals/bsp.trace.json
+2022.02.03 00:50:17 INFO  Attempting to connect to the build server...
+2022.02.03 00:50:17 INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/project/.metals/bsp.trace.json or /home/roderick/.cache/metals/bsp.trace.json
+2022.02.03 00:50:17 INFO  time: Connected to build server in 1.05s
+2022.02.03 00:50:17 INFO  Connected to Build server: Bloop v1.4.12
+2022.02.03 00:50:17 INFO  time: Imported build in 0.31s
+2022.02.03 00:50:23 INFO  time: indexed workspace in 5.52s
+2022.02.03 00:50:24 INFO  time: code lens generation in 6.94s
+2022.02.03 00:59:12 INFO  compiling root (1 scala source)
+2022.02.03 00:59:13 INFO  time: compiled root in 1.48s
+2022.02.03 00:59:13 INFO  compiling root (1 scala source)
+2022.02.03 00:59:13 INFO  time: compiled root in 0.32s
+2022.02.03 00:59:13 INFO  compiling root (1 scala source)
+2022.02.03 00:59:13 INFO  time: compiled root in 0.24s
+2022.02.03 00:59:18 INFO  compiling root (1 scala source)
+2022.02.03 00:59:18 INFO  time: compiled root in 0.18s
+2022.02.03 00:59:24 INFO  compiling root (1 scala source)
+2022.02.03 00:59:24 INFO  time: compiled root in 0.23s
+2022.02.03 00:59:24 INFO  compiling root (1 scala source)
+2022.02.03 00:59:24 INFO  time: compiled root in 0.15s
+Feb 03, 2022 1:19:24 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 205
+2022.02.03 01:19:35 INFO  compiling root (1 scala source)
+2022.02.03 01:19:35 INFO  time: compiled root in 0.68s
+2022.02.03 01:19:36 INFO  /home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/src/main/scala/example/Producer.scala:28:7: stale bloop error: type mismatch;
+ found   : Double
+ required: Int
+      4 * factor + 1,
+      ^^^^^^^^^^^^^^
+2022.02.03 01:19:36 INFO  /home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/src/main/scala/example/Producer.scala:29:7: stale bloop error: type mismatch;
+ found   : Double
+ required: Int
+      4 * factor + 1,
+      ^^^^^^^^^^^^^^
+2022.02.03 01:19:36 INFO  /home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/src/main/scala/example/Producer.scala:37:18: stale bloop error: type mismatch;
+ found   : Double
+ required: Int
+      x <- 0 to (4 * factor - 1) by factor; y <- 0 to (4 * factor - 1) by factor
+                 ^^^^^^^^^^^^^^
+2022.02.03 01:19:36 INFO  /home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/src/main/scala/example/Producer.scala:37:56: stale bloop error: type mismatch;
+ found   : Double
+ required: Int
+      x <- 0 to (4 * factor - 1) by factor; y <- 0 to (4 * factor - 1) by factor
+                                                       ^^^^^^^^^^^^^^
+2022.02.03 01:19:36 INFO  /home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/src/main/scala/example/Producer.scala:28:7: stale bloop error: type mismatch;
+ found   : Double
+ required: Int
+      4 * factor + 1,
+      ^^^^^^^^^^^^^^
+2022.02.03 01:19:36 INFO  /home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/src/main/scala/example/Producer.scala:29:7: stale bloop error: type mismatch;
+ found   : Double
+ required: Int
+      4 * factor + 1,
+      ^^^^^^^^^^^^^^
+2022.02.03 01:19:36 INFO  /home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/src/main/scala/example/Producer.scala:37:18: stale bloop error: type mismatch;
+ found   : Double
+ required: Int
+      x <- 0 to (4 * factor - 1) by factor; y <- 0 to (4 * factor - 1) by factor
+                 ^^^^^^^^^^^^^^
+2022.02.03 01:19:36 INFO  /home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/src/main/scala/example/Producer.scala:37:56: stale bloop error: type mismatch;
+ found   : Double
+ required: Int
+      x <- 0 to (4 * factor - 1) by factor; y <- 0 to (4 * factor - 1) by factor
+                                                       ^^^^^^^^^^^^^^
+2022.02.03 01:19:39 INFO  compiling root (1 scala source)
+2022.02.03 01:19:39 INFO  time: compiled root in 0.24s
+2022.02.03 01:19:57 INFO  compiling root (1 scala source)
+2022.02.03 01:19:57 INFO  time: compiled root in 0.19s
+2022.02.03 01:20:07 INFO  compiling root (1 scala source)
+2022.02.03 01:20:07 INFO  time: compiled root in 0.18s
+2022.02.03 01:20:08 INFO  compiling root (1 scala source)
+2022.02.03 01:20:08 INFO  time: compiled root in 0.21s
+2022.02.03 01:20:22 INFO  compiling root (1 scala source)
+2022.02.03 01:20:22 INFO  time: compiled root in 0.23s
+2022.02.03 01:20:25 INFO  compiling root (1 scala source)
+2022.02.03 01:20:25 INFO  time: compiled root in 0.23s
+2022.02.03 01:20:31 INFO  compiling root (1 scala source)
+2022.02.03 01:20:31 INFO  time: compiled root in 0.26s
+2022.02.03 01:20:55 INFO  compiling root (1 scala source)
+2022.02.03 01:20:55 INFO  time: compiled root in 0.19s
+2022.02.03 01:21:25 INFO  compiling root (1 scala source)
+2022.02.03 01:21:25 INFO  time: compiled root in 0.19s
+2022.02.03 01:21:40 INFO  compiling root (1 scala source)
+2022.02.03 01:21:40 INFO  time: compiled root in 0.17s
+2022.02.03 01:21:51 INFO  compiling root (1 scala source)
+2022.02.03 01:21:52 INFO  time: compiled root in 1.27s
+Feb 03, 2022 8:36:04 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 849
+2022.02.03 08:43:32 INFO  tracing is disabled for protocol LSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/.metals/lsp.trace.json or /home/roderick/.cache/metals/lsp.trace.json
+2022.02.03 08:43:33 INFO  logging to file /home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/.metals/metals.log
+2022.02.03 08:43:33 INFO  Started: Metals version 0.11.0 in workspace '/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator' for client Visual Studio Code 1.63.2.
+2022.02.03 08:43:33 INFO  Parse release: 11.0.11
+2022.02.03 08:43:36 INFO  time: initialize in 3.33s
+2022.02.03 08:43:40 INFO  Attempting to connect to the build server...
+2022.02.03 08:43:40 INFO  skipping build import with status 'Installed'
+2022.02.03 08:43:40 INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/.metals/bsp.trace.json or /home/roderick/.cache/metals/bsp.trace.json
+2022.02.03 08:43:40 INFO  Attempting to connect to the build server...
+2022.02.03 08:43:40 INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/project/.metals/bsp.trace.json or /home/roderick/.cache/metals/bsp.trace.json
+2022.02.03 08:43:40 INFO  time: Connected to build server in 1.04s
+2022.02.03 08:43:41 INFO  Connected to Build server: Bloop v1.4.12
+2022.02.03 08:43:41 INFO  time: Imported build in 0.23s
+Feb 03, 2022 8:43:42 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 2
+2022.02.03 08:43:47 ERROR code navigation does not work for the file '/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/src/main/scala/example/Consumer.scala' because the SemanticDB file '/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/.bloop/root/bloop-bsp-clients-classes/classes-Metals-PuETRgwHS3avTjOxSDtzCA==/META-INF/semanticdb/src/main/scala/example/Consumer.scala.semanticdb' doesn't exist. There can be many reasons for this error. 
+2022.02.03 08:43:48 INFO  time: indexed workspace in 7.06s
+Feb 03, 2022 8:46:46 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 55
+2022.02.03 08:53:59 INFO  compiling root (1 scala source)
+2022.02.03 08:54:02 WARN  1 deprecation
+2022.02.03 08:54:02 WARN  1 deprecation (since 2.13.0)
+2022.02.03 08:54:02 WARN  2 deprecations in total; re-run with -deprecation for details
+2022.02.03 08:54:02 INFO  time: compiled root in 3.58s
+2022.02.03 08:57:48 INFO  compiling root (1 scala source)
+2022.02.03 08:57:49 WARN  1 deprecation
+2022.02.03 08:57:49 WARN  1 deprecation (since 2.13.0)
+2022.02.03 08:57:49 WARN  2 deprecations in total; re-run with -deprecation for details
+2022.02.03 08:57:49 INFO  time: compiled root in 1.39s

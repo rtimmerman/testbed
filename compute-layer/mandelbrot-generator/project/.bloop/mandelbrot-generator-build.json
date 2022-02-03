@@ -19,7 +19,7 @@
         "classpath": [
             "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/sbt/1.5.4/sbt-1.5.4.jar",
             "/home/roderick/.sbt/boot/scala-2.12.14/lib/scala-library.jar",
-            "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/ch/epfl/scala/sbt-bloop_2.12_1.0/1.4.8-19-4d9f966b/sbt-bloop-1.4.8-19-4d9f966b.jar",
+            "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/ch/epfl/scala/sbt-bloop_2.12_1.0/1.4.11/sbt-bloop-1.4.11.jar",
             "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/main_2.12/1.5.4/main_2.12-1.5.4.jar",
             "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/io_2.12/1.5.1/io_2.12-1.5.1.jar",
             "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/net/java/dev/jna/jna/5.5.0/jna-5.5.0.jar",
@@ -216,12 +216,17 @@
                 {
                     "organization": "ch.epfl.scala",
                     "name": "sbt-bloop",
-                    "version": "1.4.8-19-4d9f966b",
+                    "version": "1.4.11",
                     "configurations": "default",
                     "artifacts": [
                         {
                             "name": "sbt-bloop",
-                            "path": "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/ch/epfl/scala/sbt-bloop_2.12_1.0/1.4.8-19-4d9f966b/sbt-bloop-1.4.8-19-4d9f966b.jar"
+                            "path": "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/ch/epfl/scala/sbt-bloop_2.12_1.0/1.4.11/sbt-bloop-1.4.11.jar"
+                        },
+                        {
+                            "name": "sbt-bloop",
+                            "classifier": "sources",
+                            "path": "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/ch/epfl/scala/sbt-bloop_2.12_1.0/1.4.11/sbt-bloop-1.4.11-sources.jar"
                         }
                     ]
                 },
@@ -234,6 +239,11 @@
                         {
                             "name": "gson",
                             "path": "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/com/google/code/gson/gson/2.7/gson-2.7.jar"
+                        },
+                        {
+                            "name": "gson",
+                            "classifier": "sources",
+                            "path": "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/com/google/code/gson/gson/2.7/gson-2.7-sources.jar"
                         }
                     ]
                 },
@@ -246,6 +256,11 @@
                         {
                             "name": "jsr305",
                             "path": "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar"
+                        },
+                        {
+                            "name": "jsr305",
+                            "classifier": "sources",
+                            "path": "/home/roderick/.cache/coursier/v1/https/repo1.maven.org/maven2/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2-sources.jar"
                         }
                     ]
                 },

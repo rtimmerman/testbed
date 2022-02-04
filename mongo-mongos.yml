@@ -315,7 +315,7 @@ metadata:
     purpose: database
 spec:
   selector:
-    role: mongos-1
+    role: mongos
   ports:
     - port: 27017
       targetPort: 27017

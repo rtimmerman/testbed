@@ -767,19 +767,22 @@ kind: Deployment
 metadata:
   name: arnold-pri
   labels:
-    purpose: arnold-pri
+    role: arnold-pri
+    purpose: database
   namespace: dev
 spec:
   selector:
     matchLabels:
-      purpose: arnold-pri
+      role: arnold-pri
+      purpose: database
   replicas: 1
   strategy:
     type: RollingUpdate
   template:
       metadata:
         labels:
-          purpose: arnold-pri
+          role: arnold-pri
+          purpose: database
       spec:
         terminationGracePeriodSeconds: 5
         volumes:
@@ -823,19 +826,22 @@ kind: Deployment
 metadata:
   name: arnold-sec-1
   labels:
-    purpose: arnold-sec-1
+    role: arnold-sec-1
+    purpose: database
   namespace: dev  
 spec:
   selector:
     matchLabels:
-      purpose: arnold-sec-1
+      role: arnold-sec-1
+      purpose: database
   replicas: 1
   strategy:
     type: RollingUpdate
   template:
     metadata:
       labels:
-        purpose: arnold-sec-1
+        role: arnold-sec-1
+        purpose: database
     spec:
       terminationGracePeriodSeconds: 5
       containers:
@@ -869,19 +875,22 @@ kind: Deployment
 metadata:
   name: arnold-sec-2
   labels:
-    purpose: arnold-sec-2
+    role: arnold-sec-2
+    purpose: database
   namespace: dev
 spec:
   selector:
     matchLabels:
-      purpose: arnold-sec-2
+      role: arnold-sec-2
+      purpose: database
   replicas: 1
   strategy:
     type: RollingUpdate
   template:
     metadata:
       labels:
-        purpose: arnold-sec-2
+        role: arnold-sec-2
+        purpose: database
     spec:
       terminationGracePeriodSeconds: 5
       containers:
@@ -916,9 +925,11 @@ kind: Service
 metadata:
   name: arnold-pri
   namespace: dev
+  labels:
+    purpose: database
 spec:
   selector:
-    purpose: arnold-pri
+    role: arnold-pri
   ports:
     - name: mongo
       port: 27018
@@ -933,9 +944,11 @@ kind: Service
 metadata:
   name: arnold-sec-1
   namespace: dev
+  labels:
+    purpose: database
 spec:
   selector:
-    purpose: arnold-sec-1
+    role: arnold-sec-1
   ports:
     - name: mongo
       port: 27018
@@ -950,9 +963,11 @@ kind: Service
 metadata:
   name: arnold-sec-2
   namespace: dev
+  labels:
+    purpose: database
 spec:
   selector:
-    purpose: arnold-sec-2
+    role: arnold-sec-2
   ports:
     - name: mongo
       port: 27018

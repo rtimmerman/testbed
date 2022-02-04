@@ -769,19 +769,22 @@ kind: Deployment
 metadata:
   name: duncan-pri
   labels:
-    purpose: duncan-pri
+    role: duncan-pri
+    purpose: database
   namespace: dev
 spec:
   selector:
     matchLabels:
-      purpose: duncan-pri
+      role: duncan-pri
+      purpose: database
   replicas: 1
   strategy:
     type: RollingUpdate
   template:
       metadata:
         labels:
-          purpose: duncan-pri
+          role: duncan-pri
+          purpose: database
       spec:
         terminationGracePeriodSeconds: 5
         volumes:
@@ -821,19 +824,22 @@ kind: Deployment
 metadata:
   name: duncan-sec-1
   labels:
-    purpose: duncan-sec-1
+    role: duncan-sec-1
+    purpose: database
   namespace: dev  
 spec:
   selector:
     matchLabels:
-      purpose: duncan-sec-1
+      role: duncan-sec-1
+      purpose: database
   replicas: 1
   strategy:
     type: RollingUpdate
   template:
     metadata:
       labels:
-        purpose: duncan-sec-1
+        role: duncan-sec-1
+        purpose: database
     spec:
       terminationGracePeriodSeconds: 5
       containers:
@@ -868,19 +874,22 @@ kind: Deployment
 metadata:
   name: duncan-sec-2
   labels:
-    purpose: duncan-sec-2
+    role: duncan-sec-2
+    purpose: database
   namespace: dev
 spec:
   selector:
     matchLabels:
-      purpose: duncan-sec-2
+      role: duncan-sec-2
+      purpose: database
   replicas: 1
   strategy:
     type: RollingUpdate
   template:
     metadata:
       labels:
-        purpose: duncan-sec-2
+        role: duncan-sec-2
+        purpose: database
     spec:
       terminationGracePeriodSeconds: 5
       containers:
@@ -915,9 +924,11 @@ kind: Service
 metadata:
   name: duncan-pri
   namespace: dev
+  labels:
+    purpose: database
 spec:
   selector:
-    purpose: duncan-pri
+    role: duncan-pri
   ports:
     - name: mongo
       port: 27018
@@ -932,9 +943,11 @@ kind: Service
 metadata:
   name: duncan-sec-1
   namespace: dev
+  labels:
+    purpose: database
 spec:
   selector:
-    purpose: duncan-sec-1
+    role: duncan-sec-1
   ports:
     - name: mongo
       port: 27018
@@ -951,7 +964,7 @@ metadata:
   namespace: dev
 spec:
   selector:
-    purpose: duncan-sec-2
+    role: duncan-sec-2
   ports:
     - name: mongo
       port: 27018

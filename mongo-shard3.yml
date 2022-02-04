@@ -769,19 +769,22 @@ kind: Deployment
 metadata:
   name: calvin-pri
   labels:
-    purpose: calvin-pri
+    role: calvin-pri
+    purpose: database
   namespace: dev
 spec:
   selector:
     matchLabels:
-      purpose: calvin-pri
+      role: calvin-pri
+      purpose: database
   replicas: 1
   strategy:
     type: RollingUpdate
   template:
       metadata:
         labels:
-          purpose: calvin-pri
+          role: calvin-pri
+          purpose: database
       spec:
         terminationGracePeriodSeconds: 5
         volumes:
@@ -821,19 +824,22 @@ kind: Deployment
 metadata:
   name: calvin-sec-1
   labels:
-    purpose: calvin-sec-1
+    role: calvin-sec-1
+    purpose: database
   namespace: dev  
 spec:
   selector:
     matchLabels:
-      purpose: calvin-sec-1
+      role: calvin-sec-1
+      purpose: database
   replicas: 1
   strategy:
     type: RollingUpdate
   template:
     metadata:
       labels:
-        purpose: calvin-sec-1
+        role: calvin-sec-1
+        purpose: database
     spec:
       terminationGracePeriodSeconds: 5
       containers:
@@ -868,19 +874,22 @@ kind: Deployment
 metadata:
   name: calvin-sec-2
   labels:
-    purpose: calvin-sec-2
+    role: calvin-sec-2
+    purpose: database
   namespace: dev
 spec:
   selector:
     matchLabels:
-      purpose: calvin-sec-2
+      role: calvin-sec-2
+      purpose: database
   replicas: 1
   strategy:
     type: RollingUpdate
   template:
     metadata:
       labels:
-        purpose: calvin-sec-2
+        role: calvin-sec-2
+        purpose: database
     spec:
       terminationGracePeriodSeconds: 5
       containers:
@@ -918,7 +927,8 @@ metadata:
   namespace: dev
 spec:
   selector:
-    purpose: calvin-pri
+    role: calvin-pri
+    purpose: database
   ports:
     - name: mongo
       port: 27018
@@ -935,7 +945,8 @@ metadata:
   namespace: dev
 spec:
   selector:
-    purpose: calvin-sec-1
+    role: calvin-sec-1
+    purpose: database
   ports:
     - name: mongo
       port: 27018
@@ -952,7 +963,8 @@ metadata:
   namespace: dev
 spec:
   selector:
-    purpose: calvin-sec-2
+    role: calvin-sec-2
+    purpose: database
   ports:
     - name: mongo
       port: 27018

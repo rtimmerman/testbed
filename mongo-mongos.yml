@@ -281,11 +281,13 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      role:  mongos-1
+      role:  mongos
+      purpose: database
   template:
     metadata:
       labels:
-        role: mongos-1
+        role: mongos
+        purpose: database
     spec:
       containers:
         - name: mongos-1-pod
@@ -309,6 +311,8 @@ apiVersion: v1
 metadata:
   name: mongos-1-svc
   namespace: dev
+  labels:
+    purpose: database
 spec:
   selector:
     role: mongos-1

@@ -769,19 +769,22 @@ kind: Deployment
 metadata:
   name: bairstow-pri
   labels:
-    purpose: bairstow-pri
+    role: bairstow-pri
+    purpose: database
   namespace: dev
 spec:
   selector:
     matchLabels:
-      purpose: bairstow-pri
+      role: bairstow-pri
+      purpose: database
   replicas: 1
   strategy:
     type: RollingUpdate
   template:
       metadata:
         labels:
-          purpose: bairstow-pri
+          role: bairstow-pri
+          purpose: database
       spec:
         terminationGracePeriodSeconds: 5
         volumes:
@@ -821,19 +824,22 @@ kind: Deployment
 metadata:
   name: bairstow-sec-1
   labels:
-    purpose: bairstow-sec-1
+    role: bairstow-sec-1
+    purpose: database
   namespace: dev  
 spec:
   selector:
     matchLabels:
-      purpose: bairstow-sec-1
+      role: bairstow-sec-1
+      purpose: database
   replicas: 1
   strategy:
     type: RollingUpdate
   template:
     metadata:
       labels:
-        purpose: bairstow-sec-1
+        role: bairstow-sec-1
+        purpose: database
     spec:
       terminationGracePeriodSeconds: 5
       containers:
@@ -868,19 +874,22 @@ kind: Deployment
 metadata:
   name: bairstow-sec-2
   labels:
-    purpose: bairstow-sec-2
+    role: bairstow-sec-2
+    purpose: database
   namespace: dev
 spec:
   selector:
     matchLabels:
-      purpose: bairstow-sec-2
+      role: bairstow-sec-2
+      purpose: database
   replicas: 1
   strategy:
     type: RollingUpdate
   template:
     metadata:
       labels:
-        purpose: bairstow-sec-2
+        role: bairstow-sec-2
+        purpose: database
     spec:
       terminationGracePeriodSeconds: 5
       containers:
@@ -915,9 +924,11 @@ kind: Service
 metadata:
   name: bairstow-pri
   namespace: dev
+  labels:
+    purpose: database
 spec:
   selector:
-    purpose: bairstow-pri
+    role: bairstow-pri
   ports:
     - name: mongo
       port: 27018
@@ -932,9 +943,11 @@ kind: Service
 metadata:
   name: bairstow-sec-1
   namespace: dev
+  labels:
+    purpose: database
 spec:
   selector:
-    purpose: bairstow-sec-1
+    role: bairstow-sec-1
   ports:
     - name: mongo
       port: 27018
@@ -949,9 +962,11 @@ kind: Service
 metadata:
   name: bairstow-sec-2
   namespace: dev
+  labels:
+    purpose: database
 spec:
   selector:
-    purpose: bairstow-sec-2
+    role: bairstow-sec-2
   ports:
     - name: mongo
       port: 27018

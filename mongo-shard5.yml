@@ -926,8 +926,6 @@ metadata:
 spec:
   selector:
     role: elliot-pri
-    labels:
-      purpose: database
   ports:
     - name: mongo
       port: 27018

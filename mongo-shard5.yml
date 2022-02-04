@@ -769,19 +769,22 @@ kind: Deployment
 metadata:
   name: elliot-pri
   labels:
-    purpose: elliot-pri
+    role: elliot-pri
+    purpose: database
   namespace: dev
 spec:
   selector:
     matchLabels:
-      purpose: elliot-pri
+      role: elliot-pri
+      purpose: database
   replicas: 1
   strategy:
     type: RollingUpdate
   template:
       metadata:
         labels:
-          purpose: elliot-pri
+          role: elliot-pri
+          purpose: database
       spec:
         terminationGracePeriodSeconds: 5
         volumes:

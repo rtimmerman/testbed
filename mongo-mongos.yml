@@ -75,7 +75,7 @@ data:
     outcome.push(
       db.getSiblingDB('$external').runCommand(
         {
-          createUser: "CN=localhost,OU=ExperimentClients,O=Roderick,O=Outside,L=Southmister,ST=Essex,C=UK",
+          createUser: "CN=localhost,OU=ExperimentClients,O=Roderick,O=Outside,L=Southminster,ST=Essex,C=UK",
           roles: [
             {role: 'readWrite', db: 'test'},
             {role: 'readWrite', db: 'mandelbrot'}

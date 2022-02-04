@@ -139,7 +139,7 @@ object DataWriter {
       "mongodb://mongos-1-svc:27017/mandelbrot?authenticationDatabase=$external&authMechanism=MONGODB-X509"
 
     val cred = MongoCredential.createMongoX509Credential(
-      "CN=localhost,OU=ExperimentClients,O=Roderick,O=Outside,L=Southmister,ST=Essex,C=UK"
+      "CN=localhost,OU=ExperimentClients,O=Roderick,O=Outside,L=Southminster,ST=Essex,C=UK"
     )
 
     val keyStore = KeyStore.getInstance(KeyStore.getDefaultType())

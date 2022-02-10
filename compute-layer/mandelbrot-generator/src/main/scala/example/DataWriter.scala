@@ -51,7 +51,7 @@ object DataWriter {
       )
     )
 
-    Await.result(
+    val result = Await.result(
       run0db
         .updateOne(
           Document("r" -> r.toString(), "i" -> i.toString()),
@@ -61,7 +61,10 @@ object DataWriter {
       Duration.Inf
     )
 
-    logger.info(s"Entry << ${record.key} | ${record.value} >> upserted.")
+    if (result.wasAcknowledged())
+      logger.info(
+        s"Entry << ${record.key} | ${record.value} >> << ${result.getUpsertedId()} >> upserted."
+      )
   }
 
   def consume(topic: String) = {
@@ -95,23 +98,28 @@ object DataWriter {
         val insert = mutable.Queue[UpdateOneModel[Nothing]]()
 
         val f1 = Future {
-          if (work.records(topic).iterator().hasNext()) writeData(work.records(topic).iterator().next())
+          if (work.records(topic).iterator().hasNext())
+            writeData(work.records(topic).iterator().next())
         }
 
         val f2 = Future {
-          if (work.records(topic).iterator().hasNext()) writeData(work.records(topic).iterator().next())
+          if (work.records(topic).iterator().hasNext())
+            writeData(work.records(topic).iterator().next())
         }
 
         val f3 = Future {
-          if (work.records(topic).iterator().hasNext()) writeData(work.records(topic).iterator().next())
+          if (work.records(topic).iterator().hasNext())
+            writeData(work.records(topic).iterator().next())
         }
 
         val f4 = Future {
-          if (work.records(topic).iterator().hasNext()) writeData(work.records(topic).iterator().next())
+          if (work.records(topic).iterator().hasNext())
+            writeData(work.records(topic).iterator().next())
         }
 
         val f5 = Future {
-          if (work.records(topic).iterator().hasNext()) writeData(work.records(topic).iterator().next())
+          if (work.records(topic).iterator().hasNext())
+            writeData(work.records(topic).iterator().next())
         }
 
         val futures = Future.sequence(List(f1, f2, f3, f4, f5))

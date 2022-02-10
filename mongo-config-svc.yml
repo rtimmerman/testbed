@@ -273,7 +273,7 @@ data:
 
     outcome = db.runCommand(
       {
-        createUser: "CN=mongos-1-svc,OU=ExperimentServers,O=Roderick,O=BBK,L=Southmister,ST=Essex,C=UK",
+        createUser: "CN=mongos-1-svc,OU=ExperimentServers,O=Roderick,O=BBK,L=Southminster,ST=Essex,C=UK",
         roles: [
           {role: 'readWrite', db: 'config'},
         ],

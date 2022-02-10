@@ -6883,3 +6883,49 @@ WARNING: Unmatched cancel notification for request id 55
 2022.02.03 08:57:49 WARN  1 deprecation (since 2.13.0)
 2022.02.03 08:57:49 WARN  2 deprecations in total; re-run with -deprecation for details
 2022.02.03 08:57:49 INFO  time: compiled root in 1.39s
+2022.02.09 23:17:08 INFO  tracing is disabled for protocol LSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/.metals/lsp.trace.json or /home/roderick/.cache/metals/lsp.trace.json
+2022.02.09 23:17:09 INFO  logging to file /home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/.metals/metals.log
+2022.02.09 23:17:09 INFO  Started: Metals version 0.11.1 in workspace '/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator' for client Visual Studio Code 1.63.2.
+2022.02.09 23:17:09 INFO  Parse release: 11.0.11
+2022.02.09 23:17:13 INFO  time: initialize in 4.17s
+2022.02.09 23:17:17 INFO  Attempting to connect to the build server...
+2022.02.09 23:17:18 INFO  skipping build import with status 'Installed'
+2022.02.09 23:17:18 INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/.metals/bsp.trace.json or /home/roderick/.cache/metals/bsp.trace.json
+2022.02.09 23:17:18 INFO  Attempting to connect to the build server...
+2022.02.09 23:17:18 INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/project/.metals/bsp.trace.json or /home/roderick/.cache/metals/bsp.trace.json
+2022.02.09 23:17:18 INFO  time: Connected to build server in 1s
+2022.02.09 23:17:18 INFO  Connected to Build server: Bloop v1.4.12
+2022.02.09 23:17:19 INFO  time: Imported build in 0.22s
+2022.02.09 23:17:25 INFO  no build target found for /home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/src/main/scala/example/DataWriter.scala. Using presentation compiler with project's scala-library version: 3.1.0
+2022.02.09 23:17:29 INFO  time: code lens generation in 10s
+2022.02.09 23:17:29 INFO  time: code lens generation in 7.25s
+2022.02.09 23:17:29 INFO  time: code lens generation in 1.48s
+2022.02.09 23:17:35 INFO  time: indexed workspace in 16s
+2022.02.09 23:17:35 INFO  compiling root (4 scala sources)
+2022.02.09 23:17:39 WARN  2 deprecations
+2022.02.09 23:17:39 WARN  1 deprecation (since 2.13.0)
+2022.02.09 23:17:39 WARN  3 deprecations in total; re-run with -deprecation for details
+2022.02.09 23:17:39 INFO  compiling root-test (2 scala sources)
+2022.02.09 23:17:39 INFO  time: compiled root in 4.39s
+Feb 09, 2022 11:17:40 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 15
+2022.02.09 23:17:40 INFO  time: compiled root-test in 1.02s
+2022.02.09 23:18:06 INFO  compiling root (1 scala source)
+2022.02.09 23:18:08 WARN  1 deprecation
+2022.02.09 23:18:08 WARN  1 deprecation (since 2.13.0)
+2022.02.09 23:18:08 WARN  2 deprecations in total; re-run with -deprecation for details
+2022.02.09 23:18:08 INFO  time: compiled root in 2.39s
+Feb 09, 2022 11:18:22 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 141
+Feb 09, 2022 11:18:29 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 178
+2022.02.09 23:19:30 ERROR scalafmt: /home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/src/main/scala/example/DataWriter.scala:68: error: identifier expected but } found
+  }
+  ^
+2022.02.09 23:19:31 INFO  compiling root (1 scala source)
+2022.02.09 23:19:32 INFO  time: compiled root in 1.07s
+2022.02.09 23:19:48 INFO  compiling root (1 scala source)
+2022.02.09 23:19:53 WARN  1 deprecation
+2022.02.09 23:19:53 WARN  1 deprecation (since 2.13.0)
+2022.02.09 23:19:53 WARN  2 deprecations in total; re-run with -deprecation for details
+2022.02.09 23:19:53 INFO  time: compiled root in 4.94s

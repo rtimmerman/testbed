@@ -277,6 +277,8 @@ apiVersion: apps/v1
 metadata:
   name: mongos-1
   namespace: dev
+  labels:
+    purpose: database
 spec:
   replicas: 1
   selector:

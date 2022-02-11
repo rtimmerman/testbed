@@ -58,6 +58,7 @@ object DataWriter {
     opts.upsert(true)
 
  
+    implicit val ec: scala.concurrent.ExecutionContext = scala.concurrent.ExecutionContext.global
     val upsertFuture = run0db
         .updateOne(
           Document("r" -> r.toString(), "i" -> i.toString()),

@@ -69,7 +69,7 @@ object DataWriter {
     Await.result(upsertFuture, 60.seconds)
 
     upsertFuture onComplete {
-      case Success(out) => logger.info(s"Entry << ${record.key} | ${record.value} >> upserted."
+      case Success(out) => logger.info(s"Entry << ${record.key} | ${record.value} >> upserted.",
       case Failure(e) => logger.error(s"Upsert Failed ${e.getMessage()}")
     }
     

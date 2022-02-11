@@ -16,6 +16,7 @@ import scala.concurrent.ExecutionContext
 import scala.concurrent.Future
 import java.util.concurrent.Executors
 import scala.concurrent.duration._
+import scala.util.{Success,Failure}
 
 object DataWriter {
   val logger = LoggerFactory.getLogger(DataWriter.getClass().getName())
@@ -41,30 +42,37 @@ object DataWriter {
 
     val upsertDocument = Document(
       "$set" -> Document(
-        "r" -> r.toString(),
-        "i" -> i.toString(),
         "value" -> valueComponents.get("value"),
         "fromTopic" -> valueComponents.get("topic"),
         "modifiedAt" -> new Date(),
         "runUuid" -> valueComponents.get("uuid"),
         "computeDateStamp" -> valueComponents.get("computeDatestamp")
+      ),
+      "$setOnInsert" -> Document(
+        "r" -> r.toString(),
+        "i" -> i.toString(),
       )
     )
 
-    val result = Await.result(
-      run0db
+    val opts = org.mongodb.scala.model.UpdateOptions()
+    opts.upsert(true)
+
+ 
+    val upsertFuture = run0db
         .updateOne(
           Document("r" -> r.toString(), "i" -> i.toString()),
-          upsertDocument
+          upsertDocument,
+          opts
         )
-        .toFuture(),
-      Duration.Inf
-    )
+        .toFuture()
 
-    if (result.wasAcknowledged())
-      logger.info(
-        s"Entry << ${record.key} | ${record.value} >> << ${result.getUpsertedId()} >> upserted."
-      )
+    Await.result(upsertFuture, 60.seconds)
+
+    upsertFuture onComplete {
+      case Success(out) => logger.info(s"Entry << ${record.key} | ${record.value} >> upserted."
+      case Failure(e) => logger.error(s"Upsert Failed ${e.getMessage()}")
+    }
+    
   }
 
   def consume(topic: String) = {

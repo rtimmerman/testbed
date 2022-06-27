@@ -6,13 +6,13 @@ metadata:
 data:
   start.sh: |
     apt update && \
-    apt install -y lsof netcat less
+    apt install -y lsof netcat less net-tools
     mongod --bind_ip_all &
     sleep 3
     mongo --norc /kickstart/add-user.js
     kill -9 $(ps aux | grep mongod | grep bind_ip_all | awk '{print $2}')
 
-    mongos --tlsMode requireTLS --tlsCAFile /kickstart/root-ca.pem --tlsCertificateKeyFile /kickstart/mongos-1-svc.pem --configdb 'configServerRS/config-server-svc-1:27019,config-server-svc-2:27019,config-server-svc-3:27019' --clusterAuthMode x509 --bind_ip_all --logpath '/var/log/mongos.log'
+    mongos --tlsMode requireTLS --tlsCAFile /kickstart/root-ca.pem --tlsCertificateKeyFile /kickstart/mongos-1-svc.pem --tlsDisabledProtocols=none --configdb 'configServerRS/config-server-svc-1:27019,config-server-svc-2:27019,config-server-svc-3:27019' --clusterAuthMode x509 --bind_ip_all --logpath '/var/log/mongos.log'
 
     #mongos --configdb 'configServerRS/config-server-svc-1:27019,config-server-svc-2:27019,config-server-svc-3:27019' --bind_ip_all --logpath '/var/log/mongos.log'
 
@@ -22,7 +22,7 @@ data:
 
     while(true) {
       try {
-        conn = new Mongo('localhost:27017');
+          conn = new Mongo('localhost:27017');
         break;
       } catch (Error) {
         print("Caught error!");

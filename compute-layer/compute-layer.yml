@@ -105,7 +105,7 @@ spec:
           ports:
             - containerPort: 9091
       nodeSelector:
-        kubernetes.io/hostname: compute-node-1
+        kubernetes.io/hostname: rrt-compute-node-1
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -142,7 +142,7 @@ spec:
           ports:
             - containerPort: 9091
       nodeSelector:
-        kubernetes.io/hostname: compute-node-2
+        kubernetes.io/hostname: rrt-compute-node-2
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -179,7 +179,7 @@ spec:
           ports:
             - containerPort: 9091
       nodeSelector:
-        kubernetes.io/hostname: compute-node-3
+        kubernetes.io/hostname: rrt-compute-node-3
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -216,7 +216,7 @@ spec:
           ports:
             - containerPort: 9091
       nodeSelector:
-        kubernetes.io/hostname: compute-node-4
+        kubernetes.io/hostname: rrt-compute-node-4
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -253,7 +253,7 @@ spec:
           ports:
             - containerPort: 9091
       nodeSelector:
-        kubernetes.io/hostname: compute-node-5
+        kubernetes.io/hostname: rrt-compute-node-5
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -290,7 +290,7 @@ spec:
           ports:
             - containerPort: 9091
       nodeSelector:
-        kubernetes.io/hostname: compute-node-6
+        kubernetes.io/hostname: rrt-compute-node-6
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -327,7 +327,7 @@ spec:
           ports:
             - containerPort: 9091
       nodeSelector:
-        kubernetes.io/hostname: compute-node-7
+        kubernetes.io/hostname: rrt-compute-node-7
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -364,7 +364,7 @@ spec:
           ports:
             - containerPort: 9091
       nodeSelector:
-        kubernetes.io/hostname: compute-node-8
+        kubernetes.io/hostname: rrt-compute-node-8
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -401,7 +401,7 @@ spec:
           ports:
             - containerPort: 9091
       nodeSelector:
-        kubernetes.io/hostname: compute-node-9
+        kubernetes.io/hostname: rrt-compute-node-9
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -438,7 +438,7 @@ spec:
           ports:
             - containerPort: 9091
       nodeSelector:
-        kubernetes.io/hostname: compute-node-10
+        kubernetes.io/hostname: rrt-compute-node-10
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -475,7 +475,7 @@ spec:
           ports:
             - containerPort: 9091
       nodeSelector:
-        kubernetes.io/hostname: compute-node-11
+        kubernetes.io/hostname: rrt-compute-node-11
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -512,7 +512,7 @@ spec:
           ports:
             - containerPort: 9091
       nodeSelector:
-        kubernetes.io/hostname: compute-node-12
+        kubernetes.io/hostname: rrt-compute-node-12
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -549,7 +549,7 @@ spec:
           ports:
             - containerPort: 9091
       nodeSelector:
-        kubernetes.io/hostname: compute-node-13
+        kubernetes.io/hostname: rrt-compute-node-13
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -586,7 +586,7 @@ spec:
           ports:
             - containerPort: 9091
       nodeSelector:
-        kubernetes.io/hostname: compute-node-14
+        kubernetes.io/hostname: rrt-compute-node-14
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -623,7 +623,7 @@ spec:
           ports:
             - containerPort: 9091
       nodeSelector:
-        kubernetes.io/hostname: compute-node-15
+        kubernetes.io/hostname: rrt-compute-node-15
 ---
 apiVersion: apps/v1
 kind: Deployment

@@ -817,7 +817,7 @@ spec:
               - name: filestore
                 mountPath: /filestore/
         nodeSelector:
-          kubernetes.io/hostname: mongo-shard-5
+          kubernetes.io/hostname: rrt-mongo-shard-5
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -867,7 +867,7 @@ spec:
            path: /home/roderick/experiment-data
            type: Directory
       nodeSelector:
-        kubernetes.io/hostname: mongo-shard-5
+        kubernetes.io/hostname: rrt-mongo-shard-5
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -917,7 +917,7 @@ spec:
            path: /home/roderick/experiment-data
            type: Directory
       nodeSelector:
-        kubernetes.io/hostname: mongo-shard-5
+        kubernetes.io/hostname: rrt-mongo-shard-5
 ---
 apiVersion: v1
 kind: Service
@@ -1001,4 +1001,4 @@ spec:
         name: add-shard-elliot
   restartPolicy: Never
   nodeSelector:
-    kubernetes.io/hostname: mongo-shard-5
+    kubernetes.io/hostname: rrt-mongo-shard-5

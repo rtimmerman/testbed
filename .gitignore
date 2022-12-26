@@ -16,3 +16,4 @@ ycsb*
 target/
 data/
 project/
+.vscode

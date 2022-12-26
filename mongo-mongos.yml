@@ -10,7 +10,7 @@ data:
     echo "Initialising Mongodb with default login users..."
     mongod --bind_ip_all --logpath '/var/log/mongo-initial-boot.log' &
     sleep 3
-    mongo --norc /kickstart/add-user.js
+    mongosh --norc /kickstart/add-user.js
     kill -9 $(ps aux | grep mongod | grep bind_ip_all | awk '{print $2}')
 
     echo "Starting Mongos..."

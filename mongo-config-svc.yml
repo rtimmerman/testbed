@@ -231,7 +231,7 @@ data:
   mongod-launcher.sh: |
     mongod --bind_ip_all &
     #mongo --norc --nodb --tls --tlsCertificateKeyFile /kickstart/config-server.pem --tlsCAFile /kickstart/root-ca.pem /kickstart/add-user.js
-    mongo --norc /kickstart/add-user.js
+    mongosh --norc /kickstart/add-user.js
     killall mongod
     mongod --configsvr \
     --replSet configServerRS \
@@ -330,7 +330,7 @@ data:
 
     printf "Connected!\n";
 
-    print `mongo --tls --tlsCertificateKeyFile /kickstart/config-server.pem --tlsCAFile /kickstart/root-ca.pem --host config-server-svc-1 --authenticationDatabase '$external' --authenticationMechanism MONGODB-X509 --port 27019 /kickstart/shard-configdb.js `;
+    print `mongosh --tls --sslPEMKeyFile /kickstart/config-server.pem --sslCAFile /kickstart/root-ca.pem --host config-server-svc-1 --authenticationDatabase '$external' --authenticationMechanism MONGODB-X509 --port 27019 /kickstart/shard-configdb.js `;
 
     exit(0);
   root-ca.pem: |

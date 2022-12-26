@@ -6,10 +6,10 @@ ycsb*
 *.csr
 *.key
 *.idea
-**/*.metals
+**/*.metals/
 *.log
 .bsp/
-**/.bloop
+**/*.bloop/
 **/project
 .bsp/
 *.tgz

@@ -27,6 +27,7 @@ libraryDependencies += "org.slf4j" % "slf4j-simple" % "1.7.32"
 libraryDependencies += "org.apache.avro" % "avro" % "1.11.0"
 // https://mvnrepository.com/artifact/io.confluent/kafka-avro-serializer
 libraryDependencies += "io.confluent" % "kafka-avro-serializer" % "7.0.0"
+libraryDependencies += "org.testifyproject.mock" % "mockito" % "1.0.6"
 
 fork := true
 // run / javaOptions += "-Djavax.net.debug=all"

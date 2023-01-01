@@ -659,7 +659,7 @@ spec:
           ports:
             - containerPort: 9091
       nodeSelector:
-        kubernetes.io/hostname: compute-node-16
+        kubernetes.io/hostname: rrt-compute-node-16
 ---
 apiVersion: apps/v1
 kind: Deployment

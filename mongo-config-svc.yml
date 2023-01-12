@@ -24,7 +24,8 @@ spec:
     spec:
       containers:
         - name: config-server-1-pod
-          image: mongo
+          image: localhost:32000/mongo-cst:1.0
+          imagePullPolicy: Always
           command:
             - 'sh'
             - '-c'
@@ -37,8 +38,19 @@ spec:
           configMap:
             name: rs-config
             defaultMode: 0777
-      nodeSelector:
-        kubernetes.io/hostname: rrt-general-services
+      # nodeSelector:
+      #   role: general-services
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                - key: role
+                  operator: In
+                  values:
+                    - mongo-shard-1
+                    - debugger
+
 ---
 kind: Service
 apiVersion: v1
@@ -75,7 +87,8 @@ spec:
     spec:
       containers:
         - name: config-server-2-pod
-          image: mongo
+          image: localhost:32000/mongo-cst:1.0
+          imagePullPolicy: Always
           command:
             - 'mongod'
             - '--configsvr'
@@ -106,8 +119,19 @@ spec:
           # - '/var/lib/mongod'
           #      nodeSelector:
           #cloud.google.com/gke-nodepool: default-pool
-      nodeSelector:
-        kubernetes.io/hostname: rrt-general-services
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                - key: role
+                  operator: In
+                  values:
+                    - mongo-shard-1
+                    - debugger
+      # nodeSelector:
+      # role: general-services
+
 ---
 kind: Service
 apiVersion: v1
@@ -143,7 +167,8 @@ spec:
     spec:
       containers:
         - name: config-server-3-pod
-          image: mongo
+          image: localhost:32000/mongo-cst:1.0
+          imagePullPolicy: Always
           command:
             #- 'sh'
             #- '-c'
@@ -177,8 +202,17 @@ spec:
             defaultMode: 0777
             #     nodeSelector:
             #cloud.google.com/gke-nodepool: default-pool
-      nodeSelector:
-        kubernetes.io/hostname: rrt-general-services
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                - key: role
+                  operator: In
+                  values:
+                    - mongo-shard-1
+                    - debugger
+
 ---
 kind: Service
 apiVersion: v1
@@ -778,5 +812,15 @@ spec:
     #   persistentVolumeClaim:
     #     claimName: scripts-dir-claim
   restartPolicy: Never
-  nodeSelector:
-    kubernetes.io/hostname: rrt-general-services
+  # nodeSelector:
+  # role: general-services
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+            - key: role
+              operator: In
+              values:
+                - mongo-shard-1
+                - debugger

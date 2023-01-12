@@ -35,9 +35,16 @@ spec:
           hostPath:
             path: /home/roderick/experiment-data
             type: Directory
-      nodeSelector:
-        kubernetes.io/hostname: rrt-general-services
-
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                - key: role
+                  operator: In
+                  values:
+                    - mongo-shard-1
+                    - debugger
 
 ---
 apiVersion: v1

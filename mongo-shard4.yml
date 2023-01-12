@@ -795,12 +795,9 @@ spec:
             configMap:
               name: kickstart-duncan
               defaultMode: 0777
-          - name: filestore
-            hostPath:
-              path: /home/roderick/experiment-data
-              type: Directory
         containers:
-          - image: mongo
+          - image: localhost:32000/mongo-cst:1.0
+            imagePullPolicy: Always
             name: mongo-db-container
             command:
               - "/bin/sh"
@@ -814,10 +811,16 @@ spec:
                 mountPath: /config/
               - name: kickstart-duncan
                 mountPath: /kickstart/
-              - name: filestore
-                mountPath: /filestore/
-        nodeSelector:
-          kubernetes.io/hostname: rrt-mongo-shard-4
+        affinity:
+          nodeAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+                - matchExpressions:
+                  - key: role
+                    operator: In
+                    values:
+                      - mongo-shard-4
+                      - debugger
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -843,7 +846,8 @@ spec:
     spec:
       terminationGracePeriodSeconds: 5
       containers:
-        - image: mongo
+        - image: localhost:32000/mongo-cst:1.0
+          imagePullPolicy: Always
           name: mongo-db-container
           ports:
             - containerPort: 27018
@@ -855,19 +859,21 @@ spec:
           volumeMounts:
             - name: kickstart-duncan
               mountPath: /kickstart/
-            - name: filestore
-              mountPath: /filestore/
       volumes:
         - name: kickstart-duncan
           configMap:
             name: kickstart-duncan
             defaultMode: 0777
-        - name: filestore
-          hostPath:
-            path: /home/roderick/experiment-data
-            type: Directory
-      nodeSelector:
-        kubernetes.io/hostname: rrt-mongo-shard-4
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                - key: role
+                  operator: In
+                  values:
+                    - mongo-shard-4
+                    - debugger
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -893,7 +899,8 @@ spec:
     spec:
       terminationGracePeriodSeconds: 5
       containers:
-        - image: mongo
+        - image: localhost:32000/mongo-cst:1.0
+          imagePullPolicy: Always
           name: mongo-db-container
           ports:
             - containerPort: 27018
@@ -905,19 +912,21 @@ spec:
           volumeMounts:
             - name: kickstart-duncan
               mountPath: /kickstart/
-            - name: filestore
-              mountPath: /filestore/
       volumes:
         - name: kickstart-duncan
           configMap:
             name: kickstart-duncan
             defaultMode: 0777
-        - name: filestore
-          hostPath:
-            path: /home/roderick/experiment-data
-            type: Directory
-      nodeSelector:
-        kubernetes.io/hostname: rrt-mongo-shard-4
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                - key: role
+                  operator: In
+                  values:
+                    - mongo-shard-4
+                    - debugger
 ---
 apiVersion: v1
 kind: Service
@@ -982,7 +991,8 @@ metadata:
 spec:
   containers:
     - name: duncan-configurator-container
-      image: mongo
+      image: localhost:32000/mongo-cst:1.0
+      imagePullPolicy: Always
       command: ['/bin/sh', '-c','/kickstart/configurator.sh']
       volumeMounts:
         - name: kickstart-duncan
@@ -998,5 +1008,14 @@ spec:
       configMap:
         name: add-shard-duncan
   restartPolicy: Never
-  nodeSelector:
-    kubernetes.io/hostname: rrt-mongo-shard-4
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+            - key: role
+              operator: In
+              values:
+                - mongo-shard-4
+                - debugger
+

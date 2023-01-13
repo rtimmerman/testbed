@@ -108,8 +108,6 @@ metadata:
   namespace: dev
 data:
   app-support-pri.sh: |
-    apt update
-    apt install -y netcat python3 python3-pip
     pip3 install psutil
     mkdir -p /filestore/data/elliot-pri
     mongod --bind_ip_all &
@@ -123,7 +121,7 @@ data:
        echo 'waiting for elliot-pri:27018 ...'
        if `nc -z elliot-pri 27018`; then
         echo 'setting up mongo rs via elliot-pri ...'
-        mongosh --ssl --sslPEMKeyFile /kickstart/elliot-pri.pem --sslCAFile /kickstart/root-ca.pem --authenticationDatabase '$external' --authenticationMechanism MONGODB-X509 elliot-pri:27018 /config/mongo-rs-config-elliot.js
+        mongosh --tls --tlsCertificateKeyFile /kickstart/elliot-pri.pem --tlsCAFile /kickstart/root-ca.pem --authenticationDatabase '$external' --authenticationMechanism MONGODB-X509 elliot-pri:27018 /config/mongo-rs-config-elliot.js
         echo 'mongo rs configured!'
         break
       fi 
@@ -133,8 +131,6 @@ data:
     tar -zxf /filestore/node_exporter-1.0.1.linux-amd64.tar.gz
     ./node_exporter-1.0.1.linux-amd64/node_exporter --web.listen-address=0.0.0.0:9091
   app-support-sec-1.sh: |
-    apt update
-    apt install -y netcat python3 python3-pip
     pip3 install psutil
     mkdir -p /filestore/data/elliot-sec-1
     mongod --clusterAuthMode x509 --tlsMode requireTLS --tlsCertificateKeyFile /kickstart/elliot-sec-1.pem --tlsCAFile /kickstart/root-ca.pem --shardsvr --replSet elliot.rs --bind_ip_all --dbpath /filestore/data/elliot-sec-1 &
@@ -142,8 +138,6 @@ data:
     tar -zxf /filestore/node_exporter-1.0.1.linux-amd64.tar.gz
     ./node_exporter-1.0.1.linux-amd64/node_exporter --web.listen-address=0.0.0.0:9091
   app-support-sec-2.sh: |
-    apt update
-    apt install -y netcat python3 python3-pip
     pip3 install psutil
     mkdir -p /filestore/data/elliot-sec-2
     mongod --clusterAuthMode x509 --tlsMode requireTLS --tlsCertificateKeyFile /kickstart/elliot-sec-2.pem --tlsCAFile /kickstart/root-ca.pem --shardsvr --replSet elliot.rs --bind_ip_all --dbpath /filestore/data/elliot-sec-2 &
@@ -151,13 +145,11 @@ data:
     tar -zxf /filestore/node_exporter-1.0.1.linux-amd64.tar.gz
     ./node_exporter-1.0.1.linux-amd64/node_exporter --web.listen-address=0.0.0.0:9091
   configurator.sh: |
-    apt update
-    apt install -y netcat
     for i in {1..60}; do
       sleep 1
       if nc -z mongos-1-svc 27017; then
         echo 'Establishing shards'
-        mongosh --ssl --sslPEMKeyFile /kickstart/mongos-1-svc.pem --sslCAFile /kickstart/root-ca.pem --authenticationDatabase "\$external" --authenticationMechanism MONGODB-X509 mongos-1-svc:27017/admin /kickstart-shard/add-shard-elliot.js
+        mongosh --tls --tlsCertificateKeyFile /kickstart/mongos-1-svc.pem --tlsCAFile /kickstart/root-ca.pem --authenticationDatabase "\$external" --authenticationMechanism MONGODB-X509 mongos-1-svc:27017/admin /kickstart-shard/add-shard-elliot.js
         break
       fi
     done

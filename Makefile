@@ -1,3 +1,6 @@
+CONTROL_DB_HOST=mongos-1-svc
+CONTROL_DB_PORT=27017
+
 setup-cluster-small:
 	gcloud beta container --project "research-310823" clusters create "cluster-1" --zone "europe-west6-b" --no-enable-basic-auth --cluster-version "latest" --machine-type "n2-standard-2" --image-type "COS" --disk-type "pd-standard" --disk-size "100" --metadata disable-legacy-endpoints=true --scopes "https://www.googleapis.com/auth/devstorage.read_only","https://www.googleapis.com/auth/logging.write","https://www.googleapis.com/auth/monitoring","https://www.googleapis.com/auth/servicecontrol","https://www.googleapis.com/auth/service.management.readonly","https://www.googleapis.com/auth/trace.append" --num-nodes "3" --enable-stackdriver-kubernetes --enable-ip-alias --network "projects/research-310823/global/networks/default" --subnetwork "projects/research-310823/regions/europe-west6/subnetworks/default" --default-max-pods-per-node "110" --no-enable-master-authorized-networks --addons HorizontalPodAutoscaling,HttpLoadBalancing --enable-autoupgrade --enable-autorepair --max-surge-upgrade 1 --max-unavailable-upgrade 0
 
@@ -58,8 +61,11 @@ shutdown-cluster:
 wipe-ycsb-db:
 	mongo --tls --tlsCAFile ./root-ca.pem --tlsCertificateKeyFile ./mongos-1-svc.pem --authenticationDatabase '$$external' --authenticationMechanism='MONGODB-X509' mongos-1-svc:27017 --eval 'db.getSiblingDB("ycsb").dropDatabase();'
 
-login-db:
-	mongo --tls --tlsCAFile ./root-ca.pem --tlsCertificateKeyFile ./mongos-1-svc.pem --authenticationDatabase '$$external' --authenticationMechanism='MONGODB-X509' mongos-1-svc:27017
+#login-db:
+#	mongo --tls --tlsCAFile ./root-ca.pem --tlsCertificateKeyFile ./mongos-1-svc.pem --authenticationDatabase '$$external' --authenticationMechanism='MONGODB-X509' mongos-1-svc:27017
+
+k-login-db:
+	microk8s kubectl exec -it svc/${CONTROL_DB_HOST} -n dev -- mongosh --tls --tlsCertificateKeyFile=/kickstart/${CONTROL_DB_HOST}.pem --tlsCAFile=/kickstart/root-ca.pem --authenticationDatabase='$$external' --authenticationMechanism='MONGODB-X509' ${CONTROL_DB_HOST}:${CONTROL_DB_PORT}
 
 setup-update-shard-configs:
 	cat mongo-shard1.yml.template | perl shard-generator.pl arnold > mongo-shard1.yml

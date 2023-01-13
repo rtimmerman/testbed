@@ -121,7 +121,7 @@ data:
        echo 'waiting for calvin-pri:27018 ...'
        if `nc -z calvin-pri 27018`; then
         echo 'setting up mongo rs via calvin-pri ...'
-        mongosh --ssl --sslPEMKeyFile /kickstart/calvin-pri.pem --sslCAFile /kickstart/root-ca.pem --authenticationDatabase '$external' --authenticationMechanism MONGODB-X509 calvin-pri:27018 /config/mongo-rs-config-calvin.js
+        mongosh --tls --tlsCertificateKeyFile /kickstart/calvin-pri.pem --tlsCAFile /kickstart/root-ca.pem --authenticationDatabase '$external' --authenticationMechanism MONGODB-X509 calvin-pri:27018 /config/mongo-rs-config-calvin.js
         echo 'mongo rs configured!'
         break
       fi 
@@ -149,7 +149,7 @@ data:
       sleep 1
       if nc -z mongos-1-svc 27017; then
         echo 'Establishing shards'
-        mongosh --ssl --sslPEMKeyFile /kickstart/mongos-1-svc.pem --sslCAFile /kickstart/root-ca.pem --authenticationDatabase "\$external" --authenticationMechanism MONGODB-X509 mongos-1-svc:27017/admin /kickstart-shard/add-shard-calvin.js
+        mongosh --tls --tlsCertificateKeyFile /kickstart/mongos-1-svc.pem --tlsCAFile /kickstart/root-ca.pem --authenticationDatabase "\$external" --authenticationMechanism MONGODB-X509 mongos-1-svc:27017/admin /kickstart-shard/add-shard-calvin.js
         break
       fi
     done

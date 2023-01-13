@@ -6,7 +6,7 @@ metadata:
 data:
   mongo-rs-config-arnold.js: |
     while (true) {
-      sleep(1000);
+      sleep(3000);
       var result = rs.initiate({
         _id: "arnold.rs",
         members: [
@@ -121,7 +121,7 @@ data:
        echo 'waiting for arnold-pri:27018 ...'
        if `nc -z arnold-pri 27018`; then
         echo 'setting up mongo rs via arnold-pri ...'
-        mongosh --ssl --sslPEMKeyFile /kickstart/arnold-pri.pem --sslCAFile /kickstart/root-ca.pem --authenticationDatabase '$external' --authenticationMechanism MONGODB-X509 arnold-pri:27018 /config/mongo-rs-config-arnold.js
+        mongosh --tls --tlsCertificateKeyFile /kickstart/arnold-pri.pem --tlsCAFile /kickstart/root-ca.pem --authenticationDatabase '$external' --authenticationMechanism MONGODB-X509 arnold-pri:27018 /config/mongo-rs-config-arnold.js
         echo 'mongo rs configured!'
         break
       fi 
@@ -149,7 +149,7 @@ data:
       sleep 1
       if nc -z mongos-1-svc 27017; then
         echo 'Establishing shards'
-        mongosh --ssl --sslPEMKeyFile /kickstart/mongos-1-svc.pem --sslCAFile /kickstart/root-ca.pem --authenticationDatabase "\$external" --authenticationMechanism MONGODB-X509 mongos-1-svc:27017/admin /kickstart-shard/add-shard-arnold.js
+        mongosh --tls --tlsCertificateKeyFile /kickstart/mongos-1-svc.pem --tlsCAFile /kickstart/root-ca.pem --authenticationDatabase '$external' --authenticationMechanism MONGODB-X509 mongos-1-svc:27017/admin /kickstart-shard/add-shard-arnold.js
         break
       fi
     done

@@ -121,7 +121,7 @@ data:
        echo 'waiting for bairstow-pri:27018 ...'
        if `nc -z bairstow-pri 27018`; then
         echo 'setting up mongo rs via bairstow-pri ...'
-        mongosh --ssl --sslPEMKeyFile /kickstart/bairstow-pri.pem --sslCAFile /kickstart/root-ca.pem --authenticationDatabase '$external' --authenticationMechanism MONGODB-X509 bairstow-pri:27018 /config/mongo-rs-config-bairstow.js
+        mongosh --tls --tlsCertificateKeyFile /kickstart/bairstow-pri.pem --tlsCAFile /kickstart/root-ca.pem --authenticationDatabase '$external' --authenticationMechanism MONGODB-X509 bairstow-pri:27018 /config/mongo-rs-config-bairstow.js
         echo 'mongo rs configured!'
         break
       fi 
@@ -149,7 +149,7 @@ data:
       sleep 1
       if nc -z mongos-1-svc 27017; then
         echo 'Establishing shards'
-        mongosh --ssl --sslPEMKeyFile /kickstart/mongos-1-svc.pem --sslCAFile /kickstart/root-ca.pem --authenticationDatabase "\$external" --authenticationMechanism MONGODB-X509 mongos-1-svc:27017/admin /kickstart-shard/add-shard-bairstow.js
+        mongosh --tls --tlsCertificateKeyFile /kickstart/mongos-1-svc.pem --tlsCAFile /kickstart/root-ca.pem --authenticationDatabase '$external' --authenticationMechanism MONGODB-X509 mongos-1-svc:27017/admin /kickstart-shard/add-shard-bairstow.js
         break
       fi
     done

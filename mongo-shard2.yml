@@ -51,7 +51,7 @@ data:
     var ok = false;
 
     while(!ok) {
-      sleep(10000);
+      sleep(30000);
       var error = sh.addShard(
         "bairstow.rs/bairstow-pri:27018,bairstow-sec-1:27018,bairstow-sec-2:27018"
       );

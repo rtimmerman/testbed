@@ -1,0 +1,30 @@
+all:
+  hosts:
+  children:
+      rrt-general-services:
+        hosts:
+          rrt-general-services.dcs.bbk.ac.uk:
+      rrt_cluster_clients:
+        hosts:
+          rrt-mongo-shard-1.dcs.bbk.ac.uk:
+          rrt-mongo-shard-2.dcs.bbk.ac.uk:
+          rrt-mongo-shard-3.dcs.bbk.ac.uk:
+          rrt-mongo-shard-4.dcs.bbk.ac.uk:
+          rrt-mongo-shard-5.dcs.bbk.ac.uk: 
+          rrt-compute-node-1.dcs.bbk.ac.uk: 
+          rrt-compute-node-2.dcs.bbk.ac.uk: 
+          rrt-compute-node-3.dcs.bbk.ac.uk: 
+          rrt-compute-node-4.dcs.bbk.ac.uk: 
+          rrt-compute-node-5.dcs.bbk.ac.uk: 
+          rrt-compute-node-6.dcs.bbk.ac.uk: 
+          rrt-compute-node-7.dcs.bbk.ac.uk: 
+          rrt-compute-node-8.dcs.bbk.ac.uk: 
+          rrt-compute-node-9.dcs.bbk.ac.uk: 
+          rrt-compute-node-10.dcs.bbk.ac.uk: 
+          rrt-compute-node-11.dcs.bbk.ac.uk: 
+          rrt-compute-node-12.dcs.bbk.ac.uk: 
+          rrt-compute-node-13.dcs.bbk.ac.uk: 
+          rrt-compute-node-14.dcs.bbk.ac.uk: 
+          rrt-compute-node-15.dcs.bbk.ac.uk: 
+          rrt-compute-node-16.dcs.bbk.ac.uk: 
+

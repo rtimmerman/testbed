@@ -1,0 +1,49 @@
+- name: Test Run
+  hosts: rrt-general-services
+  tasks:
+    - name: Test Ping
+      ansible.builtin.ping:
+    - name: Print message
+      ansible.builtin.debug:
+        msg: Hello, World
+    - name: Remove microk8s
+      become: true
+      community.general.snap:
+        name: microk8s
+        state: absent
+    - name: Install microk8s
+      become: true
+      community.general.snap:
+        name: microk8s
+        classic: true
+        # channel: 1.25/stable
+    - name: Configure microk8s
+      become: true
+      shell: |
+        #microk8s disable --force ha-cluster;
+        sudo microk8s enable dns registry;
+    - name: Register nodes
+      become: true
+      shell: |
+        #!/bin/bash
+
+        # Synopsis
+        #  ssh -t rrt-compute-node-14 "echo '$(cat node-patch-20221229.sh)' > ./patch.sh; sudo bash -c '/bin/bash ./patch.sh'; /snap/bin/microk8s leave && /snap/bin/microk8s join 193.61.36.13:25000/$(microk8s add-node --format token-check);"
+
+        #snap remove microk8s
+        #snap install --classic microk8s
+
+        # run as su
+        mkdir -p "/var/snap/microk8s/current/args/certs.d/rrt-general-services:32000"
+        touch "/var/snap/microk8s/current/args/certs.d/rrt-general-services:32000/hosts.toml"
+
+        cat << CONTENT > "/var/snap/microk8s/current/args/certs.d/rrt-general-services:32000/hosts.toml"
+        server = "rrt-general-services:32000"
+
+        [host."http://rrt-general-services:32000"]
+          capabilities = ["pull", "resolve"]
+        CONTENT
+        # printf "%s" $content > "/var/snap/microk8s/current/args/certs.d/rrt-general-services:32000/hosts.toml" &&
+
+        /snap/bin/microk8s stop && /snap/bin/microk8s start;
+

@@ -1,0 +1,91 @@
+- name: Establish client nodes
+  hosts: rrt-general-services
+  tasks:
+    - name: Remove nodes
+      become: true
+      ignore_errors: true
+      shell: |
+        microk8s remove-node rrt-mongo-shard-1
+        microk8s remove-node rrt-mongo-shard-2
+        microk8s remove-node rrt-mongo-shard-3
+        microk8s remove-node rrt-mongo-shard-4
+        microk8s remove-node rrt-mongo-shard-5
+        microk8s remove-node rrt-compute-node-1
+        microk8s remove-node rrt-compute-node-2
+        microk8s remove-node rrt-compute-node-3
+        microk8s remove-node rrt-compute-node-4
+        microk8s remove-node rrt-compute-node-5
+        microk8s remove-node rrt-compute-node-6
+        microk8s remove-node rrt-compute-node-7
+        microk8s remove-node rrt-compute-node-8
+        microk8s remove-node rrt-compute-node-9
+        microk8s remove-node rrt-compute-node-10
+        microk8s remove-node rrt-compute-node-11
+        microk8s remove-node rrt-compute-node-12
+        microk8s remove-node rrt-compute-node-13
+        microk8s remove-node rrt-compute-node-14
+        microk8s remove-node rrt-compute-node-15
+        microk8s remove-node rrt-compute-node-16
+- name: Setup client nodes
+  hosts: rrt_cluster_clients
+  tasks:
+    - name: Test Ping
+      ansible.builtin.ping:
+    - name: Install Microk8s
+      become: true
+      shell: |
+        sudo snap remove microk8s;
+        sudo snap install microk8s --classic;
+        # microk8s disable ha-cluster
+    - name: Check - can leave
+      become: true
+      ignore_errors: true
+      shell: |
+        sudo microk8s leave
+    - name: Get cluster join tokens 
+      register: token
+      shell: |
+        ssh -o "StrictHostKeyChecking=no" rrt-general-services.dcs.bbk.ac.uk microk8s add-node --format token-check
+    - name: Join Cluster
+      become: true
+      shell: |
+        sudo microk8s join rrt-general-services:25000/{{ token.stdout }} --worker
+    - name: Allow Docker Image Pulls From Repository
+      become: true
+      shell: |
+        mkdir -p '/var/snap/microk8s/current/args/certs.d/rrt-general-services:32000'
+        cat << CONTENT > '/var/snap/microk8s/current/args/certs.d/rrt-general-services:32000/hosts.toml'
+        server = "rrt-general-services:320000"
+
+        [host."http://rrt-general-services:32000"]
+          capabilities = ["pull", "resolve"]
+        CONTENT
+
+        /snap/bin/microk8s stop && /snap/bin/microk8s start
+- name: Primary node post configuration steps
+  hosts: rrt-general-services
+  tasks:
+    - name: Label nodes
+      shell: |
+        microk8s kubectl label nodes rrt-general-service role=rrt-general-service
+        microk8s kubectl label nodes rrt-mongo-shard-1 role=mongo-shard-1
+        microk8s kubectl label nodes rrt-mongo-shard-2 role=mongo-shard-2
+        microk8s kubectl label nodes rrt-mongo-shard-3 role=mongo-shard-3
+        microk8s kubectl label nodes rrt-mongo-shard-4 role=mongo-shard-4
+        microk8s kubectl label nodes rrt-mongo-shard-5 role=mongo-shard-5
+        microk8s kubectl label nodes rrt-compute-node-1 role=compute-node-1
+        microk8s kubectl label nodes rrt-compute-node-2 role=compute-node-2
+        microk8s kubectl label nodes rrt-compute-node-3 role=compute-node-3
+        microk8s kubectl label nodes rrt-compute-node-4 role=compute-node-4
+        microk8s kubectl label nodes rrt-compute-node-5 role=compute-node-5
+        microk8s kubectl label nodes rrt-compute-node-6 role=compute-node-6
+        microk8s kubectl label nodes rrt-compute-node-7 role=compute-node-7
+        microk8s kubectl label nodes rrt-compute-node-8 role=compute-node-8
+        microk8s kubectl label nodes rrt-compute-node-9 role=compute-node-9
+        microk8s kubectl label nodes rrt-compute-node-10 role=compute-node-10
+        microk8s kubectl label nodes rrt-compute-node-11 role=compute-node-11
+        microk8s kubectl label nodes rrt-compute-node-12 role=compute-node-12
+        microk8s kubectl label nodes rrt-compute-node-13 role=compute-node-13
+        microk8s kubectl label nodes rrt-compute-node-14 role=compute-node-14
+        microk8s kubectl label nodes rrt-compute-node-15 role=compute-node-15
+        microk8s kubectl label nodes rrt-compute-node-16 role=compute-node-16

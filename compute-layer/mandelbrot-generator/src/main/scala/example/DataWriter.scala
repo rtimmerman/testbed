@@ -16,7 +16,7 @@ import scala.concurrent.ExecutionContext
 import scala.concurrent.Future
 import java.util.concurrent.Executors
 import scala.concurrent.duration._
-import scala.util.{Success,Failure}
+import scala.util.{Success, Failure}
 
 object DataWriter {
   val logger = LoggerFactory.getLogger(DataWriter.getClass().getName())
@@ -50,30 +50,31 @@ object DataWriter {
       ),
       "$setOnInsert" -> Document(
         "r" -> r.toString(),
-        "i" -> i.toString(),
+        "i" -> i.toString()
       )
     )
 
     val opts = org.mongodb.scala.model.UpdateOptions()
     opts.upsert(true)
 
- 
-    implicit val ec: scala.concurrent.ExecutionContext = scala.concurrent.ExecutionContext.global
+    implicit val ec: scala.concurrent.ExecutionContext =
+      scala.concurrent.ExecutionContext.global
     val upsertFuture = run0db
-        .updateOne(
-          Document("r" -> r.toString(), "i" -> i.toString()),
-          upsertDocument,
-          opts
-        )
-        .toFuture()
+      .updateOne(
+        Document("r" -> r.toString(), "i" -> i.toString()),
+        upsertDocument,
+        opts
+      )
+      .toFuture()
 
     Await.result(upsertFuture, 60.seconds)
 
     upsertFuture onComplete {
-      case Success(out) => logger.info(s"Entry << ${record.key} | ${record.value} >> upserted.")
+      case Success(out) =>
+        logger.info(s"Entry << ${record.key} | ${record.value} >> upserted.")
       case Failure(e) => logger.error(s"Upsert Failed ${e.getMessage()}")
     }
-    
+
   }
 
   def consume(topic: String) = {
@@ -156,7 +157,7 @@ object DataWriter {
       "mongodb://mongos-1-svc:27017/mandelbrot?authenticationDatabase=$external&authMechanism=MONGODB-X509"
 
     val cred = MongoCredential.createMongoX509Credential(
-      "CN=localhost,OU=ExperimentClients,O=Roderick,O=Outside,L=Southminster,ST=Essex,C=UK"
+      "CN=localhost,OU=ExperimentClients,O=Roderick,O=Outside,L=Southminster,ST=Essex,C=GB"
     )
 
     val keyStore = KeyStore.getInstance(KeyStore.getDefaultType())

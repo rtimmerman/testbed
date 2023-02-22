@@ -154,7 +154,7 @@ object DataWriter {
     println("attempting to connect")
 
     val uri =
-      "mongodb://mongos-1-svc:27017/mandelbrot?authenticationDatabase=$external&authMechanism=MONGODB-X509"
+      "mongodb://mongos-1-svc:27017/mandelbrot?authSource=$external&authMechanism=MONGODB-X509"
 
     val cred = MongoCredential.createMongoX509Credential(
       "CN=localhost,OU=ExperimentClients,O=Roderick,O=Outside,L=Southminster,ST=Essex,C=GB"

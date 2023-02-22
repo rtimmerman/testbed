@@ -10,11 +10,9 @@ ycsb*
 *.log
 .bsp/
 **/*.bloop/
-**/project
 .bsp/
 *.tgz
 target/
 data/
-project/
 .vscode
 *.sw[op]

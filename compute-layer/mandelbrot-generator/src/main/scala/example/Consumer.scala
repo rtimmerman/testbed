@@ -127,8 +127,8 @@ object Consumer {
 
               val payload =
                 mapper.writeValueAsString(
-                  Map("metadata" -> Map("operation" -> "writeData")),
                   Map(
+                    "metadata" -> Map("operation" -> "writeData"),
                     "data" -> Map(
                       "value" -> res,
                       "uuid" -> uuid,

@@ -11,6 +11,10 @@ import java.util.{Date, Properties}
 import scala.collection.mutable
 import scala.collection.mutable.ListBuffer
 
+import com.fasterxml.jackson.module.scala.DefaultScalaModule
+import com.fasterxml.jackson.databind.json.JsonMapper
+import com.fasterxml.jackson.core.`type`.TypeReference
+
 object Consumer {
   val logger = LoggerFactory.getLogger(Consumer.getClass.getName)
 
@@ -82,7 +86,23 @@ object Consumer {
         val writes = ListBuffer[UpdateOneModel[Nothing]]()
         val insert = mutable.Queue[UpdateOneModel[Nothing]]()
 
+        val mapper =
+          JsonMapper
+            .builder()
+            .addModule(DefaultScalaModule)
+            .build()
+
         work.forEach(record => {
+
+          // payload = mapper.readValue(
+          //   record,
+          //   new TypeReference[Map[String, Map[String, String]]]
+          // )
+
+          // switch (payload["operation"]) {
+          //   case "doWork"
+          // }
+
           println(record.key() + " = " + record.value())
           ("""([0-9.-]+)\s*\+\s*([0-9.-]+)i;([0-9]+);(.*?)""".r)
             .findAllIn(record.value)
@@ -105,11 +125,26 @@ object Consumer {
               val datestamp =
                 (new Date()).toString() //todo make the datastamp here nicer
 
+              val payload =
+                mapper.writeValueAsString(
+                  Map("metadata" -> Map("operation" -> "writeData")),
+                  Map(
+                    "data" -> Map(
+                      "value" -> res,
+                      "uuid" -> uuid,
+                      "r" -> r,
+                      "i" -> i,
+                      "computeDateStamp" -> datestamp,
+                      "topic" -> topic
+                    )
+                  )
+                )
+
               resultProducer.send(
                 new ProducerRecord[String, String](
                   "result",
                   s"$r:$i",
-                  s"value=$res;uuid=$uuid;topic=$topic;computeDateStamp=$datestamp;"
+                  payload
                 )
               )
 

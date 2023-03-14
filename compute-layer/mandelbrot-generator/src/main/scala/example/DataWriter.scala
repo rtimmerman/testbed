@@ -18,39 +18,67 @@ import java.util.concurrent.Executors
 import scala.concurrent.duration._
 import scala.util.{Success, Failure}
 
+import com.fasterxml.jackson.module.scala.DefaultScalaModule
+import com.fasterxml.jackson.databind.json.JsonMapper
+import com.fasterxml.jackson.core.`type`.TypeReference
+
 object DataWriter {
   val logger = LoggerFactory.getLogger(DataWriter.getClass().getName())
 
   val run0db: MongoCollection[Document] =
     mongoDbClient().getDatabase("mandelbrot").getCollection("run0")
 
-  def writeData(record: ConsumerRecord[String, String]) {
+  val mapper = JsonMapper.builder().addModule(DefaultScalaModule).build()
+
+  def writeData(payload: Map[String, String]) {
+    // todo implement
+  }
+
+  def clearDb(payload: Map[String, String]) {
+    // todo implement
+  }
+
+  def handleData(record: ConsumerRecord[String, String]) {
     //"a=1;b=2;c=d;d=4".split(";").toList.map(v => {v.split("=").toList}).collect {case List(a: String, b: String) => (a, b)}.toMap
     //"[-]?[0-9.]+".r
-    val keyComponents = "[-]?[0-9.]+".r.findAllIn(record.key).matchData.toArray
-    val r = keyComponents(0)
-    val i = keyComponents(1)
 
     logger.debug(s"Received record data: ${record.value}")
+    // todo: move datawriter logic to own function, add support for data clean-up (e.g. before tests run)
 
-    val valueComponents = record.value
-      .split(";")
-      .toList
-      .map(v => { v.split("=").toList })
-      .collect { case List(k: String, v: String) => (k, v) }
-      .toMap
+    val payload: Map[String, Map[String, String]] = mapper.readValue(
+      record.value,
+      new TypeReference[Map[String, Map[String, String]]] {}
+    )
+
+    // val keyComponents = "[-]?[0-9.]+".r.findAllIn(record.key).matchData.toArray
+    // val r = keyComponents(0)
+    // val i = keyComponents(1)
+    val data = payload("data")
+    val r = data("r")
+    val i = data("i")
+
+    // val valueComponents = record.value
+    //   .split(";")
+    //   .toList
+    //   .map(v => { v.split("=").toList })
+    //   .collect { case List(k: String, v: String) => (k, v) }
+    //   .toMap
+
+    payload("metadata")("operation") match {
+      case "foo" => println("");
+    }
 
     val upsertDocument = Document(
       "$set" -> Document(
-        "value" -> valueComponents.get("value"),
-        "fromTopic" -> valueComponents.get("topic"),
+        "value" -> data("value"),
+        "fromTopic" -> data("topic"),
         "modifiedAt" -> new Date(),
-        "runUuid" -> valueComponents.get("uuid"),
-        "computeDateStamp" -> valueComponents.get("computeDatestamp")
+        "runUuid" -> data("uuid"),
+        "computeDateStamp" -> data("computeDatestamp")
       ),
       "$setOnInsert" -> Document(
-        "r" -> r.toString(),
-        "i" -> i.toString()
+        "r" -> data("r"),
+        "i" -> data("i")
       )
     )
 
@@ -107,32 +135,42 @@ object DataWriter {
         val writes = ListBuffer[UpdateOneModel[Nothing]]()
         val insert = mutable.Queue[UpdateOneModel[Nothing]]()
 
-        val f1 = Future {
-          if (work.records(topic).iterator().hasNext())
-            writeData(work.records(topic).iterator().next())
+        val runs = ListBuffer[Future[Unit]]();
+        for (i <- Range(0, 10)) {
+          runs.append(Future {
+            if (work.records(topic).iterator().hasNext())
+              handleData(work.records(topic).iterator().next())
+          })
         }
 
-        val f2 = Future {
-          if (work.records(topic).iterator().hasNext())
-            writeData(work.records(topic).iterator().next())
-        }
+        val futures = Future.sequence(runs)
 
-        val f3 = Future {
-          if (work.records(topic).iterator().hasNext())
-            writeData(work.records(topic).iterator().next())
-        }
+        // val f1 = Future {
+        //   if (work.records(topic).iterator().hasNext())
+        //     handleData(work.records(topic).iterator().next())
+        // }
 
-        val f4 = Future {
-          if (work.records(topic).iterator().hasNext())
-            writeData(work.records(topic).iterator().next())
-        }
+        // val f2 = Future {
+        //   if (work.records(topic).iterator().hasNext())
+        //     handleData(work.records(topic).iterator().next())
+        // }
 
-        val f5 = Future {
-          if (work.records(topic).iterator().hasNext())
-            writeData(work.records(topic).iterator().next())
-        }
+        // val f3 = Future {
+        //   if (work.records(topic).iterator().hasNext())
+        //     handleData(work.records(topic).iterator().next())
+        // }
 
-        val futures = Future.sequence(List(f1, f2, f3, f4, f5))
+        // val f4 = Future {
+        //   if (work.records(topic).iterator().hasNext())
+        //     handleData(work.records(topic).iterator().next())
+        // }
+
+        // val f5 = Future {
+        //   if (work.records(topic).iterator().hasNext())
+        //     handleData(work.records(topic).iterator().next())
+        // }
+
+        // val futures = Future.sequence(List(f1, f2, f3, f4, f5))
         Await.result(futures, 60.seconds)
 
         /*work.forEach(record => {

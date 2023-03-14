@@ -20,8 +20,13 @@ libraryDependencies += "org.apache.avro" % "avro" % "1.11.0"
 // https://mvnrepository.com/artifact/io.confluent/kafka-avro-serializer
 libraryDependencies += "io.confluent" % "kafka-avro-serializer" % "7.0.0"
 libraryDependencies += "org.testifyproject.mock" % "mockito" % "1.0.6"
+libraryDependencies += "com.fasterxml.jackson.module" % "jackson-module-scala_2.13" % "2.13.5"
 
 fork := true
 // run / javaOptions += "-Djavax.net.debug=all"
 run / javaOptions += "-Djavax.net.ssl.keyStore=/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/bbk.ac.uk.p12"
 run / javaOptions += "-Djavax.net.ssl.keyStorePassword=xiec.gate.r"
+
+ThisBuild / assemblyMergeStrategy := { case _ =>
+  MergeStrategy.first
+}

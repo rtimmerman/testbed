@@ -57,7 +57,13 @@ object Producer {
           new ProducerRecord[String, String](
             topic,
             "coordinate",
-            value.toString + ";" + iterations + ";" + runUUID.toString
+            //value.toString + ";" + iterations + ";" + runUUID.toString
+            Consumer.encodedPayload(
+              value.real.toString(),
+              value.imag.toString(),
+              iterations.toString(),
+              runUUID.toString()
+            )
           )
         )
       })

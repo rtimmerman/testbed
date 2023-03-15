@@ -17,6 +17,34 @@ import com.fasterxml.jackson.core.`type`.TypeReference
 
 object Consumer {
   val logger = LoggerFactory.getLogger(Consumer.getClass.getName)
+  val mapper =
+    JsonMapper
+      .builder()
+      .addModule(DefaultScalaModule)
+      .build()
+
+  def encodedPayload(
+      r: String,
+      i: String,
+      iterations: String,
+      uuid: String
+  ): String = {
+    mapper.writeValueAsString(
+      Map[String, String](
+        "r" -> r,
+        "i" -> i,
+        "iterations" -> iterations,
+        "uuid" -> uuid
+      )
+    )
+  }
+
+  def decodedPayload(payload: String): Map[String, String] = {
+    mapper.readValue(
+      payload,
+      new TypeReference[Map[String, String]] {}
+    )
+  }
 
   def process(z: Complex[Double], c: Complex[Double], iterations: Int): Int = {
     if (iterations < 1) {
@@ -86,68 +114,62 @@ object Consumer {
         val writes = ListBuffer[UpdateOneModel[Nothing]]()
         val insert = mutable.Queue[UpdateOneModel[Nothing]]()
 
-        val mapper =
-          JsonMapper
-            .builder()
-            .addModule(DefaultScalaModule)
-            .build()
-
         work.forEach(record => {
           println(record.key() + " = " + record.value())
-          ("""([0-9.-]+)\s*\+\s*([0-9.-]+)i;([0-9]+);(.*?)""".r)
-            .findAllIn(record.value)
-            .matchData foreach { m =>
-            {
-              val z =
-                new Complex[Double](m.group(1).toDouble, m.group(2).toDouble)
 
-              val res = process(
-                z,
-                z,
-                m.group(3).toInt
-              )
+          val payload = decodedPayload(record.value())
+          val z =
+            new Complex[Double](payload("r").toDouble, payload("i").toDouble)
 
-              val r = m.group(1)
-              val i = m.group(2)
-              val uuid = m.group(4)
-              val datestamp =
-                (new Date()).toString() //todo make the datastamp here nicer
+          // do some processing
+          val res = process(z, z, payload("iterations").toInt)
 
-              val data: Map[String, String] = Map(
-                "value" -> res.toString(),
-                "uuid" -> uuid,
-                "r" -> r,
-                "i" -> i,
-                "computeDateStamp" -> datestamp,
-                "topic" -> topic
-              )
+          // Save the result
+          DataWriter.doWork(
+            resultProducer,
+            "writeData",
+            s"${payload("r")}:${payload("i")}",
+            Map[String, String](
+              "r" -> payload("r"),
+              "i" -> payload("i"),
+              "value" -> res.toString,
+              "uuid" -> payload("uuid"),
+              "computeDateStamp" -> payload("computeDateStamp"),
+              "topic" -> payload("topic")
+            )
+          )
 
-              // val payload =
-              //   mapper.writeValueAsString(
-              //     Map(
-              //       "metadata" -> Map("operation" -> "writeData"),
-              //       "data" -> Map(
-              //         "value" -> res,
-              //         "uuid" -> uuid,
-              //         "r" -> r,
-              //         "i" -> i,
-              //         "computeDateStamp" -> datestamp,
-              //         "topic" -> topic
-              //       )
-              //     )
-              //   )
+          // ("""([0-9.-]+)\s*\+\s*([0-9.-]+)i;([0-9]+);(.*?)""".r)
+          //   .findAllIn(record.value)
+          //   .matchData foreach { m =>
+          //   {
+          //     val z =
+          //       new Complex[Double](m.group(1).toDouble, m.group(2).toDouble)
 
-              // resultProducer.send(
-              //   new ProducerRecord[String, String](
-              //     "result",
-              //     s"$r:$i",
-              //     payload
-              //   )
-              // )
+          //     val res = process(
+          //       z,
+          //       z,
+          //       m.group(3).toInt
+          //     )
 
-              DataWriter.doWork(resultProducer, "writeData", s"$r:$i", data)
-            }
-          }
+          //     val r = m.group(1)
+          //     val i = m.group(2)
+          //     val uuid = m.group(4)
+          //     val datestamp =
+          //       (new Date()).toString() //todo make the datastamp here nicer
+
+          //     val data: Map[String, String] = Map(
+          //       "value" -> res.toString(),
+          //       "uuid" -> uuid,
+          //       "r" -> r,
+          //       "i" -> i,
+          //       "computeDateStamp" -> datestamp,
+          //       "topic" -> topic
+          //     )
+
+          //     DataWriter.doWork(resultProducer, "writeData", s"$r:$i", data)
+          //   }
+          // }
         })
       }
     }

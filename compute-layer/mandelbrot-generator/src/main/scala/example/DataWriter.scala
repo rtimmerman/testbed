@@ -52,7 +52,7 @@ object DataWriter {
       scala.concurrent.ExecutionContext.global
     val upsertFuture = run0db
       .updateOne(
-        Document("r" -> r.toString(), "i" -> i.toString()),
+        Document(data("r"), "i" -> data("i")),
         upsertDocument,
         opts
       )
@@ -84,8 +84,6 @@ object DataWriter {
     )
 
     val data = payload("data")
-    val r = data("r")
-    val i = data("i")
 
     payload("metadata")("operation") match {
       case "writeData" => writeData(data);

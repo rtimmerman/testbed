@@ -139,13 +139,13 @@ object Consumer {
               //     )
               //   )
 
-              resultProducer.send(
-                new ProducerRecord[String, String](
-                  "result",
-                  s"$r:$i",
-                  payload
-                )
-              )
+              // resultProducer.send(
+              //   new ProducerRecord[String, String](
+              //     "result",
+              //     s"$r:$i",
+              //     payload
+              //   )
+              // )
 
               DataWriter.doWork(resultProducer, "writeData", s"$r:$i", data)
 

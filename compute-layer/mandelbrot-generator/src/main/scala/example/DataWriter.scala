@@ -30,7 +30,7 @@ object DataWriter {
 
   val mapper = JsonMapper.builder().addModule(DefaultScalaModule).build()
 
-  def writeData(data: Map[String[String, String]]) {
+  def writeData(data: Map[String, String]) {
     val upsertDocument = Document(
       "$set" -> Document(
         "value" -> data("value"),
@@ -52,7 +52,7 @@ object DataWriter {
       scala.concurrent.ExecutionContext.global
     val upsertFuture = run0db
       .updateOne(
-        Document(data("r"), "i" -> data("i")),
+        Document("r" -> data("r"), "i" -> data("i")),
         upsertDocument,
         opts
       )
@@ -63,7 +63,7 @@ object DataWriter {
     upsertFuture onComplete {
       case Success(out) =>
         logger.info(
-          s"Entry << ${data(r)} | ${data(i)} | ${data(value)} >> upserted."
+          s"Entry << ${data("r")} | ${data("i")} | ${data("value")} >> upserted."
         )
       case Failure(e) => logger.error(s"Upsert Failed ${e.getMessage()}")
     }

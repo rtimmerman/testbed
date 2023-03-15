@@ -30,44 +30,7 @@ object DataWriter {
 
   val mapper = JsonMapper.builder().addModule(DefaultScalaModule).build()
 
-  def writeData(payload: Map[String, String]) {
-    // todo implement
-  }
-
-  def clearDb(payload: Map[String, String]) {
-    // todo implement
-  }
-
-  def handleData(record: ConsumerRecord[String, String]) {
-    //"a=1;b=2;c=d;d=4".split(";").toList.map(v => {v.split("=").toList}).collect {case List(a: String, b: String) => (a, b)}.toMap
-    //"[-]?[0-9.]+".r
-
-    logger.debug(s"Received record data: ${record.value}")
-    // todo: move datawriter logic to own function, add support for data clean-up (e.g. before tests run)
-
-    val payload: Map[String, Map[String, String]] = mapper.readValue(
-      record.value,
-      new TypeReference[Map[String, Map[String, String]]] {}
-    )
-
-    // val keyComponents = "[-]?[0-9.]+".r.findAllIn(record.key).matchData.toArray
-    // val r = keyComponents(0)
-    // val i = keyComponents(1)
-    val data = payload("data")
-    val r = data("r")
-    val i = data("i")
-
-    // val valueComponents = record.value
-    //   .split(";")
-    //   .toList
-    //   .map(v => { v.split("=").toList })
-    //   .collect { case List(k: String, v: String) => (k, v) }
-    //   .toMap
-
-    payload("metadata")("operation") match {
-      case "foo" => println("");
-    }
-
+  def writeData(data: Map[String[String, String]]) {
     val upsertDocument = Document(
       "$set" -> Document(
         "value" -> data("value"),
@@ -102,7 +65,32 @@ object DataWriter {
         logger.info(s"Entry << ${record.key} | ${record.value} >> upserted.")
       case Failure(e) => logger.error(s"Upsert Failed ${e.getMessage()}")
     }
+  }
 
+  def clearDb(payload: Map[String, String]) {
+    val deleteFuture = run0db.deleteMany(Document()).execute()
+  }
+
+  def handleData(record: ConsumerRecord[String, String]) {
+    //"a=1;b=2;c=d;d=4".split(";").toList.map(v => {v.split("=").toList}).collect {case List(a: String, b: String) => (a, b)}.toMap
+    //"[-]?[0-9.]+".r
+
+    logger.debug(s"Received record data: ${record.value}")
+    // todo: move datawriter logic to own function, add support for data clean-up (e.g. before tests run)
+
+    val payload: Map[String, Map[String, String]] = mapper.readValue(
+      record.value,
+      new TypeReference[Map[String, Map[String, String]]] {}
+    )
+
+    val data = payload("data")
+    val r = data("r")
+    val i = data("i")
+
+    payload("metadata")("operation") match {
+      case "writeData" => writeData(data);
+      case "clearDb"   => clearDb();
+    }
   }
 
   def consume(topic: String) = {

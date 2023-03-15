@@ -45,6 +45,8 @@ object DataWriter {
         )
       )
 
+    resultProducer.beginTransaction()
+
     resultProducer.send(
       new ProducerRecord[String, String](
         "result",

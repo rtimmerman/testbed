@@ -107,8 +107,6 @@ object Consumer {
                 m.group(3).toInt
               )
 
-              resultProducer.beginTransaction()
-
               val r = m.group(1)
               val i = m.group(2)
               val uuid = m.group(4)
@@ -148,8 +146,6 @@ object Consumer {
               // )
 
               DataWriter.doWork(resultProducer, "writeData", s"$r:$i", data)
-
-              resultProducer.commitTransaction()
             }
           }
         })

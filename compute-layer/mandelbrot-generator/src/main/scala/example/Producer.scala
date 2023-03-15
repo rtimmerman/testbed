@@ -33,6 +33,8 @@ object Producer {
     var lot: Int = 0
 
     kafkaProducer.beginTransaction()
+    val runUUID = UUID.randomUUID()
+
     for (
       x <- 0 to (4 * factor.toInt - 1) by factor.toInt;
       y <- 0 to (4 * factor.toInt - 1) by factor.toInt
@@ -47,8 +49,6 @@ object Producer {
         if (x + factor.toInt >= (4 * factor.toInt)) 4 * factor.toInt
         else x + factor.toInt
       val entries = plane(x to xlimit, y to ylimit).toArray
-
-      val runUUID = UUID.randomUUID()
 
       println(s"(${entries.length} entries to ${topic})")
       entries.foreach(value => {

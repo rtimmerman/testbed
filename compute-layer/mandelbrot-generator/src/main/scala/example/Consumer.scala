@@ -93,16 +93,6 @@ object Consumer {
             .build()
 
         work.forEach(record => {
-
-          // payload = mapper.readValue(
-          //   record,
-          //   new TypeReference[Map[String, Map[String, String]]]
-          // )
-
-          // switch (payload["operation"]) {
-          //   case "doWork"
-          // }
-
           println(record.key() + " = " + record.value())
           ("""([0-9.-]+)\s*\+\s*([0-9.-]+)i;([0-9]+);(.*?)""".r)
             .findAllIn(record.value)
@@ -125,20 +115,29 @@ object Consumer {
               val datestamp =
                 (new Date()).toString() //todo make the datastamp here nicer
 
-              val payload =
-                mapper.writeValueAsString(
-                  Map(
-                    "metadata" -> Map("operation" -> "writeData"),
-                    "data" -> Map(
-                      "value" -> res,
-                      "uuid" -> uuid,
-                      "r" -> r,
-                      "i" -> i,
-                      "computeDateStamp" -> datestamp,
-                      "topic" -> topic
-                    )
-                  )
-                )
+              val data: Map[String, String] = Map(
+                "value" -> res.toString(),
+                "uuid" -> uuid,
+                "r" -> r,
+                "i" -> i,
+                "computeDateStamp" -> datestamp,
+                "topic" -> topic
+              )
+
+              // val payload =
+              //   mapper.writeValueAsString(
+              //     Map(
+              //       "metadata" -> Map("operation" -> "writeData"),
+              //       "data" -> Map(
+              //         "value" -> res,
+              //         "uuid" -> uuid,
+              //         "r" -> r,
+              //         "i" -> i,
+              //         "computeDateStamp" -> datestamp,
+              //         "topic" -> topic
+              //       )
+              //     )
+              //   )
 
               resultProducer.send(
                 new ProducerRecord[String, String](
@@ -147,6 +146,8 @@ object Consumer {
                   payload
                 )
               )
+
+              DataWriter.doWork(resultProducer, "writeData", s"$r:$i", data)
 
               resultProducer.commitTransaction()
             }

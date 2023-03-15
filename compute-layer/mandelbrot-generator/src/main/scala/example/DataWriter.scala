@@ -17,6 +17,7 @@ import scala.concurrent.Future
 import java.util.concurrent.Executors
 import scala.concurrent.duration._
 import scala.util.{Success, Failure}
+import org.apache.kafka.clients.producer.{KafkaProducer, ProducerRecord}
 
 import com.fasterxml.jackson.module.scala.DefaultScalaModule
 import com.fasterxml.jackson.databind.json.JsonMapper
@@ -29,6 +30,31 @@ object DataWriter {
     mongoDbClient().getDatabase("mandelbrot").getCollection("run0")
 
   val mapper = JsonMapper.builder().addModule(DefaultScalaModule).build()
+
+  def doWork(
+      resultProducer: KafkaProducer[String, String],
+      operation: String,
+      key: String,
+      data: Map[String, String]
+  ) {
+    val payload =
+      mapper.writeValueAsString(
+        Map(
+          "metadata" -> Map("operation" -> operation),
+          "data" -> data
+        )
+      )
+
+    resultProducer.send(
+      new ProducerRecord[String, String](
+        "result",
+        key,
+        payload
+      )
+    )
+
+    resultProducer.commitTransaction()
+  }
 
   def writeData(data: Map[String, String]) {
     val upsertDocument = Document(
@@ -74,11 +100,7 @@ object DataWriter {
   }
 
   def handleData(record: ConsumerRecord[String, String]) {
-    //"a=1;b=2;c=d;d=4".split(";").toList.map(v => {v.split("=").toList}).collect {case List(a: String, b: String) => (a, b)}.toMap
-    //"[-]?[0-9.]+".r
-
     logger.debug(s"Received record data: ${record.value}")
-    // todo: move datawriter logic to own function, add support for data clean-up (e.g. before tests run)
 
     val payload: Map[String, Map[String, String]] = mapper.readValue(
       record.value,
@@ -133,41 +155,7 @@ object DataWriter {
 
         val futures = Future.sequence(runs)
 
-        // val f1 = Future {
-        //   if (work.records(topic).iterator().hasNext())
-        //     handleData(work.records(topic).iterator().next())
-        // }
-
-        // val f2 = Future {
-        //   if (work.records(topic).iterator().hasNext())
-        //     handleData(work.records(topic).iterator().next())
-        // }
-
-        // val f3 = Future {
-        //   if (work.records(topic).iterator().hasNext())
-        //     handleData(work.records(topic).iterator().next())
-        // }
-
-        // val f4 = Future {
-        //   if (work.records(topic).iterator().hasNext())
-        //     handleData(work.records(topic).iterator().next())
-        // }
-
-        // val f5 = Future {
-        //   if (work.records(topic).iterator().hasNext())
-        //     handleData(work.records(topic).iterator().next())
-        // }
-
-        // val futures = Future.sequence(List(f1, f2, f3, f4, f5))
         Await.result(futures, 60.seconds)
-
-        /*work.forEach(record => {
-          val future = Future {
-            writeData(record)
-          }
-
-          Await.ready(future, 60.seconds)
-        })*/
 
       }
     }

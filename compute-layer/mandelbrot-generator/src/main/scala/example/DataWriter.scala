@@ -37,7 +37,7 @@ object DataWriter {
         "fromTopic" -> data("topic"),
         "modifiedAt" -> new Date(),
         "runUuid" -> data("uuid"),
-        "computeDateStamp" -> data("computeDatestamp")
+        "computeDateStamp" -> data("computeDateStamp")
       ),
       "$setOnInsert" -> Document(
         "r" -> data("r"),

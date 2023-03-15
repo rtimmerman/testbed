@@ -134,7 +134,9 @@ object Consumer {
               "i" -> payload("i"),
               "value" -> res.toString,
               "uuid" -> payload("uuid"),
-              "computeDateStamp" -> payload("computeDateStamp"),
+              "computeDateStamp" -> java.time.Instant
+                .now()
+                .toString,
               "topic" -> payload("topic")
             )
           )

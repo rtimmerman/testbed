@@ -62,13 +62,15 @@ object DataWriter {
 
     upsertFuture onComplete {
       case Success(out) =>
-        logger.info(s"Entry << ${record.key} | ${record.value} >> upserted.")
+        logger.info(
+          s"Entry << ${data(r)} | ${data(i)} | ${data(value)} >> upserted."
+        )
       case Failure(e) => logger.error(s"Upsert Failed ${e.getMessage()}")
     }
   }
 
-  def clearDb(payload: Map[String, String]) {
-    val deleteFuture = run0db.deleteMany(Document()).execute()
+  def clearDb() {
+    val deleteFuture = run0db.deleteMany(Document())
   }
 
   def handleData(record: ConsumerRecord[String, String]) {

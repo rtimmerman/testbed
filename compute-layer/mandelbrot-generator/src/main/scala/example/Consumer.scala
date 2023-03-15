@@ -137,7 +137,7 @@ object Consumer {
               "computeDateStamp" -> java.time.Instant
                 .now()
                 .toString,
-              "topic" -> payload("topic")
+              "topic" -> topic
             )
           )
 

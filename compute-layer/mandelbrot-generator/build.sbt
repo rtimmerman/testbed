@@ -1,4 +1,4 @@
-ThisBuild / scalaVersion := "2.13.5"
+ThisBuild / scalaVersion := "3.3.0"
 ThisBuild / version := "0.1.0-SNAPSHOT"
 ThisBuild / organization := "com.example"
 ThisBuild / organizationName := "example"
@@ -7,10 +7,10 @@ resolvers += "confluent" at "https://packages.confluent.io/maven/"
 
 // See https://www.scala-sbt.org/1.x/docs/Using-Sonatype.html for instructions on how to publish to Sonatype.
 
-libraryDependencies += "org.apache.kafka" %% "kafka" % "2.8.0"
-libraryDependencies += "org.typelevel" %% "spire" % "0.17.0"
-libraryDependencies += "org.scalanlp" %% "breeze" % "1.2"
-libraryDependencies += "org.mongodb.scala" %% "mongo-scala-driver" % "4.3.1"
+libraryDependencies += "org.apache.kafka" % "kafka-clients" % "3.5.1"
+libraryDependencies += "org.typelevel" %% "spire" % "0.18.0"
+libraryDependencies += "org.scalanlp" %% "breeze" % "2.1.0"
+libraryDependencies += "org.mongodb" % "mongodb-driver-sync" % "4.10.2"
 // https://mvnrepository.com/artifact/org.slf4j/slf4j-api
 libraryDependencies += "org.slf4j" % "slf4j-api" % "1.7.32"
 // https://mvnrepository.com/artifact/org.slf4j/slf4j-simple

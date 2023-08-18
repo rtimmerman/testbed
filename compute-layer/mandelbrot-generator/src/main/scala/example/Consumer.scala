@@ -2,7 +2,6 @@ package example
 
 import org.apache.kafka.clients.consumer._
 import org.apache.kafka.clients.producer.{KafkaProducer, ProducerRecord}
-import org.mongodb.scala.model.UpdateOneModel
 import org.slf4j.LoggerFactory
 import spire.implicits._
 import spire.math._
@@ -14,6 +13,7 @@ import scala.collection.mutable.ListBuffer
 import com.fasterxml.jackson.module.scala.DefaultScalaModule
 import com.fasterxml.jackson.databind.json.JsonMapper
 import com.fasterxml.jackson.core.`type`.TypeReference
+import com.mongodb.client.model.UpdateOneModel
 
 object Consumer {
   val logger = LoggerFactory.getLogger(Consumer.getClass.getName)

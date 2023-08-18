@@ -1,8 +1,7 @@
 package example
 import com.mongodb
 import org.apache.kafka.clients.consumer._
-import org.mongodb.scala._
-import org.mongodb.scala.model.UpdateOneModel
+import com.mongodb.client.model.UpdateOneModel
 import org.slf4j.LoggerFactory
 
 import java.security.{KeyStore, SecureRandom}
@@ -22,6 +21,17 @@ import org.apache.kafka.clients.producer.{KafkaProducer, ProducerRecord}
 import com.fasterxml.jackson.module.scala.DefaultScalaModule
 import com.fasterxml.jackson.databind.json.JsonMapper
 import com.fasterxml.jackson.core.`type`.TypeReference
+import com.mongodb.client.model.mql.MqlDocument
+import org.bson.Document
+import com.mongodb.client.MongoCollection
+import com.mongodb.client.MongoClient
+import com.mongodb.MongoCredential
+import com.mongodb.MongoClientSettings
+import com.mongodb.ConnectionString
+import com.mongodb.client.model.Filters
+import scala.collection.View.Filter
+import com.mongodb.client.model.Updates
+import com.mongodb.client.MongoClients
 
 object DataWriter {
   val logger = LoggerFactory.getLogger(DataWriter.getClass().getName())
@@ -36,7 +46,7 @@ object DataWriter {
       operation: String,
       key: String,
       data: Map[String, String]
-  ) {
+  ) = {
     val payload =
       mapper.writeValueAsString(
         Map(
@@ -58,50 +68,43 @@ object DataWriter {
     resultProducer.commitTransaction()
   }
 
-  def writeData(data: Map[String, String]) {
-    val upsertDocument = Document(
-      "$set" -> Document(
-        "value" -> data("value"),
-        "fromTopic" -> data("topic"),
-        "modifiedAt" -> new Date(),
-        "runUuid" -> data("uuid"),
-        "computeDateStamp" -> data("computeDateStamp")
-      ),
-      "$setOnInsert" -> Document(
-        "r" -> data("r"),
-        "i" -> data("i")
-      )
-    )
-
-    val opts = org.mongodb.scala.model.UpdateOptions()
+  def writeData(data: Map[String, String]) = {
+    var opts = com.mongodb.client.model.UpdateOptions()
     opts.upsert(true)
 
     implicit val ec: scala.concurrent.ExecutionContext =
       scala.concurrent.ExecutionContext.global
-    val upsertFuture = run0db
+
+    run0db
       .updateOne(
-        Document("r" -> data("r"), "i" -> data("i")),
-        upsertDocument,
+        Filters.and(Filters.eq("r", data("r")), Filters.eq("i", data("i"))),
+        Updates.combine(
+           Updates.set("value", data("value")),
+           Updates.set("fromTopic", data("topic")),
+           Updates.set("modifiedAt", new Date()),
+           Updates.set("computeDateStamp", data("computeDateStamp")),
+           Updates.setOnInsert("r", data("r")),
+           Updates.setOnInsert("i", data("i"))
+        ),
         opts
       )
-      .toFuture()
 
-    Await.result(upsertFuture, 60.seconds)
+    //Await.result(upsertFuture, 60.seconds)
 
-    upsertFuture onComplete {
-      case Success(out) =>
+    //upsertFuture onComplete {
+      //case Success(out) =>
         logger.info(
           s"Entry << ${data("r")} | ${data("i")} | ${data("value")} >> upserted."
         )
-      case Failure(e) => logger.error(s"Upsert Failed ${e.getMessage()}")
-    }
+      //case Failure(e) => logger.error(s"Upsert Failed ${e.getMessage()}")
   }
+  
 
-  def clearDb() {
+  def clearDb() = {
     val deleteFuture = run0db.deleteMany(Document())
   }
 
-  def handleData(record: ConsumerRecord[String, String]) {
+  def handleData(record: ConsumerRecord[String, String]) = {
     logger.debug(s"Received record data: ${record.value}")
 
     val payload: Map[String, Map[String, String]] = mapper.readValue(
@@ -219,6 +222,7 @@ object DataWriter {
       .writeConcern(mongodb.WriteConcern.ACKNOWLEDGED)
       .build()
 
-    MongoClient(dbSettings);
+    MongoClients.create(dbSettings)
   }
+
 }

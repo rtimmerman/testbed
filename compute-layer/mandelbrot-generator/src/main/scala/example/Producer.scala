@@ -35,7 +35,7 @@ object Producer {
     kafkaProducer.beginTransaction()
     val runUUID = UUID.randomUUID()
 
-    println(s"Starting run: $runnUUID")
+    println(s"Starting run: $runUUID")
 
     for (
       x <- 0 to (4 * factor.toInt - 1) by factor.toInt;

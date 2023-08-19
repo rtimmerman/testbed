@@ -1,24 +1,25 @@
 package example
 import java.util.Properties
 
-//object Mandelbrot extends App with Greeting {
-@main def mandelbrot(role: String, topic: String, iterations: Int): Unit =
-  println(f"Starting as $role, topic: $topic, iterations = $iterations")
-  // println(args)
-  // val topic = args(0) match {
-  //   case "consumer"             => args(1)
-  //   case "data-writer-consumer" => args(1)
-  //   case _                      => "test"
-  // }
+@main def mandelbrot(role: String, args: String*): Unit =
+  val topic = role match {
+    case "producer"             => args(0)
+    case "consumer"             => args(0)
+    case "data-writer-consumer" => args(0)
+    case _                      => "test"
+  }
 
-  // val topicPrefix =
-  //   if (role.equals("producer") && args.length > 1) topic else "test"
-  // val iterations =
-  //   if (args.length > 2) args(2).toInt else 10
+  val iterations = role match {
+    case "producer" => args(1).toInt
+    case _ => 0
+  }
 
   if (role.equals("producer"))
+    println(f"<< PRODUCER >> submitting to topic: \"$topic\", # iterations = $iterations")
     Producer.produceGridPoints(topic, iterations)
   else if (role.equals("consumer"))
+    println(f"<< CONSUMER >> listening to \"$topic\"")
     Consumer.consume(topic)
   else if (role.equals("data-writer-consumer"))
+    println(f"<< DATA-WRITER >> listnening to \"$topic\"")
     DataWriter.consume(topic)

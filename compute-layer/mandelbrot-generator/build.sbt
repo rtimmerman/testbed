@@ -11,19 +11,15 @@ libraryDependencies += "org.apache.kafka" % "kafka-clients" % "3.5.1"
 libraryDependencies += "org.typelevel" %% "spire" % "0.18.0"
 libraryDependencies += "org.scalanlp" %% "breeze" % "2.1.0"
 libraryDependencies += "org.mongodb" % "mongodb-driver-sync" % "4.10.2"
-// https://mvnrepository.com/artifact/org.slf4j/slf4j-api
 libraryDependencies += "org.slf4j" % "slf4j-api" % "1.7.32"
-// https://mvnrepository.com/artifact/org.slf4j/slf4j-simple
 libraryDependencies += "org.slf4j" % "slf4j-simple" % "1.7.32"
-// https://mvnrepository.com/artifact/org.apache.avro/avro
 libraryDependencies += "org.apache.avro" % "avro" % "1.11.0"
-// https://mvnrepository.com/artifact/io.confluent/kafka-avro-serializer
 libraryDependencies += "io.confluent" % "kafka-avro-serializer" % "7.0.0"
 libraryDependencies += "org.testifyproject.mock" % "mockito" % "1.0.6"
-libraryDependencies += "com.fasterxml.jackson.module" % "jackson-module-scala_2.13" % "2.13.5"
+libraryDependencies += "com.fasterxml.jackson.module" %% "jackson-module-scala" % "2.15.2"
+
 
 fork := true
-// run / javaOptions += "-Djavax.net.debug=all"
 run / javaOptions += "-Djavax.net.ssl.keyStore=/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/bbk.ac.uk.p12"
 run / javaOptions += "-Djavax.net.ssl.keyStorePassword=xiec.gate.r"
 

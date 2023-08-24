@@ -3,8 +3,8 @@ package example
 import org.apache.kafka.clients.consumer._
 import org.apache.kafka.clients.producer.{KafkaProducer, ProducerRecord}
 import org.slf4j.LoggerFactory
-import spire.implicits._
-import spire.math._
+//import spire.implicits._
+// import spire.math._
 
 import java.util.{Date, Properties}
 import scala.collection.mutable
@@ -14,6 +14,22 @@ import com.fasterxml.jackson.module.scala.DefaultScalaModule
 import com.fasterxml.jackson.databind.json.JsonMapper
 import com.fasterxml.jackson.core.`type`.TypeReference
 import com.mongodb.client.model.UpdateOneModel
+
+class Complex(var r: BigDecimal, var i: BigDecimal) {
+  def + (other: Complex): Complex = new Complex(this.r + other.r, this.i + other.i)
+  
+
+  def * (other: Complex): Complex = new Complex(
+        this.r * other.r - (other.i * this.i), 
+        this.r * other.i + this.i * other.r
+  )
+
+  def pow(n: BigDecimal): Complex = this * this
+
+  def abs(): Double = Math.pow(r.pow(2).toDouble + i.pow(2).toDouble, 0.5)
+
+  def conj(): Complex = new Complex(this.r, -this.i)
+}
 
 object Consumer {
   val logger = LoggerFactory.getLogger(Consumer.getClass.getName)
@@ -46,15 +62,14 @@ object Consumer {
     )
   }
 
-  def process(z: Complex[Double], c: Complex[Double], iterations: Int): Int = {
+  def process(z: Complex, c: Complex, iterations: Int): Int = {
     if (iterations < 1) {
       return -1
     }
 
-    val M: Complex[Double] =
-      (z pow 2) + c
+    val M: Complex = (z pow 2) + c
 
-    if (M.abs > 4.0) {
+    if (M.abs() > 4.0) {
       return iterations
     }
 
@@ -119,7 +134,7 @@ object Consumer {
 
           val payload = decodedPayload(record.value())
           val z =
-            new Complex[Double](payload("r").toDouble, payload("i").toDouble)
+            new Complex(payload("r").toDouble, payload("i").toDouble)
 
           // do some processing
           val res = process(z, z, payload("iterations").toInt)
@@ -140,38 +155,6 @@ object Consumer {
               "topic" -> topic
             )
           )
-
-          // ("""([0-9.-]+)\s*\+\s*([0-9.-]+)i;([0-9]+);(.*?)""".r)
-          //   .findAllIn(record.value)
-          //   .matchData foreach { m =>
-          //   {
-          //     val z =
-          //       new Complex[Double](m.group(1).toDouble, m.group(2).toDouble)
-
-          //     val res = process(
-          //       z,
-          //       z,
-          //       m.group(3).toInt
-          //     )
-
-          //     val r = m.group(1)
-          //     val i = m.group(2)
-          //     val uuid = m.group(4)
-          //     val datestamp =
-          //       (new Date()).toString() //todo make the datastamp here nicer
-
-          //     val data: Map[String, String] = Map(
-          //       "value" -> res.toString(),
-          //       "uuid" -> uuid,
-          //       "r" -> r,
-          //       "i" -> i,
-          //       "computeDateStamp" -> datestamp,
-          //       "topic" -> topic
-          //     )
-
-          //     DataWriter.doWork(resultProducer, "writeData", s"$r:$i", data)
-          //   }
-          // }
         })
       }
     }

@@ -15,8 +15,13 @@ libraryDependencies += "org.slf4j" % "slf4j-api" % "1.7.32"
 libraryDependencies += "org.slf4j" % "slf4j-simple" % "1.7.32"
 libraryDependencies += "org.apache.avro" % "avro" % "1.11.0"
 libraryDependencies += "io.confluent" % "kafka-avro-serializer" % "7.0.0"
-libraryDependencies += "org.testifyproject.mock" % "mockito" % "1.0.6"
+// https://mvnrepository.com/artifact/org.mockito/mockito-core
+libraryDependencies += "org.mockito" % "mockito-core" % "5.4.0" % Test
+
 libraryDependencies += "com.fasterxml.jackson.module" %% "jackson-module-scala" % "2.15.2"
+// https://mvnrepository.com/artifact/org.scalatest/scalatest
+libraryDependencies += "org.scalactic" %% "scalactic" % "3.2.16"
+libraryDependencies += "org.scalatest" %% "scalatest" % "3.2.16" % Test
 
 
 fork := true

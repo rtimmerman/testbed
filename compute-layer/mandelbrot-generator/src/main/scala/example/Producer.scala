@@ -6,6 +6,11 @@ import breeze.linalg._
 
 import java.security.MessageDigest;
 
+class Producer(var kafkaProducer: KafkaProducer[String, String] = null)
+{
+
+}
+
 object Producer {
   def gridWorkStream(
       kafkaProducer: KafkaProducer[String, String],
@@ -77,7 +82,7 @@ object Producer {
     kafkaProducer.close()
   }
 
-  def produceGridPoints(topicPrefix: String, iterations: Int) = {
+  def produceGridPoints(topicPrefix: String, iterations: Int, kafkaProducer: KafkaProducer[String, String] = null) = {
     val props = new Properties()
     props.put("bootstrap.servers", "kafka-topic-server:9092")
     props.put(
@@ -92,8 +97,14 @@ object Producer {
       "transactional.id",
       "transaction-id-1"
     )
-    val producer = new KafkaProducer[String, String](props)
+    //val producer = new KafkaProducer[String, String](props)
+    val producer: KafkaProducer[String, String] = kafkaProducer match {
+      case null => new KafkaProducer[String, String](props)
+      case _ => kafkaProducer
+    }
+
     producer.initTransactions()
+
     //val record =
     //  new ProducerRecord[String, String]("test", "test-key", "test value")
     gridWorkStream(producer, topicPrefix, iterations)

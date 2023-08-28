@@ -437,6 +437,15 @@ data:
     n8ezkNqwkg4u8qOSh5I6Vin/343uJ//AYqvNvqrwhiaZBxVZXlq3tg5Fe8RX+wYF
     NArrYbGDtBNZ/Fdv/y1OZHMYL1y96WTYIrz3D9kNfW8ZQThnKA==
     -----END CERTIFICATE-----
+    -----BEGIN PUBLIC KEY-----
+    MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAhx5qTqAyEENGBef7mOlx
+    qANCHNeure6tJ3ciPquLGXhM93xysbehYpDkijvVpa5loTfsbNLbJa6wlR3unqZy
+    vJnhUa8dKdayLaPjXLiTkIKV+j6KXTNo0KKHau/Ckq7OkuhRr+7vowz+hwaZAOH+
+    L8psO3AVyiK2dvpkxGFM9dnF/cyZbQBGfPQ6NWMuevh9Acgs+bLOqRB2o6Ql3SK7
+    xVfSlLjS1CPp8qQGV3tgOalw5fTbXLVg8i3uXDVs6P4m39bkcacFhQ7iU3SpDIuI
+    MF264UFViILJN2E8nwZqcVsyNw84vEXAaVmU9RBqvlTdjuhf8zyLjrLGXflnE795
+    nwIDAQAB
+    -----END PUBLIC KEY-----
   config-server-2.pem: |
     -----BEGIN CERTIFICATE-----
     MIIFYTCCA0mgAwIBAgIBCzANBgkqhkiG9w0BAQsFADCB1jEzMDEGA1UEAwwqUlJU

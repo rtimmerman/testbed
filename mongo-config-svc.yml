@@ -295,7 +295,7 @@ data:
     db = conn.getDB('admin').getSiblingDB('$external');
     outcome = db.runCommand(
       {
-        createUser: "CN=config-server-svc-1,OU=School of Computing and Mathematical Sciences,O="Birkbeck, University of London",ST=Essex,C=GB,EMAIL=rtimme01@bbk.ac.uk",
+        createUser: "CN=config-server-svc-1,OU=School of Computing and Mathematical Sciences,O=\"Birkbeck, University of London\",ST=Essex,C=GB,EMAIL=rtimme01@bbk.ac.uk",
         roles: [
           {role: 'userAdminAnyDatabase', db: 'admin'},
           {role: 'readWrite', db: 'test'},
@@ -311,7 +311,7 @@ data:
 
     outcome = db.runCommand(
       {
-        createUser: "CN=mongos-1-svc,OU=School of Computing and Mathematical Sciences,O="Birkbeck, University of London",ST=Essex,C=GB,EMAIL=rtimme01@bbk.ac.uk",
+        createUser: "CN=mongos-1-svc,OU=School of Computing and Mathematical Sciences,O=\"Birkbeck, University of London\",ST=Essex,C=GB,EMAIL=rtimme01@bbk.ac.uk",
         roles: [
           {role: 'readWrite', db: 'config'},
         ],

@@ -151,6 +151,77 @@ data:
     J70CxzZHPVTBS8tb
     -----END CERTIFICATE-----
   mongos-1-svc.pem: |
+    Certificate:
+        Data:
+            Version: 3 (0x2)
+            Serial Number: 20 (0x14)
+            Signature Algorithm: sha256WithRSAEncryption
+            Issuer: CN=RRT General Services Certificate Authority, ST=Essex, C=GB/emailAddress=rtimme01@bbk.ac.uk, O=Birkbeck, University of London, OU=School of Computing and Mathematical Sciences
+            Validity
+                Not Before: Aug 28 23:20:02 2023 GMT
+                Not After : Aug 25 23:20:02 2033 GMT
+            Subject: CN=mongos-1-svc, ST=Essex, C=GB/emailAddress=rtimme01@bbk.ac.uk, O="Birkbeck, University of London", OU=School of Computing and Mathematical Sciences
+            Subject Public Key Info:
+                Public Key Algorithm: rsaEncryption
+                    Public-Key: (2048 bit)
+                    Modulus:
+                        00:aa:ba:6a:48:15:15:03:7a:a7:4c:a5:32:b8:c6:
+                        a9:46:a7:94:aa:a2:38:c1:5d:80:36:34:7d:23:d2:
+                        3f:60:0a:64:52:74:2a:8a:98:0c:5a:3f:41:8b:78:
+                        f9:b8:74:64:62:38:4d:c2:7d:37:45:18:50:e6:cd:
+                        e9:03:42:89:d1:1c:49:b5:01:f7:ef:02:e8:03:23:
+                        c6:23:ab:80:19:c9:c2:2b:ed:9c:ba:b4:c0:60:80:
+                        ac:29:f8:de:ad:2d:cd:d0:26:4d:7f:d8:7f:01:c3:
+                        69:d7:7d:a7:58:42:69:6f:b2:61:fc:a6:6a:b3:80:
+                        df:30:66:4a:4e:fc:5c:80:83:59:c7:b7:88:df:f1:
+                        72:88:1c:d6:35:9b:03:6e:55:b4:e3:39:17:08:46:
+                        5f:19:53:72:31:90:ac:05:1c:21:af:6d:cf:fc:ff:
+                        24:1b:e4:04:c9:3a:47:8f:be:cc:3f:b9:9a:a8:28:
+                        db:54:36:19:30:14:f1:1f:a4:a3:4e:58:75:4c:b5:
+                        47:68:ba:da:13:d5:7b:ab:d3:8a:07:8b:de:96:7f:
+                        fd:cf:02:0c:ab:95:c1:a1:09:03:37:92:4f:9e:41:
+                        dd:dc:d4:85:76:25:ca:c2:75:4a:25:fd:ff:d7:4b:
+                        e1:dd:96:e3:e1:2b:17:23:ad:34:33:a4:c6:90:7c:
+                        32:d5
+                    Exponent: 65537 (0x10001)
+            X509v3 extensions:
+                X509v3 Extended Key Usage: 
+                    TLS Web Client Authentication, TLS Web Server Authentication
+                X509v3 Subject Key Identifier: 
+                    7B:CA:C0:29:7E:C6:D5:85:A5:7C:87:D1:42:AD:F6:93:82:75:5E:0E
+                X509v3 Authority Key Identifier: 
+                    E9:04:68:3D:07:A3:EB:AD:4C:F8:03:C9:DB:F7:F9:29:05:2C:FD:DB
+        Signature Algorithm: sha256WithRSAEncryption
+        Signature Value:
+            53:48:68:92:d9:b0:ca:53:1d:33:36:00:dd:ce:9d:6a:1a:44:
+            35:88:05:4d:56:23:eb:ad:48:0b:0f:62:3f:a7:6a:4c:44:7c:
+            ff:4c:ba:e0:b5:29:44:26:11:9f:c3:e9:a9:14:bf:aa:cd:89:
+            b6:f8:b2:7e:3d:09:48:fe:4e:7b:2d:47:c1:b0:53:6d:5e:73:
+            53:5e:6a:c8:f9:f1:8b:95:9e:b6:92:f9:35:2e:77:02:af:e4:
+            bd:c4:a0:f2:3a:3a:17:6b:45:08:9f:68:59:58:94:c9:dc:07:
+            8b:97:4d:5d:f4:6c:bf:22:b4:3d:dc:dc:3d:ac:95:8b:84:b8:
+            b7:a6:73:14:c6:b8:49:f0:00:76:0b:d4:cd:07:a6:10:28:78:
+            6c:ed:88:91:23:79:2b:8e:b4:c8:5c:4a:b6:a0:0b:c6:de:ae:
+            74:9d:be:f2:f0:77:cb:b5:fe:56:a2:e3:e8:4a:a1:0e:ec:49:
+            97:70:45:1e:73:fa:f2:a8:e1:5a:e9:a4:ba:7e:4f:c8:7f:67:
+            a6:aa:32:c0:27:97:59:30:1f:d2:c1:81:d3:47:28:da:ff:54:
+            99:78:78:21:08:2f:cb:e0:e1:6b:1a:83:83:49:8f:c6:8c:5e:
+            31:c2:6f:69:0f:86:8d:be:c5:7e:e4:14:42:d8:88:76:42:0f:
+            ea:0e:0a:20:80:e3:88:9f:df:9b:86:71:de:4a:8f:0f:bf:c9:
+            3e:8b:e2:11:2f:32:85:ab:a6:b3:39:7a:79:9a:89:d7:43:10:
+            b7:d0:73:89:ec:b6:56:21:79:7d:ba:1d:cf:b6:dc:96:ad:7d:
+            1e:e0:62:d8:45:b6:02:be:d0:40:02:f4:4a:d0:e1:c4:6c:96:
+            22:62:47:fd:b2:bb:1b:48:d7:39:d9:4b:22:d1:76:f1:db:81:
+            9f:72:08:83:00:e4:aa:28:eb:7e:23:a1:9d:a0:e6:47:81:dd:
+            89:1d:d8:31:b4:f9:39:c2:cf:1f:84:8a:47:f1:ac:72:70:30:
+            14:f9:9d:08:17:1f:31:b2:37:fd:9f:b0:e2:4d:8e:4d:dc:a2:
+            0e:2c:69:de:ae:a8:5c:6d:89:ae:2b:f0:52:44:0c:d2:15:c6:
+            b7:e0:b2:c7:fa:63:f4:f3:b1:48:2d:e8:74:63:bc:69:58:1e:
+            c2:eb:54:0e:7c:b0:18:81:25:62:a9:2e:db:4d:48:97:ca:67:
+            84:0c:2c:49:bd:c7:c9:6f:c0:c6:6a:ad:99:54:e2:2c:7d:58:
+            35:d4:77:29:04:f4:61:05:56:b6:46:a9:b7:a4:21:96:8d:da:
+            07:3c:7c:f9:c8:b1:e5:25:18:87:de:3b:db:2e:34:80:34:eb:
+            1c:9d:99:02:48:7c:1a:13
     -----BEGIN CERTIFICATE-----
     MIIFbjCCA1agAwIBAgIBFDANBgkqhkiG9w0BAQsFADCB1jEzMDEGA1UEAwwqUlJU
     IEdlbmVyYWwgU2VydmljZXMgQ2VydGlmaWNhdGUgQXV0aG9yaXR5MQ4wDAYDVQQI
@@ -212,6 +283,77 @@ data:
     2fmGcGLI6+ObEK8KQ0RHUQ==
     -----END PRIVATE KEY-----
   config-sever-1.pem: |
+    Certificate:
+        Data:
+            Version: 3 (0x2)
+            Serial Number: 10 (0xa)
+            Signature Algorithm: sha256WithRSAEncryption
+            Issuer: CN=RRT General Services Certificate Authority, ST=Essex, C=GB/emailAddress=rtimme01@bbk.ac.uk, O=Birkbeck, University of London, OU=School of Computing and Mathematical Sciences
+            Validity
+                Not Before: Aug 28 23:20:00 2023 GMT
+                Not After : Aug 25 23:20:00 2033 GMT
+            Subject: CN=config-server-svc-1, ST=Essex, C=GB/emailAddress=rtimme01@bbk.ac.uk, O="Birkbeck, University of London", OU=School of Computing and Mathematical Sciences
+            Subject Public Key Info:
+                Public Key Algorithm: rsaEncryption
+                    Public-Key: (2048 bit)
+                    Modulus:
+                        00:bf:36:9e:3c:ef:96:98:56:a1:49:33:51:2b:94:
+                        de:c0:3a:07:4c:c7:69:55:08:96:63:41:ca:3a:29:
+                        ce:4d:58:fd:3c:d4:7c:5f:a1:40:fc:a0:4f:9d:82:
+                        c7:2b:cc:b4:d7:97:38:f0:67:8d:0d:2b:fd:ed:60:
+                        d1:aa:a3:39:0e:42:ca:07:1d:39:b3:f6:e8:ba:ad:
+                        aa:e8:79:91:65:0a:49:39:0d:36:40:e4:42:56:c1:
+                        d1:d0:30:e9:54:85:fc:95:1d:f1:0b:e9:5d:59:95:
+                        3a:b2:71:39:2d:a1:e2:52:99:cd:43:4a:4a:74:81:
+                        5f:71:73:f1:31:0a:52:4c:a0:37:7a:cd:b8:5d:c3:
+                        a0:c5:77:79:25:ce:db:e8:7f:0b:86:2d:a6:78:a4:
+                        c5:9b:a7:13:d3:ab:d8:e7:dd:4e:a1:82:b0:72:ae:
+                        11:86:ca:f6:95:6f:62:7f:33:6f:d1:8e:d3:c0:2d:
+                        69:f3:41:94:b0:88:19:5c:aa:72:54:ad:af:f0:a6:
+                        a9:d6:c3:ac:37:89:dd:07:d8:70:0f:4d:11:08:d6:
+                        fd:07:91:e0:54:18:e4:e1:94:3e:7e:63:a0:f7:94:
+                        95:76:1c:cf:1f:ef:5b:49:7d:c9:43:54:30:1a:b1:
+                        4e:e8:1f:94:04:bc:03:dd:4b:3e:1f:25:99:0f:07:
+                        81:2f
+                    Exponent: 65537 (0x10001)
+            X509v3 extensions:
+                X509v3 Extended Key Usage: 
+                    TLS Web Client Authentication, TLS Web Server Authentication
+                X509v3 Subject Key Identifier: 
+                    1E:CF:4A:E5:5B:1A:E3:86:4F:7A:38:2C:B5:B4:62:59:F8:DF:13:5D
+                X509v3 Authority Key Identifier: 
+                    E9:04:68:3D:07:A3:EB:AD:4C:F8:03:C9:DB:F7:F9:29:05:2C:FD:DB
+        Signature Algorithm: sha256WithRSAEncryption
+        Signature Value:
+            b6:ca:40:4d:92:1f:91:1e:f4:c0:5f:86:00:22:8e:54:70:16:
+            ee:a6:8d:60:be:6c:89:b4:6b:bb:f5:97:75:10:b2:5f:52:84:
+            da:25:45:ad:79:3d:e3:9c:da:02:d8:fb:6a:d4:23:2b:67:25:
+            72:4a:f7:ac:b5:8f:2c:c3:06:c1:42:af:5b:4e:76:a7:e7:f1:
+            ee:1a:f6:3d:f6:4d:9d:9a:a9:9c:14:bc:d4:2d:c4:1f:6e:74:
+            b5:42:46:aa:63:32:51:cd:92:75:2c:13:f2:7e:57:89:1a:b9:
+            b5:49:bd:24:90:18:b8:c2:47:a2:23:91:ed:c3:6d:bc:d8:df:
+            59:00:de:73:83:49:2c:c0:07:43:57:ef:fb:9e:c4:73:f7:e0:
+            47:64:3a:ad:b3:66:41:74:e0:38:98:23:39:b1:52:70:1c:87:
+            b4:00:40:8f:25:ff:50:4e:47:8a:55:69:f4:7a:fc:64:44:ad:
+            c8:f8:bd:68:7f:f9:8b:e9:ba:34:94:df:80:b0:f7:cb:a5:8c:
+            4e:a8:72:e1:18:be:cb:28:84:90:bb:b0:1a:7b:08:b2:7f:5d:
+            f3:13:6b:af:77:c9:14:a0:52:c1:a5:a8:90:76:06:fb:1b:0d:
+            2c:ba:b5:c2:07:76:0b:4e:42:ec:c7:e0:88:59:dc:f8:5f:38:
+            7c:c4:44:1e:4f:b3:00:82:fb:b2:ad:d2:21:f3:40:00:8b:d8:
+            2f:df:e5:bc:79:cc:37:13:50:72:37:7b:1e:69:7f:cf:96:75:
+            a7:9e:2f:03:45:31:e8:f8:8a:5b:9a:c3:39:80:b4:a2:36:40:
+            20:70:37:ef:4e:04:99:f9:0f:6f:53:34:95:7d:ac:98:63:82:
+            8b:16:fd:78:48:d2:86:ed:e8:fe:5c:8b:4c:e1:6d:55:49:4d:
+            2c:c6:62:62:c4:6f:1d:dd:9e:73:6f:3e:f9:72:51:56:90:f7:
+            e5:76:2d:dc:44:33:a8:85:a5:1a:9b:36:83:52:fd:d5:7d:8f:
+            a5:f2:f4:5f:2d:d6:83:4f:0e:a4:44:f8:f7:c5:75:03:cc:2d:
+            17:63:54:4f:f6:9d:83:2b:92:41:85:c0:50:6f:01:fd:e3:6b:
+            8b:7e:a9:d5:f7:8c:c1:60:00:2e:80:bf:91:65:ba:4f:2f:71:
+            47:18:fe:2d:c0:57:bc:80:70:96:a9:b5:a6:5e:93:ec:13:0d:
+            39:30:3e:e4:20:97:c1:3f:e7:86:44:06:6c:e3:63:44:28:29:
+            b3:24:03:42:da:9f:ee:14:ca:31:a4:49:6e:97:8b:5c:08:e3:
+            c9:68:5f:ca:2c:f0:d9:6c:f1:e5:d4:4f:5e:71:b2:07:9d:b7:
+            a6:2d:4f:05:72:db:cc:62
     -----BEGIN CERTIFICATE-----
     MIIFdTCCA12gAwIBAgIBCjANBgkqhkiG9w0BAQsFADCB1jEzMDEGA1UEAwwqUlJU
     IEdlbmVyYWwgU2VydmljZXMgQ2VydGlmaWNhdGUgQXV0aG9yaXR5MQ4wDAYDVQQI

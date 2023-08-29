@@ -15,7 +15,6 @@ foreach $arg (@ARGV) {
         next;
     }
 
-
     if ($writeTo) {
         $$writeTo = $arg;
         $writeTo = undef;
@@ -32,6 +31,11 @@ foreach $line (<DATA>) {
         open CI, "<$1";
         foreach $cert_line (<CI>) {
             print FO "    $cert_line";
+        }
+    } elsif ($line =~ /\{!decrypt (.*?)\}/) {
+        $content = `openssl rsa -in $1 -passin pass:xiec.gate.r`;
+        foreach $line (split /\n/, $content) {
+          print FO "    $line\n";
         }
     } else {
         print FO $line;
@@ -287,22 +291,22 @@ data:
 
     printjson(outcome);
   root-ca.pem: |
-    {!import root-ca.pem}
-    
+    {!import security/cacert.pem}
   mongos-1-svc.pem: |
-    {!import mongos-1-svc.pem}
-
+    {!import security/certs/mongos-1-svc.pem}
+    {!decrypt security/mongos-1-svc-key.pem}
   config-server.pem: |
-    {!import config-server-svc-1.pem}
-    
+    {!import security/certs/config-server-svc-1.pem}
+    {!decrypt security/config-server-svc-1-key.pem}
   %ID%-pri.pem: |
-    {!import %ID%-pri.pem}
-    
+    {!import security/certs/%ID%-pri.pem}
+    {!decrypt security/%ID%-pri-key.pem}
   %ID%-sec-1.pem: |
-    {!import %ID%-sec-1.pem}
-
+    {!import security/certs/%ID%-sec-1.pem}
+    {!decrypt security/%ID%-sec-1-key.pem}
   %ID%-sec-2.pem: |
-    {!import %ID%-sec-2.pem}
+    {!import security/certs/%ID%-sec-2.pem}
+    {!decrypt security/%ID%-sec-2-key.pem}
     
 ---
 apiVersion: apps/v1

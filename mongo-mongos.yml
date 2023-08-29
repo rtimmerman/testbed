@@ -186,7 +186,7 @@ data:
                     Exponent: 65537 (0x10001)
             X509v3 extensions:
                 X509v3 Extended Key Usage: 
-                    TLS Web Client Authentication, TLS Web Server Authentication
+                    TLS Web Client Authentication
                 X509v3 Subject Key Identifier: 
                     7B:CA:C0:29:7E:C6:D5:85:A5:7C:87:D1:42:AD:F6:93:82:75:5E:0E
                 X509v3 Authority Key Identifier: 

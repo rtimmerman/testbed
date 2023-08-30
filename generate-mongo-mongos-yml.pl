@@ -110,7 +110,7 @@ data:
     outcome.push(
       db.runCommand(
         {
-          createUser: "OU=School of Computing and Mathematical Sciences,O=Birkbeck,emailAddress=rtimme01@bbk.ac.uk,C=GB,ST=Essex,CN=mongos-1-svc",
+          createUser: "OU=SCMS,O=Birkbeck,emailAddress=rtimme01@bbk.ac.uk,C=GB,ST=Essex,CN=mongos-1-svc",
           roles: [
             {role: 'userAdminAnyDatabase', db: 'admin'},
             {role: 'readWrite', db: 'test'},
@@ -128,7 +128,7 @@ data:
     outcome.push(
       db.getSiblingDB('$external').runCommand(
         {
-          createUser: "OU=School of Computing and Mathematical Sciences,O=Birkbeck,emailAddress=rtimme01@bbk.ac.uk,C=GB,ST=Essex,CN=localhost",
+          createUser: "OU=SCMS,O=Birkbeck,emailAddress=rtimme01@bbk.ac.uk,C=GB,ST=Essex,CN=localhost",
           roles: [
             {role: 'readWrite', db: 'test'},
             {role: 'readWrite', db: 'mandelbrot'}
@@ -144,7 +144,7 @@ data:
     outcome.push(
       db.runCommand(
         {
-          createUser: "OU=School of Computing and Mathematical Sciences,O=Birkbeck,emailAddress=rtimme01@bbk.ac.uk,C=GB,ST=Essex,CN=arnold-pri",
+          createUser: "OU=SCMS,O=Birkbeck,emailAddress=rtimme01@bbk.ac.uk,C=GB,ST=Essex,CN=arnold-pri",
           roles: [
             {role: 'userAdminAnyDatabase', db: 'admin'},
             {role: 'readWrite', db: 'test'},

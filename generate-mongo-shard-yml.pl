@@ -46,6 +46,7 @@ close FO;
 
 
 __DATA__
+# This file has been generated dynamically using generate-mongo-shard-yml.pl, edit that file and re-run.
 apiVersion: v1
 kind: ConfigMap
 metadata:

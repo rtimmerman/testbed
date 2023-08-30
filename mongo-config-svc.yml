@@ -1,3 +1,4 @@
+# This file has been generated dynamically using generate-mongo-config-server-yml.pl, edit that file and re-run.
 kind: Namespace
 apiVersion: v1
 metadata:
@@ -94,17 +95,17 @@ spec:
             - '--configsvr'
             - '--replSet'
             - 'configServerRS'
-            - '--sslMode'
-            - 'requireSSL'
+            - '--tlsMode'
+            - 'requireTLS'
             - '--clusterAuthMode'
             - 'x509'
-            - '--sslClusterFile'
+            - '--tlsClusterFile'
             - '/kickstart/mongos-1-svc.pem'
-            - '--sslPEMKeyFile'
+            - '--tlsCertificateKeyFile'
             - '/kickstart/config-server-2.pem'
-            - '--sslCAFile'
+            - '--tlsCAFile'
             - '/kickstart/root-ca.pem'
-            - '--sslAllowInvalidCertificates'
+            - '--tlsAllowInvalidCertificates'
             - '--bind_ip'
             - '*'
             # - '--dbpath'
@@ -177,15 +178,15 @@ spec:
             - '--configsvr'
             - '--replSet'
             - 'configServerRS'
-            - '--sslMode'
-            - 'requireSSL'
+            - '--tlsMode'
+            - 'requireTLS'
             - '--clusterAuthMode'
             - 'x509'
-            - '--sslClusterFile'
+            - '--tlsClusterFile'
             - '/kickstart/mongos-1-svc.pem'
-            - '--sslPEMKeyFile'
+            - '--tlsCertificateKeyFile'
             - '/kickstart/config-server-3.pem'
-            - '--sslCAFile'
+            - '--tlsCAFile'
             - '/kickstart/root-ca.pem'
             - '--sslAllowInvalidCertificates'
             - '--bind_ip'
@@ -269,12 +270,12 @@ data:
     killall mongod
     mongod --configsvr \
     --replSet configServerRS \
-    --sslMode requireSSL \
+    --tlsMode requireTLS \
     --clusterAuthMode x509 \
-    --sslClusterFile /kickstart/mongos-1-svc.pem \
-    --sslPEMKeyFile /kickstart/config-server.pem \
-    --sslCAFile /kickstart/root-ca.pem \
-    --sslAllowInvalidCertificates \
+    --tlsClusterFile /kickstart/mongos-1-svc.pem \
+    --tlsCertificateKeyFile /kickstart/config-server.pem \
+    --tlsCAFile /kickstart/root-ca.pem \
+    --tlsAllowInvalidCertificates \
     --bind_ip \*
   add-user.js: |
     // wait for mongod to be present...
@@ -295,7 +296,7 @@ data:
     db = conn.getDB('admin').getSiblingDB('$external');
     outcome = db.runCommand(
       {
-        createUser: "CN=config-server-svc-1,OU=School of Computing and Mathematical Sciences,O=Birkbeck,ST=Essex,C=GB,emailAddress=rtimme01@bbk.ac.uk",
+        createUser: "CN=config-server-svc-1,OU=School of Computing and Mathematical Sciences,O="Birkbeck, University of London",ST=Essex,C=GB,EMAIL=rtimme01@bbk.ac.uk",
         roles: [
           {role: 'userAdminAnyDatabase', db: 'admin'},
           {role: 'readWrite', db: 'test'},
@@ -311,7 +312,7 @@ data:
 
     outcome = db.runCommand(
       {
-        createUser: "CN=mongos-1-svc,OU=School of Computing and Mathematical Sciences,O=Birkbeck,ST=Essex,C=GB,emailAddress=rtimme01@bbk.ac.uk",
+        createUser: "CN=mongos-1-svc,OU=School of Computing and Mathematical Sciences,O="Birkbeck, University of London",ST=Essex,C=GB,EMAIL=rtimme01@bbk.ac.uk",
         roles: [
           {role: 'readWrite', db: 'config'},
         ],
@@ -364,7 +365,7 @@ data:
 
     printf "Connected!\n";
 
-    print `mongosh --tls --sslPEMKeyFile /kickstart/config-server.pem --sslCAFile /kickstart/root-ca.pem --host config-server-svc-1 --authenticationDatabase '$external' --authenticationMechanism MONGODB-X509 --port 27019 /kickstart/shard-configdb.js `;
+    print `mongosh --tls --tlsAllowInvalidCertificates --tlsCertificateKeyFile /kickstart/config-server.pem --tlsCAFile /kickstart/root-ca.pem --host config-server-svc-1 --authenticationDatabase '$external' --authenticationMechanism MONGODB-X509 --port 27019 /kickstart/shard-configdb.js `;
 
     exit(0);
   root-ca.pem: |
@@ -930,6 +931,7 @@ data:
     0P2HYmCVde2JqVeZkZNDfgEBig==
     -----END PRIVATE KEY-----
 ---
+# This file has been generated dynamically using generate-mongo-config-server-yml.pl, edit that file and re-run.
 kind: Pod
 apiVersion: v1
 metadata:

@@ -93,7 +93,7 @@ data:
     outcome.push(
         db.runCommand(
         {
-          createUser: "CN=config-server-svc-1,OU=ExperimentClients,O=Roderick,O=BBK,L=Southminster,ST=Essex,C=GB",
+          createUser: "OU=School of Computing and Mathematical Sciences,O=Birkbeck,emailAddress=rtimme01@bbk.ac.uk,C=GB,ST=Essex,CN=mongo-config-svc-1",
           roles: [
             {role: 'userAdminAnyDatabase', db: 'admin'},
             {role: 'readWrite', db: 'test'},
@@ -110,7 +110,7 @@ data:
     outcome.push(
       db.runCommand(
         {
-          createUser: "CN=mongos-1-svc,OU=ExperimentServers,O=Roderick,O=BBK,L=Southminster,ST=Essex,C=GB",
+          createUser: "OU=School of Computing and Mathematical Sciences,O=Birkbeck,emailAddress=rtimme01@bbk.ac.uk,C=GB,ST=Essex,CN=mongos-1-svc",
           roles: [
             {role: 'userAdminAnyDatabase', db: 'admin'},
             {role: 'readWrite', db: 'test'},
@@ -128,7 +128,7 @@ data:
     outcome.push(
       db.getSiblingDB('$external').runCommand(
         {
-          createUser: "CN=localhost,OU=ExperimentClients,O=Roderick,O=Outside,L=Southminster,ST=Essex,C=GB",
+          createUser: "OU=School of Computing and Mathematical Sciences,O=Birkbeck,emailAddress=rtimme01@bbk.ac.uk,C=GB,ST=Essex,CN=localhost",
           roles: [
             {role: 'readWrite', db: 'test'},
             {role: 'readWrite', db: 'mandelbrot'}
@@ -144,7 +144,7 @@ data:
     outcome.push(
       db.runCommand(
         {
-          createUser: "CN=arnold-pri,OU=ExperimentServers,O=Roderick,O=BBK,L=Southminster,ST=Essex,C=GB",
+          createUser: "OU=School of Computing and Mathematical Sciences,O=Birkbeck,emailAddress=rtimme01@bbk.ac.uk,C=GB,ST=Essex,CN=arnold-pri",
           roles: [
             {role: 'userAdminAnyDatabase', db: 'admin'},
             {role: 'readWrite', db: 'test'},

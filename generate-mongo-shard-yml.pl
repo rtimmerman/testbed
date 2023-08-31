@@ -225,7 +225,7 @@ data:
     outcome.push(
         db.runCommand(
         {
-          createUser: "CN=%ID%-pri,OU=ExperimentClients,O=Roderick,O=BBK,L=Southminster,ST=Essex,C=GB",
+          createUser: "OU=SCMS,O=Birkbeck,emailAddress=rtimme01@bbk.ac.uk,C=GB,ST=Essex,CN=%ID%-pri",
           roles: [
             {role: 'userAdminAnyDatabase', db: 'admin'},
             {role: 'readWrite', db: 'test'},
@@ -242,7 +242,7 @@ data:
     outcome.push(
         db.runCommand(
         {
-          createUser: "CN=%ID%-sec-1,OU=ExperimentClients,O=Roderick,O=BBK,L=Southminster,ST=Essex,C=GB",
+          createUser: "OU=SCMS,O=Birkbeck,emailAddress=rtimme01@bbk.ac.uk,C=GB,ST=Essex,CN=%ID%-sec-1",
           roles: [
             {role: 'userAdminAnyDatabase', db: 'admin'},
             {role: 'readWrite', db: 'test'},
@@ -259,7 +259,7 @@ data:
     outcome.push(
         db.runCommand(
         {
-          createUser: "CN=%ID%-sec-2,OU=ExperimentClients,O=Roderick,O=BBK,L=Southminster,ST=Essex,C=GB",
+          createUser: "OU=SCMS,O=Birkbeck,emailAddress=rtimme01@bbk.ac.uk,C=GB,ST=Essex,CN=%ID%-sec-2",
           roles: [
             {role: 'userAdminAnyDatabase', db: 'admin'},
             {role: 'readWrite', db: 'test'},
@@ -276,7 +276,7 @@ data:
     outcome.push(
         db.runCommand(
         {
-          createUser: "CN=mongos-1-svc,OU=ExperimentServers,O=Roderick,O=BBK,L=Southminster,ST=Essex,C=GB",
+          createUser: "OU=SCMS,O=Birkbeck,emailAddress=rtimme01@bbk.ac.uk,C=GB,ST=Essex,CN=mongos-1-svc",
           roles: [
             {role: 'userAdminAnyDatabase', db: 'admin'},
             {role: 'readWrite', db: 'test'},

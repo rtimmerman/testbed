@@ -43,7 +43,7 @@ data:
     outcome.push(
         db.runCommand(
         {
-          createUser: "OU=School of Computing and Mathematical Sciences,O=Birkbeck,emailAddress=rtimme01@bbk.ac.uk,C=GB,ST=Essex,CN=mongo-config-svc-1",
+          createUser: "OU=SCMS,O=Birkbeck,emailAddress=rtimme01@bbk.ac.uk,C=GB,ST=Essex,CN=mongo-config-svc-1",
           roles: [
             {role: 'userAdminAnyDatabase', db: 'admin'},
             {role: 'readWrite', db: 'test'},

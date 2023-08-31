@@ -1025,7 +1025,7 @@ spec:
                   - key: role
                     operator: In
                     values:
-                      - mongo-shard-1
+                      - mongo-shard-5
                       - debugger
 
 
@@ -1085,7 +1085,7 @@ spec:
                 - key: role
                   operator: In
                   values:
-                    - mongo-shard-1
+                    - mongo-shard-5
                     - debugger
 
 
@@ -1141,7 +1141,7 @@ spec:
                 - key: role
                   operator: In
                   values:
-                    - mongo-shard-1
+                    - mongo-shard-5
                     - debugger
 
 ---
@@ -1235,5 +1235,5 @@ spec:
             - key: role
               operator: In
               values:
-                - mongo-shard-1
+                - mongo-shard-5
                 - debugger

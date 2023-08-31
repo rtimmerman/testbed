@@ -4,6 +4,7 @@ package main;
 
 my $id = undef;
 my $out = undef;
+my $node = undef;
 
 our $writeTo = undef;
 foreach $arg (@ARGV) {
@@ -12,6 +13,9 @@ foreach $arg (@ARGV) {
         next;
     } elsif ($arg =~ /--out/) {
         $writeTo = \$out;
+        next;
+    } elsif ($arg =~ /--node/) {
+        $writeTo = \$node;
         next;
     }
 
@@ -27,6 +31,7 @@ open FO, ">$out";
 
 foreach $line (<DATA>) {
     $line =~ s/%ID%/$id/g;
+    $line =~ s/%NODE%/$node/g;
     if ($line =~ /\{!import (.*?)\}$/) {
         open CI, "<$1";
         foreach $cert_line (<CI>) {
@@ -367,7 +372,7 @@ spec:
                   - key: role
                     operator: In
                     values:
-                      - mongo-shard-1
+                      - %NODE%
                       - debugger
 
 
@@ -427,7 +432,7 @@ spec:
                 - key: role
                   operator: In
                   values:
-                    - mongo-shard-1
+                    - %NODE%
                     - debugger
 
 
@@ -483,7 +488,7 @@ spec:
                 - key: role
                   operator: In
                   values:
-                    - mongo-shard-1
+                    - %NODE%
                     - debugger
 
 ---
@@ -577,5 +582,5 @@ spec:
             - key: role
               operator: In
               values:
-                - mongo-shard-1
+                - %NODE%
                 - debugger

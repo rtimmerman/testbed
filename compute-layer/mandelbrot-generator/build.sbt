@@ -25,7 +25,7 @@ libraryDependencies += "org.scalatest" %% "scalatest" % "3.2.16" % Test
 
 
 fork := true
-run / javaOptions += "-Djavax.net.ssl.keyStore=/home/roderick/workspace/mongo-cluster/compute-layer/mandelbrot-generator/bbk.ac.uk.p12"
+run / javaOptions += "-Djavax.net.ssl.keyStore=bbk.ac.uk.p12"
 run / javaOptions += "-Djavax.net.ssl.keyStorePassword=xiec.gate.r"
 
 ThisBuild / assemblyMergeStrategy := { case _ =>

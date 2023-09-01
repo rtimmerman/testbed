@@ -11,9 +11,9 @@ COPY ./node_exporter-1.0.1.linux-amd64.tar.gz /root/
 COPY ./upscript.sh /root/
 RUN chmod 755 /root/upscript.sh
 
-RUN apt update
-RUN apt install -y openjdk-11-jdk-headless
-RUN apt install -y curl zip unzip wget at vim procps
+RUN apt-get update
+RUN apt-get install -y openjdk-11-jdk-headless
+RUN apt-get install -y curl zip unzip wget at vim procps
 RUN curl -s 'https://get.sdkman.io' | bash
 RUN source /root/.bashrc
 RUN source "/root/.sdkman/bin/sdkman-init.sh"

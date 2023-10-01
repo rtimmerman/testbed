@@ -11,73 +11,51 @@ class Producer(var kafkaProducer: KafkaProducer[String, String] = null)
 
 }
 
+val size_x = 1000
+val size_y = 1000
+
+extension (x: Int)
+  def toR: Double = -2 + (x/size_x.toDouble * 4)
+  def toI: Double = -2 + (x/size_y.toDouble * 4)
+
 object Producer {
   def gridWorkStream(
       kafkaProducer: KafkaProducer[String, String],
       topicPrefix: String,
       iterations: Int
   ) = {
-
-    // static factor at 1000, in future this could be dynamically established instead (via an arg)
-    val factor = 1e3
-    val divf = 1 / factor
-
-    val data =
-      for (
-        r <- BigDecimal(-2.0) to BigDecimal(2.0) by divf;
-        i <- BigDecimal(-2.0) to BigDecimal(2.0) by divf
-      )
-        yield breeze.math.Complex(r.toDouble, i.toDouble)
-
-    val plane = breeze.linalg.DenseMatrix.create(
-      4 * factor.toInt + 1,
-      4 * factor.toInt + 1,
-      data.toArray
-    )
-
-    var lot: Int = 0
-
-    kafkaProducer.beginTransaction()
     val runUUID = UUID.randomUUID()
 
-    println(s"Starting run: $runUUID")
+    val b = Array.ofDim[Map[String, Double]](size_x, size_y)
+    for (y <- Range(0, size_y, 1);
+      x <- Range(0, size_x, 1))
+      b(x)(y) = Map("r" -> x.toR, "i" -> y.toI)
 
-    for (
-      x <- 0 to (4 * factor.toInt - 1) by factor.toInt;
-      y <- 0 to (4 * factor.toInt - 1) by factor.toInt
-    ) {
+    val batches = b.flatten.grouped((size_x * size_y)/16).toList
+  
+    var lot = 0
+    
+    batches.foreach(batch => {
+      kafkaProducer.beginTransaction()
       val topic = s"${topicPrefix}-${lot}"
-      val ylimit =
-        if (y + factor.toInt >= (4 * factor.toInt)) 4 * factor.toInt
-        else y + factor.toInt
-      print(s"Sending lot ${lot} ")
-
-      val xlimit =
-        if (x + factor.toInt >= (4 * factor.toInt)) 4 * factor.toInt
-        else x + factor.toInt
-      val entries = plane(x to xlimit, y to ylimit).toArray
-
-      println(s"(${entries.length} entries to ${topic})")
-      entries.foreach(value => {
-        //println(value.toString())
+      println(s"Sending ${batch.length} entries to $topic")
+      batch.foreach(entry => {
         kafkaProducer.send(
           new ProducerRecord[String, String](
             topic,
             "coordinate",
-            //value.toString + ";" + iterations + ";" + runUUID.toString
             Consumer.encodedPayload(
-              value.real.toString(),
-              value.imag.toString(),
-              iterations.toString(),
-              runUUID.toString()
+                "%f".format(entry.getOrElse("r", 0)),
+                "%f".format(entry.getOrElse("i", 0)),
+                iterations.toString(),
+                runUUID.toString()
+              )
             )
-          )
-        )
-      })
-
-      lot = if (((x + y) % factor) == 0) lot + 1 else lot
-
-    }
+          ).get()
+        })
+      kafkaProducer.commitTransaction()
+      lot += 1
+    })
 
     kafkaProducer.close()
   }

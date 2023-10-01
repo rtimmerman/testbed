@@ -15,7 +15,7 @@ import org.apache.kafka.clients.Metadata
 
 class ProducerSpec extends AnyFlatSpec with Matchers {
   "The Producer object" should "be able to evenly distribute work to nodes" in {
-    val topic = "test"
+    val topic = "test"  
     val iterations = 100
 
     val kafkaProducer = Mockito.mock(classOf[KafkaProducer[String, String]])

@@ -134,7 +134,7 @@ object Consumer {
 
           val payload = decodedPayload(record.value())
           val z =
-            new Complex(payload("r").toDouble, payload("i").toDouble)
+            new Complex(BigDecimal(payload("r")), BigDecimal(payload("i")))
 
           // do some processing
           val res = process(z, z, payload("iterations").toInt)

@@ -153,9 +153,10 @@ object DataWriter {
         val runs = ListBuffer[Future[Unit]]();
         for (i <- Range(0, 10)) {
           runs.append(Future {
-            if (work.records(topic).iterator().hasNext())
-              handleData(work.records(topic).iterator().next())
-          })
+            work.records(topic).forEach(record => {
+              handleData(record)
+            })
+          }) 
         }
 
         val futures = Future.sequence(runs)

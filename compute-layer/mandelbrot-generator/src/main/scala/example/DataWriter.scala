@@ -152,11 +152,11 @@ object DataWriter {
         // val insert = mutable.Queue[UpdateOneModel[Nothing]]()
 
         //for (i <- Range(0, 10)) {
-          runs.append(Future {
+          //runs.append(Future {
             work.records(topic).forEach(record => {
               handleData(record)
             })
-          }) 
+          //}) 
         //}
       }
       val futures = Future.sequence(runs)

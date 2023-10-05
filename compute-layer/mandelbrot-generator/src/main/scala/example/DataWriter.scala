@@ -145,25 +145,22 @@ object DataWriter {
 
     while (true) {
       val work = consumer.poll(1000)
+      val runs = ListBuffer[Future[Unit]]();
 
       if (work != null) {
-        val writes = ListBuffer[UpdateOneModel[Nothing]]()
-        val insert = mutable.Queue[UpdateOneModel[Nothing]]()
+        // val writes = ListBuffer[UpdateOneModel[Nothing]]()
+        // val insert = mutable.Queue[UpdateOneModel[Nothing]]()
 
-        val runs = ListBuffer[Future[Unit]]();
-        for (i <- Range(0, 10)) {
+        //for (i <- Range(0, 10)) {
           runs.append(Future {
             work.records(topic).forEach(record => {
               handleData(record)
             })
           }) 
-        }
-
-        val futures = Future.sequence(runs)
-
-        Await.result(futures, 60.seconds)
-
+        //}
       }
+      val futures = Future.sequence(runs)
+      Await.result(futures, 60.seconds)
     }
 
   }

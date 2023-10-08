@@ -140,27 +140,23 @@ object DataWriter {
     val consumer = new KafkaConsumer[String, String](props);
     consumer.subscribe(topics)
 
-    //implicit val ec =
-    //  ExecutionContext.fromExecutor(Executors.newFixedThreadPool(10))
+    implicit val ec =
+      ExecutionContext.fromExecutor(Executors.newFixedThreadPool(30))
 
+    val runs = ListBuffer[Future[Unit]]();
     while (true) {
       val work = consumer.poll(1000)
-      // val runs = ListBuffer[Future[Unit]]();
-
+    
       if (work != null) {
-        // val writes = ListBuffer[UpdateOneModel[Nothing]]()
-        // val insert = mutable.Queue[UpdateOneModel[Nothing]]()
-
-        //for (i <- Range(0, 10)) {
-          //runs.append(Future {
-            work.records(topic).forEach(record => {
-              handleData(record)
-            })
-          //}) 
-        //}
+        runs.append(Future {
+          work.records(topic).forEach(record => {
+            handleData(record)
+          })
+        })
       }
-      // val futures = Future.sequence(runs)
-      // Await.result(futures, 60.seconds)
+
+      val futures = Future.sequence(runs)
+      Await.result(futures, 4.days)
     }
 
   }

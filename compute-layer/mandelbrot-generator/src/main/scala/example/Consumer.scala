@@ -3,8 +3,6 @@ package example
 import org.apache.kafka.clients.consumer._
 import org.apache.kafka.clients.producer.{KafkaProducer, ProducerRecord}
 import org.slf4j.LoggerFactory
-//import spire.implicits._
-// import spire.math._
 
 import java.util.{Date, Properties}
 import scala.collection.mutable
@@ -14,6 +12,7 @@ import com.fasterxml.jackson.module.scala.DefaultScalaModule
 import com.fasterxml.jackson.databind.json.JsonMapper
 import com.fasterxml.jackson.core.`type`.TypeReference
 import com.mongodb.client.model.UpdateOneModel
+import java.util.UUID
 
 class Complex(var r: BigDecimal, var i: BigDecimal) {
   def + (other: Complex): Complex = new Complex(this.r + other.r, this.i + other.i)
@@ -31,8 +30,7 @@ class Complex(var r: BigDecimal, var i: BigDecimal) {
   def conj(): Complex = new Complex(this.r, -this.i)
 }
 
-object Consumer {
-  val logger = LoggerFactory.getLogger(Consumer.getClass.getName)
+object Consumer extends KafkaTrait {
   val mapper =
     JsonMapper
       .builder()
@@ -77,52 +75,14 @@ object Consumer {
   }
 
   def consume(topic: String) = {
-    val props = new Properties()
-    props.put("bootstrap.servers", "kafka-topic-server:9092")
-    props.put(
-      "key.deserializer",
-      "org.apache.kafka.common.serialization.StringDeserializer"
-    )
-    props.put(
-      "value.deserializer",
-      "org.apache.kafka.common.serialization.StringDeserializer"
-    )
-    props.put(
-      "group.id",
-      "0"
-    )
-
-    props.put(
-      "topic",
-      topic
-    )
-
-    val dataOutProps = new Properties();
-    dataOutProps.put("bootstrap.servers", "kafka-topic-server:9092")
-    dataOutProps.put(
-      "key.serializer",
-      "org.apache.kafka.common.serialization.StringSerializer"
-    )
-    dataOutProps.put(
-      "value.serializer",
-      "org.apache.kafka.common.serialization.StringSerializer"
-    )
-    dataOutProps.put("transactional.id", s"dw-transaction-id-$topic")
-
-    dataOutProps.put("retries", "10")
-    dataOutProps.put("retry.backoff.ms", "5000")
-
     println(s"Consuming from ${topic}")
 
-    val consumer = new KafkaConsumer[String, String](props);
-    val resultProducer = new KafkaProducer[String, String](dataOutProps)
+    val consumer = initConsumer(topic, "0")
+    val sysConsumer = initConsumer("system", UUID.randomUUID().toString())
+    val resultProducer = initProducer(s"dw-transaction-id-$topic")
     resultProducer.initTransactions()
-    var topics = new java.util.ArrayList[String]()
-    topics.add(props.get("topic").asInstanceOf[String])
 
-    consumer.subscribe(topics)
-
-    while (true) {
+    while (running) {
       val work = consumer.poll(1000)
 
       if (work != null) {
@@ -157,6 +117,7 @@ object Consumer {
           )
         })
       }
+      handleSystemMessages[String,String](sysConsumer)
     }
   }
 

@@ -18,7 +18,7 @@ extension (x: Int)
   def toR: Double = -2 + (x/size_x.toDouble * 4)
   def toI: Double = -2 + (x/size_y.toDouble * 4)
 
-object Producer {
+object Producer extends KafkaTrait {
   def gridWorkStream(
       kafkaProducer: KafkaProducer[String, String],
       topicPrefix: String,
@@ -61,30 +61,12 @@ object Producer {
   }
 
   def produceGridPoints(topicPrefix: String, iterations: Int, kafkaProducer: KafkaProducer[String, String] = null) = {
-    val props = new Properties()
-    props.put("bootstrap.servers", "kafka-topic-server:9092")
-    props.put(
-      "key.serializer",
-      "org.apache.kafka.common.serialization.StringSerializer"
-    )
-    props.put(
-      "value.serializer",
-      "org.apache.kafka.common.serialization.StringSerializer"
-    )
-    props.put(
-      "transactional.id",
-      "transaction-id-1"
-    )
-    //val producer = new KafkaProducer[String, String](props)
     val producer: KafkaProducer[String, String] = kafkaProducer match {
-      case null => new KafkaProducer[String, String](props)
+      case null => initProducer("transaction-id-1")
       case _ => kafkaProducer
     }
 
     producer.initTransactions()
-
-    //val record =
-    //  new ProducerRecord[String, String]("test", "test-key", "test value")
     gridWorkStream(producer, topicPrefix, iterations)
     producer.close()
 

@@ -32,9 +32,9 @@ import com.mongodb.client.model.Filters
 import scala.collection.View.Filter
 import com.mongodb.client.model.Updates
 import com.mongodb.client.MongoClients
+import java.util.UUID
 
-object DataWriter {
-  val logger = LoggerFactory.getLogger(DataWriter.getClass().getName())
+object DataWriter extends LoggingTrait, KafkaTrait {
 
   val run0db: MongoCollection[Document] =
     mongoDbClient().getDatabase("mandelbrot").getCollection("run0")
@@ -121,30 +121,15 @@ object DataWriter {
   }
 
   def consume(topic: String) = {
-    val props = new Properties()
-    props.put("bootstrap.servers", "kafka-topic-server:9092")
-    props.put(
-      "key.deserializer",
-      "org.apache.kafka.common.serialization.StringDeserializer"
-    )
-    props.put(
-      "value.deserializer",
-      "org.apache.kafka.common.serialization.StringDeserializer"
-    )
-    props.put("group.id", "0")
-    props.put("topic", topic)
+    val consumer = initConsumer("consumer", "0")
 
-    var topics = new java.util.ArrayList[String]()
-    topics.add(props.get("topic").asInstanceOf[String])
-
-    val consumer = new KafkaConsumer[String, String](props);
-    consumer.subscribe(topics)
+    val sysConsumer = initConsumer("system", UUID.randomUUID().toString())
 
     implicit val ec =
       ExecutionContext.fromExecutor(Executors.newFixedThreadPool(30))
 
     val runs = ListBuffer[Future[Unit]]();
-    while (true) {
+    while (running) {
       val work = consumer.poll(1000)
     
       if (work != null) {
@@ -155,8 +140,10 @@ object DataWriter {
         })
       }
 
-      val futures = Future.sequence(runs)
-      Await.result(futures, 4.days)
+      handleSystemMessages[String, String](sysConsumer)
+
+      //val futures = Future.sequence(runs)
+      //Await.result(futures, 4.days)
     }
 
   }

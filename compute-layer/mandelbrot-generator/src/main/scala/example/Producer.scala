@@ -6,11 +6,6 @@ import breeze.linalg._
 
 import java.security.MessageDigest;
 
-class Producer(var kafkaProducer: KafkaProducer[String, String] = null)
-{
-
-}
-
 val size_x = 1000
 val size_y = 1000
 
@@ -69,6 +64,5 @@ object Producer extends KafkaTrait {
     producer.initTransactions()
     gridWorkStream(producer, topicPrefix, iterations)
     producer.close()
-
   }
 }

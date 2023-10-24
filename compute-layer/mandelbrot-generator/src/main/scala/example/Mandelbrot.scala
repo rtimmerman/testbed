@@ -35,23 +35,63 @@ given ExecutionContext = ExecutionContext.global
   if (role.equals("producer"))
     println(f"<< PRODUCER >> submitting to topic: \"$topic\", # iterations = $iterations")
     val activity = new Activity(Role.Producer, UUID.randomUUID().toString())
-    Future {
-      Thread.sleep(10000)
-      activity.uploadJar("./target/scala-3.3.0/mandelbrot-generator_3-0.1.0-SNAPSHOT.jar")
-    }
+    // Future {
+    //   Thread.sleep(10000)
+    //   activity.uploadJar("./target/scala-3.3.0/mandelbrot-generator_3-0.1.0-SNAPSHOT.jar")
+    // }
     activity.consumeJar(topic, iterations.toString)
     //Producer.produceGridPoints(topic, iterations)
   else if (role.equals("consumer"))
     println(f"<< CONSUMER >> listening to \"$topic\"")
-    Consumer.consume(topic)
+    val activity = new Activity(Role.Consumer, UUID.randomUUID().toString())
+    // Future {
+    //   Thread.sleep(10000)
+    //   activity.uploadJar("./target/scala-3.3.0/mandelbrot-generator_3-0.1.0-SNAPSHOT.jar")
+    // }
+    activity.consumeJar(topic)
   else if (role.equals("data-writer-consumer"))
     println(f"<< DATA-WRITER >> listnening to \"$topic\"")
-    DataWriter.consume(topic)
+    val activity = new Activity(Role.DataWriter, UUID.randomUUID().toString())
+    activity.consumeJar(topic)
+    //DataWriter.consume(topic)
+  else if (role.equals("console"))
+      println("<< CONSOLE >>")
+      val activity = new Activity(Role.Console)
+      val command: String = null
+      val args: Seq[String] = null
+      var running = true
+      while(running)
+        print("[console]: ")
+        Console.out.flush()
+        val instruction = scala.io.StdIn.readLine()
+        if (instruction != null && !instruction.isEmpty)
+          val List(command, args*) = instruction.split(" ").toList: @unchecked
+          Console.out.flush()
+          if (command.equals("system-stop")) activity.stopSystem()
+          if (command.equals("quit")) running = false
+          command match
+            case "system:stop" => activity.stopSystem()
+            case "jar:upload" => activity.uploadJar(args(0))
+            case "jar:consume" => activity.consumeJar(args:_*)
+            case "quit" => running = false
+            case "help" => println("""
+╭───────────────────╮
+│ Avaiable Commands │
+╰───────────────────╯
+
+system:stop         - Sends stop signal to all listening-loop consumers
+jar:upload          - Uploads new class packages to the listening-loop consumers (note the package may built using `sbt package`)
+jar:consume [args]  - Boots using a previously uploaded jar (n.b. be sure to run `system:stop`first)
+quit                - Exit the console
+help
+            """)
+            case _ => {}
 
 enum Role(val name: String):
   case Consumer extends Role("Consumer")
   case Producer extends Role("Producer")
   case DataWriter extends Role("DataWriter")
+  case Console extends Role("Console")
 
 enum JarState:
   case Fresh, Stale
@@ -126,7 +166,7 @@ class Activity(var role: Role, var kafkaGroupId: String = UUID.randomUUID().toSt
     )
     consumerProps.put(
       "group.id",
-      kafkaGroupId
+       kafkaGroupId
     )
 
     val topic = "loadjar"
@@ -143,6 +183,20 @@ class Activity(var role: Role, var kafkaGroupId: String = UUID.randomUUID().toSt
 
     return consumer
 
+  def stopSystem(): Unit = 
+    val sysProducer = kafkaSysProducer("transaction-id-2")
+    try {
+      sysProducer.initTransactions()
+      sysProducer.beginTransaction()
+      val f = sysProducer.send(new ProducerRecord[String, String]("system", "stop", ""))
+      sysProducer.commitTransaction()
+      sysProducer.close()
+    } catch {
+      case e: Exception => println(s"Exception encountered: ${e.getClass()} ${e.getMessage()}")
+      sysProducer.abortTransaction()
+      sysProducer.close()
+    }
+
   def uploadJar(classJarPackage: String) = 
     val file = new File(classJarPackage)
     val fileInputStream = new FileInputStream(file)
@@ -153,18 +207,13 @@ class Activity(var role: Role, var kafkaGroupId: String = UUID.randomUUID().toSt
     producer.beginTransaction()
     producer.send(new ProducerRecord[String, Array[Byte]]("loadjar", "bytes", bytes))
     producer.commitTransaction()
-
-    val sysProducer = kafkaSysProducer("transaction-id-2")
-    sysProducer.initTransactions()
-    sysProducer.beginTransaction()
-    sysProducer.send(new ProducerRecord[String, String]("system", "stop", ""))
-    sysProducer.commitTransaction()
+    producer.close()
 
   def consumeJar(params: String*): Unit = 
     val consumer = kafkaConsumer()
     //given ExecutionContext = ExecutionContext.global
 
-    var workers: ListBuffer[Future[Unit]] = new ListBuffer[Future[Unit]]()
+    //var workers: ListBuffer[Future[Unit]] = new ListBuffer[Future[Unit]]()
     
     while (true) {
       val work = consumer.poll(1000)
@@ -174,17 +223,15 @@ class Activity(var role: Role, var kafkaGroupId: String = UUID.randomUUID().toSt
         logger.info(s"Work available")
         work.forEach(record => {
           (new FileOutputStream(new File("./out.jar"))).write(record.value())
-        })
+        })  
         
         // replace the operating instances of the base Consumer class.
+        val clazz = this.classLoader("./out.jar").loadClass("Consumer")
 
         if (role == Role.Consumer) {
           try {
-            val clazz = this.classLoader("./out.jar").loadClass("Consumer")
             val workConsumer = clazz.getDeclaredConstructor().newInstance()
-            workers += Future {
-              clazz.getDeclaredMethod("consume").invoke(workConsumer)
-            }
+            clazz.getDeclaredMethod("consume").invoke(null, params(0))
           } catch {
             case e: Exception => println("Encountered issue setting up consumer: " + e.getMessage())
           }
@@ -192,12 +239,8 @@ class Activity(var role: Role, var kafkaGroupId: String = UUID.randomUUID().toSt
 
         if (role == Role.Producer) {
           try {
-            val clazz = this.classLoader("./out.jar").loadClass("example.Producer")
-            //val workProducer = clazz.getDeclaredConstructor().newInstance()
-            val f = Future {
-              clazz.getDeclaredMethod("produceGridPoints", classOf[String], classOf[Int], classOf[KafkaProducer[String,String]]).invoke(null, params(0), params(1).toInt, null)
-            }
-            Await.result(f, 24.hours)
+            //val workProducer = clazz.getDeclaredConstructor().newInstance()    
+            clazz.getDeclaredMethod("produceGridPoints", classOf[String], classOf[Int], classOf[KafkaProducer[String,String]]).invoke(null, params(0), params(1).toInt, null)
           } catch {
             case e: Exception => println(s"Encountered issue setting up producer: <<${e.getClass().getName()} -> ${e.getMessage()}>>")
           }
@@ -205,11 +248,7 @@ class Activity(var role: Role, var kafkaGroupId: String = UUID.randomUUID().toSt
 
         if (role == Role.DataWriter) {
           try {
-            val clazz = this.classLoader("./out.jar").loadClass("DataWriter")
-            val workDataWriterConsumer = clazz.getDeclaredConstructor().newInstance()
-            workers += Future {
-              clazz.getDeclaredMethod("consume").invoke(workDataWriterConsumer)
-            }
+            clazz.getDeclaredMethod("consume").invoke(null, params(0))
           } catch {
             case e: Exception => println("Encountered issue setting up consumer: " + e.getMessage())
           }

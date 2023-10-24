@@ -51,5 +51,18 @@ sbt "run data-writer <data-topic>"
 
 The data writer is similiar to a consumer apart from that rather than processing data in terms of the algorithm it shuttles results from the data-topic to the data store.
 
+## Console
 
+This project supports a console, it may be accessed like so:
 
+```
+java -jar assembly-jar-name.jar example.mandelbrot console
+```
+
+## Misc
+
+This project supports fat-jar production using `sbt assembly`.  If this done, then instead of running `sbt run` each time.  Use the jar instead - for example,
+```sh
+# analogous to but faster than `sbt 'run producer test 1000'`
+java -jar assembly-jar-name.jar example.mandelbrot producer test 1000
+```

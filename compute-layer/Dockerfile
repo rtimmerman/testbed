@@ -14,10 +14,10 @@ RUN chmod 755 /root/upscript.sh
 RUN apt-get update
 RUN apt-get install -y openjdk-11-jdk-headless
 RUN apt-get install -y curl zip unzip wget at vim procps
-RUN curl -s 'https://get.sdkman.io' | bash
-RUN source /root/.bashrc
-RUN source "/root/.sdkman/bin/sdkman-init.sh"
-RUN /bin/bash -c '. /root/.bashrc; sdk install sbt'
+#RUN curl -s 'https://get.sdkman.io' | bash
+#RUN source /root/.bashrc
+#RUN source "/root/.sdkman/bin/sdkman-init.sh"
+#RUN /bin/bash -c '. /root/.bashrc; sdk install sbt'
 
 WORKDIR /root
 RUN cd /root

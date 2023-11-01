@@ -52,11 +52,11 @@ trait KafkaTrait extends LoggingTrait:
       val sysWork = sysConsumer.poll(100)
       //logger.info("system tick")
       if (sysWork != null) {
-        logger.info(s"Received work, no. of items=${sysWork.count()}")
+        //logger.info(s"Received work, no. of items=${sysWork.count()}")
         sysWork.forEach(record => {
             //logger.info(s"Record: ${record.key()}:${record.value()}")
             if (record.key() == SystemMessage.STOP.getMessage()) {
-              logger.warn("Receive system level request to halt operations.")
+              logger.warn("Received system level request to halt operations.")
               running = false
             }
         })

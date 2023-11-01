@@ -121,8 +121,7 @@ object DataWriter extends LoggingTrait, KafkaTrait {
   }
 
   def consume(topic: String) = {
-    val consumer = initConsumer("consumer", "0")
-
+    val consumer = initConsumer(topic, "data-writer-main")
     val sysConsumer = initConsumer("system", UUID.randomUUID().toString())
 
     implicit val ec =

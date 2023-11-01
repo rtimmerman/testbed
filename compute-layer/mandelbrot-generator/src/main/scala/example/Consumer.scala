@@ -78,7 +78,7 @@ object Consumer extends KafkaTrait {
     println(s"Consuming from ${topic}")
 
     val consumer = initConsumer(topic, "0")
-    val sysConsumer = initConsumer("system", UUID.randomUUID().toString())
+    val sysConsumer = initConsumer("system", s"system-${UUID.randomUUID().toString()}")
     val resultProducer = initProducer(s"dw-transaction-id-$topic")
     resultProducer.initTransactions()
 

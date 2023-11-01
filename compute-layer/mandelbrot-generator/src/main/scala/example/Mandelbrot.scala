@@ -39,15 +39,15 @@ given ExecutionContext = ExecutionContext.global
     //   Thread.sleep(10000)
     //   activity.uploadJar("./target/scala-3.3.0/mandelbrot-generator_3-0.1.0-SNAPSHOT.jar")
     // }
-    activity.consumeJar(topic, iterations.toString)
+    activity.producer("./target/scala-3.3.0/mandelbrot-generator_3-0.1.0-SNAPSHOT.jar", topic, iterations.toString)
     //Producer.produceGridPoints(topic, iterations)
   else if (role.equals("consumer"))
     println(f"<< CONSUMER >> listening to \"$topic\"")
     val activity = new Activity(Role.Consumer, UUID.randomUUID().toString())
-    // Future {
-    //   Thread.sleep(10000)
-    //   activity.uploadJar("./target/scala-3.3.0/mandelbrot-generator_3-0.1.0-SNAPSHOT.jar")
-    // }
+    Future {
+      Thread.sleep(10000)
+      activity.uploadJar("./target/scala-3.3.0/mandelbrot-generator_3-0.1.0-SNAPSHOT.jar")
+    }
     activity.consumeJar(topic)
   else if (role.equals("data-writer-consumer"))
     println(f"<< DATA-WRITER >> listnening to \"$topic\"")
@@ -73,6 +73,7 @@ given ExecutionContext = ExecutionContext.global
             case "system:stop" => activity.stopSystem()
             case "jar:upload" => activity.uploadJar(args(0))
             case "jar:consume" => activity.consumeJar(args:_*)
+            case "producer" => activity.producer(args(0), args(1), args(2))
             case "quit" => running = false
             case "help" => println("""
 ╭───────────────────╮
@@ -105,6 +106,7 @@ class StaleJarException extends Exception
   * @param kafkaGroupId default is a different group per instantiation to allow for multiple consumers to read from one source of truth for jar updates.
   */
 class Activity(var role: Role, var kafkaGroupId: String = UUID.randomUUID().toString()):
+
   val logger = LoggerFactory.getLogger(classOf[Activity].getName)
   
   def kafkaProducer(transactionId: String): KafkaProducer[String, Array[Byte]] = 
@@ -188,7 +190,7 @@ class Activity(var role: Role, var kafkaGroupId: String = UUID.randomUUID().toSt
     try {
       sysProducer.initTransactions()
       sysProducer.beginTransaction()
-      val f = sysProducer.send(new ProducerRecord[String, String]("system", "stop", ""))
+      val f = sysProducer.send(new ProducerRecord[String, String]("system", SystemMessage.STOP.getMessage(), SystemMessage.STOP.getMessage()))
       sysProducer.commitTransaction()
       sysProducer.close()
     } catch {
@@ -226,20 +228,22 @@ class Activity(var role: Role, var kafkaGroupId: String = UUID.randomUUID().toSt
         })  
         
         // replace the operating instances of the base Consumer class.
-        val clazz = this.classLoader("./out.jar").loadClass("Consumer")
+        
 
         if (role == Role.Consumer) {
           try {
-            val workConsumer = clazz.getDeclaredConstructor().newInstance()
-            clazz.getDeclaredMethod("consume").invoke(null, params(0))
+            val clazz = this.classLoader("./out.jar").loadClass("example.Consumer")
+            //val workConsumer = clazz.getDeclaredConstructor().newInstance()
+            clazz.getDeclaredMethod("consume", classOf[String]).invoke(null, params(0))
           } catch {
-            case e: Exception => println("Encountered issue setting up consumer: " + e.getMessage())
+            case e: Exception => println(s"Encountered issue setting up consumer: <<${e.getClass().getName()} -> ${e.getMessage()}>>")
           }
         }
 
         if (role == Role.Producer) {
           try {
             //val workProducer = clazz.getDeclaredConstructor().newInstance()    
+            val clazz = this.classLoader("./out.jar").loadClass("example.Producer")
             clazz.getDeclaredMethod("produceGridPoints", classOf[String], classOf[Int], classOf[KafkaProducer[String,String]]).invoke(null, params(0), params(1).toInt, null)
           } catch {
             case e: Exception => println(s"Encountered issue setting up producer: <<${e.getClass().getName()} -> ${e.getMessage()}>>")
@@ -248,12 +252,17 @@ class Activity(var role: Role, var kafkaGroupId: String = UUID.randomUUID().toSt
 
         if (role == Role.DataWriter) {
           try {
-            clazz.getDeclaredMethod("consume").invoke(null, params(0))
+            val clazz = this.classLoader("./out.jar").loadClass("example.DataWriter")
+            clazz.getDeclaredMethod("consume", classOf[String]).invoke(null, params(0))
           } catch {
-            case e: Exception => println("Encountered issue setting up consumer: " + e.getMessage())
+            case e: Exception => println(s"Encountered issue setting up data writer consumer: <<${e.getClass().getName()} -> ${e.getMessage()}>>")
           }
         }
     }
+
+  def producer(jarfile: String, topic: String, args: String*): Unit =
+     val clazz = this.classLoader(jarfile).loadClass("example.Producer")
+     clazz.getDeclaredMethod("produceGridPoints", classOf[String], classOf[Int], classOf[KafkaProducer[String,String]]).invoke(null, topic, args(0).toInt, null)
 
   def classLoader(classJarPackage: String): URLClassLoader = 
     new URLClassLoader(Array(new java.io.File(classJarPackage).toURI.toURL), this.getClass().getClassLoader())

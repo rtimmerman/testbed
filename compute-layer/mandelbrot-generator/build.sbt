@@ -17,6 +17,7 @@ libraryDependencies += "org.apache.avro" % "avro" % "1.11.0"
 libraryDependencies += "io.confluent" % "kafka-avro-serializer" % "7.0.0"
 // https://mvnrepository.com/artifact/org.mockito/mockito-core
 libraryDependencies += "org.mockito" % "mockito-core" % "5.4.0" % Test
+libraryDependencies += "com.fasterxml.jackson.dataformat" % "jackson-dataformat-yaml" % "2.16.0"
 
 libraryDependencies += "com.fasterxml.jackson.module" %% "jackson-module-scala" % "2.15.2"
 // https://mvnrepository.com/artifact/org.scalatest/scalatest

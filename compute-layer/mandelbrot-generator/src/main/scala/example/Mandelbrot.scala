@@ -27,7 +27,7 @@ given ExecutionContext = ExecutionContext.global
   }
 
   val frameConfigFile = role match {
-    case "producer" => args(1)
+    case "producer" => args(0)
     case _ => ""
   }
 
@@ -171,14 +171,10 @@ class Activity(var role: Role, var kafkaGroupId: String = UUID.randomUUID().toSt
     )
 
     val topic = "loadjar"
-    consumerProps.put(
-      "topic",
-      topic
-    )
 
     val consumer = new KafkaConsumer[String, Array[Byte]](consumerProps);
     var topics = new java.util.ArrayList[String]()
-    topics.add(consumerProps.get("topic").asInstanceOf[String])
+    topics.add(topic)
 
     consumer.subscribe(topics)
 

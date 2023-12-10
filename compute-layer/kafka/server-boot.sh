@@ -14,7 +14,7 @@ do
 	bin/kafka-topics.sh --zookeeper 0.0.0.0:2181 --create --if-not-exists --topic test-topic-$i --replication-factor=1 --partitions=16
 done
 bin/kafka-topics.sh --zookeeper 0.0.0.0:2181 --create --if-not-exists --topic system --replication-factor=1 --partitions=1
-bin/kafka-topics.sh --zookeeper 0.0.0.0:2181 --create --if-not-exists --topic results --replication-factor=1 --partitions=16
+bin/kafka-topics.sh --zookeeper 0.0.0.0:2181 --create --if-not-exists --topic result --replication-factor=1 --partitions=16
 bin/kafka-topics.sh --zookeeper 0.0.0.0:2181 --create --if-not-exists --topic loadjar --replication-factor=1 --partitions=16
 
 # >> loop to wait for termination. <<

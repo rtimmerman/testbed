@@ -28,7 +28,7 @@ object Producer extends KafkaTrait {
 
     val runUUID = UUID.randomUUID()
 
-    val b = Array.ofDim[Map[String, Double]](size_x, size_y)
+    val b = Array.ofDim[Map[String, Double]](size_x + 1, size_y + 1)
     
 
     // for (y <- Range(0, size_y, 1);
@@ -36,11 +36,15 @@ object Producer extends KafkaTrait {
     //   b(x)(y) = Map("r" -> x.toR, "i" -> y.toI)
 
     val linspace = (x1: BigDecimal, x2: BigDecimal, count: BigDecimal) => (x1 to x2 by ((x1 - x2).abs/count))
-    val toCoord = (x1: Double, x2: Double, scale: Double, point: BigDecimal) =>  (((Math.max(x1, x2) + point) / Math.abs(x1 - x2)) * scale).toInt
+    val centerOn = (x: BigDecimal, count: Int) => linspace(x - (x / count / 2.0), x + (x / count / 2.0), count)
 
-    for (i <- linspace(params.minI, params.maxI, size_y); r <- linspace(params.minR, params.maxR, size_x))
-      val x = toCoord(params.minR.toDouble, params.maxR.toDouble, size_x, r)
-      val y = toCoord(params.minI.toDouble, params.maxI.toDouble, size_y, i)
+    val toCoord = (x1: Double, x2: Double, scale: Double, point: BigDecimal) =>  linspace(x1, x2, scale).indexOf(point)
+
+    val I = linspace(params.minI, params.maxI, size_y)
+    val R = linspace(params.minR, params.maxR, size_x)
+    for (i <- I; r <- R)
+      val x = R.indexOf(r)
+      val y = I.indexOf(i)
       b(x)(y) = Map("r" -> r.toDouble, "i" -> i.toDouble)
       
 

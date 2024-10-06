@@ -31,6 +31,7 @@ import com.mongodb.ConnectionString
 import com.mongodb.client.model.Filters
 import scala.collection.View.Filter
 import com.mongodb.client.model.Updates
+import com.mongodb.client.model.InsertOneModel
 import com.mongodb.client.MongoClients
 import java.util.UUID
 
@@ -75,19 +76,31 @@ object DataWriter extends LoggingTrait, KafkaTrait {
     implicit val ec: scala.concurrent.ExecutionContext =
       scala.concurrent.ExecutionContext.global
 
-    run0db
-      .updateOne(
-        Filters.and(Filters.eq("r", data("r")), Filters.eq("i", data("i"))),
-        Updates.combine(
-           Updates.set("value", data("value")),
-           Updates.set("fromTopic", data("topic")),
-           Updates.set("modifiedAt", new Date()),
-           Updates.set("computeDateStamp", data("computeDateStamp")),
-           Updates.setOnInsert("r", data("r")),
-           Updates.setOnInsert("i", data("i"))
-        ),
-        opts
-      )
+    // Insert approach
+    run0db.insertOne(
+      new Document()
+        .append("value", data("value"))
+        .append("fromTopic", data("topic"))
+        .append("modifiedAt", new Date())
+        .append("computeDateStamp", data("computeDateStamp"))
+        .append("r", data("r"))
+        .append("i", data("i"))
+    )
+
+    // Upsert approach
+    // run0db
+    //   .updateOne(
+    //     Filters.and(Filters.eq("r", data("r")), Filters.eq("i", data("i"))),
+    //     Updates.combine(
+    //        Updates.set("value", data("value")),
+    //        Updates.set("fromTopic", data("topic")),
+    //        Updates.set("modifiedAt", new Date()),
+    //        Updates.set("computeDateStamp", data("computeDateStamp")),
+    //        Updates.setOnInsert("r", data("r")),
+    //        Updates.setOnInsert("i", data("i"))
+    //     ),
+    //     opts
+    //   )
 
     //Await.result(upsertFuture, 60.seconds)
 
@@ -121,7 +134,7 @@ object DataWriter extends LoggingTrait, KafkaTrait {
   }
 
   def consume(topic: String) = {
-    val consumer = initConsumer(topic, "data-writer-main")
+    val consumer = initConsumer(topic, f"data-writer-main-${UUID.randomUUID().toString()}")
     val sysConsumer = initConsumer("system", UUID.randomUUID().toString())
 
     implicit val ec =

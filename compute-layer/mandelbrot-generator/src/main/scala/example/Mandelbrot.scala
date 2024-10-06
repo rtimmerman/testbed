@@ -21,25 +21,24 @@ import scala.collection.mutable.ListBuffer
 given ExecutionContext = ExecutionContext.global
 @main def mandelbrot(role: String, args: String*): Unit =
   val topic = role match {
-    case "producer"             => args(0)
     case "consumer"             => args(0)
     case "data-writer-consumer" => args(0)
     case _                      => "test"
   }
 
-  val iterations = role match {
-    case "producer" => args(1).toInt
-    case _ => 0
+  val frameConfigFile = role match {
+    case "producer" => args(0)
+    case _ => ""
   }
 
   if (role.equals("producer"))
-    println(f"<< PRODUCER >> submitting to topic: \"$topic\", # iterations = $iterations")
+    println(f"<< PRODUCER >> starting producer from config: \"$frameConfigFile\"")
     val activity = new Activity(Role.Producer, UUID.randomUUID().toString())
     // Future {
     //   Thread.sleep(10000)
     //   activity.uploadJar("./target/scala-3.3.0/mandelbrot-generator_3-0.1.0-SNAPSHOT.jar")
     // }
-    activity.producer("./target/scala-3.3.0/mandelbrot-generator_3-0.1.0-SNAPSHOT.jar", topic, iterations.toString)
+    activity.producer("./target/scala-3.3.0/mandelbrot-generator_3-0.1.0-SNAPSHOT.jar", frameConfigFile)
     //Producer.produceGridPoints(topic, iterations)
   else if (role.equals("consumer"))
     println(f"<< CONSUMER >> listening to \"$topic\"")
@@ -73,7 +72,7 @@ given ExecutionContext = ExecutionContext.global
             case "system:stop" => activity.stopSystem()
             case "jar:upload" => activity.uploadJar(args(0))
             case "jar:consume" => activity.consumeJar(args:_*)
-            case "producer" => activity.producer(args(0), args(1), args(2))
+            case "producer" => activity.producer(args(0), args(1))
             case "quit" => running = false
             case "help" => println("""
 ╭───────────────────╮
@@ -172,14 +171,10 @@ class Activity(var role: Role, var kafkaGroupId: String = UUID.randomUUID().toSt
     )
 
     val topic = "loadjar"
-    consumerProps.put(
-      "topic",
-      topic
-    )
 
     val consumer = new KafkaConsumer[String, Array[Byte]](consumerProps);
     var topics = new java.util.ArrayList[String]()
-    topics.add(consumerProps.get("topic").asInstanceOf[String])
+    topics.add(topic)
 
     consumer.subscribe(topics)
 
@@ -244,7 +239,7 @@ class Activity(var role: Role, var kafkaGroupId: String = UUID.randomUUID().toSt
           try {
             //val workProducer = clazz.getDeclaredConstructor().newInstance()    
             val clazz = this.classLoader("./out.jar").loadClass("example.Producer")
-            clazz.getDeclaredMethod("produceGridPoints", classOf[String], classOf[Int], classOf[KafkaProducer[String,String]]).invoke(null, params(0), params(1).toInt, null)
+            clazz.getDeclaredMethod("produceGridPoints", classOf[String], classOf[KafkaProducer[String,String]]).invoke(null, params(0), null)
           } catch {
             case e: Exception => println(s"Encountered issue setting up producer: <<${e.getClass().getName()} -> ${e.getMessage()}>>")
           }
@@ -260,9 +255,9 @@ class Activity(var role: Role, var kafkaGroupId: String = UUID.randomUUID().toSt
         }
     }
 
-  def producer(jarfile: String, topic: String, args: String*): Unit =
+  def producer(jarfile: String, frameConfigFile: String, args: String*): Unit =
      val clazz = this.classLoader(jarfile).loadClass("example.Producer")
-     clazz.getDeclaredMethod("produceGridPoints", classOf[String], classOf[Int], classOf[KafkaProducer[String,String]]).invoke(null, topic, args(0).toInt, null)
+     clazz.getDeclaredMethod("produceGridPoints", classOf[String], classOf[KafkaProducer[String,String]]).invoke(null, frameConfigFile, null)
 
   def classLoader(classJarPackage: String): URLClassLoader = 
     new URLClassLoader(Array(new java.io.File(classJarPackage).toURI.toURL), this.getClass().getClassLoader())

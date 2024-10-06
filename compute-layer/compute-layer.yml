@@ -48,7 +48,7 @@ spec:
       role: data-writer-consumer-0
   replicas: 1
   strategy:
-    type: RollingUpdate
+    type: Recreate
   template:
     metadata:
       labels:

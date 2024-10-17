@@ -29,6 +29,10 @@ data:
               - elliot-pri:9091
               - elliot-sec-1:9091
               - elliot-sec-2:9091
+            labels:
+              group: mongo-shards
+
+            - targets:
               - consumer-0:9091
               - consumer-1:9091
               - consumer-2:9091
@@ -46,7 +50,7 @@ data:
               - consumer-14:9091
               - consumer-15:9091
             labels:
-              group: experiment-1
+              group: consumners
 
 ---
 apiVersion: apps/v1

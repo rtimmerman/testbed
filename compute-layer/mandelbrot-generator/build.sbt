@@ -1,7 +1,7 @@
-ThisBuild / scalaVersion := "3.3.0"
+ThisBuild / scalaVersion := "3.5.0"
 ThisBuild / version := "0.1.0-SNAPSHOT"
-ThisBuild / organization := "com.example"
-ThisBuild / organizationName := "example"
+ThisBuild / organization := "com.rrt"
+ThisBuild / organizationName := "rrt"
 
 resolvers += "confluent" at "https://packages.confluent.io/maven/"
 
@@ -22,7 +22,9 @@ libraryDependencies += "com.fasterxml.jackson.module" %% "jackson-module-scala" 
 // https://mvnrepository.com/artifact/org.scalatest/scalatest
 libraryDependencies += "org.scalactic" %% "scalactic" % "3.2.16"
 libraryDependencies += "org.scalatest" %% "scalatest" % "3.2.16" % Test
-
+libraryDependencies += "io.prometheus" % "simpleclient" % "0.16.0"
+libraryDependencies += "io.prometheus" % "simpleclient_httpserver" % "0.16.0"
+//libraryDependencies += "io.prometheus" % "prometheus-metrics-exporter-httpserver" % "1.3.3"
 
 fork := true
 run / javaOptions += "-Djavax.net.ssl.keyStore=bbk.ac.uk.p12"

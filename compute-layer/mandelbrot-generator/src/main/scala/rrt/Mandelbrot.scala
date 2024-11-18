@@ -227,7 +227,7 @@ class Activity(var role: Role, var kafkaGroupId: String = UUID.randomUUID().toSt
 
         if (role == Role.Consumer) {
           try {
-            val clazz = this.classLoader("./out.jar").loadClass("example.Consumer")
+            val clazz = this.classLoader("./out.jar").loadClass("rrt.Consumer")
             //val workConsumer = clazz.getDeclaredConstructor().newInstance()
             clazz.getDeclaredMethod("consume", classOf[String]).invoke(null, params(0))
           } catch {
@@ -238,7 +238,7 @@ class Activity(var role: Role, var kafkaGroupId: String = UUID.randomUUID().toSt
         if (role == Role.Producer) {
           try {
             //val workProducer = clazz.getDeclaredConstructor().newInstance()    
-            val clazz = this.classLoader("./out.jar").loadClass("example.Producer")
+            val clazz = this.classLoader("./out.jar").loadClass("rrt.Producer")
             clazz.getDeclaredMethod("produceGridPoints", classOf[String], classOf[KafkaProducer[String,String]]).invoke(null, params(0), null)
           } catch {
             case e: Exception => println(s"Encountered issue setting up producer: <<${e.getClass().getName()} -> ${e.getMessage()}>>")
@@ -247,7 +247,7 @@ class Activity(var role: Role, var kafkaGroupId: String = UUID.randomUUID().toSt
 
         if (role == Role.DataWriter) {
           try {
-            val clazz = this.classLoader("./out.jar").loadClass("example.DataWriter")
+            val clazz = this.classLoader("./out.jar").loadClass("rrt.DataWriter")
             clazz.getDeclaredMethod("consume", classOf[String]).invoke(null, params(0))
           } catch {
             case e: Exception => println(s"Encountered issue setting up data writer consumer: <<${e.getClass().getName()} -> ${e.getMessage()}>>")
@@ -256,7 +256,7 @@ class Activity(var role: Role, var kafkaGroupId: String = UUID.randomUUID().toSt
     }
 
   def producer(jarfile: String, frameConfigFile: String, args: String*): Unit =
-     val clazz = this.classLoader(jarfile).loadClass("example.Producer")
+     val clazz = this.classLoader(jarfile).loadClass("rrt.Producer")
      clazz.getDeclaredMethod("produceGridPoints", classOf[String], classOf[KafkaProducer[String,String]]).invoke(null, frameConfigFile, null)
 
   def classLoader(classJarPackage: String): URLClassLoader = 

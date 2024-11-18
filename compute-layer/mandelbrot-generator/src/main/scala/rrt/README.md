@@ -64,5 +64,13 @@ java -jar assembly-jar-name.jar example.mandelbrot console
 This project supports fat-jar production using `sbt assembly`.  If this done, then instead of running `sbt run` each time.  Use the jar instead - for example,
 ```sh
 # analogous to but faster than `sbt 'run producer test 1000'`
-java -jar assembly-jar-name.jar example.mandelbrot producer test 1000
+java -cp assembly-jar-name.jar rrt.mandelbrot producer test 1000
 ```
+
+Note well if scala is provided in the VM then the ordinary jar may be used by running for example
+
+```sh
+scala -cp project-name.jar rrt.mandelbrot producer test 1000
+```
+
+instead.

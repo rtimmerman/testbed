@@ -104,13 +104,13 @@ object Consumer extends KafkaTrait {
   
     while (running) {
       val work = consumer.poll(1000)
+      val timeStart = java.time.Instant.now()
 
       if (work != null) {
         val writes = ListBuffer[UpdateOneModel[Nothing]]()
         val insert = mutable.Queue[UpdateOneModel[Nothing]]()
 
         work.forEach(record => {
-          val timeStart = java.time.Instant.now()
           println(record.key() + " = " + record.value())
 
           val payload = decodedPayload(record.value())
@@ -119,7 +119,6 @@ object Consumer extends KafkaTrait {
 
           // do some processing
           val res = process(z, z, payload("iterations").toInt)
-          RrtMetrics.appendDwellTime(java.time.temporal.ChronoUnit.MILLIS.between(timeStart, java.time.Instant.now()))
 
           // Save the result
           DataWriter.doWork(
@@ -138,6 +137,8 @@ object Consumer extends KafkaTrait {
             )
           )
         })
+        
+        RrtMetrics.appendDwellTime(java.time.temporal.ChronoUnit.MILLIS.between(timeStart, java.time.Instant.now()))
       }
       // statsServer.close()
       handleSystemMessages[String,String](sysConsumer)

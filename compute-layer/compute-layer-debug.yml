@@ -755,7 +755,7 @@ spec:
     role: data-writer-consumer-0
   ports:
     - port: 9091
-      targetPort: 9091
+      targetPort: 9091      
   type: ClusterIP
 ---
 apiVersion: v1
@@ -769,6 +769,10 @@ spec:
   ports:
     - port: 9091
       targetPort: 9091
+      name: node-exporter
+    - port: 9180
+      targetPort: 9180
+      name: custom-metrics
   type: ClusterIP
 ---
 apiVersion: v1

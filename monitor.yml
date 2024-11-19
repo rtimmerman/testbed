@@ -51,6 +51,26 @@ data:
               - consumer-15:9091
             labels:
               group: consumers
+              
+          - targets:
+              - consumer-0:9180
+              - consumer-1:9180
+              - consumer-2:9180
+              - consumer-3:9180
+              - consumer-4:9180
+              - consumer-5:9180
+              - consumer-6:9180
+              - consumer-7:9180
+              - consumer-8:9180
+              - consumer-9:9180
+              - consumer-10:9180
+              - consumer-11:9180
+              - consumer-12:9180
+              - consumer-13:9180
+              - consumer-14:9180
+              - consumer-15:9180
+            labels:
+              group: consumers-custom
 
 ---
 apiVersion: apps/v1
@@ -93,8 +113,16 @@ spec:
           hostPath:
             path: /home/roderick/experiment-data
             type: Directory
-      nodeSelector:
-        kubernetes.io/hostname: rrt-general-services
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                - key: role
+                  operator: In
+                  values:
+                    - rrt-general-services
+                    - debugger
 
 ---
 apiVersion: v1
@@ -145,8 +173,16 @@ spec:
           hostPath:
             path: /home/roderick/experiment-data
             type: Directory
-      nodeSelector:
-        kubernetes.io/hostname: rrt-general-services
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                - key: role
+                  operator: In
+                  values:
+                    - rrt-general-services
+                    - debugger
 ---
 apiVersion: v1
 kind: Service

@@ -67,8 +67,17 @@ spec:
             - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
           ports:
             - containerPort: 9091
-      nodeSelector:
-        kubernetes.io/hostname: rrt-general-services
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                - key: role
+                  operator: In
+                  values:
+                    - rrt-general-services
+                    - debugger
+
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -104,8 +113,18 @@ spec:
             - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
           ports:
             - containerPort: 9091
-      nodeSelector:
-        kubernetes.io/hostname: rrt-compute-node-1
+            - containerPort: 9180
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                - key: role
+                  operator: In
+                  values:
+                    - rrt-compute-node-1
+                    - debugger   
+
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -141,8 +160,17 @@ spec:
             - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
           ports:
             - containerPort: 9091
-      nodeSelector:
-        kubernetes.io/hostname: rrt-compute-node-2
+            - containerPort: 9180
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                - key: role
+                  operator: In
+                  values:
+                    - rrt-compute-node-2
+
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -178,8 +206,17 @@ spec:
             - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
           ports:
             - containerPort: 9091
-      nodeSelector:
-        kubernetes.io/hostname: rrt-compute-node-3
+            - containerPort: 9180
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                - key: role
+                  operator: In
+                  values:
+                    - rrt-compute-node-3
+
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -215,8 +252,16 @@ spec:
             - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
           ports:
             - containerPort: 9091
-      nodeSelector:
-        kubernetes.io/hostname: rrt-compute-node-4
+            - containerPort: 9180
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                - key: role
+                  operator: In
+                  values:
+                    - rrt-compute-node-4
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -252,8 +297,16 @@ spec:
             - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
           ports:
             - containerPort: 9091
-      nodeSelector:
-        kubernetes.io/hostname: rrt-compute-node-5
+            - containerPort: 9180
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                - key: role
+                  operator: In
+                  values:
+                    - rrt-compute-node-5
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -289,8 +342,16 @@ spec:
             - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
           ports:
             - containerPort: 9091
-      nodeSelector:
-        kubernetes.io/hostname: rrt-compute-node-6
+            - containerPort: 9180
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                - key: role
+                  operator: In
+                  values:
+                    - rrt-compute-node-6
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -326,8 +387,16 @@ spec:
             - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
           ports:
             - containerPort: 9091
-      nodeSelector:
-        kubernetes.io/hostname: rrt-compute-node-7
+            - containerPort: 9180
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                - key: role
+                  operator: In
+                  values:
+                    - rrt-compute-node-7
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -363,8 +432,16 @@ spec:
             - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
           ports:
             - containerPort: 9091
-      nodeSelector:
-        kubernetes.io/hostname: rrt-compute-node-8
+            - containerPort: 9180
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                - key: role
+                  operator: In
+                  values:
+                    - rrt-compute-node-8
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -400,8 +477,16 @@ spec:
             - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
           ports:
             - containerPort: 9091
-      nodeSelector:
-        kubernetes.io/hostname: rrt-compute-node-9
+            - containerPort: 9180
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                - key: role
+                  operator: In
+                  values:
+                    - rrt-compute-node-9
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -437,8 +522,16 @@ spec:
             - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
           ports:
             - containerPort: 9091
-      nodeSelector:
-        kubernetes.io/hostname: rrt-compute-node-10
+            - containerPort: 9180
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                - key: role
+                  operator: In
+                  values:
+                    - rrt-compute-node-10
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -474,8 +567,16 @@ spec:
             - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
           ports:
             - containerPort: 9091
-      nodeSelector:
-        kubernetes.io/hostname: rrt-compute-node-11
+            - containerPort: 9180
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                - key: role
+                  operator: In
+                  values:
+                    - rrt-compute-node-11
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -511,8 +612,16 @@ spec:
             - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
           ports:
             - containerPort: 9091
-      nodeSelector:
-        kubernetes.io/hostname: rrt-compute-node-12
+            - containerPort: 9180
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                - key: role
+                  operator: In
+                  values:
+                    - rrt-compute-node-12
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -548,8 +657,16 @@ spec:
             - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
           ports:
             - containerPort: 9091
-      nodeSelector:
-        kubernetes.io/hostname: rrt-compute-node-13
+            - containerPort: 9180
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                - key: role
+                  operator: In
+                  values:
+                    - rrt-compute-node-13
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -585,8 +702,16 @@ spec:
             - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
           ports:
             - containerPort: 9091
-      nodeSelector:
-        kubernetes.io/hostname: rrt-compute-node-14
+            - containerPort: 9180
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                - key: role
+                  operator: In
+                  values:
+                    - rrt-compute-node-14
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -622,8 +747,16 @@ spec:
             - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
           ports:
             - containerPort: 9091
-      nodeSelector:
-        kubernetes.io/hostname: rrt-compute-node-15
+            - containerPort: 9180
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                - key: role
+                  operator: In
+                  values:
+                    - rrt-compute-node-15
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -658,8 +791,16 @@ spec:
             - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
           ports:
             - containerPort: 9091
-      nodeSelector:
-        kubernetes.io/hostname: rrt-compute-node-16
+            - containerPort: 9180
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                - key: role
+                  operator: In
+                  values:
+                    - rrt-compute-node-16
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -689,8 +830,16 @@ spec:
             - {name: ROLE, value: producer-shell}
           ports:
             - containerPort: 9091
-      nodeSelector:
-        kubernetes.io/hostname: rrt-general-services
+            - containerPort: 9180
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                - key: role
+                  operator: In
+                  values:
+                    - rrt-general-services
 
 ### Services ###
 
@@ -732,6 +881,10 @@ spec:
   ports:
     - port: 9091
       targetPort: 9091
+      name: node-exporter
+    - port: 9180
+      targetPort: 9180
+      name: custom-metrics
   type: ClusterIP
 ---
 apiVersion: v1
@@ -745,6 +898,10 @@ spec:
   ports:
     - port: 9091
       targetPort: 9091
+      name: node-exporter
+    - port: 9180
+      targetPort: 9180
+      name: custom-metrics
   type: ClusterIP
 ---
 apiVersion: v1
@@ -758,6 +915,10 @@ spec:
   ports:
     - port: 9091
       targetPort: 9091
+      name: node-exporter
+    - port: 9180
+      targetPort: 9180
+      name: custom-metrics
   type: ClusterIP
 ---
 apiVersion: v1
@@ -771,6 +932,10 @@ spec:
   ports:
     - port: 9091
       targetPort: 9091
+      name: node-exporter
+    - port: 9180
+      targetPort: 9180
+      name: custom-metrics
   type: ClusterIP
 ---
 apiVersion: v1
@@ -784,6 +949,10 @@ spec:
   ports:
     - port: 9091
       targetPort: 9091
+      name: node-exporter
+    - port: 9180
+      targetPort: 9180
+      name: custom-metrics
   type: ClusterIP
 ---
 apiVersion: v1
@@ -797,6 +966,10 @@ spec:
   ports:
     - port: 9091
       targetPort: 9091
+      name: node-exporter
+    - port: 9180
+      targetPort: 9180
+      name: custom-metrics
   type: ClusterIP
 ---
 apiVersion: v1
@@ -810,6 +983,10 @@ spec:
   ports:
     - port: 9091
       targetPort: 9091
+      name: node-exporter
+    - port: 9180
+      targetPort: 9180
+      name: custom-metrics
   type: ClusterIP
 ---
 apiVersion: v1
@@ -823,6 +1000,10 @@ spec:
   ports:
     - port: 9091
       targetPort: 9091
+      name: node-exporter
+    - port: 9180
+      targetPort: 9180
+      name: custom-metrics
   type: ClusterIP
 ---
 apiVersion: v1
@@ -836,6 +1017,10 @@ spec:
   ports:
     - port: 9091
       targetPort: 9091
+      name: node-exporter
+    - port: 9180
+      targetPort: 9180
+      name: custom-metrics
   type: ClusterIP
 ---
 apiVersion: v1
@@ -849,6 +1034,10 @@ spec:
   ports:
     - port: 9091
       targetPort: 9091
+      name: node-exporter
+    - port: 9180
+      targetPort: 9180
+      name: custom-metrics
   type: ClusterIP
 ---
 apiVersion: v1
@@ -862,6 +1051,10 @@ spec:
   ports:
     - port: 9091
       targetPort: 9091
+      name: node-exporter
+    - port: 9180
+      targetPort: 9180
+      name: custom-metrics
   type: ClusterIP
 ---
 apiVersion: v1
@@ -875,6 +1068,10 @@ spec:
   ports:
     - port: 9091
       targetPort: 9091
+      name: node-exporter
+    - port: 9180
+      targetPort: 9180
+      name: custom-metrics
   type: ClusterIP
 ---
 apiVersion: v1
@@ -888,6 +1085,10 @@ spec:
   ports:
     - port: 9091
       targetPort: 9091
+      name: node-exporter
+    - port: 9180
+      targetPort: 9180
+      name: custom-metrics
   type: ClusterIP
 ---
 apiVersion: v1
@@ -901,6 +1102,10 @@ spec:
   ports:
     - port: 9091
       targetPort: 9091
+      name: node-exporter
+    - port: 9180
+      targetPort: 9180
+      name: custom-metrics
   type: ClusterIP
 ---
 apiVersion: v1
@@ -914,6 +1119,10 @@ spec:
   ports:
     - port: 9091
       targetPort: 9091
+      name: node-exporter
+    - port: 9180
+      targetPort: 9180
+      name: custom-metrics
   type: ClusterIP
 ---
 apiVersion: v1
@@ -927,6 +1136,10 @@ spec:
   ports:
     - port: 9091
       targetPort: 9091
+      name: node-exporter
+    - port: 9180
+      targetPort: 9180
+      name: custom-metrics
   type: ClusterIP
 ---
 apiVersion: v1

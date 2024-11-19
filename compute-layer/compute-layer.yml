@@ -30,8 +30,16 @@ spec:
           ports:
             - containerPort: 9092
             - containerPort: 2181
-      nodeSelector:
-        kubernetes.io/hostname: rrt-general-services
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                - key: role
+                  operator: In
+                  values:
+                    - rrt-general-services
+                    - debugger
 ---
 apiVersion: apps/v1
 kind: Deployment

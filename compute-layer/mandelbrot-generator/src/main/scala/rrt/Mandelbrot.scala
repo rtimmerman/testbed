@@ -16,7 +16,7 @@ import scala.concurrent.duration._
 import scala.concurrent.ExecutionContext
 import scala.concurrent.Await
 import scala.collection.mutable.ListBuffer
-
+import io.prometheus.client.exporter.HTTPServer
 
 given ExecutionContext = ExecutionContext.global
 @main def mandelbrot(role: String, args: String*): Unit =
@@ -38,16 +38,27 @@ given ExecutionContext = ExecutionContext.global
     //   Thread.sleep(10000)
     //   activity.uploadJar("./target/scala-3.3.0/mandelbrot-generator_3-0.1.0-SNAPSHOT.jar")
     // }
-    activity.producer("./target/scala-3.3.0/mandelbrot-generator_3-0.1.0-SNAPSHOT.jar", frameConfigFile)
+    activity.producer("./target/scala-3.5.0/mandelbrot-generator_3-0.1.0-SNAPSHOT.jar", frameConfigFile)
     //Producer.produceGridPoints(topic, iterations)
   else if (role.equals("consumer"))
     println(f"<< CONSUMER >> listening to \"$topic\"")
     val activity = new Activity(Role.Consumer, UUID.randomUUID().toString())
     Future {
       Thread.sleep(10000)
-      activity.uploadJar("./target/scala-3.3.0/mandelbrot-generator_3-0.1.0-SNAPSHOT.jar")
+      activity.uploadJar("./target/scala-3.5.0/mandelbrot-generator_3-0.1.0-SNAPSHOT.jar")
     }
+    println("Attempting to bring up metrics server...")
+    val statsServer = HTTPServer.Builder()
+        .withPort(9180)
+        //.withDaemonThreads(true)
+        .build()
+  
+
+    println(s"Metrics Server is up on port ${statsServer.getPort()}")
+    println("Waiting for work...")
+
     activity.consumeJar(topic)
+    statsServer.close()
   else if (role.equals("data-writer-consumer"))
     println(f"<< DATA-WRITER >> listnening to \"$topic\"")
     val activity = new Activity(Role.DataWriter, UUID.randomUUID().toString())

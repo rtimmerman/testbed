@@ -7,6 +7,8 @@ import org.slf4j.LoggerFactory
 import java.util.{Date, Properties}
 import scala.collection.mutable
 import scala.collection.mutable.ListBuffer
+import scala.concurrent.{Await,Future}
+import scala.concurrent.duration.*
 
 import com.fasterxml.jackson.module.scala.DefaultScalaModule
 import com.fasterxml.jackson.databind.json.JsonMapper
@@ -90,8 +92,16 @@ object Consumer extends KafkaTrait {
     val resultProducer = initProducer(s"dw-transaction-id-$topic")
     resultProducer.initTransactions()
 
-    val statsServer = new HTTPServer(8180)
+    // println("Attempting to bring up metrics server...")
+    // val statsServer = HTTPServer.Builder()
+    //     .withPort(9180)
+    //     //.withDaemonThreads(true)
+    //     .build()
+  
 
+    // println(s"Metrics Server is up on port ${statsServer.getPort()}")
+    // println("Waiting for work...")
+  
     while (running) {
       val work = consumer.poll(1000)
 
@@ -129,7 +139,7 @@ object Consumer extends KafkaTrait {
           )
         })
       }
-      statsServer.stop()
+      // statsServer.close()
       handleSystemMessages[String,String](sysConsumer)
     }
   }

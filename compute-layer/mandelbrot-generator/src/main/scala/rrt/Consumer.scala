@@ -101,7 +101,7 @@ object Consumer extends KafkaTrait {
 
     // println(s"Metrics Server is up on port ${statsServer.getPort()}")
     // println("Waiting for work...")
-  
+
     while (running) {
       val work = consumer.poll(1000)
       val timeStart = java.time.Instant.now()

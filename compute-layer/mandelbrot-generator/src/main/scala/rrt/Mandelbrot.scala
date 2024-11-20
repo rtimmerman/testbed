@@ -51,7 +51,7 @@ given ExecutionContext = ExecutionContext.global
 
     val activity = new Activity(Role.Consumer, UUID.randomUUID().toString())
     Future {
-      Thread.sleep(30000)
+      Thread.sleep(10000)
       activity.uploadJar("./target/scala-3.5.0/mandelbrot-generator_3-0.1.0-SNAPSHOT.jar")
     }
 

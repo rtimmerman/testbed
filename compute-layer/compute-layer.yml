@@ -130,8 +130,8 @@ spec:
                 - key: role
                   operator: In
                   values:
-                    - rrt-compute-node-1
-                    - debugger   
+                    - compute-node-1
+                    - debugger
 
 ---
 apiVersion: apps/v1
@@ -177,7 +177,7 @@ spec:
                 - key: role
                   operator: In
                   values:
-                    - rrt-compute-node-2
+                    - compute-node-2
 
 ---
 apiVersion: apps/v1
@@ -223,7 +223,7 @@ spec:
                 - key: role
                   operator: In
                   values:
-                    - rrt-compute-node-3
+                    - compute-node-3
 
 ---
 apiVersion: apps/v1
@@ -269,7 +269,7 @@ spec:
                 - key: role
                   operator: In
                   values:
-                    - rrt-compute-node-4
+                    - compute-node-4
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -314,7 +314,7 @@ spec:
                 - key: role
                   operator: In
                   values:
-                    - rrt-compute-node-5
+                    - compute-node-5
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -359,7 +359,7 @@ spec:
                 - key: role
                   operator: In
                   values:
-                    - rrt-compute-node-6
+                    - compute-node-6
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -404,7 +404,7 @@ spec:
                 - key: role
                   operator: In
                   values:
-                    - rrt-compute-node-7
+                    - compute-node-7
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -449,7 +449,7 @@ spec:
                 - key: role
                   operator: In
                   values:
-                    - rrt-compute-node-8
+                    - compute-node-8
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -494,7 +494,7 @@ spec:
                 - key: role
                   operator: In
                   values:
-                    - rrt-compute-node-9
+                    - compute-node-9
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -539,7 +539,7 @@ spec:
                 - key: role
                   operator: In
                   values:
-                    - rrt-compute-node-10
+                    - compute-node-10
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -584,7 +584,7 @@ spec:
                 - key: role
                   operator: In
                   values:
-                    - rrt-compute-node-11
+                    - compute-node-11
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -629,7 +629,7 @@ spec:
                 - key: role
                   operator: In
                   values:
-                    - rrt-compute-node-12
+                    - compute-node-12
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -674,7 +674,7 @@ spec:
                 - key: role
                   operator: In
                   values:
-                    - rrt-compute-node-13
+                    - compute-node-13
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -719,7 +719,7 @@ spec:
                 - key: role
                   operator: In
                   values:
-                    - rrt-compute-node-14
+                    - compute-node-14
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -764,7 +764,7 @@ spec:
                 - key: role
                   operator: In
                   values:
-                    - rrt-compute-node-15
+                    - compute-node-15
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -808,7 +808,7 @@ spec:
                 - key: role
                   operator: In
                   values:
-                    - rrt-compute-node-16
+                    - compute-node-16
 ---
 apiVersion: apps/v1
 kind: Deployment

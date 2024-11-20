@@ -42,19 +42,19 @@ given ExecutionContext = ExecutionContext.global
     //Producer.produceGridPoints(topic, iterations)
   else if (role.equals("consumer"))
     println(f"<< CONSUMER >> listening to \"$topic\"")
-    val activity = new Activity(Role.Consumer, UUID.randomUUID().toString())
-    // Future {
-    //   Thread.sleep(10000)
-    //   activity.uploadJar("./target/scala-3.5.0/mandelbrot-generator_3-0.1.0-SNAPSHOT.jar")
-    // }
     println("Attempting to bring up metrics server...")
     val statsServer = HTTPServer.Builder()
         .withPort(9180)
         //.withDaemonThreads(true)
         .build()
-  
-
     println(s"Metrics Server is up on port ${statsServer.getPort()}")
+
+    val activity = new Activity(Role.Consumer, UUID.randomUUID().toString())
+    Future {
+      Thread.sleep(30000)
+      activity.uploadJar("./target/scala-3.5.0/mandelbrot-generator_3-0.1.0-SNAPSHOT.jar")
+    }
+
     println("Waiting for work...")
 
     activity.consumeJar(topic)

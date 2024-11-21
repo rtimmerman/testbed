@@ -51,23 +51,31 @@ class ConsumerSpec extends AnyFlatSpec with Matchers {
     assert(res.equals(999))
   }
 
-  "Consumer" should "not break on 0-0i" in {
-    val r = 0
-    val i = -0
-    val z = Complex(BigDecimal(1), BigDecimal(0))
-    val res = Consumer.process(z, z, 1000)
-    assert(res.equals(999))
+  "Consumer" should "know how to calculate complex power" in {
+    val z = Complex(BigDecimal(2), BigDecimal(0))
+    // println(z**2)
+    // println(z.pow(2))
+    assert((z**2).equals(z.pow(2)))
   }
 
-  "Consumer" should "know how to handle an exception" in {
-    try {
-      val r = 1/0
-    } catch {
-      case e: Exception =>
-        println(e.getClass())
-        e.getStackTrace().foreach(t => println(s"<ERR> $t ${t.getArg}"))
-        if (e.getCause() != null)
-          println(s"<ERR> Caused by: ${e.getCause().getClass()}")
-    }
+  "Consumer" should "not break on 0-0i" in {
+    val r = 0.00000
+    val i = -1.00000
+    val z = Complex(BigDecimal(r), BigDecimal(i))
+    val res = Consumer.process(z, z, 1000)
+    // println(res)
+    assert(res.equals(-1))
   }
+
+  // "Consumer" should "know how to handle an exception" in {
+  //   try {
+  //     val r = 1/0
+  //   } catch {
+  //     case e: Exception =>
+  //       println(e.getClass())
+  //       e.getStackTrace().foreach(t => println(s"<ERR> $t ${t.getArg}"))
+  //       if (e.getCause() != null)
+  //         println(s"<ERR> Caused by: ${e.getCause().getClass()}")
+  //   }
+  // }
 }

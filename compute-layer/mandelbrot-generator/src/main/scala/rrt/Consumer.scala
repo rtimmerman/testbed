@@ -31,13 +31,15 @@ class Complex(var r: BigDecimal, var i: BigDecimal) {
   def pow(n: BigDecimal): Complex = this * this
   def **(n: BigDecimal): Complex = 
     var ans: Complex = this
-    Range(0, n.toInt).foreach(_ => ans = ans * this)
+    Range(0, n.toInt - 1).foreach(_ => ans = ans * this)
     return ans
 
 
   def abs(): Double = Math.pow(r.pow(2).toDouble + i.pow(2).toDouble, 0.5)
 
   def conj(): Complex = new Complex(this.r, -this.i)
+
+  override def toString(): String = s"${r.toDouble} + ${i.toDouble}"
 }
 
 object Consumer extends KafkaTrait {
@@ -137,7 +139,7 @@ object Consumer extends KafkaTrait {
             )
           )
         })
-        
+
         RrtMetrics.appendDwellTime(java.time.temporal.ChronoUnit.MILLIS.between(timeStart, java.time.Instant.now()))
       }
       // statsServer.close()

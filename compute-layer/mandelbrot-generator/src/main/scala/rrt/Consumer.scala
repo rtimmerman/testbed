@@ -28,7 +28,7 @@ class Complex(var r: BigDecimal, var i: BigDecimal) {
         this.r * other.i + this.i * other.r
   )
 
-  def pow(n: BigDecimal): Complex = this * this
+  def pow(n: BigDecimal): Complex = this**(n)
   def **(n: BigDecimal): Complex = 
     var ans: Complex = this
     Range(0, n.toInt - 1).foreach(_ => ans = ans * this)

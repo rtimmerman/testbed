@@ -242,7 +242,11 @@ class Activity(var role: Role, var kafkaGroupId: String = UUID.randomUUID().toSt
             //val workConsumer = clazz.getDeclaredConstructor().newInstance()
             clazz.getDeclaredMethod("consume", classOf[String]).invoke(null, params(0))
           } catch {
-            case e: Exception => println(s"Encountered issue setting up consumer: <<${e.getClass().getName()} -> ${e.getMessage()}>>")
+            case e: Exception => 
+              println(s"<ERR> Caller encountered issue with the consumer: <<${e.getClass().getName()} -> ${e.getMessage()}>>")
+              println(s"<ERR> Stack trace: ")
+              e.getStackTrace().foreach(t => println(s"<ERR> $t"))
+              println(s"<ERR> Caused by: ${e.getCause().getClass()}")
           }
         }
 

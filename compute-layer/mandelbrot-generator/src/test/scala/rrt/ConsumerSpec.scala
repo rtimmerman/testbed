@@ -42,4 +42,32 @@ class ConsumerSpec extends AnyFlatSpec with Matchers {
     //Await.result(statsServer, 30.seconds).stop()
     statsServer.close()
   }
+
+  "Consumer" should "be able to process 0-i" in {
+    val r = 0
+    val i = -1
+    val z = Complex(BigDecimal(1), BigDecimal(0))
+    val res = Consumer.process(z, z, 1000)
+    assert(res.equals(999))
+  }
+
+  "Consumer" should "not break on 0-0i" in {
+    val r = 0
+    val i = -0
+    val z = Complex(BigDecimal(1), BigDecimal(0))
+    val res = Consumer.process(z, z, 1000)
+    assert(res.equals(999))
+  }
+
+  "Consumer" should "know how to handle an exception" in {
+    try {
+      val r = 1/0
+    } catch {
+      case e: Exception =>
+        println(e.getClass())
+        e.getStackTrace().foreach(t => println(s"<ERR> $t ${t.getArg}"))
+        if (e.getCause() != null)
+          println(s"<ERR> Caused by: ${e.getCause().getClass()}")
+    }
+  }
 }

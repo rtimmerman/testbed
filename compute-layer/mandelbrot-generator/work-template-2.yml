@@ -1,0 +1,6 @@
+version: 2
+topicPrefix: test
+iterations: 1000
+coordinate: 0+0i
+zoomPc: 100
+neighbourhoodSize: 1000

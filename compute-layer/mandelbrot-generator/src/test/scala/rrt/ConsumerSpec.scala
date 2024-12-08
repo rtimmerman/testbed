@@ -30,6 +30,28 @@ class ConsumerSpec extends AnyFlatSpec with Matchers {
     assert(a.abs() == 5)
   }
 
+  "Complex number" should "be initilisable from string representation" in {
+    val expr1 = "-2+3i"
+    val c1 = Complex.fromString(expr1)
+    assert(c1.r == -2)
+    assert(c1.i == 3)
+
+    val expr2 = "-1-9i"
+    val c2 = Complex.fromString(expr2)
+    assert(c2.r == -1)
+    assert(c2.i == -9)
+
+    val expr3 = "1+2i"
+    val c3 = Complex.fromString(expr3)
+    assert(c3.r == 1)
+    assert(c3.i == 2)
+
+    val expr4 = "hello"
+    val c4 = Complex.fromString(expr4)
+    assert(c4.r == 0)
+    assert(c4.i == 0)
+  }
+
   "Consumer" should "be able to emit prometheus counter statistics" in {
     val statsServer = HTTPServer.Builder()
         .withPort(9180)
@@ -53,8 +75,6 @@ class ConsumerSpec extends AnyFlatSpec with Matchers {
 
   "Consumer" should "know how to calculate complex power" in {
     val z = Complex(BigDecimal(2), BigDecimal(0))
-    // println(z**2)
-    // println(z.pow(2))
     assert((z**2).equals(z.pow(2)))
   }
 

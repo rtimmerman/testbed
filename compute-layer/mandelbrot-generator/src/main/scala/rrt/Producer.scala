@@ -14,47 +14,71 @@ import java.io.File
 //   def toI: Double = -2 + (x/size_y.toDouble * 4)
 
 object Producer extends KafkaTrait {
+
+  def createSpaceFromPoint(c: rrt.Complex, zoomPc: Integer = 100, ball: Integer = 1000, canvasDimensions: Map[String, Int] = Map("minR" -> -2, "maxR" -> 2, "minI" -> -2, "maxI" -> 2)): Array[Array[Map[String, Double]]] = {
+    val scale = 1 / (zoomPc.toDouble / 100)
+    val linspace = (x1: BigDecimal, x2: BigDecimal, count: BigDecimal) => (x1 to x2 by ((x1 - x2).abs / (count)))
+    val R = linspace(canvasDimensions("minR"), canvasDimensions("maxR"), BigDecimal(ball))
+    val I = linspace(canvasDimensions("minI"), canvasDimensions("maxI"), BigDecimal(ball))
+
+    // the point is c
+
+    // transform the points by adding c and multiplying them by scale across the initial space.
+    val tR = R.map(e => (e + c.r) * scale)
+    val tI = R.map(e => (e + c.i) * scale)
+
+    val b = Array.ofDim[Map[String, Double]](ball + 1, ball + 1)
+    for (i <- tI; r <- tR)
+      b(tR.indexOf(r))(tI.indexOf(i)) = Map("r" -> r.toDouble, "i" -> i.toDouble)
+
+    return b
+  }
+
+  def createSpace(sizeX: Int, sizeY: Int, minR: Double, maxR: Double, minI: Double, maxI: Double): Array[Array[Map[String,Double]]] = {
+    val b = Array.ofDim[Map[String, Double]](sizeX + 1, sizeY + 1)
+
+    val linspace = (x1: BigDecimal, x2: BigDecimal, count: BigDecimal) => (x1 to x2 by ((x1 - x2).abs/count))
+
+    val toCoord = (x1: Double, x2: Double, scale: Double, point: BigDecimal) => linspace(x1, x2, scale).indexOf(point)
+
+    val I = linspace(minI, maxI, sizeY)
+    val R = linspace(minR, maxR, sizeX)
+    for (i <- I; r <- R)
+      val x = R.indexOf(r)
+      val y = I.indexOf(i)
+      b(x)(y) = Map("r" -> r.toDouble, "i" -> i.toDouble)
+
+    return b
+  }
+
   def gridWorkStream(
       kafkaProducer: KafkaProducer[String, String],
       frameConfigFile: String
   ) = {
 
-    //val config = new ObjectMapper(new YamlFactory())
-    var mapper = new ObjectMapper(new YAMLFactory())
-    var params = mapper.readValue(new File(frameConfigFile), classOf[ProducerParams]): ProducerParams
-
-    var size_x: Int = params.sizeX
-    var size_y: Int = params.sizeY
-
     val runUUID = UUID.randomUUID()
 
-    val b = Array.ofDim[Map[String, Double]](size_x + 1, size_y + 1)
-    
+    var mapper = new ObjectMapper(new YAMLFactory())
+    var paramsBase = mapper.readValue(new File(frameConfigFile), classOf[ProducerParams]): ProducerParams
+    var b: Array[Array[Map[String,Double]]] = null
+    var space = 0
 
-    // for (y <- Range(0, size_y, 1);
-    //   x <- Range(0, size_x, 1))
-    //   b(x)(y) = Map("r" -> x.toR, "i" -> y.toI)
+    if (paramsBase.version == 2)
+        val params = mapper.readValue(new File(frameConfigFile), classOf[ProducerParamsV2]): ProducerParamsV2
+        b = createSpaceFromPoint(rrt.Complex.fromString(params.coordinate), params.zoomPc, params.neighbourhoodSize)
+        space = params.neighbourhoodSize * params.neighbourhoodSize
+    else
+        val params = paramsBase
+        b = createSpace(params.sizeX, params.sizeY, params.minR, params.maxR, params.minI, params.maxI)
+        space = params.sizeX * params.sizeY
 
-    val linspace = (x1: BigDecimal, x2: BigDecimal, count: BigDecimal) => (x1 to x2 by ((x1 - x2).abs/count))
-    val centerOn = (x: BigDecimal, count: Int) => linspace(x - (x / count / 2.0), x + (x / count / 2.0), count)
-
-    val toCoord = (x1: Double, x2: Double, scale: Double, point: BigDecimal) =>  linspace(x1, x2, scale).indexOf(point)
-
-    val I = linspace(params.minI, params.maxI, size_y)
-    val R = linspace(params.minR, params.maxR, size_x)
-    for (i <- I; r <- R)
-      val x = R.indexOf(r)
-      val y = I.indexOf(i)
-      b(x)(y) = Map("r" -> r.toDouble, "i" -> i.toDouble)
-      
-
-    val batches = b.flatten.grouped((size_x * size_y)/16).toList
+    val batches = b.flatten.grouped(space/16).toList
   
     var lot = 0
     
     batches.foreach(batch => {
       kafkaProducer.beginTransaction()
-      val topic = s"${params.topicPrefix}-${lot}"
+      val topic = s"${paramsBase.topicPrefix}-${lot}"
       println(s"Sending ${batch.length} entries to $topic")
       batch.foreach(entry => {
         kafkaProducer.send(
@@ -64,7 +88,7 @@ object Producer extends KafkaTrait {
             Consumer.encodedPayload(
                 "%f".format(entry.getOrElse("r", 0)),
                 "%f".format(entry.getOrElse("i", 0)),
-                params.iterations.toString(),
+                paramsBase.iterations.toString(),
                 runUUID.toString()
               )
             )

@@ -34,12 +34,35 @@ class Complex(var r: BigDecimal, var i: BigDecimal) {
     Range(0, n.toInt - 1).foreach(_ => ans = ans * this)
     return ans
 
+  override def equals(n: Any): Boolean =
+    if (n.isInstanceOf[Complex])
+      return n.asInstanceOf[Complex].r == this.r &&  n.asInstanceOf[Complex].i == this.i
+    return false
+
 
   def abs(): Double = Math.pow(r.pow(2).toDouble + i.pow(2).toDouble, 0.5)
 
   def conj(): Complex = new Complex(this.r, -this.i)
 
   override def toString(): String = s"${r.toDouble} + ${i.toDouble}"
+
+}
+
+object Complex {
+  def fromString(str: String): Complex = {
+    val complexRegex = "(([-+]?\\d+)i?)".r
+    var r: BigDecimal = 0
+    var i: BigDecimal = 0
+    for (m <- complexRegex.findAllMatchIn(str)) {
+      val candidate = m.group(1)
+      if (candidate.contains("i"))
+        i = BigDecimal(m.group(2))
+      else
+        r = BigDecimal(candidate)
+    }
+
+    return Complex(r, i)
+  }
 }
 
 object Consumer extends KafkaTrait {

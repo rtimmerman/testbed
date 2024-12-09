@@ -848,6 +848,7 @@ spec:
                   operator: In
                   values:
                     - rrt-general-services
+                    - debugger
 
 ### Services ###
 

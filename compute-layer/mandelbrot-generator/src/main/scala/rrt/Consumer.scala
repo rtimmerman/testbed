@@ -50,7 +50,7 @@ class Complex(var r: BigDecimal, var i: BigDecimal) {
 
 object Complex {
   def fromString(str: String): Complex = {
-    val complexRegex = "(([-+]?\\d+)i?)".r
+    val complexRegex = "(([-+]?[0-9.]+)i?)".r
     var r: BigDecimal = 0
     var i: BigDecimal = 0
     for (m <- complexRegex.findAllMatchIn(str)) {

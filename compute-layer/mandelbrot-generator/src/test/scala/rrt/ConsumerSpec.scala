@@ -50,6 +50,11 @@ class ConsumerSpec extends AnyFlatSpec with Matchers {
     val c4 = Complex.fromString(expr4)
     assert(c4.r == 0)
     assert(c4.i == 0)
+
+    val expr5 = "-1.3+2.4i"
+    val c5 = Complex.fromString(expr5)
+    assert(c5.r == -1.3)
+    assert(c5.i == 2.4)
   }
 
   "Consumer" should "be able to emit prometheus counter statistics" in {

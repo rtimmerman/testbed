@@ -78,6 +78,15 @@ class ConsumerSpec extends AnyFlatSpec with Matchers {
     assert(res.equals(999))
   }
 
+  "Consumer" should "be able to process -1.152+0.352i" in {
+    val r = -1.152
+    val i = -0.352
+    val z = Complex(BigDecimal(r), BigDecimal(i))
+    val res = Consumer.process(z, z, 1000)
+    println(res)
+    assert(res.equals(992))
+  }
+
   "Consumer" should "know how to calculate complex power" in {
     val z = Complex(BigDecimal(2), BigDecimal(0))
     assert((z**2).equals(z.pow(2)))

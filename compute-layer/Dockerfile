@@ -9,6 +9,8 @@ RUN mkdir /root/mandelbrot-generator
 COPY mandelbrot-generator /root/mandelbrot-generator
 COPY ./node_exporter-1.0.1.linux-amd64.tar.gz /root/
 COPY ./upscript.sh /root/
+COPY ./Submitter.class /root/
+COPY ./Submitter.java /root/
 RUN chmod 755 /root/upscript.sh
 
 RUN apt-get update
@@ -22,6 +24,7 @@ RUN apt-get install -y curl zip unzip wget at vim procps
 WORKDIR /root
 RUN cd /root
 RUN tar -zxf ./node_exporter-1.0.1.linux-amd64.tar.gz
+RUN atd
 
 ENTRYPOINT /bin/bash -c /root/upscript.sh 
 

@@ -9,6 +9,8 @@ import scala.collection.mutable
 import scala.collection.mutable.ListBuffer
 import scala.concurrent.{Await,Future}
 import scala.concurrent.duration.*
+import scala.util.boundary
+import boundary.break
 
 import com.fasterxml.jackson.module.scala.DefaultScalaModule
 import com.fasterxml.jackson.databind.json.JsonMapper
@@ -96,17 +98,16 @@ object Consumer extends KafkaTrait {
   }
 
   def process(z: Complex, c: Complex, iterations: Int): Int = {
-    if (iterations < 1) {
-      return -1
-    }
-
-    val M: Complex = (z**2) + c
-
-    if (M.abs() > 4.0) {
-      return iterations
-    }
-
-    process(M, c, iterations - 1)
+    val blowup = 4.0
+    var m = z;
+    boundary:
+      Range(0, iterations).foreach(i => {
+        m = (m**2) + c
+        if (m.abs() > blowup) {
+          break(iterations - i)
+        }
+      })
+      -1
   }
 
   def consume(topic: String) = {

@@ -39,7 +39,7 @@ class ProducerSpec extends AnyFlatSpec with Matchers {
 
     // left extreme should -2-2i
     assert(b(0)(0)("r") == -2)
-    assert(b(0)(0)("i") == -2)
+    assert(b(0)(0)("i") == 2)
 
     // origin should be 0+0i
     assert(b(500)(500)("r") == 0)
@@ -47,7 +47,7 @@ class ProducerSpec extends AnyFlatSpec with Matchers {
 
     // right most should be 2+2i
     assert(b(1000)(1000)("r") == 2)
-    assert(b(1000)(1000)("i") == 2)
+    assert(b(1000)(1000)("i") == -2)
   }
 
   "Producer" should "be able to produce neighbour points of fixed size around locus" in {
@@ -55,7 +55,7 @@ class ProducerSpec extends AnyFlatSpec with Matchers {
     val space = Producer.createSpaceFromPoint(c)
     // left most should be -2-2i
     assert(space(0)(0)("r") == -2)
-    assert(space(0)(0)("i") == -2)
+    assert(space(0)(0)("i") == 2)
 
     // origin should be 0+0i
     assert(space(500)(500)("r") == 0)
@@ -63,7 +63,23 @@ class ProducerSpec extends AnyFlatSpec with Matchers {
 
     // right most should be 2+2i
     assert(space(1000)(1000)("r") == 2)
-    assert(space(1000)(1000)("i") == 2)
+    assert(space(1000)(1000)("i") == -2)
+  }
+
+  "Producer" should "generate space able to support points of fixed size around locus" in {
+    val c = rrt.Complex(-1, -1)
+    val space = Producer.createSpaceFromPoint(c)
+    // left most should be -2-2i
+    assert(space(0)(0)("r") == -3)
+    assert(space(0)(0)("i") == 1)
+
+    // origin should be 0+0i
+    assert(space(500)(500)("r") == -1)
+    assert(space(500)(500)("i") == -1)
+
+    // right most should be 2+2i
+    assert(space(1000)(1000)("r") == 1)
+    assert(space(1000)(1000)("i") == -3)
   }
 
   "Producer" should "be able to consume v1 parameters" in {

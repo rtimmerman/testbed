@@ -25,7 +25,7 @@ object Producer extends KafkaTrait {
 
     // transform the points by adding c and multiplying them by scale across the initial space.
     val tR = R.map(e => (e + c.r) * scale)
-    val tI = R.map(e => (e + c.i) * scale)
+    val tI = R.map(e => (e + c.i) * scale).reverse
 
     val b = Array.ofDim[Map[String, Double]](ball + 1, ball + 1)
     for (i <- tI; r <- tR)
@@ -41,7 +41,7 @@ object Producer extends KafkaTrait {
 
     val toCoord = (x1: Double, x2: Double, scale: Double, point: BigDecimal) => linspace(x1, x2, scale).indexOf(point)
 
-    val I = linspace(minI, maxI, sizeY)
+    val I = linspace(minI, maxI, sizeY).reverse
     val R = linspace(minR, maxR, sizeX)
     for (i <- I; r <- R)
       val x = R.indexOf(r)

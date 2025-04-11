@@ -16,12 +16,14 @@ libraryDependencies += "org.slf4j" % "slf4j-simple" % "1.7.32"
 libraryDependencies += "org.apache.avro" % "avro" % "1.11.0"
 libraryDependencies += "io.confluent" % "kafka-avro-serializer" % "7.0.0"
 // https://mvnrepository.com/artifact/org.mockito/mockito-core
-libraryDependencies += "org.mockito" % "mockito-core" % "5.4.0" % Test
+libraryDependencies += "org.mockito" % "mockito-core" % "5.17.0" % Test
 libraryDependencies += "com.fasterxml.jackson.dataformat" % "jackson-dataformat-yaml" % "2.16.0"
 libraryDependencies += "com.fasterxml.jackson.module" %% "jackson-module-scala" % "2.16.0"
 // https://mvnrepository.com/artifact/org.scalatest/scalatest
 libraryDependencies += "org.scalactic" %% "scalactic" % "3.2.16"
 libraryDependencies += "org.scalatest" %% "scalatest" % "3.2.16" % Test
+libraryDependencies += "org.scalamock" %% "scalamock" % "7.3.0" % Test
+
 libraryDependencies += "io.prometheus" % "simpleclient" % "0.16.0"
 libraryDependencies += "io.prometheus" % "simpleclient_httpserver" % "0.16.0"
 //libraryDependencies += "io.prometheus" % "prometheus-metrics-exporter-httpserver" % "1.3.3"

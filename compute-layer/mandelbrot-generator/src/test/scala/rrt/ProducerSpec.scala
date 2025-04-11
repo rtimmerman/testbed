@@ -2,11 +2,13 @@ package rrt
 
 import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.must.Matchers
+import org.scalatest.Tag
 import org.mockito.Mockito
 import org.mockito.ArgumentMatchers
 import org.mockito.ArgumentCaptor
 import org.apache.kafka.clients.producer.ProducerRecord
 import org.apache.kafka.clients.producer.KafkaProducer
+import org.apache.kafka.clients.producer.MockProducer
 import org.mockito.hamcrest.MockitoHamcrest
 import scala.concurrent.Future
 import org.apache.kafka.common.KafkaFuture
@@ -14,7 +16,10 @@ import org.apache.kafka.clients.producer.RecordMetadata
 import org.apache.kafka.clients.Metadata
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory
+import breeze.linalg._
 
+object ParameterSpace extends Tag("rrt.tags.ParameterSpace")
+object Kafka extends Tag("rrt.tags.Kafka")
 
 class ProducerSpec extends AnyFlatSpec with Matchers {
   "The Producer object" should "be able to evenly distribute work to nodes" in {
@@ -155,5 +160,93 @@ class ProducerSpec extends AnyFlatSpec with Matchers {
     assert(space == 1e6)
     assert(b.size == 1001)
     assert(b(0).size == 1001)
+  }
+
+  "Producer" should "partition a space evenly between 16 consumers." in {
+    
+    // create the space
+    val space = Array.ofDim[Int](16, 16)
+    val spc = (0 to 15)
+    var z: Int = 0
+    var p, q: Int = 0
+    for (i <- spc; j <- spc)
+      if (z % 4 == 0 && z > 0)
+        p += 1
+      if (z % 16 == 0 && z > 0)
+        p = q
+      if (z % 63 == 0 && z > 0)
+        q += 4
+      space(i)(j) = p
+
+      // display
+      print("%-6d".format(p))
+      z += 1
+
+      if (z % 16 == 0)
+        println()
+
+    // val linspace = (x1: Double, x2: Double, count: Double) => (x1 to x2 by ((x1 - x2).abs / (count)))
+    // val R = linspace(-2, 2, Double(1000)).toList
+
+      // val m = DenseMatrix.zeros[Double](16, 16)
+    // m(1, 1) = 1
+    
+    //                  Y                                 X
+    // println(space.slice(0, 4).toList.foreach(s => s.slice(0, 4).toList.foreach(a => print("%-4d".format(a)))))
+    
+    // Square shaped partitioning
+    val nPartition = 16
+    val pSize = 4
+    // val allocations: Map[Int, List[Int]]
+    println("partition size = %d".format(pSize))
+    var rank = 0
+    val parts: Array[Double] = null
+
+    (0 to 15 by 4).foreach(y => {
+      (0 to 15 by 4).foreach(x => {
+        // space.slice(y, y + 4).toList.foreach(s => {s.slice(x, x + 4).toList.foreach(a => print("%-4d".format(a))); println();})
+        val items = space.slice(y, y + 4).toList.map(s => s.slice(x, x + 4).toList).flatten
+        println(items)
+        println("%d ___".format(rank))
+        rank += 1
+     })
+    })
+  }
+
+  "Producer" should "partition a square space in 16 subspaces" taggedAs(ParameterSpace) in {
+    val c = new Complex(0, 0)
+    val nParts = 16
+    val space = Producer.createSpaceFromPoint(c, ball=16)
+ 
+    val spaces = Producer.partition(space, nParts)
+
+    assert(spaces.length == nParts)
+
+    spaces.foreach(s => {
+        // note well: the square is actually 5 elements by 5 since the count is inclusive (and overlaps).
+        assert(s.length == 25)
+      })
+
+    // range check
+    (0 to 3).foreach(spaces(_).foreach(entry => {
+      assert(entry("i") >= 1.0)
+    }))
+
+    (0 to 14 by 4).foreach(spaces(_).foreach(entry => {
+      assert(entry("r") <= -1.0 && entry("r") >= -2.0)
+    }))
+  }
+
+  "Producer" should "be able to send work to Kafka" taggedAs(Kafka) in {
+    val configFile = System.getProperty("user.dir") + "/src/test/resources/test-work.yml"
+    val producerProps = new java.util.Properties()
+
+    val kafkaProducer = MockProducer[String, String](
+      true,
+       new org.apache.kafka.common.serialization.StringSerializer,
+       new org.apache.kafka.common.serialization.StringSerializer)
+    kafkaProducer.initTransactions
+
+    Producer.gridWorkStream(kafkaProducer, configFile)
   }
 }

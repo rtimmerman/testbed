@@ -15,7 +15,9 @@ import java.io.File
 
 object Producer extends KafkaTrait {
 
-  def createSpaceFromPoint(c: rrt.Complex, zoomPc: Integer = 100, ball: Integer = 1000, canvasDimensions: Map[String, Int] = Map("minR" -> -2, "maxR" -> 2, "minI" -> -2, "maxI" -> 2)): Array[Array[Map[String, Double]]] = {
+  type Space = Array[Array[Map[String, Double]]];
+
+  def createSpaceFromPoint(c: rrt.Complex, zoomPc: Integer = 100, ball: Integer = 1000, canvasDimensions: Map[String, Int] = Map("minR" -> -2, "maxR" -> 2, "minI" -> -2, "maxI" -> 2)): Space = {
     val scale = 1 / (zoomPc.toDouble / 100)
     val linspace = (x1: BigDecimal, x2: BigDecimal, count: BigDecimal) => (x1 to x2 by ((x1 - x2).abs / (count)))
     val R = linspace(canvasDimensions("minR"), canvasDimensions("maxR"), BigDecimal(ball))
@@ -25,7 +27,7 @@ object Producer extends KafkaTrait {
 
     // transform the points by adding c and multiplying them by scale across the initial space.
     val tR = R.map(e => (e + c.r) * scale)
-    val tI = R.map(e => (e + c.i) * scale).reverse
+    val tI = I.map(e => (e + c.i) * scale).reverse
 
     val b = Array.ofDim[Map[String, Double]](ball + 1, ball + 1)
     for (i <- tI; r <- tR)
@@ -34,7 +36,7 @@ object Producer extends KafkaTrait {
     return b
   }
 
-  def createSpace(sizeX: Int, sizeY: Int, minR: Double, maxR: Double, minI: Double, maxI: Double): Array[Array[Map[String,Double]]] = {
+  def createSpace(sizeX: Int, sizeY: Int, minR: Double, maxR: Double, minI: Double, maxI: Double): Space = {
     val b = Array.ofDim[Map[String, Double]](sizeX + 1, sizeY + 1)
 
     val linspace = (x1: BigDecimal, x2: BigDecimal, count: BigDecimal) => (x1 to x2 by ((x1 - x2).abs/count))
@@ -51,8 +53,23 @@ object Producer extends KafkaTrait {
     return b
   }
 
+  def partition(space: Space, nPartitions: Int): Seq[Array[Map[String, Double]]] =
+    val width, height = (space.length / Math.sqrt(nPartitions)).toInt
+    val size = space.length * space(0).length
+    // for (x <- 0 to  Math.sqrt(nPartitions).toInt - 1; y <- 0 to Math.sqrt(nPartitions).toInt - 1)
+      // println(s"Y:($y,$x) ${y * height} to ${(y * height) + height}, ${x * width} to ${(x * width) + width}")
+
+    for (x <- 0 to  Math.sqrt(nPartitions).toInt - 1; y <- 0 to Math.sqrt(nPartitions).toInt - 1)
+      yield space
+        .slice((y * height), (y * height) + height + 1)
+        .map(a => a.slice((x * width), (x * width) + width + 1))
+        .flatten
+
+    // for (x <- 0 to space(0).length - 1 by width; y <- 0 to space.length - 1 by height)
+    //   yield space.slice(y, y + height + 1).map(a => a.slice(x, x + width + 1)).flatten
+
   def gridWorkStream(
-      kafkaProducer: KafkaProducer[String, String],
+      kafkaProducer: Producer[String, String],
       frameConfigFile: String
   ) = {
 
@@ -72,7 +89,8 @@ object Producer extends KafkaTrait {
         b = createSpace(params.sizeX, params.sizeY, params.minR, params.maxR, params.minI, params.maxI)
         space = params.sizeX * params.sizeY
 
-    val batches = b.flatten.grouped(space/16).toList
+    // val batches = b.flatten.grouped(space/16).toList
+    val batches = partition(b, 16)
   
     var lot = 0
     

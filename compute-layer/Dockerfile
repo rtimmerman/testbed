@@ -1,4 +1,4 @@
-FROM debian:bullseye
+FROM debian:bookworm
 
 RUN useradd operations
 
@@ -14,7 +14,7 @@ COPY ./Submitter.java /root/
 RUN chmod 755 /root/upscript.sh
 
 RUN apt-get update
-RUN apt-get install -y openjdk-11-jdk-headless
+RUN apt-get install -y openjdk-17-jdk-headless
 RUN apt-get install -y curl zip unzip wget at vim procps
 #RUN curl -s 'https://get.sdkman.io' | bash
 #RUN source /root/.bashrc

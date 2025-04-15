@@ -82,7 +82,7 @@ given ExecutionContext = ExecutionContext.global
           command match
             case "system:stop" => activity.stopSystem()
             case "jar:upload" => activity.uploadJar(args(0))
-            case "jar:consume" => activity.consumeJar(args:_*)
+            case "jar:consume" => activity.consumeJar(args*)
             case "producer" => activity.producer(args(0), args(1))
             case "quit" => running = false
             case "help" => println("""
@@ -148,7 +148,7 @@ class Activity(var role: Role, var kafkaGroupId: String = UUID.randomUUID().toSt
   def kafkaSysProducer(transactionId: String): KafkaProducer[String, String] = 
     val producerProps = new Properties()
     
-    producerProps.put("bootstrap.servers", "kafka-topic-server:9092")  
+    producerProps.put("bootstrap.servers", "PLAINTEXT://kafka-topic-server:9092")  
     producerProps.put(
       "key.serializer",
       "org.apache.kafka.common.serialization.StringSerializer"
@@ -167,7 +167,7 @@ class Activity(var role: Role, var kafkaGroupId: String = UUID.randomUUID().toSt
 
   def kafkaConsumer(): KafkaConsumer[String, Array[Byte]] =
     val consumerProps = new Properties()
-    consumerProps.put("bootstrap.servers", "kafka-topic-server:9092")
+    consumerProps.put("bootstrap.servers", "PLAINTEXT://kafka-topic-server:9092")
     consumerProps.put(
       "key.deserializer",
       "org.apache.kafka.common.serialization.StringDeserializer"

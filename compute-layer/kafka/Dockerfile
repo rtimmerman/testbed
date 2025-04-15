@@ -1,6 +1,6 @@
-FROM alpine:3.14.0
+FROM alpine:3.21.0
 
-RUN apk add --no-cache openjdk11-jre-headless bash
+RUN apk add --no-cache openjdk17-jre-headless bash
 RUN apk add tree
 
 SHELL ["/bin/bash", "-c"]

@@ -11,7 +11,7 @@ trait KafkaTrait extends LoggingTrait:
 
     def initConsumer(topic: String, groupId: String): KafkaConsumer[String, String] = {
         val props = new Properties
-        props.put("bootstrap.servers", "kafka-topic-server:9092")
+        props.put("bootstrap.servers", "PLAINTEXT://kafka-topic-server:9092")
         props.put(
             "key.deserializer",
             "org.apache.kafka.common.serialization.StringDeserializer"
@@ -31,7 +31,7 @@ trait KafkaTrait extends LoggingTrait:
 
     def initProducer(transactionId: String): KafkaProducer[String, String] = {
         val dataOutProps = new Properties();
-        dataOutProps.put("bootstrap.servers", "kafka-topic-server:9092")
+        dataOutProps.put("bootstrap.servers", "PLAINTEXT://kafka-topic-server:9092")
         dataOutProps.put(
         "key.serializer",
         "org.apache.kafka.common.serialization.StringSerializer"

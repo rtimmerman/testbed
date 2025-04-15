@@ -95,24 +95,29 @@ object Producer extends KafkaTrait {
     var lot = 0
     
     batches.foreach(batch => {
-      kafkaProducer.beginTransaction()
       val topic = s"${paramsBase.topicPrefix}-${lot}"
       println(s"Sending ${batch.length} entries to $topic")
-      batch.foreach(entry => {
-        kafkaProducer.send(
-          new ProducerRecord[String, String](
-            topic,
-            "coordinate",
-            Consumer.encodedPayload(
-                "%f".format(entry.getOrElse("r", 0)),
-                "%f".format(entry.getOrElse("i", 0)),
-                paramsBase.iterations.toString(),
-                runUUID.toString()
+      batch.grouped(10).foreach(grp => {
+        kafkaProducer.beginTransaction()
+
+        grp.foreach(entry => {
+          kafkaProducer.send(
+            new ProducerRecord[String, String](
+              topic,
+              "coordinate",
+              Consumer.encodedPayload(
+                  "%f".format(entry.getOrElse("r", 0)),
+                  "%f".format(entry.getOrElse("i", 0)),
+                  paramsBase.iterations.toString(),
+                  runUUID.toString()
+                )
               )
-            )
-          ).get()
-        })
-      kafkaProducer.commitTransaction()
+            ).get()
+          })
+        
+        kafkaProducer.commitTransaction()
+
+      })
       lot += 1
     })
 

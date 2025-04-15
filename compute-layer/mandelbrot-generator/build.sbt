@@ -7,7 +7,7 @@ resolvers += "confluent" at "https://packages.confluent.io/maven/"
 
 // See https://www.scala-sbt.org/1.x/docs/Using-Sonatype.html for instructions on how to publish to Sonatype.
 
-libraryDependencies += "org.apache.kafka" % "kafka-clients" % "3.5.1"
+libraryDependencies += "org.apache.kafka" % "kafka-clients" % "4.0.0"
 libraryDependencies += "org.typelevel" %% "spire" % "0.18.0"
 libraryDependencies += "org.scalanlp" %% "breeze" % "2.1.0"
 libraryDependencies += "org.mongodb" % "mongodb-driver-sync" % "4.10.2"

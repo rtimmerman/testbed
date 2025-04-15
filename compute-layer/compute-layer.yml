@@ -24,7 +24,7 @@ spec:
       hostname: kafka-topic-server
       terminationGracePeriodSeconds: 5
       containers:
-        - image: rrt-general-services:32000/kafka-topic-server:0.1
+        - image: rrt-general-services:32000/kafka-topic-server:4.0
           imagePullPolicy: Always
           name: kafka-topic-server
           ports:

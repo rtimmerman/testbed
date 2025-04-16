@@ -3,7 +3,7 @@ package rrt
 import java.util.UUID
 import org.apache.kafka.clients.consumer.KafkaConsumer
 import java.util.Properties
-import org.apache.kafka.clients.producer.KafkaProducer
+import org.apache.kafka.clients.producer.{Producer,KafkaProducer}
 import org.slf4j.LoggerFactory
 
 trait KafkaTrait extends LoggingTrait:

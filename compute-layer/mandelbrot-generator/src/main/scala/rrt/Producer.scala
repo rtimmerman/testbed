@@ -9,12 +9,13 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory
 import java.io.File
 
-// extension (x: Int)
-//   def toR: Double = -2 + (x/size_x.toDouble * 4)
-//   def toI: Double = -2 + (x/size_y.toDouble * 4)
+import scala.concurrent.{Future, ExecutionContext, Await}
+import scala.util.{Success, Failure}
+import scala.util.Random
+
+import org.slf4j.{Logger,LoggerFactory}
 
 object Producer extends KafkaTrait {
-
   type Space = Array[Array[Map[String, Double]]];
 
   def createSpaceFromPoint(c: rrt.Complex, zoomPc: Integer = 100, ball: Integer = 1000, canvasDimensions: Map[String, Int] = Map("minR" -> -2, "maxR" -> 2, "minI" -> -2, "maxI" -> 2)): Space = {
@@ -69,10 +70,9 @@ object Producer extends KafkaTrait {
     //   yield space.slice(y, y + height + 1).map(a => a.slice(x, x + width + 1)).flatten
 
   def gridWorkStream(
-      kafkaProducer: Producer[String, String],
+      producerFactory: (String) => (Producer[String, String]),
       frameConfigFile: String
-  ) = {
-
+  ) =
     val runUUID = UUID.randomUUID()
 
     var mapper = new ObjectMapper(new YAMLFactory())
@@ -89,49 +89,57 @@ object Producer extends KafkaTrait {
         b = createSpace(params.sizeX, params.sizeY, params.minR, params.maxR, params.minI, params.maxI)
         space = params.sizeX * params.sizeY
 
-    // val batches = b.flatten.grouped(space/16).toList
     val batches = partition(b, 16)
   
     var lot = 0
-    
-    batches.foreach(batch => {
-      val topic = s"${paramsBase.topicPrefix}-${lot}"
-      println(s"Sending ${batch.length} entries to $topic")
-      batch.grouped(10).foreach(grp => {
-        kafkaProducer.beginTransaction()
 
-        grp.foreach(entry => {
-          kafkaProducer.send(
-            new ProducerRecord[String, String](
-              topic,
-              "coordinate",
-              Consumer.encodedPayload(
-                  "%f".format(entry.getOrElse("r", 0)),
-                  "%f".format(entry.getOrElse("i", 0)),
-                  paramsBase.iterations.toString(),
-                  runUUID.toString()
+    def dispatch(batch: Array[Map[String, Double]], number: Int): Future[String] =
+      val topic = s"${paramsBase.topicPrefix}-${number}"
+      Future {
+        val kafkaProducer = producerFactory(s"transaction-$number")
+
+        batch.grouped(100).foreach(grp => {
+          kafkaProducer.beginTransaction
+
+          grp.foreach(entry => {
+            // print(".")
+            kafkaProducer.send(
+              new ProducerRecord[String, String](
+                topic,
+                "coordinate",
+                Consumer.encodedPayload(
+                    "%f".format(entry.getOrElse("r", 0)),
+                    "%f".format(entry.getOrElse("i", 0)),
+                    paramsBase.iterations.toString(),
+                    runUUID.toString()
+                  )
                 )
-              )
-            ).get()
-          })
-        
-        kafkaProducer.commitTransaction()
+              ).get()
+            })
+            // print("|")
+          kafkaProducer.commitTransaction()
+        })
+        kafkaProducer.close
 
-      })
-      lot += 1
-    })
+        s"Sent ${batch.length} entries to topic: $topic)"
+      }
+    
+    logger.info("Dispatching...")
+    val dispatchFuture = (0 to batches.length - 1).map(i => dispatch(batches(i), i))
 
-    kafkaProducer.close()
-  }
+    // dispatchFuture.foreach {future =>
+    //   future.foreach {result => println(s"Result = $result")}}
+   
+    // wait for all dispatches to complete
+    val results = Await.result(Future.sequence(dispatchFuture), scala.concurrent.duration.Duration.Inf)
+    results.foreach(logger.info)
+    logger.info("Done")
 
   def produceGridPoints(frameConfigFile: String, kafkaProducer: KafkaProducer[String, String] = null) = {
-    val producer: KafkaProducer[String, String] = kafkaProducer match {
-      case null => initProducer("transaction-id-1")
-      case _ => kafkaProducer
-    }
-
-    producer.initTransactions()
-    gridWorkStream(producer, frameConfigFile)
-    producer.close()
+    gridWorkStream((transactionId: String) => {
+      val producer = initProducer(transactionId)
+      producer.initTransactions
+      producer
+    }, frameConfigFile)
   }
 }

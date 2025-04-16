@@ -22,21 +22,6 @@ object ParameterSpace extends Tag("rrt.tags.ParameterSpace")
 object Kafka extends Tag("rrt.tags.Kafka")
 
 class ProducerSpec extends AnyFlatSpec with Matchers {
-  "The Producer object" should "be able to evenly distribute work to nodes" in {
-    // val topic = "test"  
-    // val iterations = 100
-
-    // val kafkaProducer = Mockito.mock(classOf[KafkaProducer[String, String]])
-    // // val mockFuture = Mockito.mock(classOf[java.util.concurrent.Future.type])
-    // //Mockito.doReturn(mockFuture).when(kafkaProducer).send(ArgumentMatchers.any())
-    // // Mockito
-    // //   .when(kafkaProducer.send(ArgumentMatchers.any()))
-    // //   .thenReturn(mockFuture)
-    // println("here")
-
-    // Producer.produceGridPoints(topic, 10, kafkaProducer)
-  }
-
   "A producer instance" should "be able to support customisable canvas plots" in {
     val params = ProducerParams(1, 100,"test",-2,2,2,-2,1000,1000)
 
@@ -100,7 +85,6 @@ class ProducerSpec extends AnyFlatSpec with Matchers {
     sizeY: 1000
     """
 
-    //var params = mapper.readValue(new File(frameConfigFile), classOf[ProducerParams]): ProducerParams
     var mapper = new ObjectMapper(new YAMLFactory())
 
     var params = mapper.readValue(yamlText, classOf[ProducerParams]): ProducerParams
@@ -184,15 +168,6 @@ class ProducerSpec extends AnyFlatSpec with Matchers {
 
       if (z % 16 == 0)
         println()
-
-    // val linspace = (x1: Double, x2: Double, count: Double) => (x1 to x2 by ((x1 - x2).abs / (count)))
-    // val R = linspace(-2, 2, Double(1000)).toList
-
-      // val m = DenseMatrix.zeros[Double](16, 16)
-    // m(1, 1) = 1
-    
-    //                  Y                                 X
-    // println(space.slice(0, 4).toList.foreach(s => s.slice(0, 4).toList.foreach(a => print("%-4d".format(a)))))
     
     // Square shaped partitioning
     val nPartition = 16
@@ -241,12 +216,14 @@ class ProducerSpec extends AnyFlatSpec with Matchers {
     val configFile = System.getProperty("user.dir") + "/src/test/resources/test-work.yml"
     val producerProps = new java.util.Properties()
 
-    val kafkaProducer = MockProducer[String, String](
-      true,
-       new org.apache.kafka.common.serialization.StringSerializer,
-       new org.apache.kafka.common.serialization.StringSerializer)
-    kafkaProducer.initTransactions
-
-    Producer.gridWorkStream(kafkaProducer, configFile)
+    Producer.gridWorkStream((txName: String) => {
+      val kafkaProducer = MockProducer[String, String](
+        true,
+        new org.apache.kafka.common.serialization.StringSerializer,
+        new org.apache.kafka.common.serialization.StringSerializer
+      )
+      kafkaProducer.initTransactions
+      kafkaProducer
+    }, configFile)
   }
 }

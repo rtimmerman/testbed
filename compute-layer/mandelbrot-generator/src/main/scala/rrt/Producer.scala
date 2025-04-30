@@ -20,15 +20,15 @@ object Producer extends KafkaTrait {
 
   def createSpaceFromPoint(c: rrt.Complex, zoomPc: Integer = 100, ball: Integer = 1000, canvasDimensions: Map[String, Int] = Map("minR" -> -2, "maxR" -> 2, "minI" -> -2, "maxI" -> 2)): Space = {
     val scale = 1 / (zoomPc.toDouble / 100)
-    val linspace = (x1: BigDecimal, x2: BigDecimal, count: BigDecimal) => (x1 to x2 by ((x1 - x2).abs / (count)))
+    val linspace = (x1: BigDecimal, x2: BigDecimal, count: BigDecimal) => (x1 * scale to x2 * scale by (((x1  * scale) - (x2 * scale)).abs / (count)))
     val R = linspace(canvasDimensions("minR"), canvasDimensions("maxR"), BigDecimal(ball))
     val I = linspace(canvasDimensions("minI"), canvasDimensions("maxI"), BigDecimal(ball))
 
     // the point is c
 
     // transform the points by adding c and multiplying them by scale across the initial space.
-    val tR = R.map(e => (e + c.r) * scale)
-    val tI = I.map(e => (e + c.i) * scale).reverse
+    val tR = R.map(e => (e + c.r))
+    val tI = I.map(e => (e + c.i)).reverse
 
     val b = Array.ofDim[Map[String, Double]](ball + 1, ball + 1)
     for (i <- tI; r <- tR)

@@ -18,8 +18,13 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory
 import breeze.linalg._
 
+import scala.util.boundary
+import boundary.break
+
+
 object ParameterSpace extends Tag("rrt.tags.ParameterSpace")
 object Kafka extends Tag("rrt.tags.Kafka")
+object Navigation extends Tag("rrt.tags.Navigation")
 
 class ProducerSpec extends AnyFlatSpec with Matchers {
   "A producer instance" should "be able to support customisable canvas plots" in {
@@ -145,6 +150,32 @@ class ProducerSpec extends AnyFlatSpec with Matchers {
     assert(b.size == 1001)
     assert(b(0).size == 1001)
   }
+
+  "Producer" should "correctly center on a given coordinate in v2 jobs" taggedAs(Navigation) in {
+    val locus = rrt.Complex.fromString("-0.19821982198219823-1.1003100310031004i")
+
+    val space = Producer.createSpaceFromPoint(locus, 200_000, 160)
+    val ctr = space(80)(80)
+
+    assert(ctr.get("i").get.toDouble.equals(locus.i.toDouble), s"Expected i to be ${locus.i.toDouble} but got ${ctr.get("i").get.toDouble}")
+    assert(ctr.get("r").get.toDouble.equals(locus.r.toDouble), s"Expected r to be ${locus.r.toDouble} but got ${ctr.get("r").get.toDouble}")
+
+    // this code previews the outcome
+    space.foreach(i => {
+      i.foreach(r => {
+        val z = rrt.Complex(BigDecimal(r.get("r").get), BigDecimal(r.get("i").get))
+        val n = Consumer.process(z, z, 100)
+        if (n > -1) {
+          print(List('*', '-', '+', '/')(n % 4))
+        } else {
+          print(' ')
+        }
+      })
+      println()
+    })
+
+  }
+
 
   "Producer" should "partition a space evenly between 16 consumers." in {
     

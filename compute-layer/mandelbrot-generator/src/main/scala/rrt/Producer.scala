@@ -23,7 +23,6 @@ object Producer extends KafkaTrait {
     val linspace = (x1: BigDecimal, x2: BigDecimal, count: BigDecimal) => (x1 * scale to x2 * scale by (((x1  * scale) - (x2 * scale)).abs / (count)))
     val R = linspace(canvasDimensions("minR"), canvasDimensions("maxR"), BigDecimal(ball))
     val I = linspace(canvasDimensions("minI"), canvasDimensions("maxI"), BigDecimal(ball))
-
     // the point is c
 
     // transform the points by adding c and multiplying them by scale across the initial space.
@@ -81,10 +80,13 @@ object Producer extends KafkaTrait {
     var space = 0
 
     if (paramsBase.version == 2)
+        logger.info(s"Received v2 work config from: $frameConfigFile")
         val params = mapper.readValue(new File(frameConfigFile), classOf[ProducerParamsV2]): ProducerParamsV2
         b = createSpaceFromPoint(rrt.Complex.fromString(params.coordinate), params.zoomPc, params.neighbourhoodSize)
         space = params.neighbourhoodSize * params.neighbourhoodSize
+        logger.info(s"Run: (Zoom %: ${params.zoomPc} | initial entry: ${rrt.Complex.fromMap(b(0)(0))})")
     else
+        logger.info(s"Received v1 work config from: $frameConfigFile")
         val params = paramsBase
         b = createSpace(params.sizeX, params.sizeY, params.minR, params.maxR, params.minI, params.maxI)
         space = params.sizeX * params.sizeY

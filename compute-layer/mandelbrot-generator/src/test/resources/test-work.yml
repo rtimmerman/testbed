@@ -2,5 +2,5 @@ version: 2
 topicPrefix: test
 iterations: 1000
 coordinate: 0+0i
-zoomPc: 100
+zoomPc: 100_000
 neighbourhoodSize: 1600

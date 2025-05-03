@@ -46,7 +46,7 @@ class Complex(var r: BigDecimal, var i: BigDecimal) {
 
   def conj(): Complex = new Complex(this.r, -this.i)
 
-  override def toString(): String = s"${r.toDouble} + ${i.toDouble}"
+  override def toString(): String = s"${r.toDouble}${if i >= 0 then "+" else ""}${i.toDouble}i"
 
 }
 
@@ -65,6 +65,12 @@ object Complex {
 
     return Complex(r, i)
   }
+
+  def fromMap(entry: Map[String, Double]): Complex =
+    return Complex(
+      BigDecimal(entry.get("r").get),
+      BigDecimal(entry.get("i").get)
+    )
 }
 
 object Consumer extends KafkaTrait {

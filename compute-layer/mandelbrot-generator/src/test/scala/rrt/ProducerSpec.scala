@@ -25,6 +25,7 @@ import boundary.break
 object ParameterSpace extends Tag("rrt.tags.ParameterSpace")
 object Kafka extends Tag("rrt.tags.Kafka")
 object Navigation extends Tag("rrt.tags.Navigation")
+object WorkConfig extends Tag("rrt.tags.WorkConfig")
 
 class ProducerSpec extends AnyFlatSpec with Matchers {
   "A producer instance" should "be able to support customisable canvas plots" in {
@@ -104,7 +105,7 @@ class ProducerSpec extends AnyFlatSpec with Matchers {
     assert(params.sizeY == 1000)
   }
 
-  "Producer" should "be able to consume v2 parameters" in {
+  "Producer" should "be able to consume v2 parameters" taggedAs(WorkConfig) in {
     var mapper = new ObjectMapper(new YAMLFactory())
 
     val yamlText = """
@@ -113,13 +114,13 @@ class ProducerSpec extends AnyFlatSpec with Matchers {
     topicPrefix: test
     coordinate: 0+0i
     neighbourhoodSize: 1000
-    zoomPc: 100
+    zoomPc: 100_000
     """
     var params = mapper.readValue(yamlText, classOf[ProducerParamsV2]): ProducerParamsV2
     assert(params.version == 2)
     assert(params.coordinate == "0+0i")
     assert(params.neighbourhoodSize == 1000)
-    assert(params.zoomPc == 100)
+    assert(params.zoomPc == 100000)
   }
 
   "Producer" should "be able to consume either v1 or v2 parameters" in {

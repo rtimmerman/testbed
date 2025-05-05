@@ -80,6 +80,7 @@ object DataWriter extends LoggingTrait, KafkaTrait {
     run0db.insertOne(
       new Document()
         .append("value", data("value"))
+        .append("runUuid", data("uuid"))
         .append("fromTopic", data("topic"))
         .append("modifiedAt", new Date())
         .append("computeDateStamp", data("computeDateStamp"))

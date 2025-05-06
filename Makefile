@@ -68,7 +68,7 @@ k-login-db:
 	microk8s kubectl exec -it svc/${CONTROL_DB_HOST} -n dev -- mongosh --tls --tlsCertificateKeyFile=/kickstart/${CONTROL_DB_HOST}.pem --tlsCAFile=/kickstart/root-ca.pem --authenticationDatabase='$$external' --authenticationMechanism='MONGODB-X509' ${CONTROL_DB_HOST}:${CONTROL_DB_PORT}
 
 k-export-db-csv:
-	microk8s kubectl exec -it svc/${CONTROL_DB_HOST} -n dev -- mongoexport --uri 'mongodb://${CONTROL_DB_HOST}:${CONTROL_DB_PORT}/mandelbrot?tls=true&tlsCertificateKeyFile=/kickstart/${CONTROL_DB_HOST}.pem&tlsCAFile=/kickstart/root-ca.pem&authSource=$$external&authMechanism=MONGODB-X509&directConnection=true' --collection=run0 --fields=_id,value,fromTopic,modifiedAt,computeDateStamp,r,i --type=csv --tlsInsecure --out run0.csv
+	microk8s kubectl exec -it svc/${CONTROL_DB_HOST} -n dev -- mongoexport --uri 'mongodb://${CONTROL_DB_HOST}:${CONTROL_DB_PORT}/mandelbrot?tls=true&tlsCertificateKeyFile=/kickstart/${CONTROL_DB_HOST}.pem&tlsCAFile=/kickstart/root-ca.pem&authSource=$$external&authMechanism=MONGODB-X509&directConnection=true' --collection=run0 --fields=_id,runUuid,value,fromTopic,modifiedAt,computeDateStamp,r,i --type=csv --tlsInsecure --out run0.csv
 	microk8s kubectl exec -it svc/${CONTROL_DB_HOST} -n dev -- cat run0.csv > run0.csv
 
 setup-update-shard-configs:

@@ -71,6 +71,13 @@ k-export-db-csv:
 	microk8s kubectl exec -it svc/${CONTROL_DB_HOST} -n dev -- mongoexport --uri 'mongodb://${CONTROL_DB_HOST}:${CONTROL_DB_PORT}/mandelbrot?tls=true&tlsCertificateKeyFile=/kickstart/${CONTROL_DB_HOST}.pem&tlsCAFile=/kickstart/root-ca.pem&authSource=$$external&authMechanism=MONGODB-X509&directConnection=true' --collection=run0 --fields=_id,runUuid,value,fromTopic,modifiedAt,computeDateStamp,r,i --type=csv --tlsInsecure --out run0.csv
 	microk8s kubectl exec -it svc/${CONTROL_DB_HOST} -n dev -- cat run0.csv > run0.csv
 
+k-export-db-csv-uuid:
+	@read -p "Enter UUID: " uuid; \
+	echo "Exporting all records for: $$uuid ... \n"; \
+	microk8s kubectl exec -it svc/${CONTROL_DB_HOST} -n dev -- mongoexport --uri 'mongodb://${CONTROL_DB_HOST}:${CONTROL_DB_PORT}/mandelbrot?tls=true&tlsCertificateKeyFile=/kickstart/${CONTROL_DB_HOST}.pem&tlsCAFile=/kickstart/root-ca.pem&authSource=$$external&authMechanism=MONGODB-X509&directConnection=true' --collection=run0 --fields=_id,runUuid,value,fromTopic,modifiedAt,computeDateStamp,r,i --type=csv --tlsInsecure --out run0.csv --query "{\"runUuid\": \"$$uuid\"}"; \
+	microk8s kubectl exec -it svc/${CONTROL_DB_HOST} -n dev -- cat run0.csv > run0.csv
+	
+
 setup-update-shard-configs:
 	cat mongo-shard1.yml.template | perl shard-generator.pl arnold > mongo-shard1.yml
 	cat mongo-shard1.yml.template | perl shard-generator.pl bairstow > mongo-shard2.yml

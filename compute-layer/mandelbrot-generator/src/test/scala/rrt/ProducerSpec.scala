@@ -26,6 +26,7 @@ object ParameterSpace extends Tag("rrt.tags.ParameterSpace")
 object Kafka extends Tag("rrt.tags.Kafka")
 object Navigation extends Tag("rrt.tags.Navigation")
 object WorkConfig extends Tag("rrt.tags.WorkConfig")
+object Dimensionality extends Tag("rrt.tags.Dimensionality")
 
 class ProducerSpec extends AnyFlatSpec with Matchers {
   "A producer instance" should "be able to support customisable canvas plots" in {
@@ -242,6 +243,21 @@ class ProducerSpec extends AnyFlatSpec with Matchers {
     (0 to 14 by 4).foreach(spaces(_).foreach(entry => {
       assert(entry("r") <= -1.0 && entry("r") >= -2.0)
     }))
+  }
+
+  "Producer" should "be able to find the julia dimension from a set of coordinate points" taggedAs(Dimensionality)in {
+    // val configFile = System.getProperty("user.dir") + "/src/test/resources/test-work.yml"
+    val space = Producer.createSpaceFromPoint(Complex(0, 0), ball=16).flatten
+    val dimension = Producer.getJuliaDimension(space, 10, 40)
+    assert(1 == Math.round(dimension)) // 1 - indicates
+
+    assert(
+      1 > Producer.getJuliaDimension(
+        Producer.createSpaceFromPoint(Complex(-6, -6), ball=16).flatten,
+        10,
+        40
+      )
+    )
   }
 
   "Producer" should "be able to send work to Kafka" taggedAs(Kafka) in {

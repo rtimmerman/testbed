@@ -1,8 +1,8 @@
 package rrt
 import java.util.{Properties, UUID}
 import org.apache.kafka.clients.producer._
-import breeze.math._
-import breeze.linalg._
+// import breeze.math._
+// import breeze.linalg._
 
 import java.security.MessageDigest;
 import com.fasterxml.jackson.databind.ObjectMapper
@@ -14,6 +14,7 @@ import scala.util.{Success, Failure}
 import scala.util.Random
 
 import org.slf4j.{Logger,LoggerFactory}
+import java.math.RoundingMode
 
 object Producer extends KafkaTrait {
   type Space = Array[Array[Map[String, Double]]];
@@ -64,9 +65,68 @@ object Producer extends KafkaTrait {
         .slice((y * height), (y * height) + height + 1)
         .map(a => a.slice((x * width), (x * width) + width + 1))
         .flatten
+  
+  def getJuliaDimension(grp: Array[Map[String, Double]], iterations: Int, boxSize: Int): Double =
+    val nums = grp.map(rrt.Complex.fromMap)
+    val min = nums.reduce((a, b) => if a.r < b.r then a else b)
+    val max = nums.reduce((a, b) => if a.i > b.i then a else b)
+    val centre = rrt.Complex((min.r + max.r) / 2, (min.i + max.i) / 2) //<- find the midpoint using averages between real and imaginary parts separately
+    logger.debug(f"calculating julia dimension for $centre")
+    // now calculate the box count dimension the number of iterations will match the config
+    var d = 0
+    var blowup = 4.0
 
-    // for (x <- 0 to space(0).length - 1 by width; y <- 0 to space.length - 1 by height)
-    //   yield space.slice(y, y + height + 1).map(a => a.slice(x, x + width + 1)).flatten
+    val z_plane = (BigDecimal(-2) to BigDecimal(2) by BigDecimal(4.0/boxSize))
+      .map((i) => (BigDecimal(-2) to BigDecimal(2) by BigDecimal(4.0/boxSize))
+      .map((r) => rrt.Complex(r,i)))
+
+    lazy val m: (rrt.Complex, Int) => Int = (z, n) =>{
+      val z2 = (z ** 2) + centre
+      // println(z2.abs())
+      z2.abs() match
+        case v if v >= blowup => iterations - n
+        case v if n > 0 => m(z2, n - 1)
+        case _ => -1
+    
+    }
+    //         if (box_threshold <= area[int(x)][int(y)] or area[int(x)][int(y)] == -1):
+    //        nr += 1
+
+    val boxThreshold = 0.05 * iterations
+
+    val julia = z_plane.flatten.map {case z =>
+      val e = m(z, iterations) 
+      e match
+        case v if v == -1|| (v > 0 && v >= boxThreshold)  => 1
+        case _ => 0
+    }
+
+    // ** Verification Plot **
+    // julia.zipWithIndex.foreach {case (z, idx) =>
+    //     if (z == 1) {
+    //       print(idx match
+    //         case n if n <= n % (boxSize / 4.0) => 1
+    //         case _ => '*'
+    //         )
+    //     } else {
+    //       print(' ')
+    //     }
+    //     if (idx % (boxSize + 1) == 0) {
+    //       println()
+    //     }
+    //   }
+
+    // val boxCount = 6
+    // val divs = julia.toList.grouped(julia.size / Math.pow(boxCount, 2).toInt).map(g => g.sum).filter(n => n > 0)  
+    // val nr = divs.size
+
+    val avgBoxNr = Range(2, 30)
+      .map {case boxCount => Map(
+        "nr" -> julia.toList.grouped(julia.size / Math.pow(boxCount, 2).toInt).map(g => g.sum).filter(n => n > 0).size, //number of filled boxes
+        "nb" -> boxCount // box length (i.e. nb^2 = total number of boxes)
+        )}
+      .map {resmap => Math.abs(Math.log(resmap("nr")) / Math.log(1.0/Math.pow(resmap("nb"), 2)))}
+    BigDecimal(avgBoxNr.sum / avgBoxNr.size).setScale(2, scala.math.BigDecimal.RoundingMode.HALF_UP).toDouble
 
   def gridWorkStream(
       producerFactory: (String) => (Producer[String, String]),
@@ -101,6 +161,10 @@ object Producer extends KafkaTrait {
         val kafkaProducer = producerFactory(s"transaction-$number")
 
         batch.grouped(100).foreach(grp => {
+          val centreDimension = paramsBase.getClass.getSimpleName match
+            case "ProducerParamsV2" => getJuliaDimension(grp, paramsBase.iterations, paramsBase.asInstanceOf[ProducerParamsV2].neighbourhoodSize)
+            case _ => -1
+
           kafkaProducer.beginTransaction
 
           grp.foreach(entry => {

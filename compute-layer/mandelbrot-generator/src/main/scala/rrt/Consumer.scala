@@ -23,6 +23,8 @@ import io.prometheus.client.exporter.HTTPServer
 
 class Complex(var r: BigDecimal, var i: BigDecimal) {
   def + (other: Complex): Complex = new Complex(this.r + other.r, this.i + other.i)
+
+  def - (other: Complex): Complex = new Complex(this.r - other.r, this.i - other.i)
   
 
   def * (other: Complex): Complex = new Complex(
@@ -71,6 +73,9 @@ object Complex {
       BigDecimal(entry.get("r").get),
       BigDecimal(entry.get("i").get)
     )
+  
+  def min(a: List[Complex]) =
+      a.reduce((x, y) => if x.abs() <= y.abs() then x else y)
 }
 
 object Consumer extends KafkaTrait {

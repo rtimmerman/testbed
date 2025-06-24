@@ -4,3 +4,7 @@ iterations: 1000
 coordinate: 0+0i
 zoomPc: 100_000
 neighbourhoodSize: 1600
+
+initialPolicy:
+  # stablitiy | instability | z=a+ib
+  seek: stability

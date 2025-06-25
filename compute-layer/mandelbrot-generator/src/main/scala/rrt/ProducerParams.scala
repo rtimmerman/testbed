@@ -2,7 +2,6 @@ package rrt
 
 import com.fasterxml.jackson.annotation.{JsonProperty,JsonIgnoreProperties};
 
-
 @JsonIgnoreProperties(ignoreUnknown = true)
 case class ProducerParams(
     @JsonProperty("version", required=true) version: Int,
@@ -24,4 +23,16 @@ case class ProducerParamsV2 (
     @JsonProperty("coordinate", required=false) coordinate: String,
     @JsonProperty("neighbourhoodSize", required=false) neighbourhoodSize: Int,
     @JsonProperty("zoomPc", required=false) zoomPc: Int,
+    @JsonProperty("policy", required=false) policy: ProducerWorkPolicy,
+)
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+case class ProducerWorkPolicy(
+    @JsonProperty("stable_region_policy", required=false) stableRegionPolicy: StableRegionPolicy,
+)
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+case class StableRegionPolicy(
+    @JsonProperty("max_tries", required = true) maxTries: Int,
+    @JsonProperty("try_interval_sec", required = true) tryIntervalSec: Int,
 )

@@ -263,6 +263,7 @@ class ProducerSpec extends AnyFlatSpec with Matchers {
   "Producer" should "be able to send work to Kafka" taggedAs(Kafka) in {
     val configFile = System.getProperty("user.dir") + "/src/test/resources/test-work.yml"
     val producerProps = new java.util.Properties()
+    val params = Producer.getParams(configFile)
 
     Producer.gridWorkStream((txName: String) => {
       val kafkaProducer = MockProducer[String, String](
@@ -272,6 +273,6 @@ class ProducerSpec extends AnyFlatSpec with Matchers {
       )
       kafkaProducer.initTransactions
       kafkaProducer
-    }, configFile)
+    }, params)
   }
 }

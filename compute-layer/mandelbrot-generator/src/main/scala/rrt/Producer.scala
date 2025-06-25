@@ -128,41 +128,50 @@ object Producer extends KafkaTrait {
       .map {resmap => Math.abs(Math.log(resmap("nr")) / Math.log(1.0/Math.pow(resmap("nb"), 2)))}
     BigDecimal(avgBoxNr.sum / avgBoxNr.size).setScale(2, scala.math.BigDecimal.RoundingMode.HALF_UP).toDouble
 
+  def getParams(configFilePath: String): ProducerParams | ProducerParamsV2 =
+    var mapper = new ObjectMapper(new YAMLFactory())
+    mapper.readValue(new File(configFilePath), classOf[ProducerParams]) match
+      case p if p.version == 2 => mapper.readValue(new File(configFilePath), classOf[ProducerParamsV2])
+      case p => p
+
   def gridWorkStream(
       producerFactory: (String) => (Producer[String, String]),
-      frameConfigFile: String
+      params: ProducerParams | ProducerParamsV2
   ) =
     val runUUID = UUID.randomUUID()
 
-    var mapper = new ObjectMapper(new YAMLFactory())
-    var paramsBase = mapper.readValue(new File(frameConfigFile), classOf[ProducerParams]): ProducerParams
     var b: Array[Array[Map[String,Double]]] = null
     var space = 0
 
-    if (paramsBase.version == 2)
-        logger.info(s"Received v2 work config from: $frameConfigFile")
-        val params = mapper.readValue(new File(frameConfigFile), classOf[ProducerParamsV2]): ProducerParamsV2
-        b = createSpaceFromPoint(rrt.Complex.fromString(params.coordinate), params.zoomPc, params.neighbourhoodSize)
-        space = params.neighbourhoodSize * params.neighbourhoodSize
-        logger.info(s"Run: (Zoom %: ${params.zoomPc} | initial entry: ${rrt.Complex.fromMap(b(0)(0))})")
-    else
-        logger.info(s"Received v1 work config from: $frameConfigFile")
-        val params = paramsBase
-        b = createSpace(params.sizeX, params.sizeY, params.minR, params.maxR, params.minI, params.maxI)
-        space = params.sizeX * params.sizeY
+    params match
+      case p: ProducerParamsV2 =>
+        logger.info(s"Received v2 parameter set")
+        // val params = mapper.readValue(new File(frameConfigFile), classOf[ProducerParamsV2]): ProducerParamsV2
+        logger.info(params.getClass.toString)
+        b = createSpaceFromPoint(rrt.Complex.fromString(p.coordinate), p.zoomPc, p.neighbourhoodSize)
+        space = p.neighbourhoodSize * p.neighbourhoodSize
+        logger.info(s"Run: (Zoom %: ${p.zoomPc} | initial entry: ${rrt.Complex.fromMap(b(0)(0))})")
+      case p: ProducerParams =>
+        logger.info(s"Received v1 parameter set")
+        // val params = paramsBase
+        b = createSpace(p.sizeX, p.sizeY, p.minR, p.maxR, p.minI, p.maxI)
+        space = p.sizeX * p.sizeY
 
     val batches = partition(b, 16)
   
     var lot = 0
 
     def dispatch(batch: Array[Map[String, Double]], number: Int): Future[String] =
-      val topic = s"${paramsBase.topicPrefix}-${number}"
+      val topic = params match
+        case p: ProducerParamsV2 => s"${p.topicPrefix}-${number}"
+        case p: ProducerParams => s"${p.topicPrefix}-${number}"
+
       Future {
         val kafkaProducer = producerFactory(s"transaction-$number")
 
         batch.grouped(100).foreach(grp => {
-          val centreDimension = paramsBase.getClass.getSimpleName match
-            case "ProducerParamsV2" => getJuliaDimension(grp, paramsBase.iterations, paramsBase.asInstanceOf[ProducerParamsV2].neighbourhoodSize)
+          val centreDimension = params match
+            case p: ProducerParamsV2 => getJuliaDimension(grp, p.iterations, p.neighbourhoodSize)
             case _ => -1
 
           kafkaProducer.beginTransaction
@@ -176,7 +185,9 @@ object Producer extends KafkaTrait {
                 Consumer.encodedPayload(
                     "%f".format(entry.getOrElse("r", 0)),
                     "%f".format(entry.getOrElse("i", 0)),
-                    paramsBase.iterations.toString(),
+                    params match
+                      case p: ProducerParamsV2 => p.iterations.toString()
+                      case p: ProducerParams => p.iterations.toString(),
                     runUUID.toString()
                   )
                 )
@@ -195,10 +206,12 @@ object Producer extends KafkaTrait {
 
     // dispatchFuture.foreach {future =>
     //   future.foreach {result => println(s"Result = $result")}}
-   
     // wait for all dispatches to complete
     val results = Await.result(Future.sequence(dispatchFuture), scala.concurrent.duration.Duration.Inf)
     results.foreach(logger.info)
+
+    // TODO: Code in rentry (i.e. for policy based optimisation here)
+
     logger.info("Done")
 
   def produceGridPoints(frameConfigFile: String, kafkaProducer: KafkaProducer[String, String] = null) = {
@@ -206,6 +219,6 @@ object Producer extends KafkaTrait {
       val producer = initProducer(transactionId)
       producer.initTransactions
       producer
-    }, frameConfigFile)
+    }, Producer.getParams(frameConfigFile))
   }
 }

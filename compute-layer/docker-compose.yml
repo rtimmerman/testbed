@@ -5,6 +5,8 @@ services:
     build: .
     environment:
       - ROLE=producer-shell
+    volumes:
+      - ./mandelbrot-generator:/root/mandelbrot-generator
   consumer:
     image: operator:1.0
     build: .

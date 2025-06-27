@@ -66,7 +66,9 @@ object Producer extends KafkaTrait {
         .map(a => a.slice((x * width), (x * width) + width + 1))
         .flatten
   
-  def getJuliaDimension(grp: Array[Map[String, Double]], iterations: Int, boxSize: Int): Double =
+  case class JuliaDimensionResult(dim: Double, centre: rrt.Complex)
+
+  def getJuliaDimension(grp: Array[Map[String, Double]], iterations: Int, boxSize: Int): JuliaDimensionResult =
     val nums = grp.map(rrt.Complex.fromMap)
     val min = nums.reduce((a, b) => if a.r < b.r then a else b)
     val max = nums.reduce((a, b) => if a.i > b.i then a else b)
@@ -123,10 +125,13 @@ object Producer extends KafkaTrait {
     val avgBoxNr = Range(2, 30)
       .map {case boxCount => Map(
         "nr" -> julia.toList.grouped(julia.size / Math.pow(boxCount, 2).toInt).map(g => g.sum).filter(n => n > 0).size, //number of filled boxes
-        "nb" -> boxCount // box length (i.e. nb^2 = total number of boxes)
+        "nb" -> boxCount, // box length (i.e. nb^2 = total number of boxes)
         )}
       .map {resmap => Math.abs(Math.log(resmap("nr")) / Math.log(1.0/Math.pow(resmap("nb"), 2)))}
-    BigDecimal(avgBoxNr.sum / avgBoxNr.size).setScale(2, scala.math.BigDecimal.RoundingMode.HALF_UP).toDouble
+    JuliaDimensionResult(
+      dim = BigDecimal(avgBoxNr.sum / avgBoxNr.size).setScale(2, scala.math.BigDecimal.RoundingMode.HALF_UP).toDouble,
+      centre = centre
+    )
 
   def getParams(configFilePath: String): ProducerParams | ProducerParamsV2 =
     var mapper = new ObjectMapper(new YAMLFactory())
@@ -137,7 +142,7 @@ object Producer extends KafkaTrait {
   def gridWorkStream(
       producerFactory: (String) => (Producer[String, String]),
       params: ProducerParams | ProducerParamsV2
-  ) =
+  ): Unit =
     val runUUID = UUID.randomUUID()
 
     var b: Array[Array[Map[String,Double]]] = null
@@ -161,6 +166,8 @@ object Producer extends KafkaTrait {
   
     var lot = 0
 
+    var centreDimensionMap: scala.collection.mutable.Map[String, JuliaDimensionResult] = scala.collection.mutable.Map()
+
     def dispatch(batch: Array[Map[String, Double]], number: Int): Future[String] =
       val topic = params match
         case p: ProducerParamsV2 => s"${p.topicPrefix}-${number}"
@@ -168,11 +175,10 @@ object Producer extends KafkaTrait {
 
       Future {
         val kafkaProducer = producerFactory(s"transaction-$number")
-
         batch.grouped(100).foreach(grp => {
-          val centreDimension = params match
+          centreDimensionMap(topic) = params match
             case p: ProducerParamsV2 => getJuliaDimension(grp, p.iterations, p.neighbourhoodSize)
-            case _ => -1
+            case _ => JuliaDimensionResult(-1, null)
 
           kafkaProducer.beginTransaction
 
@@ -208,9 +214,23 @@ object Producer extends KafkaTrait {
     //   future.foreach {result => println(s"Result = $result")}}
     // wait for all dispatches to complete
     val results = Await.result(Future.sequence(dispatchFuture), scala.concurrent.duration.Duration.Inf)
+
+    // evaluate performance and apply strategies here
+
     results.foreach(logger.info)
 
-    // TODO: Code in rentry (i.e. for policy based optimisation here)
+    // let's test the hypothesis for julia, here is the re-entrant code for that
+    val closestCentre = centreDimensionMap.values.reduce { (a, b) => if a.dim < b.dim then b else a}
+    params match
+      case p: ProducerParamsV2 if p.policy.stableRegionPolicy.maxTries > 0 =>
+        val p2 = p.copy(
+          coordinate = closestCentre.centre.toString,
+          policy = ProducerWorkPolicy(StableRegionPolicy(maxTries = p.policy.stableRegionPolicy.maxTries - 1, tryIntervalSec = p.policy.stableRegionPolicy.tryIntervalSec))
+        )
+        // wait before submitting ork again.
+        Thread.sleep(p.policy.stableRegionPolicy.tryIntervalSec * 1000)
+        gridWorkStream(producerFactory, p2)
+      case _ =>
 
     logger.info("Done")
 
@@ -220,5 +240,17 @@ object Producer extends KafkaTrait {
       producer.initTransactions
       producer
     }, Producer.getParams(frameConfigFile))
+
+    // evaluate performance (cwt)
+    // 1. Connect to prometheus load balancer and extract statistics (e.g. run the dwell time query as grafana does - maybe grafana api may assist)
+    // 2. determine which highest activity nodes vs lower activity nodes
+
+    // choose strategy (e.g. mid-point julia vs load balance classification)
+    // 3. Classify the performance by linking it to the julia mid point mapping, record this as in future the strategy to be chosen can be predetermined for example
+    // 4. At this point, given the node activity (intensity is known), choose how to redistribute traffic (e.g. we can average out load by lowering work on highest activity nodes by redistributing their work to low activity nodes)
+
+    // resubmit until policy is satisfied.
+    // 5. run gridWorkStream again but partition the nodes according to step 4
+    // 6. repeat steps 1 - 5 until a policy has been satisified (end-time or end-state).
   }
 }

@@ -4,9 +4,8 @@ RUN useradd operations
 
 SHELL ["/bin/bash", "-c"]
 
-RUN mkdir /root/mandelbrot-generator
-
-COPY mandelbrot-generator /root/mandelbrot-generator
+# RUN mkdir /root/mandelbrot-generator
+#COPY mandelbrot-generator /root/mandelbrot-generator
 COPY ./node_exporter-1.0.1.linux-amd64.tar.gz /root/
 COPY ./upscript.sh /root/
 COPY ./Submitter.class /root/

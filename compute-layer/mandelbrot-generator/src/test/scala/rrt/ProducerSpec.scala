@@ -249,14 +249,15 @@ class ProducerSpec extends AnyFlatSpec with Matchers {
     // val configFile = System.getProperty("user.dir") + "/src/test/resources/test-work.yml"
     val space = Producer.createSpaceFromPoint(Complex(0, 0), ball=16).flatten
     val dimension = Producer.getJuliaDimension(space, 10, 40)
-    assert(1 == Math.round(dimension)) // 1 - indicates
+    assert(1 == Math.round(dimension.dim)) // 1 - indicates
 
+    // position one (0) of the tuple is the dimension, position two is the center point.
     assert(
       1 > Producer.getJuliaDimension(
         Producer.createSpaceFromPoint(Complex(-6, -6), ball=16).flatten,
         10,
         40
-      )
+      ).dim
     )
   }
 

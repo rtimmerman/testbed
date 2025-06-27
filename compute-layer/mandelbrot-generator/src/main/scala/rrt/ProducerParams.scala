@@ -25,7 +25,6 @@ case class ProducerParamsV2 (
     @JsonProperty("zoomPc", required=false) zoomPc: Int,
     @JsonProperty("policy", required=false) policy: ProducerWorkPolicy,
 )
-
 @JsonIgnoreProperties(ignoreUnknown = true)
 case class ProducerWorkPolicy(
     @JsonProperty("stable_region_policy", required=false) stableRegionPolicy: StableRegionPolicy,

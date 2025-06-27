@@ -89,9 +89,11 @@ spec:
                     - rrt-general-services
                     - debugger
       volumes:
-        - name: application-vol
-          hostPath:
-            path: /home/roderick/testbed/compute-layer/mandelbrot-generator
+      - name: application-vol
+        nfs:
+          server: rrt-general-services.dcs.bbk.ac.uk
+          path: /home/roderick/testbed/compute-layer/mandelbrot-generator
+          readOnly: true
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -142,9 +144,11 @@ spec:
                     - compute-node-1
                     - debugger
       volumes:
-        - name: application-vol
-          hostPath:
-            path: /home/roderick/testbed/compute-layer/mandelbrot-generator
+      - name: application-vol
+        nfs:
+          server: rrt-general-services.dcs.bbk.ac.uk
+          path: /home/roderick/testbed/compute-layer/mandelbrot-generator
+          readOnly: true
 
 ---
 apiVersion: apps/v1
@@ -195,9 +199,11 @@ spec:
                   values:
                     - compute-node-2
       volumes:
-        - name: application-vol
-          hostPath:
-            path: /home/roderick/testbed/compute-layer/mandelbrot-generator
+      - name: application-vol
+        nfs:
+          server: rrt-general-services.dcs.bbk.ac.uk
+          path: /home/roderick/testbed/compute-layer/mandelbrot-generator
+          readOnly: true
 
 ---
 apiVersion: apps/v1
@@ -248,9 +254,11 @@ spec:
                   values:
                     - compute-node-3
       volumes:
-        - name: application-vol
-          hostPath:
-            path: /home/roderick/testbed/compute-layer/mandelbrot-generator
+      - name: application-vol
+        nfs:
+          server: rrt-general-services.dcs.bbk.ac.uk
+          path: /home/roderick/testbed/compute-layer/mandelbrot-generator
+          readOnly: true
 
 ---
 apiVersion: apps/v1
@@ -301,9 +309,11 @@ spec:
                   values:
                     - compute-node-4
       volumes:
-        - name: application-vol
-          hostPath:
-            path: /home/roderick/testbed/compute-layer/mandelbrot-generator
+      - name: application-vol
+        nfs:
+          server: rrt-general-services.dcs.bbk.ac.uk
+          path: /home/roderick/testbed/compute-layer/mandelbrot-generator
+          readOnly: true
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -353,9 +363,11 @@ spec:
                   values:
                     - compute-node-5
       volumes:
-        - name: application-vol
-          hostPath:
-            path: /home/roderick/testbed/compute-layer/mandelbrot-generator
+      - name: application-vol
+        nfs:
+          server: rrt-general-services.dcs.bbk.ac.uk
+          path: /home/roderick/testbed/compute-layer/mandelbrot-generator
+          readOnly: true
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -405,9 +417,11 @@ spec:
                   values:
                     - compute-node-6
       volumes:
-        - name: application-vol
-          hostPath:
-            path: /home/roderick/testbed/compute-layer/mandelbrot-generator
+      - name: application-vol
+        nfs:
+          server: rrt-general-services.dcs.bbk.ac.uk
+          path: /home/roderick/testbed/compute-layer/mandelbrot-generator
+          readOnly: true
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -457,9 +471,11 @@ spec:
                   values:
                     - compute-node-7
       volumes:
-        - name: application-vol
-          hostPath:
-            path: /home/roderick/testbed/compute-layer/mandelbrot-generator
+      - name: application-vol
+        nfs:
+          server: rrt-general-services.dcs.bbk.ac.uk
+          path: /home/roderick/testbed/compute-layer/mandelbrot-generator
+          readOnly: true
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -509,9 +525,11 @@ spec:
                   values:
                     - compute-node-8
       volumes:
-        - name: application-vol
-          hostPath:
-            path: /home/roderick/testbed/compute-layer/mandelbrot-generator
+      - name: application-vol
+        nfs:
+          server: rrt-general-services.dcs.bbk.ac.uk
+          path: /home/roderick/testbed/compute-layer/mandelbrot-generator
+          readOnly: true
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -561,9 +579,11 @@ spec:
                   values:
                     - compute-node-9
       volumes:
-        - name: application-vol
-          hostPath:
-            path: /home/roderick/testbed/compute-layer/mandelbrot-generator
+      - name: application-vol
+        nfs:
+          server: rrt-general-services.dcs.bbk.ac.uk
+          path: /home/roderick/testbed/compute-layer/mandelbrot-generator
+          readOnly: true
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -613,9 +633,11 @@ spec:
                   values:
                     - compute-node-10
       volumes:
-        - name: application-vol
-          hostPath:
-            path: /home/roderick/testbed/compute-layer/mandelbrot-generator
+      - name: application-vol
+        nfs:
+          server: rrt-general-services.dcs.bbk.ac.uk
+          path: /home/roderick/testbed/compute-layer/mandelbrot-generator
+          readOnly: true
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -665,9 +687,11 @@ spec:
                   values:
                     - compute-node-11
       volumes:
-        - name: application-vol
-          hostPath:
-            path: /home/roderick/testbed/compute-layer/mandelbrot-generator
+      - name: application-vol
+        nfs:
+          server: rrt-general-services.dcs.bbk.ac.uk
+          path: /home/roderick/testbed/compute-layer/mandelbrot-generator
+          readOnly: true
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -717,9 +741,11 @@ spec:
                   values:
                     - compute-node-12
       volumes:
-        - name: application-vol
-          hostPath:
-            path: /home/roderick/testbed/compute-layer/mandelbrot-generator
+      - name: application-vol
+        nfs:
+          server: rrt-general-services.dcs.bbk.ac.uk
+          path: /home/roderick/testbed/compute-layer/mandelbrot-generator
+          readOnly: true
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -769,9 +795,11 @@ spec:
                   values:
                     - compute-node-13
       volumes:
-        - name: application-vol
-          hostPath:
-            path: /home/roderick/testbed/compute-layer/mandelbrot-generator
+      - name: application-vol
+        nfs:
+          server: rrt-general-services.dcs.bbk.ac.uk
+          path: /home/roderick/testbed/compute-layer/mandelbrot-generator
+          readOnly: true
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -821,9 +849,11 @@ spec:
                   values:
                     - compute-node-14
       volumes:
-        - name: application-vol
-          hostPath:
-            path: /home/roderick/testbed/compute-layer/mandelbrot-generator
+      - name: application-vol
+        nfs:
+          server: rrt-general-services.dcs.bbk.ac.uk
+          path: /home/roderick/testbed/compute-layer/mandelbrot-generator
+          readOnly: true
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -873,9 +903,11 @@ spec:
                   values:
                     - compute-node-15
       volumes:
-        - name: application-vol
-          hostPath:
-            path: /home/roderick/testbed/compute-layer/mandelbrot-generator
+      - name: application-vol
+        nfs:
+          server: rrt-general-services.dcs.bbk.ac.uk
+          path: /home/roderick/testbed/compute-layer/mandelbrot-generator
+          readOnly: true
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -924,9 +956,11 @@ spec:
                   values:
                     - compute-node-16
       volumes:
-        - name: application-vol
-          hostPath:
-            path: /home/roderick/testbed/compute-layer/mandelbrot-generator
+      - name: application-vol
+        nfs:
+          server: rrt-general-services.dcs.bbk.ac.uk
+          path: /home/roderick/testbed/compute-layer/mandelbrot-generator
+          readOnly: true
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -970,9 +1004,11 @@ spec:
                   values:
                     - rrt-general-services
       volumes:
-        - name: application-vol
-          hostPath:
-            path: /home/roderick/testbed/compute-layer/mandelbrot-generator
+      - name: application-vol
+        nfs:
+          server: rrt-general-services.dcs.bbk.ac.uk
+          path: /home/roderick/testbed/compute-layer/mandelbrot-generator
+          readOnly: true
 
 ### Services ###
 

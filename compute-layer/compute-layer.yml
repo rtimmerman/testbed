@@ -92,7 +92,6 @@ spec:
         - name: application-vol
           hostPath:
             path: /home/roderick/testbed/compute-layer/mandelbrot-generator
-            type: Directory
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -146,7 +145,6 @@ spec:
         - name: application-vol
           hostPath:
             path: /home/roderick/testbed/compute-layer/mandelbrot-generator
-            type: Directory
 
 ---
 apiVersion: apps/v1
@@ -200,7 +198,6 @@ spec:
         - name: application-vol
           hostPath:
             path: /home/roderick/testbed/compute-layer/mandelbrot-generator
-            type: Directory
 
 ---
 apiVersion: apps/v1
@@ -254,7 +251,6 @@ spec:
         - name: application-vol
           hostPath:
             path: /home/roderick/testbed/compute-layer/mandelbrot-generator
-            type: Directory
 
 ---
 apiVersion: apps/v1
@@ -308,7 +304,6 @@ spec:
         - name: application-vol
           hostPath:
             path: /home/roderick/testbed/compute-layer/mandelbrot-generator
-            type: Directory
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -361,7 +356,6 @@ spec:
         - name: application-vol
           hostPath:
             path: /home/roderick/testbed/compute-layer/mandelbrot-generator
-            type: Directory
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -414,7 +408,6 @@ spec:
         - name: application-vol
           hostPath:
             path: /home/roderick/testbed/compute-layer/mandelbrot-generator
-            type: Directory
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -467,7 +460,6 @@ spec:
         - name: application-vol
           hostPath:
             path: /home/roderick/testbed/compute-layer/mandelbrot-generator
-            type: Directory
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -520,7 +512,6 @@ spec:
         - name: application-vol
           hostPath:
             path: /home/roderick/testbed/compute-layer/mandelbrot-generator
-            type: Directory
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -573,7 +564,6 @@ spec:
         - name: application-vol
           hostPath:
             path: /home/roderick/testbed/compute-layer/mandelbrot-generator
-            type: Directory
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -626,7 +616,6 @@ spec:
         - name: application-vol
           hostPath:
             path: /home/roderick/testbed/compute-layer/mandelbrot-generator
-            type: Directory
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -679,7 +668,6 @@ spec:
         - name: application-vol
           hostPath:
             path: /home/roderick/testbed/compute-layer/mandelbrot-generator
-            type: Directory
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -732,7 +720,6 @@ spec:
         - name: application-vol
           hostPath:
             path: /home/roderick/testbed/compute-layer/mandelbrot-generator
-            type: Directory
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -785,7 +772,6 @@ spec:
         - name: application-vol
           hostPath:
             path: /home/roderick/testbed/compute-layer/mandelbrot-generator
-            type: Directory
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -838,7 +824,6 @@ spec:
         - name: application-vol
           hostPath:
             path: /home/roderick/testbed/compute-layer/mandelbrot-generator
-            type: Directory
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -891,7 +876,6 @@ spec:
         - name: application-vol
           hostPath:
             path: /home/roderick/testbed/compute-layer/mandelbrot-generator
-            type: Directory
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -943,7 +927,6 @@ spec:
         - name: application-vol
           hostPath:
             path: /home/roderick/testbed/compute-layer/mandelbrot-generator
-            type: Directory
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -990,7 +973,6 @@ spec:
         - name: application-vol
           hostPath:
             path: /home/roderick/testbed/compute-layer/mandelbrot-generator
-            type: Directory
 
 ### Services ###
 

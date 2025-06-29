@@ -122,7 +122,7 @@ object Producer extends KafkaTrait {
     // val divs = julia.toList.grouped(julia.size / Math.pow(boxCount, 2).toInt).map(g => g.sum).filter(n => n > 0)  
     // val nr = divs.size
 
-    val avgBoxNr = Range(2, 30)
+    val avgBoxNr = Range(2, 5)
       .map {case boxCount => Map(
         "nr" -> julia.toList.grouped(julia.size / Math.pow(boxCount, 2).toInt).map(g => g.sum).filter(n => n > 0).size, //number of filled boxes
         "nb" -> boxCount, // box length (i.e. nb^2 = total number of boxes)

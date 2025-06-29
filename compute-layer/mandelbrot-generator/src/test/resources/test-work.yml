@@ -1,9 +1,9 @@
 version: 2
 topicPrefix: test
 iterations: 1000
-coordinate: 0+0i
-zoomPc: 100_000
-neighbourhoodSize: 1600
+coordinate: 0.1982-1.1003i
+zoomPc: 100
+neighbourhoodSize: 100
 
 # Optimisation strategy (end-game hypothesis testing)
 policy:
@@ -15,4 +15,4 @@ policy:
     # Max tries designates the number of attempts to make before arriving in the situation where all nodes are stable
     max_tries: 10
     # The time between each try
-    try_interval_sec: 7_200 # 2 hours
+    try_interval_sec: 10 # 10 secs (for testing)

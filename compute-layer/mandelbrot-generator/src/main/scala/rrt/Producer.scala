@@ -128,6 +128,13 @@ object Producer extends KafkaTrait {
         "nb" -> boxCount, // box length (i.e. nb^2 = total number of boxes)
         )}
       .map {resmap => Math.abs(Math.log(resmap("nr")) / Math.log(1.0/Math.pow(resmap("nb"), 2)))}
+
+    if (avgBoxNr.sum.isInfinity) {
+      logger.debug(s"Setting dimension to 1.0 since the sum for ${centre} is infinity")
+      return JuliaDimensionResult(1.0d, centre)
+    }
+    logger.info(s"Aquired julia dimension for ${centre}")
+
     JuliaDimensionResult(
       dim = BigDecimal(avgBoxNr.sum / avgBoxNr.size).setScale(2, scala.math.BigDecimal.RoundingMode.HALF_UP).toDouble,
       centre = centre
@@ -150,6 +157,7 @@ object Producer extends KafkaTrait {
 
     params match
       case p: ProducerParamsV2 =>
+        logger.info(s"Started run (UUID: $runUUID})")
         logger.info(s"Received v2 parameter set")
         // val params = mapper.readValue(new File(frameConfigFile), classOf[ProducerParamsV2]): ProducerParamsV2
         logger.info(params.getClass.toString)
@@ -219,6 +227,8 @@ object Producer extends KafkaTrait {
 
     results.foreach(logger.info)
 
+    logger.info("Dispatch complete")
+
     // let's test the hypothesis for julia, here is the re-entrant code for that
     val closestCentre = centreDimensionMap.values.reduce { (a, b) => if a.dim < b.dim then b else a}
     params match
@@ -228,6 +238,7 @@ object Producer extends KafkaTrait {
           policy = ProducerWorkPolicy(StableRegionPolicy(maxTries = p.policy.stableRegionPolicy.maxTries - 1, tryIntervalSec = p.policy.stableRegionPolicy.tryIntervalSec))
         )
         // wait before submitting ork again.
+        logger.info(s"Ready to send work for new coordinate ${p2.coordinate} (after ${p2.policy.stableRegionPolicy.tryIntervalSec} seconds)")
         Thread.sleep(p.policy.stableRegionPolicy.tryIntervalSec * 1000)
         gridWorkStream(producerFactory, p2)
       case _ =>

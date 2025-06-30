@@ -16,3 +16,6 @@ ycsb*
 data/
 .vscode
 *.sw[op]
+**/target/
+*.png
+*.jp*g

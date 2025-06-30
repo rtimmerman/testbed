@@ -3,6 +3,11 @@ ThisBuild / version := "0.1.0-SNAPSHOT"
 ThisBuild / organization := "com.rrt"
 ThisBuild / organizationName := "rrt"
 
+Test / fork := true
+Test / javaOptions += "-Dlog4j.configurationFile=src/test/resources/log4j2-test.xml"
+
+// Compile / unmanagedResources += baseDirectory.value / "src" / "main" / "resources" / "log4j2.xml"
+
 resolvers += "confluent" at "https://packages.confluent.io/maven/"
 
 // See https://www.scala-sbt.org/1.x/docs/Using-Sonatype.html for instructions on how to publish to Sonatype.
@@ -12,7 +17,9 @@ libraryDependencies += "org.typelevel" %% "spire" % "0.18.0"
 libraryDependencies += "org.scalanlp" %% "breeze" % "2.1.0"
 libraryDependencies += "org.mongodb" % "mongodb-driver-sync" % "4.10.2"
 libraryDependencies += "org.slf4j" % "slf4j-api" % "1.7.32"
-libraryDependencies += "org.slf4j" % "slf4j-simple" % "1.7.32"
+// libraryDependencies += "org.slf4j" % "slf4j-simple" % "1.7.32"
+libraryDependencies += "org.apache.logging.log4j" % "log4j-api" % "2.25.0"
+libraryDependencies += "org.apache.logging.log4j" % "log4j-slf4j2-impl" % "2.25.0"
 libraryDependencies += "org.apache.avro" % "avro" % "1.11.0"
 libraryDependencies += "io.confluent" % "kafka-avro-serializer" % "7.0.0"
 // https://mvnrepository.com/artifact/org.mockito/mockito-core

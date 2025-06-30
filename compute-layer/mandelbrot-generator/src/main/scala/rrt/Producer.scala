@@ -174,9 +174,11 @@ object Producer extends KafkaTrait {
   
     var lot = 0
 
-    var centreDimensionMap: scala.collection.mutable.Map[String, JuliaDimensionResult] = scala.collection.mutable.Map()
+    // var centreDimensionMap: scala.collection.mutable.Map[String, JuliaDimensionResult] = scala.collection.mutable.Map()
 
-    def dispatch(batch: Array[Map[String, Double]], number: Int): Future[String] =
+    case class DispatchResult(message: String, juliaDimensionResult: JuliaDimensionResult)
+
+    def dispatch(batch: Array[Map[String, Double]], number: Int): Future[DispatchResult] =
       val topic = params match
         case p: ProducerParamsV2 => s"${p.topicPrefix}-${number}"
         case p: ProducerParams => s"${p.topicPrefix}-${number}"
@@ -184,10 +186,6 @@ object Producer extends KafkaTrait {
       Future {
         val kafkaProducer = producerFactory(s"transaction-$number")
         batch.grouped(100).foreach(grp => {
-          centreDimensionMap(topic) = params match
-            case p: ProducerParamsV2 => getJuliaDimension(grp, p.iterations, p.neighbourhoodSize)
-            case _ => JuliaDimensionResult(-1, null)
-
           kafkaProducer.beginTransaction
 
           grp.foreach(entry => {
@@ -211,8 +209,12 @@ object Producer extends KafkaTrait {
           kafkaProducer.commitTransaction()
         })
         kafkaProducer.close
-
-        s"Sent ${batch.length} entries to topic: $topic)"
+        DispatchResult(
+          message = "Sent ${batch.length} entries to topic: $topic)",
+          juliaDimensionResult = params match
+            case p: ProducerParamsV2 => getJuliaDimension(batch, p.iterations, p.neighbourhoodSize)
+            case _ => JuliaDimensionResult(-1, null)
+        )
       }
     
     logger.info("Dispatching...")
@@ -225,12 +227,16 @@ object Producer extends KafkaTrait {
 
     // evaluate performance and apply strategies here
 
-    results.foreach(logger.info)
+    results.foreach {result => {
+      logger.info(result.message)
+    }}
+
+    
 
     logger.info("Dispatch complete")
 
     // let's test the hypothesis for julia, here is the re-entrant code for that
-    val closestCentre = centreDimensionMap.values.reduce { (a, b) => if a.dim < b.dim then b else a}
+    val closestCentre = results.map {r => r.juliaDimensionResult}.reduce { (a, b) => if a.dim > b.dim then a else b }
     params match
       case p: ProducerParamsV2 if p.policy.stableRegionPolicy.maxTries > 0 =>
         val p2 = p.copy(

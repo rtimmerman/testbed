@@ -231,14 +231,13 @@ object Producer extends KafkaTrait {
       logger.info(result.message)
     }}
 
-    
-
     logger.info("Dispatch complete")
 
-    // let's test the hypothesis for julia, here is the re-entrant code for that
-    val closestCentre = results.map {r => r.juliaDimensionResult}.reduce { (a, b) => if a.dim > b.dim then a else b }
     params match
-      case p: ProducerParamsV2 if p.policy.stableRegionPolicy.maxTries > 0 =>
+      // Julia Dimension based Optimisation Hypothesis Test (run by run)
+      // let's test the hypothesis for julia, here is the re-entrant code for that
+      case p: ProducerParamsV2 if p.policy.stableRegionPolicy != null && p.policy.stableRegionPolicy.maxTries > 0 =>
+        val closestCentre = results.map {r => r.juliaDimensionResult}.reduce { (a, b) => if a.dim > b.dim then a else b }
         val p2 = p.copy(
           coordinate = closestCentre.centre.toString,
           policy = ProducerWorkPolicy(StableRegionPolicy(maxTries = p.policy.stableRegionPolicy.maxTries - 1, tryIntervalSec = p.policy.stableRegionPolicy.tryIntervalSec))

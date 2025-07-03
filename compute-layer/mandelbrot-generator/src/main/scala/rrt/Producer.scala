@@ -170,62 +170,65 @@ object Producer extends KafkaTrait {
         b = createSpace(p.sizeX, p.sizeY, p.minR, p.maxR, p.minI, p.maxI)
         space = p.sizeX * p.sizeY
 
-    val batches = partition(b, 16)
-  
-    var lot = 0
-
-    // var centreDimensionMap: scala.collection.mutable.Map[String, JuliaDimensionResult] = scala.collection.mutable.Map()
+    val workset = b.sliding(100, 100)
 
     case class DispatchResult(message: String, juliaDimensionResult: JuliaDimensionResult)
-
-    def dispatch(batch: Array[Map[String, Double]], number: Int): Future[DispatchResult] =
-      val topic = params match
-        case p: ProducerParamsV2 => s"${p.topicPrefix}-${number}"
-        case p: ProducerParams => s"${p.topicPrefix}-${number}"
-
-      Future {
-        val kafkaProducer = producerFactory(s"transaction-$number")
-        batch.grouped(100).foreach(grp => {
-          kafkaProducer.beginTransaction
-
-          grp.foreach(entry => {
-            // print(".")
-            kafkaProducer.send(
-              new ProducerRecord[String, String](
-                topic,
-                "coordinate",
-                Consumer.encodedPayload(
-                    "%f".format(entry.getOrElse("r", 0)),
-                    "%f".format(entry.getOrElse("i", 0)),
-                    params match
-                      case p: ProducerParamsV2 => p.iterations.toString()
-                      case p: ProducerParams => p.iterations.toString(),
-                    runUUID.toString()
-                  )
-                )
-              ).get()
-            })
-            // print("|")
-          kafkaProducer.commitTransaction()
-        })
-        kafkaProducer.close
-        DispatchResult(
-          message = "Sent ${batch.length} entries to topic: $topic)",
-          juliaDimensionResult = params match
-            case p: ProducerParamsV2 => getJuliaDimension(batch, p.iterations, p.neighbourhoodSize)
-            case _ => JuliaDimensionResult(-1, null)
-        )
-      }
+    // perf-eval loop
+    val results = workset.map {work =>
+      logger.atInfo().log(s"Workset size: ${work.length}")
+      val batches = partition(work, 16)
+      // todo, the batches need to be now be subdivided and looped over.
     
-    logger.info("Dispatching...")
-    val dispatchFuture = (0 to batches.length - 1).map(i => dispatch(batches(i), i))
+      var lot = 0
 
-    // dispatchFuture.foreach {future =>
-    //   future.foreach {result => println(s"Result = $result")}}
-    // wait for all dispatches to complete
-    val results = Await.result(Future.sequence(dispatchFuture), scala.concurrent.duration.Duration.Inf)
+      // var centreDimensionMap: scala.collection.mutable.Map[String, JuliaDimensionResult] = scala.collection.mutable.Map()
+      def dispatch(batch: Array[Map[String, Double]], number: Int): Future[DispatchResult] =
+        val topic = params match
+          case p: ProducerParamsV2 => s"${p.topicPrefix}-${number}"
+          case p: ProducerParams => s"${p.topicPrefix}-${number}"
 
-    // evaluate performance and apply strategies here
+        Future {
+          val kafkaProducer = producerFactory(s"transaction-$number")
+          batch.grouped(100).foreach(grp => {
+            kafkaProducer.beginTransaction
+
+            grp.foreach(entry => {
+              // print(".")
+              kafkaProducer.send(
+                new ProducerRecord[String, String](
+                  topic,
+                  "coordinate",
+                  Consumer.encodedPayload(
+                      "%f".format(entry.getOrElse("r", 0)),
+                      "%f".format(entry.getOrElse("i", 0)),
+                      params match
+                        case p: ProducerParamsV2 => p.iterations.toString()
+                        case p: ProducerParams => p.iterations.toString(),
+                      runUUID.toString()
+                    )
+                  )
+                ).get()
+              })
+              // print("|")
+            kafkaProducer.commitTransaction()
+          })
+          kafkaProducer.close
+          DispatchResult(
+            message = s"Sent ${batch.length} entries to topic: $topic)",
+            juliaDimensionResult = params match
+              case p: ProducerParamsV2 => getJuliaDimension(batch, p.iterations, p.neighbourhoodSize)
+              case _ => JuliaDimensionResult(-1, null)
+          )
+        }
+        
+      logger.info("Dispatching...")
+      val dispatchFuture = (0 to batches.length - 1).map(i => dispatch(batches(i), i))
+      Await.result(Future.sequence(dispatchFuture), scala.concurrent.duration.Duration.Inf)
+    }.reduce((w1, w2) => w1.concat(w2))
+        // Pause here to wait for the work to complete
+        // Evaluate the performance
+        // rebalance the work according to a chosen strategy (e.g. could be frame by frame based action of Julia set based optimation)
+    // ---- end of perf-eval loop ----
 
     results.foreach {result => {
       logger.info(result.message)
@@ -237,6 +240,7 @@ object Producer extends KafkaTrait {
       // Julia Dimension based Optimisation Hypothesis Test (run by run)
       // let's test the hypothesis for julia, here is the re-entrant code for that
       case p: ProducerParamsV2 if p.policy.stableRegionPolicy != null && p.policy.stableRegionPolicy.maxTries > 0 =>
+        logger.info("Julia re-positioning (hypothesis test)")
         val closestCentre = results.map {r => r.juliaDimensionResult}.reduce { (a, b) => if a.dim > b.dim then a else b }
         val p2 = p.copy(
           coordinate = closestCentre.centre.toString,

@@ -5,6 +5,12 @@ coordinate: 0.1982-1.1003i
 zoomPc: 100
 neighbourhoodSize: 100
 
+monitor:
+  prometheus_api_url: http://blowdryer:30845/api/v1/query_range
+  queries:
+    - id: dwell_time
+      query: "sum by (instance) (rate(node_cpu_seconds_total{group='consumers',mode='idle'}[4m]))"
+
 # Optimisation strategy (end-game hypothesis testing)
 policy:
   # Use the stable region policy to zero in on a stable region of the set (where dimensionality is close 1.0 across all nodes)

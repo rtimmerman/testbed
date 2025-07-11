@@ -24,7 +24,21 @@ case class ProducerParamsV2 (
     @JsonProperty("neighbourhoodSize", required=false) neighbourhoodSize: Int,
     @JsonProperty("zoomPc", required=false) zoomPc: Int,
     @JsonProperty("policy", required=false) policy: ProducerWorkPolicy,
+    @JsonProperty("monitor", required=false) monitor: Monitor,
 )
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+case class Monitor(
+    @JsonProperty("prometheus_api_url") prometheusApiUrl: String,
+    @JsonProperty("queries") queries: Array[Queries]
+)
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+case class Queries(
+    @JsonProperty("id") id: String,
+    @JsonProperty("query") query: String,
+)
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 case class ProducerWorkPolicy(
     @JsonProperty("stable_region_policy", required=false) stableRegionPolicy: StableRegionPolicy,

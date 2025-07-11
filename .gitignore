@@ -19,3 +19,6 @@ data/
 **/target/
 *.png
 *.jp*g
+*.jar
+kafka/kafka*
+

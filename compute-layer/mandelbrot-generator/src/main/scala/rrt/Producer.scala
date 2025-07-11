@@ -15,6 +15,8 @@ import scala.util.Random
 
 import org.slf4j.{Logger,LoggerFactory}
 import java.math.RoundingMode
+import rrt.external.PerformanceEvaluator
+import scala.collection.mutable.Queue
 
 object Producer extends KafkaTrait {
   type Space = Array[Array[Map[String, Double]]];
@@ -174,7 +176,11 @@ object Producer extends KafkaTrait {
 
     case class DispatchResult(message: String, juliaDimensionResult: JuliaDimensionResult)
     // perf-eval loop
-    val results = workset.map {work =>
+
+    val workIterator = workset.iterator
+    val workQueue: Queue[Array[Array[Map[String, Double]]]] = Queue(workIterator.next)
+    while (!workQueue.isEmpty)
+      val work = workQueue.removeLast()
       logger.atInfo().log(s"Workset size: ${work.length}")
       val batches = partition(work, 16)
       // todo, the batches need to be now be subdivided and looped over.
@@ -224,16 +230,22 @@ object Producer extends KafkaTrait {
       logger.info("Dispatching...")
       val dispatchFuture = (0 to batches.length - 1).map(i => dispatch(batches(i), i))
       Await.result(Future.sequence(dispatchFuture), scala.concurrent.duration.Duration.Inf)
-    }.reduce((w1, w2) => w1.concat(w2))
-        // Pause here to wait for the work to complete
-        // Evaluate the performance
+
+      
+      // **** Load Balancing ****
+      params match
+        case p: ProducerParamsV2 =>
+          // wait for a set time interval or ascertain that alk the workers have finished.
+          Thread.sleep(p.policy.stableRegionPolicy.tryIntervalSec)
+          // evaluate performance here
+          val lastPerformance = PerformanceEvaluator.getLastPerformance(params.asInstanceOf[ProducerParamsV2])
+          PerformanceEvaluator.orderByPerformance(lastPerformance)
+          // rebalance here
+          workQueue.append(PerformanceEvaluator.rebalance(workIterator.next, weights = PerformanceEvaluator.orderByPerformance(lastPerformance)))
+        case _ =>
+        
         // rebalance the work according to a chosen strategy (e.g. could be frame by frame based action of Julia set based optimation)
     // ---- end of perf-eval loop ----
-
-    results.foreach {result => {
-      logger.info(result.message)
-    }}
-
     logger.info("Dispatch complete")
 
     params match
@@ -246,7 +258,7 @@ object Producer extends KafkaTrait {
           coordinate = closestCentre.centre.toString,
           policy = ProducerWorkPolicy(StableRegionPolicy(maxTries = p.policy.stableRegionPolicy.maxTries - 1, tryIntervalSec = p.policy.stableRegionPolicy.tryIntervalSec))
         )
-        // wait before submitting ork again.
+        // wait before submitting work again.
         logger.info(s"Ready to send work for new coordinate ${p2.coordinate} (after ${p2.policy.stableRegionPolicy.tryIntervalSec} seconds)")
         Thread.sleep(p.policy.stableRegionPolicy.tryIntervalSec * 1000)
         gridWorkStream(producerFactory, p2)

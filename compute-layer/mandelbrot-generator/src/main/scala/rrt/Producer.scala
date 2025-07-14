@@ -241,13 +241,18 @@ object Producer extends KafkaTrait {
           val lastPerformance = PerformanceEvaluator.getLastPerformance(params.asInstanceOf[ProducerParamsV2])
           PerformanceEvaluator.orderByPerformance(lastPerformance)
           // rebalance here
-          workQueue.append(PerformanceEvaluator.rebalance(workIterator.next, weights = PerformanceEvaluator.orderByPerformance(lastPerformance)))
+          workQueue.append(PerformanceEvaluator.rebalance(
+            workIterator.next, 
+            weights = PerformanceEvaluator.orderByPerformance(lastPerformance),
+            nodePartitionMap = (0 to 15).map(i => (f"consumer-$i", i)).toMap
+          ))
         case _ =>
         
         // rebalance the work according to a chosen strategy (e.g. could be frame by frame based action of Julia set based optimation)
     // ---- end of perf-eval loop ----
     logger.info("Dispatch complete")
 
+    /*
     params match
       // Julia Dimension based Optimisation Hypothesis Test (run by run)
       // let's test the hypothesis for julia, here is the re-entrant code for that
@@ -263,6 +268,7 @@ object Producer extends KafkaTrait {
         Thread.sleep(p.policy.stableRegionPolicy.tryIntervalSec * 1000)
         gridWorkStream(producerFactory, p2)
       case _ =>
+      */
 
     logger.info("Done")
 

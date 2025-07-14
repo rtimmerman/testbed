@@ -69,8 +69,9 @@ object PerformanceEvaluator:
       *
       * @param result
       */
-    def orderByPerformance(result: Map[String, Map[Double, Double]]): List[Tuple] =
-        result.map {case (k, v) => (k, v)}.toList.sortWith((a, b) => (a(1).values.sum / a(1).size) > (b(1).values.sum / b(1).size))
+    def orderByPerformance(result: Map[String, Map[Double, Double]]): List[(String, Double)] =
+        val l: List[(String, Double)] = result.map((k, v) => (k, v.values.sum / v.size)).toList
+        l.sortWith((a, b) => b(1) > a(1))
     
     /**
       * Rebalances the work load according to the peformance the last run (summarised with weights)
@@ -80,21 +81,35 @@ object PerformanceEvaluator:
       * @param weights an ordered (highest performing/engaged at top) list of consumers
       * @return
       */
-    def rebalance(work: Array[Array[Map[String, Double]]], weights: List[(String,Double)]): Array[Array[Map[String, Double]]] =
+    def rebalance(work: Array[Array[Map[String, Double]]], weights: List[(String,Double)], nodePartitionMap: Map[String, Int]): Array[Array[Map[String, Double]]] =
         // number of units are assumed to be initially evenly distributed in work, so take length of first
         val nUnits = work(0).length
-    
         val wDist = List(weights(0)(1),weights.last(1)).reduce(_-_).abs
-
-        val perfMean = weights.map {case (a, m) => (m / wDist) * nUnits}
-        val avgPerf = perfMean.sum / perfMean.length
-
-        // rebalance the top 50%
-        (BigDecimal(1) to BigDecimal(perfMean.length * 0.5) by BigDecimal(1)).map{i => i.toInt}.map{i =>
-            /* TODO: work should be in the same order as the sorted weights */
-            val nFreeSlots = work(i).length * (perfMean(i) - avgPerf)
-            (work(i).toList ::: work(work.length - i).slice(0, nFreeSlots.ceil.toInt).toList).toArray
-        }.toArray
+        val avgPerf = weights.map {case (a, m) => m}.reduce(_+_) / weights.length        
+        val balances = weights.map {case (a, m) => (
+            a,
+            m,
+            avgPerf - m match
+                case e if e > 0 => (Math.abs(avgPerf - m) / 100) * nUnits
+                case e if e <= 0 => (Math.abs(avgPerf - m) / 100) * -nUnits
+        )}
+        
+        val nw = balances.map {case (nodeName, _, unitDiff) => 
+            (nodeName, unitDiff match
+                case e if e > 0 =>
+                    work(nodePartitionMap(nodeName)).toList :::
+                    balances.filter(b => b(0) != nodeName).map{(w,_,n) =>
+                            work(nodePartitionMap(w)).slice(0, n.toInt.abs).toList
+                        }.flatten
+                case e if e <= 0 =>
+                    work(nodePartitionMap(nodeName))
+                        .slice(e.toInt.abs, work(nodePartitionMap(nodeName)).length).toList
+            )}.toMap
+        
+        // println(nw)
+        nw.toList.sortWith((a, b) => nodePartitionMap(a(0)) < nodePartitionMap(b(0)))
+            .map(a => a(1).toArray)
+            .toArray()
     
     /**
       * Performs wavelet transform to obtain a compressed, queriable representation of the entire time series

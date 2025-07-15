@@ -2,8 +2,16 @@ version: 2
 topicPrefix: test
 iterations: 1000
 coordinate: 0+0i
+#coordinate: 0.1982-1.1003i
 zoomPc: 100
-neighbourhoodSize: 1600
+neighbourhoodSize: 100
+
+monitor:
+  prometheus_api_url: http://rrt-general-services:31697/api/v1/query_range
+  queries:
+    - id: dwell_time
+      query: "sum by (instance) (rate(node_cpu_seconds_total{group='consumers',mode='idle'}[4m]))"
+  registered_consumer_name_template: consumer-%d:9090
 
 # Optimisation strategy (end-game hypothesis testing)
 policy:

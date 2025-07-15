@@ -236,7 +236,7 @@ object Producer extends KafkaTrait {
       params match
         case p: ProducerParamsV2 =>
           // wait for a set time interval or ascertain that alk the workers have finished.
-          Thread.sleep(p.policy.stableRegionPolicy.tryIntervalSec)
+          Thread.sleep(p.policy.stableRegionPolicy.tryIntervalSec * 1000)
           // evaluate performance here
           val lastPerformance = PerformanceEvaluator.getLastPerformance(params.asInstanceOf[ProducerParamsV2])
           PerformanceEvaluator.orderByPerformance(lastPerformance)

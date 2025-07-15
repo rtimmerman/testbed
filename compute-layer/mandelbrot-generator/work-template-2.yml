@@ -23,4 +23,5 @@ policy:
     # Max tries designates the number of attempts to make before arriving in the situation where all nodes are stable
     max_tries: 10
     # The time between each try
-    try_interval_sec: 7_200 # 2 hours
+    # try_interval_sec: 7_200 # 2 hours
+    try_interval_sec: 1_800 # 30 minutes

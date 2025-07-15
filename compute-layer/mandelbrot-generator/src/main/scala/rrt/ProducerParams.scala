@@ -30,6 +30,7 @@ case class ProducerParamsV2 (
 @JsonIgnoreProperties(ignoreUnknown = true)
 case class Monitor(
     @JsonProperty("prometheus_api_url") prometheusApiUrl: String,
+    @JsonProperty("registered_consumer_name_template") registeredConsumerNameTemplate: String,
     @JsonProperty("queries") queries: Array[Queries]
 )
 

@@ -244,7 +244,7 @@ object Producer extends KafkaTrait {
           workQueue.append(PerformanceEvaluator.rebalance(
             workIterator.next, 
             weights = PerformanceEvaluator.orderByPerformance(lastPerformance),
-            nodePartitionMap = (0 to 15).map(i => (f"consumer-$i", i)).toMap
+            nodePartitionMap = (0 to 15).map(i => (p.monitor.registeredConsumerNameTemplate.format(i), i)).toMap
           ))
         case _ =>
         

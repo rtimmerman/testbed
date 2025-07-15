@@ -20,6 +20,8 @@ import breeze.linalg._
 
 import scala.util.boundary
 import boundary.break
+import rrt.external.PerformanceEvaluator
+import org.mockito.MockedStatic
 
 
 object ParameterSpace extends Tag("rrt.tags.ParameterSpace")
@@ -265,6 +267,9 @@ class ProducerSpec extends AnyFlatSpec with Matchers {
     val configFile = System.getProperty("user.dir") + "/src/test/resources/test-work.yml"
     val producerProps = new java.util.Properties()
     val params = Producer.getParams(configFile)
+
+    // val peMock = Mockito.mockStatic(getClass[PerformanceEvaluator.type])
+    // Mockito.when(peMock.getLastPerformance())
 
     Producer.gridWorkStream((txName: String) => {
       val kafkaProducer = MockProducer[String, String](

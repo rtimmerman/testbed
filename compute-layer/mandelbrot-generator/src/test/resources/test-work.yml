@@ -10,6 +10,7 @@ monitor:
   queries:
     - id: dwell_time
       query: "sum by (instance) (rate(node_cpu_seconds_total{group='consumers',mode='idle'}[4m]))"
+  registered_consumer_name_template: consumer-%d:9090
 
 # Optimisation strategy (end-game hypothesis testing)
 policy:

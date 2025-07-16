@@ -172,7 +172,11 @@ object Producer extends KafkaTrait {
         b = createSpace(p.sizeX, p.sizeY, p.minR, p.maxR, p.minI, p.maxI)
         space = p.sizeX * p.sizeY
 
-    val workset = b.map(_.sliding(100, 100).toArray)
+    val evalUnits = params match
+      case p: ProducerParamsV2 => p.policy.stableRegionPolicy.maxEvalUnits
+      case _ => 100
+    
+    val workset = b.map(_.sliding(evalUnits, evalUnits).toArray).toArray
 
     case class DispatchResult(message: String, juliaDimensionResult: JuliaDimensionResult)
     // perf-eval loop

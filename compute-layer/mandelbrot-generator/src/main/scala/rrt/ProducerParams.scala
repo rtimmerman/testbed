@@ -48,5 +48,6 @@ case class ProducerWorkPolicy(
 @JsonIgnoreProperties(ignoreUnknown = true)
 case class StableRegionPolicy(
     @JsonProperty("max_tries", required = true) maxTries: Int,
+    @JsonProperty("max_eval_units", required = true) maxEvalUnits: Int,
     @JsonProperty("try_interval_sec", required = true) tryIntervalSec: Int,
 )

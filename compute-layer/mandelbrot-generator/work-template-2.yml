@@ -4,7 +4,7 @@ iterations: 1000
 coordinate: 0+0i
 #coordinate: 0.1982-1.1003i
 zoomPc: 100
-neighbourhoodSize: 100
+neighbourhoodSize: 1600
 
 monitor:
   prometheus_api_url: http://rrt-general-services:31697/api/v1/query_range
@@ -21,8 +21,9 @@ policy:
   # policies: stableRegionPolicy, unstableRegionPolicy, towardsPolicy
   stable_region_policy:
     # Max tries designates the number of attempts to make before arriving in the situation where all nodes are stable
+    max_eval_units: 15000
     max_tries: 10
     # The time between each try
     # try_interval_sec: 7_200 # 2 hours
     # try_interval_sec: 1_800 # 30 minutes
-    try_interval_sec: 180 # 3 minutes
+    try_interval_sec: 3600 # 3 minutes

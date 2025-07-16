@@ -247,6 +247,28 @@ class ProducerSpec extends AnyFlatSpec with Matchers {
     }))
   }
 
+  "Producer" should "be able to subdivide partitions in work chunks" taggedAs(ParameterSpace) in {
+    val c = new Complex(0, 0)
+    val nParts = 16
+    val space = Producer.createSpaceFromPoint(c, ball=100)
+ 
+    val partitionedSpace = Producer.partition(space, nParts)
+    
+    val workChunks = partitionedSpace.map(_.sliding(10, 10).toArray).toArray
+    def workIterator(workset: Array[Array[Array[Map[String,Double]]]]) =
+      for (i <- Range(0, workset(0).toList.length))
+        yield workset.map(_.toList(i).toArray).toArray
+    
+    val workI = workIterator(workChunks).iterator
+    
+    assert(workI.length == workChunks(0).length)
+    val batch1 = workI.next()
+    assert(batch1.length == 16)
+    assert(batch1(0).length == 10) // as per the slider.
+    
+    // println(workI.next()(15).toList)
+  }
+
   "Producer" should "be able to find the julia dimension from a set of coordinate points" taggedAs(Dimensionality)in {
     // val configFile = System.getProperty("user.dir") + "/src/test/resources/test-work.yml"
     val space = Producer.createSpaceFromPoint(Complex(0, 0), ball=16).flatten

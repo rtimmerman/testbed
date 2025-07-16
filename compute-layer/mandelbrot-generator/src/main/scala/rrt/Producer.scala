@@ -172,12 +172,19 @@ object Producer extends KafkaTrait {
         b = createSpace(p.sizeX, p.sizeY, p.minR, p.maxR, p.minI, p.maxI)
         space = p.sizeX * p.sizeY
 
-    val workset = b.sliding(100, 100)
+    val workset = b.map(_.sliding(100, 100).toArray)
 
     case class DispatchResult(message: String, juliaDimensionResult: JuliaDimensionResult)
     // perf-eval loop
 
-    val workIterator = workset.iterator
+    def workGenerator(workset: Array[Array[Array[Map[String,Double]]]]) =
+      for (i <- Range(0, workset(0).toList.length))
+        yield workset.map(_.toList(i).toArray).toArray
+
+    val workIterator = workGenerator(workset).iterator
+
+    // val workIterator = workset.iterator
+
     val workQueue: Queue[Array[Array[Map[String, Double]]]] = Queue(workIterator.next)
     while (!workQueue.isEmpty)
       val work = workQueue.removeLast()

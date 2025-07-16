@@ -164,7 +164,7 @@ object Consumer extends KafkaTrait {
         val insert = mutable.Queue[UpdateOneModel[Nothing]]()
 
         work.forEach(record => {
-          println(record.key() + " = " + record.value())
+          logger.atInfo.log(record.key() + " = " + record.value())
 
           val payload = decodedPayload(record.value())
           val z =

@@ -11,7 +11,7 @@ monitor:
   queries:
     - id: dwell_time
       query: "sum by (instance) (rate(node_cpu_seconds_total{group='consumers',mode='idle'}[4m]))"
-  registered_consumer_name_template: consumer-%d:9090
+  registered_consumer_name_template: consumer-%d:9091
 
 # Optimisation strategy (end-game hypothesis testing)
 policy:
@@ -24,4 +24,5 @@ policy:
     max_tries: 10
     # The time between each try
     # try_interval_sec: 7_200 # 2 hours
-    try_interval_sec: 1_800 # 30 minutes
+    # try_interval_sec: 1_800 # 30 minutes
+    try_interval_sec: 180 # 3 minutes

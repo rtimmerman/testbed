@@ -248,11 +248,12 @@ object Producer extends KafkaTrait {
           val lastPerformance = PerformanceEvaluator.getLastPerformance(params.asInstanceOf[ProducerParamsV2])
           PerformanceEvaluator.orderByPerformance(lastPerformance)
           // rebalance here
-          workQueue.append(PerformanceEvaluator.rebalance(
-            workIterator.next, 
-            weights = PerformanceEvaluator.orderByPerformance(lastPerformance),
-            nodePartitionMap = (0 to 15).map(i => (p.monitor.registeredConsumerNameTemplate.format(i), i)).toMap
-          ))
+          if (workIterator.hasNext)
+            workQueue.append(PerformanceEvaluator.rebalance(
+              workIterator.next, 
+              weights = PerformanceEvaluator.orderByPerformance(lastPerformance),
+              nodePartitionMap = (0 to 15).map(i => (p.monitor.registeredConsumerNameTemplate.format(i), i)).toMap
+            ))
         case _ =>
         
         // rebalance the work according to a chosen strategy (e.g. could be frame by frame based action of Julia set based optimation)

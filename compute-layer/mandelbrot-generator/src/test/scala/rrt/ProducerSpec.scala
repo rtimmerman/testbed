@@ -22,6 +22,7 @@ import scala.util.boundary
 import boundary.break
 import rrt.external.PerformanceEvaluator
 import org.mockito.MockedStatic
+import scala.collection.mutable.Queue
 
 
 object ParameterSpace extends Tag("rrt.tags.ParameterSpace")
@@ -266,7 +267,11 @@ class ProducerSpec extends AnyFlatSpec with Matchers {
     assert(batch1.length == 16)
     assert(batch1(0).length == 10) // as per the slider.
     
-    // println(workI.next()(15).toList)
+    val queue: Queue[Array[Array[Map[String, Double]]]] = Queue(workI.next)
+    while (!queue.isEmpty)
+      val work = queue.removeLast()
+      if (workI.hasNext)
+        queue.append(workI.next)
   }
 
   "Producer" should "be able to find the julia dimension from a set of coordinate points" taggedAs(Dimensionality)in {

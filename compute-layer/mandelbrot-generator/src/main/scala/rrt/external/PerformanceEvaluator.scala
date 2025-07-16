@@ -60,7 +60,7 @@ object PerformanceEvaluator:
 
         document.at("/data/result").asScala.map((result) =>
             val name: String = result.at("/metric/instance").asText
-            val entries = document.at("/data/result/0/values").asScala.toList.map(e => (e.get(0).asDouble, e.get(1).asDouble)).toMap
+            val entries = result.at("/values").asScala.toList.map(e => (e.get(0).asDouble, e.get(1).asDouble)).toMap
             (name, entries)
         ).toMap
 

@@ -100,12 +100,12 @@ object Producer extends KafkaTrait {
 
     // TODO: un comment this out when doing julia set based load balancing
     // also pay attention to issues around underflow errors here.
-    // val julia = z_plane.flatten.map {case z =>
-    //   val e = m(z, iterations) 
-    //   e match
-    //     case v if v == -1|| (v > 0 && v >= boxThreshold)  => 1
-    //     case _ => 0
-    // }
+    val julia = z_plane.flatten.map {case z =>
+      val e = m(z, iterations) 
+      e match
+        case v if v == -1|| (v > 0 && v >= boxThreshold)  => 1
+        case _ => 0
+    }
 
     // ** Verification Plot **
     // julia.zipWithIndex.foreach {case (z, idx) =>

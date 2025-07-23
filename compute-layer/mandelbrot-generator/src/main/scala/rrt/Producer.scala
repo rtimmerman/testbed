@@ -177,7 +177,7 @@ object Producer extends KafkaTrait {
         space = p.sizeX * p.sizeY
 
     val evalUnits = params match
-      case p: ProducerParamsV2 => p.policy.stableRegionPolicy.maxEvalUnits
+      case p: ProducerParamsV2 if p.usingStableRegionPolicy => p.policy.stableRegionPolicy.maxEvalUnits
       case _ => 100
     
     val workset = b.map(_.sliding(evalUnits, evalUnits).toArray).toArray
@@ -249,7 +249,7 @@ object Producer extends KafkaTrait {
       
       // **** Load Balancing ****
       params match
-        case p: ProducerParamsV2 if (p.usingStableRegionPolicy) =>
+        case p: ProducerParamsV2 if p.usingStableRegionPolicy =>
           // wait for a set time interval or ascertain that alk the workers have finished.
           Thread.sleep(p.policy.stableRegionPolicy.tryIntervalSec * 1000)
           // evaluate performance here

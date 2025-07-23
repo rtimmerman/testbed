@@ -18,6 +18,8 @@ import java.math.RoundingMode
 import rrt.external.PerformanceEvaluator
 import scala.collection.mutable.Queue
 
+import rrt.ProducerParamsV2Extension._
+
 object Producer extends KafkaTrait {
   type Space = Array[Array[Map[String, Double]]];
 
@@ -247,7 +249,7 @@ object Producer extends KafkaTrait {
       
       // **** Load Balancing ****
       params match
-        case p: ProducerParamsV2 =>
+        case p: ProducerParamsV2 if (p.usingStableRegionPolicy) =>
           // wait for a set time interval or ascertain that alk the workers have finished.
           Thread.sleep(p.policy.stableRegionPolicy.tryIntervalSec * 1000)
           // evaluate performance here
@@ -261,6 +263,7 @@ object Producer extends KafkaTrait {
               nodePartitionMap = (0 to 15).map(i => (p.monitor.registeredConsumerNameTemplate.format(i), i)).toMap
             ))
         case _ =>
+          // i.e. do not rebalance, continue straight on.
         
         // rebalance the work according to a chosen strategy (e.g. could be frame by frame based action of Julia set based optimation)
     // ---- end of perf-eval loop ----

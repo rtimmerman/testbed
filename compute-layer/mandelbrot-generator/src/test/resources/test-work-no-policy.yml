@@ -18,9 +18,5 @@ policy:
   # this objective of this process is to ascertain performance differences between nodes as stability is approached
   # Pre-reqs a stable point in the z-plane should be specified (above)
   # policies: stableRegionPolicy, unstableRegionPolicy, towardsPolicy
-  stable_region_policy:
-    # Max tries designates the number of attempts to make before arriving in the situation where all nodes are stable
-    max_tries: 10
-    max_eval_units: 15000
-    # The time between each try
-    try_interval_sec: 10 # 10 secs (for testing)
+  none:
+    active: true

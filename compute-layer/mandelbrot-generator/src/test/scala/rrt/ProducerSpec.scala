@@ -23,9 +23,12 @@ import boundary.break
 import rrt.external.PerformanceEvaluator
 import org.mockito.MockedStatic
 import scala.collection.mutable.Queue
+import rrt.ProducerParamsV2Extension.usingStableRegionPolicy
+import rrt.ProducerParamsV2Extension.usingNoPolicy
 
 
 object ParameterSpace extends Tag("rrt.tags.ParameterSpace")
+object Config extends Tag("rrt.tags.Config")
 object Kafka extends Tag("rrt.tags.Kafka")
 object Navigation extends Tag("rrt.tags.Navigation")
 object WorkConfig extends Tag("rrt.tags.WorkConfig")
@@ -294,6 +297,7 @@ class ProducerSpec extends AnyFlatSpec with Matchers {
     val configFile = System.getProperty("user.dir") + "/src/test/resources/test-work.yml"
     val producerProps = new java.util.Properties()
     val params = Producer.getParams(configFile)
+    assert(params.asInstanceOf[ProducerParamsV2].usingStableRegionPolicy)
 
     // val peMock = Mockito.mockStatic(getClass[PerformanceEvaluator.type])
     // Mockito.when(peMock.getLastPerformance())
@@ -307,5 +311,14 @@ class ProducerSpec extends AnyFlatSpec with Matchers {
       kafkaProducer.initTransactions
       kafkaProducer
     }, params)
+  }
+
+  "Producer" should "be able to determine V2 parameter none policy" taggedAs(Config) in {
+    val configFile = System.getProperty("user.dir") + "/src/test/resources/test-work-no-policy.yml"
+    val producerProps = new java.util.Properties()
+    val params = Producer.getParams(configFile)
+
+    assert(!params.asInstanceOf[ProducerParamsV2].usingStableRegionPolicy)
+    assert(params.asInstanceOf[ProducerParamsV2].usingNoPolicy)
   }
 }

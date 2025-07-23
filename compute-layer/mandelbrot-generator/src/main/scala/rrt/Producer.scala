@@ -263,7 +263,8 @@ object Producer extends KafkaTrait {
               nodePartitionMap = (0 to 15).map(i => (p.monitor.registeredConsumerNameTemplate.format(i), i)).toMap
             ))
         case _ =>
-          workQueue.append(workIterator.next)
+          if (workIterator.hasNext)
+            workQueue.append(workIterator.next)
           // i.e. do not rebalance, continue straight on.
         
         // rebalance the work according to a chosen strategy (e.g. could be frame by frame based action of Julia set based optimation)

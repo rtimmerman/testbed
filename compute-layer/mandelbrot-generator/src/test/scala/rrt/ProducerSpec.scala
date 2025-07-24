@@ -36,7 +36,7 @@ object Dimensionality extends Tag("rrt.tags.Dimensionality")
 
 class ProducerSpec extends AnyFlatSpec with Matchers {
   "A producer instance" should "be able to support customisable canvas plots" in {
-    val params = ProducerParams(1, 100,"test",-2,2,2,-2,1000,1000)
+    val params = ProducerParams(1, 100,"test",-2,2,2,-2,1000,1000, 16)
 
     val b = Producer.createSpace(params.sizeX, params.sizeY, params.minR, params.maxR, params.minI, params.maxI)
 

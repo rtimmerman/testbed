@@ -60,8 +60,6 @@ object Producer extends KafkaTrait {
 
   def partition(space: Space, nPartitions: Int): Seq[Array[Map[String, Double]]] =
     val width, height = (space.length / Math.sqrt(nPartitions)).toInt
-    // for (x <- 0 to  Math.sqrt(nPartitions).toInt - 1; y <- 0 to Math.sqrt(nPartitions).toInt - 1)
-      // println(s"Y:($y,$x) ${y * height} to ${(y * height) + height}, ${x * width} to ${(x * width) + width}")
 
     for (x <- 0 to  Math.sqrt(nPartitions).toInt - 1; y <- 0 to Math.sqrt(nPartitions).toInt - 1)
       yield space
@@ -189,6 +187,10 @@ object Producer extends KafkaTrait {
       for (i <- Range(0, workset(0).toList.length))
         yield workset.map(_.toList(i).toArray).toArray
 
+    def getProgressBar(percent: Double, length: Int = 10): String =
+      val nchars: Int = (length * (percent / 100)).ceil.toInt
+      "[ " + "\u25A0".repeat(nchars) + "\u2504".repeat(length - nchars) + s" ] (${percent}%)"
+
     val workIterator = workGenerator(workset).iterator
 
     // val workIterator = workset.iterator
@@ -203,6 +205,15 @@ object Producer extends KafkaTrait {
           case p: ProducerParamsV2 => p.partitions
           case p: ProducerParams => p.partitions
       )
+
+      logger.info("\u256D\u2500 Batch Allocations \u2500\u256E")
+      val tBatchSize = batches.map((i) => i.length).sum
+      logger.atInfo.log(f"Total number of units: ${tBatchSize.toString}")
+      (0 to batches.length - 1).foreach { i =>
+        logger.atInfo.log(s"Batch $i: ${getProgressBar(batches(i).length.toFloat / tBatchSize * 100)}")
+      }
+      logger.info("\u2500".repeat(15))
+
       // todo, the batches need to be now be subdivided and looped over.
     
       var lot = 0

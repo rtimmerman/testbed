@@ -60,7 +60,6 @@ object Producer extends KafkaTrait {
 
   def partition(space: Space, nPartitions: Int): Seq[Array[Map[String, Double]]] =
     val width, height = (space.length / Math.sqrt(nPartitions)).toInt
-    val size = space.length * space(0).length
     // for (x <- 0 to  Math.sqrt(nPartitions).toInt - 1; y <- 0 to Math.sqrt(nPartitions).toInt - 1)
       // println(s"Y:($y,$x) ${y * height} to ${(y * height) + height}, ${x * width} to ${(x * width) + width}")
 
@@ -178,7 +177,8 @@ object Producer extends KafkaTrait {
 
     val evalUnits = params match
       case p: ProducerParamsV2 if p.usingStableRegionPolicy => p.policy.stableRegionPolicy.maxEvalUnits
-      case _ => 100
+      case p: ProducerParamsV2 if p.usingNoPolicy => p.policy.nonePolicy.blockSize
+      case _ => 160
     
     val workset = b.map(_.sliding(evalUnits, evalUnits).toArray).toArray
 
@@ -197,7 +197,12 @@ object Producer extends KafkaTrait {
     while (!workQueue.isEmpty)
       val work = workQueue.removeLast()
       logger.atInfo().log(s"Workset size: ${work.length}")
-      val batches = partition(work, 16)
+      val batches = partition(
+        work,
+        params match 
+          case p: ProducerParamsV2 => p.partitions
+          case p: ProducerParams => p.partitions
+      )
       // todo, the batches need to be now be subdivided and looped over.
     
       var lot = 0

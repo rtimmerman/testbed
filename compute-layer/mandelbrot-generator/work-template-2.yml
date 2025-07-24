@@ -1,5 +1,6 @@
 version: 2
 topicPrefix: test
+paritions: 16
 iterations: 1000
 coordinate: 0+0i
 #coordinate: 0.1982-1.1003i
@@ -27,3 +28,8 @@ policy:
     # try_interval_sec: 7_200 # 2 hours
     # try_interval_sec: 1_800 # 30 minutes
     try_interval_sec: 3600 # 3 minutes
+
+  # none (or no) policy by-passes rebalancing algorithms
+  # none:
+  #  active: true
+  #  block_size: 160

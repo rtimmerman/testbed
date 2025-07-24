@@ -1,5 +1,10 @@
 version: 2
+
 topicPrefix: test
+# specifies how the work will be subdivided by nodes allocated to topics test-i where
+# i represents the maximum number of topics
+partitions: 16
+
 iterations: 1000
 coordinate: 0.1982-1.1003i
 zoomPc: 100
@@ -14,9 +19,7 @@ monitor:
 
 # Optimisation strategy (end-game hypothesis testing)
 policy:
-  # Use the stable region policy to zero in on a stable region of the set (where dimensionality is close 1.0 across all nodes)
-  # this objective of this process is to ascertain performance differences between nodes as stability is approached
-  # Pre-reqs a stable point in the z-plane should be specified (above)
-  # policies: stableRegionPolicy, unstableRegionPolicy, towardsPolicy
+  # Use the none policy to send work to allocated nodes
   none:
     active: true
+    block_size: 160

@@ -4,6 +4,7 @@ iterations: 1000
 coordinate: 0.1982-1.1003i
 zoomPc: 100
 neighbourhoodSize: 100
+partitions: 16
 
 monitor:
   prometheus_api_url: http://blowdryer:30845/api/v1/query_range

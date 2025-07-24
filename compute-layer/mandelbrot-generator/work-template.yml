@@ -7,3 +7,4 @@ minR: -2.0
 maxR: 2.0
 topicPrefix: test
 iterations: 1000
+paritions: 16

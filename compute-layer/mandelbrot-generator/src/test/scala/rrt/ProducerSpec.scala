@@ -269,6 +269,9 @@ class ProducerSpec extends AnyFlatSpec with Matchers {
     val batch1 = workI.next()
     assert(batch1.length == 16)
     assert(batch1(0).length == 10) // as per the slider.
+    val batch2 = workI.next()
+    assert(batch2.length == 16)
+    assert(batch1(0)(0) != batch2(0)(0))
     
     val queue: Queue[Array[Array[Map[String, Double]]]] = Queue(workI.next)
     while (!queue.isEmpty)

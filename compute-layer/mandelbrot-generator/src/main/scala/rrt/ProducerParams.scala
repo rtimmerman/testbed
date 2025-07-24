@@ -13,6 +13,7 @@ case class ProducerParams(
     @JsonProperty("minR", required=false) minR: Double,
     @JsonProperty("sizeX", required=false) sizeX: Int,
     @JsonProperty("sizeY", required=false) sizeY: Int,
+    @JsonProperty("partitions", required=true) partitions: Int,
 )
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -25,6 +26,7 @@ case class ProducerParamsV2 (
     @JsonProperty("zoomPc", required=false) zoomPc: Int,
     @JsonProperty("policy", required=false) policy: ProducerWorkPolicy,
     @JsonProperty("monitor", required=false) monitor: Monitor,
+    @JsonProperty("partitions", required=true) partitions: Int,
 )
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -47,7 +49,8 @@ case class ProducerWorkPolicy(
 )
 
 case class NonePolicy(
-    @JsonProperty("active", required = true) active: Boolean = false
+    @JsonProperty("active", required = true) active: Boolean = false,
+    @JsonProperty("block_size", required = true) blockSize: Int
 )
 
 @JsonIgnoreProperties(ignoreUnknown = true)

@@ -189,7 +189,7 @@ object Producer extends KafkaTrait {
 
     def getProgressBar(percent: Double, length: Int = 10): String =
       val nchars: Int = (length * (percent / 100)).ceil.toInt
-      "[ " + "\u25A0".repeat(nchars) + "\u2504".repeat(length - nchars) + s" ] (${percent}%)"
+      "[ " + "#".repeat(nchars) + "-".repeat(length - nchars) + s" ] (${percent}%)"
 
     val workIterator = workGenerator(workset).iterator
 
@@ -206,13 +206,13 @@ object Producer extends KafkaTrait {
           case p: ProducerParams => p.partitions
       )
 
-      logger.info("\u256D\u2500 Batch Allocations \u2500\u256E")
+      logger.info("<< Batch Allocations >>")
       val tBatchSize = batches.map((i) => i.length).sum
       logger.atInfo.log(f"Total number of units: ${tBatchSize.toString}")
       (0 to batches.length - 1).foreach { i =>
         logger.atInfo.log(s"Batch $i: ${getProgressBar(batches(i).length.toFloat / tBatchSize * 100)}")
       }
-      logger.info("\u2500".repeat(15))
+      logger.info("~".repeat(15))
 
       // todo, the batches need to be now be subdivided and looped over.
     

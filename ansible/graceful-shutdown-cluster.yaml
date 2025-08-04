@@ -12,6 +12,7 @@
 - name: Shutdown general services in 10 minutes
   hosts: rrt-general-services
   tasks:
-    become: true
-    shell: |
-      shutdown -h +10m
+    - name: Shutdown in 10 minutes
+      become: true
+      shell: |
+        shutdown -h +10m

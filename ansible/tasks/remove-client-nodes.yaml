@@ -1,0 +1,26 @@
+  tasks:
+    - name: Remove client nodes
+      become: true
+      ignore_errors: true
+      shell: |
+        microk8s remove-node rrt-mongo-shard-1
+        microk8s remove-node rrt-mongo-shard-2
+        microk8s remove-node rrt-mongo-shard-3
+        microk8s remove-node rrt-mongo-shard-4
+        microk8s remove-node rrt-mongo-shard-5
+        microk8s remove-node rrt-compute-node-1
+        microk8s remove-node rrt-compute-node-2
+        microk8s remove-node rrt-compute-node-3
+        microk8s remove-node rrt-compute-node-4
+        microk8s remove-node rrt-compute-node-5
+        microk8s remove-node rrt-compute-node-6
+        microk8s remove-node rrt-compute-node-7
+        microk8s remove-node rrt-compute-node-8
+        microk8s remove-node rrt-compute-node-9
+        microk8s remove-node rrt-compute-node-10
+        microk8s remove-node rrt-compute-node-11
+        microk8s remove-node rrt-compute-node-12
+        microk8s remove-node rrt-compute-node-13
+        microk8s remove-node rrt-compute-node-14
+        microk8s remove-node rrt-compute-node-15
+        microk8s remove-node rrt-compute-node-16

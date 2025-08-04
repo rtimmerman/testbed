@@ -1,0 +1,17 @@
+- name: Graceful shutdown
+  hosts: rrt-general-services
+  tasks:
+    - include_tasks: ./tasks/unload-cluster.yaml
+    - include_tasks: ./tasks/remove-client-nodes.yaml
+
+- name: Shutdown Client nodes
+  hosts: rrt_cluster_clients
+  tasks:
+    - include_tasks: ./tasks/shutdown-clients.yaml
+
+- name: Shutdown general services in 10 minutes
+  hosts: rrt-general-services
+  tasks:
+    become: true
+    shell: |
+      shutdown -h +10m

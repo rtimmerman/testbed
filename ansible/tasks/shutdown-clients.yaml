@@ -1,0 +1,6 @@
+tasks:
+  - name: Shutdown
+    become: true
+    ignore_errors: true
+    shell: |
+      shutdown -h now

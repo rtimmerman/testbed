@@ -40,8 +40,9 @@ object ArrayExtension:
                 )
 
         def prettyString: String =
+            println("Length: " + a.length)
             val content = for (j <- 0 to a.length - 1; i <- 0 to a(0).length - 1)
-                yield f"${a.transpose.entryAt(i, j)} " + (if i == a.length - 1 then "\n" else ", ")
+                yield f"${a.transpose.entryAt(i, j)} " + (if i == a.length - 1 then "|\n" else ", ")
             "\n--------\n" 
                 + content.reduce(_+_)
                 + "\n========\n"
@@ -49,10 +50,12 @@ object ArrayExtension:
         def kronecker(n: Int, m: Int): Matrix2DType =
             val ones = Matrix2D.ones(n, m)
             for {j <- a; _ <- 1 to m}
-                yield j.flatMap(e => Array.fill(m)(e))
+                yield j.flatMap(e => Array.fill(n)(e))
 
 object Matrix2D:
     def ofShape(n: Int, m: Int, content: Double = 0d): Matrix2DType =
         (for (j <- 0 to m - 1) yield Array.fill(n){content}).toArray
+    def ofShapeFromFlat(n: Int, m: Int, content: Array[Double], extraFill: Double = 0d): Matrix2DType =
+        Array()
     def ones(n: Int, m: Int): Matrix2DType = ofShape(n, m, 1)
     def zeros(n: Int, m: Int): Matrix2DType = ofShape(n, m, 0)

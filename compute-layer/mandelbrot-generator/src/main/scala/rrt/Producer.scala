@@ -19,6 +19,7 @@ import rrt.external.PerformanceEvaluator
 import scala.collection.mutable.Queue
 
 import rrt.ProducerParamsV2Extension._
+import rrt.linalg.ArrayExtension.kronecker
 
 object Producer extends KafkaTrait {
   type Space = Array[Array[Map[String, Double]]];
@@ -69,79 +70,93 @@ object Producer extends KafkaTrait {
   
   case class JuliaDimensionResult(dim: Double, centre: rrt.Complex)
 
-  def getJuliaDimension(grp: Array[Map[String, Double]], iterations: Int, boxSize: Int): JuliaDimensionResult =
+  def juliaCentre(grp: Array[Map[String, Double]]): Complex =
     val nums = grp.map(rrt.Complex.fromMap)
     val min = nums.reduce((a, b) => if a.r < b.r then a else b)
     val max = nums.reduce((a, b) => if a.i > b.i then a else b)
     val centre = rrt.Complex((min.r + max.r) / 2, (min.i + max.i) / 2) //<- find the midpoint using averages between real and imaginary parts separately
-    logger.debug(f"calculating julia dimension for $centre")
+    logger.atDebug.log(f"Julia center found: $centre")
+    centre
+
+  def getJuliaDimension(c: Complex, iterations: Int, nBoxes: Int): Double =
+    import math._
+    import rrt.linalg._
+    import rrt.linalg.ArrayExtension._
+    val nBoxesSq = sqrt(nBoxes)
+
     // now calculate the box count dimension the number of iterations will match the config
     var d = 0
-    var blowup = 4.0
+    var blowup = 2.0
 
-    val z_plane = (BigDecimal(-2) to BigDecimal(2) by BigDecimal(4.0/boxSize))
-      .map((i) => (BigDecimal(-2) to BigDecimal(2) by BigDecimal(4.0/boxSize))
+    // establish a 1600x1600 julia plot
+    val res = BigDecimal(1) / BigDecimal(16) // i.e. 4/1600
+
+    val z_plane = (BigDecimal(-2) until BigDecimal(2) by res)
+      .map((i) => (BigDecimal(-2) until BigDecimal(2) by res)
       .map((r) => rrt.Complex(r,i)))
 
-    lazy val m: (rrt.Complex, Int) => Int = (z, n) =>{
-      val z2 = (z ** 2) + centre
-      // println(z2.abs())
+    lazy val m: (rrt.Complex, Int) => Int = (z, n) => {
+      val z2 = (z ** 2) + c
       z2.abs() match
         case v if v >= blowup => iterations - n
-        case v if n > 0 => m(z2, n - 1)
+        case v if n > 0 => 
+          m(z2, n - 1)
         case _ => -1
-    
     }
-    //         if (box_threshold <= area[int(x)][int(y)] or area[int(x)][int(y)] == -1):
-    //        nr += 1
 
-    val boxThreshold = 0.05 * iterations
+    val boxThreshold = iterations
 
-    // TODO: un comment this out when doing julia set based load balancing
     // also pay attention to issues around underflow errors here.
     val julia = z_plane.flatten.map {case z =>
       val e = m(z, iterations) 
       e match
-        case v if v == -1|| (v > 0 && v >= boxThreshold)  => 1
+        case v if v == -1 || Range(6, 8).contains(v) => v
         case _ => 0
     }
 
-    // ** Verification Plot **
-    // julia.zipWithIndex.foreach {case (z, idx) =>
-    //     if (z == 1) {
-    //       print(idx match
-    //         case n if n <= n % (boxSize / 4.0) => 1
-    //         case _ => '*'
-    //         )
-    //     } else {
-    //       print(' ')
-    //     }
-    //     if (idx % (boxSize + 1) == 0) {
-    //       println()
-    //     }
-    //   }
+    println(f"max escape iteration = ${julia.max}")
 
-    // val boxCount = 6
-    // val divs = julia.toList.grouped(julia.size / Math.pow(boxCount, 2).toInt).map(g => g.sum).filter(n => n > 0)  
-    // val nr = divs.size
+    // -- uncomment to preview julia plot (graphically)
+    julia.sliding(64, 64).foreach(row =>
+      row.foreach(column => print(column match
+        case x if x == -1 => "*"
+        case x if x > 0 => List("+","-",".")(x % 3)
+        case _ => " "
+      ))
+      println
+      )
 
-    val avgBoxNr = Range(2, 5)
-      .map {case boxCount => Map(
-        "nr" -> julia.toList.grouped(julia.size / Math.pow(boxCount, 2).toInt).map(g => g.sum).filter(n => n > 0).size, //number of filled boxes
-        "nb" -> boxCount, // box length (i.e. nb^2 = total number of boxes)
-        )}
-      .map {resmap => Math.abs(Math.log(resmap("nr")) / Math.log(1.0/Math.pow(resmap("nb"), 2)))}
+    val kronLength: Int = (64 / sqrt(nBoxes)).toInt
+    val boxlayout = (0 until nBoxes).map(i => i.toDouble).toArray.sliding(nBoxes, nBoxes).toArray.kronecker(kronLength, kronLength)
+    val boxAlloc = boxlayout.flatten.map {i => i.toInt}
+    assert(boxAlloc.length >= julia.length, f"Julia length: ${julia.length} >= Box Allocations length = ${boxAlloc.length}")
+    // println(boxlayout.prettyString)
+    // println(boxAlloc.toList)
 
-    if (avgBoxNr.sum.isInfinity) {
-      logger.debug(s"Setting dimension to 1.0 since the sum for ${centre} is infinity")
-      return JuliaDimensionResult(1.0d, centre)
-    }
-    logger.info(s"Aquired julia dimension for ${centre}")
+    logger.atInfo.log(f"Box Allocation test: End Box Alloc = ${boxAlloc(julia.length - 1)}, Box alloc length = ${boxAlloc.length}, Julia Length = ${julia.length}, iterations=${iterations}")
+    // println(julia.toList)
 
-    JuliaDimensionResult(
-      dim = BigDecimal(avgBoxNr.sum / avgBoxNr.size).setScale(2, scala.math.BigDecimal.RoundingMode.HALF_UP).toDouble,
-      centre = centre
-    )
+    val boxes = Array.ofDim[Int](boxAlloc(boxAlloc.length - 1) + 1)
+    for (i <- Range(0, julia.length))
+      val boxIndex = boxAlloc(i)
+      // logger.atInfo.log(f"box #: $boxIndex")
+      // logger.atInfo.log(f"julia val #: ${julia(i)}")
+      val valid = (v: Double) => (v != 0)
+      // julia(i) match
+      //   case v if valid(v) =>
+      //     println(f"${julia(i)} --> ${boxAlloc(i)}")
+      //     boxAlloc(i) += 1
+      //   case _ =>
+      if (valid(julia(i).toDouble))
+        // println(f"${julia(i)} --> ${boxAlloc(i)}")
+        boxes(boxAlloc(i)) += 1
+
+    val nR = boxes.filter((b) => b > 0).length
+    logger.atInfo.log(boxes.toList.toString)
+    logger.atInfo.log(f"Number of filled boxes ${nR} out of ${boxes.length}")
+    val D = 2 * (log(nR) / log(nBoxes))
+    logger.atInfo.log(f"Dimension: $D")
+    D
 
   def getParams(configFilePath: String): ProducerParams | ProducerParamsV2 =
     var mapper = new ObjectMapper(new YAMLFactory())

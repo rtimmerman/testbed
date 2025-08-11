@@ -33,6 +33,7 @@ object Kafka extends Tag("rrt.tags.Kafka")
 object Navigation extends Tag("rrt.tags.Navigation")
 object WorkConfig extends Tag("rrt.tags.WorkConfig")
 object Dimensionality extends Tag("rrt.tags.Dimensionality")
+object Matrix extends Tag("rrt.tags.Matrix")
 
 class ProducerSpec extends AnyFlatSpec with Matchers {
   "A producer instance" should "be able to support customisable canvas plots" in {
@@ -283,17 +284,29 @@ class ProducerSpec extends AnyFlatSpec with Matchers {
   "Producer" should "be able to find the julia dimension from a set of coordinate points" taggedAs(Dimensionality)in {
     // val configFile = System.getProperty("user.dir") + "/src/test/resources/test-work.yml"
     val space = Producer.createSpaceFromPoint(Complex(0, 0), ball=16).flatten
-    val dimension = Producer.getJuliaDimension(space, 10, 40)
-    assert(1 == Math.round(dimension.dim)) // 1 - indicates
+    val ctr = Producer.juliaCentre(space)
+    val dimension = Producer.getJuliaDimension(ctr, 100, 4)
+    assert(2 == Math.round(dimension)) // 1 - indicates
 
     // position one (0) of the tuple is the dimension, position two is the center point.
     assert(
-      1 > Producer.getJuliaDimension(
-        Producer.createSpaceFromPoint(Complex(-6, -6), ball=16).flatten,
-        10,
-        40
-      ).dim
+      2 > Producer.getJuliaDimension(
+        Producer.juliaCentre(Producer.createSpaceFromPoint(Complex(0, -0.4), ball=100).flatten),
+        100,
+        64
+      )
     )
+
+    val ctr2 = Producer.juliaCentre(Producer.createSpaceFromPoint(Complex(-1.3, -1.3), ball=100).flatten)
+    println(ctr2)
+    println("Average dimension testing----")
+    val avgDim = List(4, 16, 64).map(n => Producer.getJuliaDimension(
+        ctr2,
+        1000,
+        n
+      )).sum / 3.0
+    println(f"Avg Dim: $avgDim")
+
   }
 
   "Producer" should "be able to send work to Kafka" taggedAs(Kafka) in {
@@ -323,5 +336,32 @@ class ProducerSpec extends AnyFlatSpec with Matchers {
 
     assert(!params.asInstanceOf[ProducerParamsV2].usingStableRegionPolicy)
     assert(params.asInstanceOf[ProducerParamsV2].usingNoPolicy)
+  }
+
+  "Producer" should "be able to manipulate matrices" taggedAs(Matrix) in {
+    import rrt.linalg.Matrix2DType
+    import rrt.linalg.Matrix2D
+    import rrt.linalg.ArrayExtension._
+
+    val A: Matrix2DType = Array(Array(1.0, 2.0), Array(3.0, 4.0))
+    val B = A.fill(3d)
+
+    val C = Matrix2D.ofShape(2, 2)
+    println(C.entryAt(0, 0))
+    val D = A.add(B)
+    println(D.prettyString)
+
+    val E = Array(Array(2.0, 0d), Array(0d, 2.0))
+    println(E.dot(A).prettyString)
+
+    println(Matrix2D.ones(10, 10).prettyString)
+
+    println(Matrix2D.ones(2, 2).scalarMul(4).prettyString)
+    println(A.prettyString)
+
+    val K: Matrix2DType = (0 to 15).map(i => i.toDouble).toArray.sliding(4, 4).toArray
+    println(K.prettyString)
+    println(K.kronecker(4,4).prettyString)
+    println(K.kronecker(4,4).length)
   }
 }

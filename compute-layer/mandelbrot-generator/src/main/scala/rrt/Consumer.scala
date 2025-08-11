@@ -37,7 +37,10 @@ class Complex(var r: BigDecimal, var i: BigDecimal) {
   def pow(n: BigDecimal): Complex = this**(n)
   def **(n: BigDecimal): Complex = 
     var ans: Complex = this
-    Range(0, n.toInt - 1).foreach(_ => ans = ans * this)
+    try
+      Range(0, n.toInt - 1).foreach(_ => ans = ans * this)
+    catch
+      case e: ArithmeticException => 0
     return ans
   
   def **(w: Complex): Complex =
@@ -59,7 +62,10 @@ class Complex(var r: BigDecimal, var i: BigDecimal) {
     return false
 
 
-  def abs(): Double = Math.pow(r.pow(2).toDouble + i.pow(2).toDouble, 0.5)
+  // def abs(): Double = Math.pow(r.pow(2).toDouble + i.pow(2).toDouble, 0.5)
+  def abs(): Double = try
+      Math.hypot(r.toDouble, i.toDouble)
+    catch case e: ArithmeticException => 0
 
   // def conj(): Complex = new Complex(this.r, -this.i)
   def conj: Complex = Complex(this.r, -this.i)

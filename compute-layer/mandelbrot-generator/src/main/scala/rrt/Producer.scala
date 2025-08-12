@@ -189,7 +189,7 @@ object Producer extends KafkaTrait {
         space = p.sizeX * p.sizeY
 
     val evalUnits = params match
-      case p: ProducerParamsV2 if p.usingStableRegionPolicy => p.policy.stableRegionPolicy.maxEvalUnits
+      case p: ProducerParamsV2 if p.usingPerformancePolicy => p.policy.performancePolicy.maxEvalUnits
       case p: ProducerParamsV2 if p.usingNoPolicy => p.policy.nonePolicy.blockSize
       case _ => 160
     
@@ -280,9 +280,9 @@ object Producer extends KafkaTrait {
       
       // **** Load Balancing ****
       params match
-        case p: ProducerParamsV2 if p.usingStableRegionPolicy =>
+        case p: ProducerParamsV2 if p.usingPerformancePolicy =>
           // wait for a set time interval or ascertain that alk the workers have finished.
-          Thread.sleep(p.policy.stableRegionPolicy.tryIntervalSec * 1000)
+          Thread.sleep(p.policy.performancePolicy.tryIntervalSec * 1000)
           // evaluate performance here
           val lastPerformance = PerformanceEvaluator.getLastPerformance(params.asInstanceOf[ProducerParamsV2])
           PerformanceEvaluator.orderByPerformance(lastPerformance)
@@ -306,16 +306,16 @@ object Producer extends KafkaTrait {
     params match
       // Julia Dimension based Optimisation Hypothesis Test (run by run)
       // let's test the hypothesis for julia, here is the re-entrant code for that
-      case p: ProducerParamsV2 if p.policy.stableRegionPolicy != null && p.policy.stableRegionPolicy.maxTries > 0 =>
+      case p: ProducerParamsV2 if p.policy.performancePolicy != null && p.policy.performancePolicy.maxTries > 0 =>
         logger.info("Julia re-positioning (hypothesis test)")
         val closestCentre = results.map {r => r.juliaDimensionResult}.reduce { (a, b) => if a.dim > b.dim then a else b }
         val p2 = p.copy(
           coordinate = closestCentre.centre.toString,
-          policy = ProducerWorkPolicy(StableRegionPolicy(maxTries = p.policy.stableRegionPolicy.maxTries - 1, tryIntervalSec = p.policy.stableRegionPolicy.tryIntervalSec))
+          policy = ProducerWorkPolicy(performancePolicy(maxTries = p.policy.performancePolicy.maxTries - 1, tryIntervalSec = p.policy.performancePolicy.tryIntervalSec))
         )
         // wait before submitting work again.
-        logger.info(s"Ready to send work for new coordinate ${p2.coordinate} (after ${p2.policy.stableRegionPolicy.tryIntervalSec} seconds)")
-        Thread.sleep(p.policy.stableRegionPolicy.tryIntervalSec * 1000)
+        logger.info(s"Ready to send work for new coordinate ${p2.coordinate} (after ${p2.policy.performancePolicy.tryIntervalSec} seconds)")
+        Thread.sleep(p.policy.performancePolicy.tryIntervalSec * 1000)
         gridWorkStream(producerFactory, p2)
       case _ =>
       */

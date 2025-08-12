@@ -1,8 +1,8 @@
 package rrt.policy
 
-import rrt.StableRegionPolicy
+import rrt.PerformancePolicy
 
-class StableRegion(settings: StableRegionPolicy)
+class Performance(settings: PerformancePolicy)
 
 // object StableRegion:
 //     def afterDispatch() = Unit

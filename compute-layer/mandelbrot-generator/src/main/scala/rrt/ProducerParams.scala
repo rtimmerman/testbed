@@ -44,7 +44,7 @@ case class Queries(
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 case class ProducerWorkPolicy(
-    @JsonProperty("stable_region_policy", required=false) stableRegionPolicy: StableRegionPolicy,
+    @JsonProperty("performance_policy", required=false) performancePolicy: PerformancePolicy,
     @JsonProperty("none", required = false) nonePolicy: NonePolicy,
 )
 
@@ -54,7 +54,7 @@ case class NonePolicy(
 )
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-case class StableRegionPolicy(
+case class PerformancePolicy(
     @JsonProperty("max_tries", required = true) maxTries: Int,
     @JsonProperty("max_eval_units", required = true) maxEvalUnits: Int,
     @JsonProperty("try_interval_sec", required = true) tryIntervalSec: Int,
@@ -62,5 +62,5 @@ case class StableRegionPolicy(
 
 object ProducerParamsV2Extension:
     extension(p: ProducerParamsV2)
-        def usingStableRegionPolicy: Boolean = p.policy.stableRegionPolicy != null
+        def usingPerformancePolicy: Boolean = p.policy.performancePolicy != null
         def usingNoPolicy: Boolean = p.policy.nonePolicy != null

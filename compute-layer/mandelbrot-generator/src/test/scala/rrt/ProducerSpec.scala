@@ -23,7 +23,7 @@ import boundary.break
 import rrt.external.PerformanceEvaluator
 import org.mockito.MockedStatic
 import scala.collection.mutable.Queue
-import rrt.ProducerParamsV2Extension.usingStableRegionPolicy
+import rrt.ProducerParamsV2Extension.usingPerformancePolicy
 import rrt.ProducerParamsV2Extension.usingNoPolicy
 
 
@@ -313,7 +313,7 @@ class ProducerSpec extends AnyFlatSpec with Matchers {
     val configFile = System.getProperty("user.dir") + "/src/test/resources/test-work.yml"
     val producerProps = new java.util.Properties()
     val params = Producer.getParams(configFile)
-    assert(params.asInstanceOf[ProducerParamsV2].usingStableRegionPolicy)
+    assert(params.asInstanceOf[ProducerParamsV2].usingPerformancePolicy)
 
     // val peMock = Mockito.mockStatic(getClass[PerformanceEvaluator.type])
     // Mockito.when(peMock.getLastPerformance())
@@ -334,7 +334,7 @@ class ProducerSpec extends AnyFlatSpec with Matchers {
     val producerProps = new java.util.Properties()
     val params = Producer.getParams(configFile)
 
-    assert(!params.asInstanceOf[ProducerParamsV2].usingStableRegionPolicy)
+    assert(!params.asInstanceOf[ProducerParamsV2].usingPerformancePolicy)
     assert(params.asInstanceOf[ProducerParamsV2].usingNoPolicy)
   }
 

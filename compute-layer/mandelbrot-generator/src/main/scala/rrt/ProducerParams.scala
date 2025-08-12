@@ -44,7 +44,8 @@ case class Queries(
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 case class ProducerWorkPolicy(
-    @JsonProperty("performance_policy", required=false) performancePolicy: PerformancePolicy,
+    @JsonProperty("performance", required=false) performancePolicy: PerformancePolicy,
+    @JsonProperty("julia", required = false) juliaPolicy: JuliaPolicy,
     @JsonProperty("none", required = false) nonePolicy: NonePolicy,
 )
 
@@ -58,6 +59,17 @@ case class PerformancePolicy(
     @JsonProperty("max_tries", required = true) maxTries: Int,
     @JsonProperty("max_eval_units", required = true) maxEvalUnits: Int,
     @JsonProperty("try_interval_sec", required = true) tryIntervalSec: Int,
+)
+
+enum TendMinMax(val s: String):
+   case Min extends TendMinMax("min")
+   case Max extends TendMinMax("max")
+
+case class JuliaPolicy(
+    @JsonProperty("max_tries", required = true) maxTries: Int,
+    @JsonProperty("max_eval_units", required = true) maxEvalUnits: Int,
+    @JsonProperty("try_interval_sec", required = true) tryIntervalSec: Int,
+    @JsonProperty("dimension_tendency", required = true) dimTendency: TendMinMax
 )
 
 object ProducerParamsV2Extension:

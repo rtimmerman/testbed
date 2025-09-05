@@ -10,7 +10,7 @@ ycsb*
 *.log
 .bsp/
 **/*.bloop/
-.bsp/
+.bsp/*
 *.tgz
 #target/
 data/
@@ -23,3 +23,4 @@ data/
 kafka/kafka*
 
 node_modules
+

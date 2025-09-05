@@ -76,3 +76,4 @@ object ProducerParamsV2Extension:
     extension(p: ProducerParamsV2)
         def usingPerformancePolicy: Boolean = p.policy.performancePolicy != null
         def usingNoPolicy: Boolean = p.policy.nonePolicy != null
+        def usingJuliaPolicy: Boolean = p.policy.juliaPolicy != null

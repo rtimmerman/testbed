@@ -21,6 +21,9 @@ import scala.collection.mutable.Queue
 import rrt.ProducerParamsV2Extension._
 import rrt.linalg.ArrayExtension.kronecker
 
+import rrt.policy.Julia as JuliaPolicy
+import rrt.policy.Adjustable
+
 object Producer extends KafkaTrait {
   type Space = Array[Array[Map[String, Double]]];
 
@@ -188,6 +191,10 @@ object Producer extends KafkaTrait {
         b = createSpace(p.sizeX, p.sizeY, p.minR, p.maxR, p.minI, p.maxI)
         space = p.sizeX * p.sizeY
 
+    val observer: Adjustable[JuliaDimensionResult] = params match
+      case p: ProducerParamsV2 if p.usingJuliaPolicy => JuliaPolicy[JuliaDimensionResult](p)
+      case _ => null
+
     val evalUnits = params match
       case p: ProducerParamsV2 if p.usingPerformancePolicy => p.policy.performancePolicy.maxEvalUnits
       case p: ProducerParamsV2 if p.usingNoPolicy => p.policy.nonePolicy.blockSize
@@ -239,6 +246,20 @@ object Producer extends KafkaTrait {
           case p: ProducerParamsV2 => s"${p.topicPrefix}-${number}"
           case p: ProducerParams => s"${p.topicPrefix}-${number}"
 
+        observer match
+          case o: Adjustable[JuliaDimensionResult] =>
+            o.afterDispatch("Re-evaluating with new julia z...", () => {
+              params match
+                case p: ProducerParamsV2 =>
+                  val centre = juliaCentre(batch)
+                  JuliaDimensionResult(
+                    getJuliaDimension(centre, p.iterations, p.neighbourhoodSize),
+                    centre
+                  )
+                case _ => JuliaDimensionResult(-1, null)
+            })
+          case null =>
+
         Future {
           val kafkaProducer = producerFactory(s"transaction-$number")
           batch.grouped(100).foreach(grp => {
@@ -285,7 +306,7 @@ object Producer extends KafkaTrait {
           Thread.sleep(p.policy.performancePolicy.tryIntervalSec * 1000)
           // evaluate performance here
           val lastPerformance = PerformanceEvaluator.getLastPerformance(params.asInstanceOf[ProducerParamsV2])
-          PerformanceEvaluator.orderByPerformance(lastPerformance)
+          // PerformanceEvaluator.orderByPerformance(lastPerformance)
           // rebalance here
           if (workIterator.hasNext)
             workQueue.append(PerformanceEvaluator.rebalance(
@@ -301,6 +322,13 @@ object Producer extends KafkaTrait {
         // rebalance the work according to a chosen strategy (e.g. could be frame by frame based action of Julia set based optimation)
     // ---- end of perf-eval loop ----
     logger.info("Dispatch complete")
+
+    // **** post dispatch evaluation (for hypothesis tests) ****
+    
+    observer match
+      case o: Adjustable[JuliaDimensionResult] =>
+        gridWorkStream(producerFactory, o.onPostDispatchEvaluation())
+      case null =>
 
     /*
     params match

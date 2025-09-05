@@ -89,6 +89,7 @@ class ProducerSpec extends AnyFlatSpec with Matchers {
   "Producer" should "be able to consume v1 parameters" in {
     val yamlText = """
     version: 1
+    partitions: 16
     iterations: 1000
     topicPrefix: test
     minI: -2.0
@@ -118,6 +119,7 @@ class ProducerSpec extends AnyFlatSpec with Matchers {
 
     val yamlText = """
     version: 2
+    partitions: 16
     iterations: 1000
     topicPrefix: test
     coordinate: 0+0i
@@ -134,6 +136,7 @@ class ProducerSpec extends AnyFlatSpec with Matchers {
   "Producer" should "be able to consume either v1 or v2 parameters" in {
     val yamlText = """
     version: 2
+    partitions: 16
     iterations: 1000
     topicPrefix: test
     coordinate: 0+0i

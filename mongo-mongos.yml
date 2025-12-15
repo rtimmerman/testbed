@@ -458,8 +458,7 @@ spec:
                   values:
                     - mongo-shard-1
                     - debugger
-
-        
+                    - monolith
 
 ---
 kind: Service

@@ -40,6 +40,7 @@ spec:
                   values:
                     - rrt-general-services
                     - debugger
+                    - monolith
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -88,6 +89,7 @@ spec:
                   values:
                     - rrt-general-services
                     - debugger
+                    - monolith
       volumes:
       - name: application-vol
         nfs:
@@ -143,6 +145,7 @@ spec:
                   values:
                     - compute-node-1
                     - debugger
+                    - monolith
       volumes:
       - name: application-vol
         nfs:
@@ -198,6 +201,7 @@ spec:
                   operator: In
                   values:
                     - compute-node-2
+                    - monolith
       volumes:
       - name: application-vol
         nfs:
@@ -253,6 +257,7 @@ spec:
                   operator: In
                   values:
                     - compute-node-3
+                    - monolith
       volumes:
       - name: application-vol
         nfs:
@@ -308,6 +313,7 @@ spec:
                   operator: In
                   values:
                     - compute-node-4
+                    - monolith
       volumes:
       - name: application-vol
         nfs:
@@ -362,6 +368,7 @@ spec:
                   operator: In
                   values:
                     - compute-node-5
+                    - monolith
       volumes:
       - name: application-vol
         nfs:
@@ -416,6 +423,7 @@ spec:
                   operator: In
                   values:
                     - compute-node-6
+                    - monolith
       volumes:
       - name: application-vol
         nfs:
@@ -470,6 +478,7 @@ spec:
                   operator: In
                   values:
                     - compute-node-7
+                    - monolith
       volumes:
       - name: application-vol
         nfs:
@@ -524,6 +533,7 @@ spec:
                   operator: In
                   values:
                     - compute-node-8
+                    - monolith
       volumes:
       - name: application-vol
         nfs:
@@ -578,6 +588,7 @@ spec:
                   operator: In
                   values:
                     - compute-node-9
+                    - monolith
       volumes:
       - name: application-vol
         nfs:
@@ -632,6 +643,7 @@ spec:
                   operator: In
                   values:
                     - compute-node-10
+                    - monolith
       volumes:
       - name: application-vol
         nfs:
@@ -686,6 +698,7 @@ spec:
                   operator: In
                   values:
                     - compute-node-11
+                    - monolith
       volumes:
       - name: application-vol
         nfs:
@@ -740,6 +753,7 @@ spec:
                   operator: In
                   values:
                     - compute-node-12
+                    - monolith
       volumes:
       - name: application-vol
         nfs:
@@ -794,6 +808,7 @@ spec:
                   operator: In
                   values:
                     - compute-node-13
+                    - monolith
       volumes:
       - name: application-vol
         nfs:
@@ -848,6 +863,7 @@ spec:
                   operator: In
                   values:
                     - compute-node-14
+                    - monolith
       volumes:
       - name: application-vol
         nfs:
@@ -902,6 +918,7 @@ spec:
                   operator: In
                   values:
                     - compute-node-15
+                    - monolith
       volumes:
       - name: application-vol
         nfs:
@@ -955,6 +972,7 @@ spec:
                   operator: In
                   values:
                     - compute-node-16
+                    - monolith
       volumes:
       - name: application-vol
         nfs:
@@ -1003,6 +1021,7 @@ spec:
                   operator: In
                   values:
                     - rrt-general-services
+                    - monolith
       volumes:
       - name: application-vol
         nfs:

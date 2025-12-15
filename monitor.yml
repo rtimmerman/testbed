@@ -123,6 +123,7 @@ spec:
                   values:
                     - rrt-general-services
                     - debugger
+                    - monolith
 
 ---
 apiVersion: v1
@@ -183,6 +184,7 @@ spec:
                   values:
                     - rrt-general-services
                     - debugger
+                    - monolith
 ---
 apiVersion: v1
 kind: Service

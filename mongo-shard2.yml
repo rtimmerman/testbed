@@ -987,7 +987,7 @@ spec:
                     values:
                       - mongo-shard-2
                       - debugger
-
+                      - monolith
 
 ---
 apiVersion: apps/v1
@@ -1047,6 +1047,7 @@ spec:
                   values:
                     - mongo-shard-2
                     - debugger
+                    - monolith
 
 
 ---
@@ -1103,6 +1104,7 @@ spec:
                   values:
                     - mongo-shard-2
                     - debugger
+                    - monolith
 
 ---
 apiVersion: v1
@@ -1197,3 +1199,5 @@ spec:
               values:
                 - mongo-shard-2
                 - debugger
+                - monolith
+

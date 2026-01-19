@@ -81,7 +81,8 @@ spec:
           volumeMounts:
           - mountPath: /root/mandelbrot-generator
             name: application-vol
-          - mountPath: /data
+          - mountPath: /data/
+            name: data-vol
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:

@@ -8,8 +8,6 @@ import java.io.FileInputStream
 import org.apache.kafka.clients.producer.ProducerRecord
 import java.io.FileOutputStream
 import java.util.UUID
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory
 import scala.concurrent.Future
 import scala.concurrent.duration.Duration
 import scala.concurrent.duration._
@@ -17,9 +15,58 @@ import scala.concurrent.ExecutionContext
 import scala.concurrent.Await
 import scala.collection.mutable.ListBuffer
 import io.prometheus.client.exporter.HTTPServer
+import org.apache.logging.log4j.core.config.Configurator
+import org.apache.logging.log4j.core.config.Configuration
+import org.apache.logging.log4j.core.config.ConfigurationFactory
+import java.net.URI
+import org.apache.logging.log4j.core.appender.FileAppender
+import org.apache.logging.log4j.core.LoggerContext
+import org.apache.logging.log4j.LogManager
+import org.apache.logging.log4j.core.layout.PatternLayout
+import org.apache.logging.log4j.Logger
 
 given ExecutionContext = ExecutionContext.global
+
+def setupLogging() =
+  var ctx = LogManager.getContext(false).asInstanceOf[LoggerContext]
+  val logger = ctx.getLogger(classOf[Activity].getName)
+
+  // var logConfigFile = File("src/main/resources/log4j2.xml")
+  // var logConfig = ConfigurationFactory.getInstance().getConfiguration(null, null, logConfigFile.toURI())
+  // logConfig.initialize()
+
+  var layout = PatternLayout.newBuilder()
+    .withPattern("%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n")
+    .build()
+
+  var fileAppenderBuilder: FileAppender.Builder[?] = FileAppender.newBuilder()
+  fileAppenderBuilder.setName("output") // todo get this from environment
+  fileAppenderBuilder.withFileName("outlog.log") // todo get this from environment
+  fileAppenderBuilder.withLayout(layout)
+  fileAppenderBuilder.setConfiguration(ctx.getConfiguration())
+
+  // System.getenv()
+
+  var fileAppender = fileAppenderBuilder.build()
+  fileAppender.start()
+
+  sys.addShutdownHook {
+    println("Gracefully stopping the logs")
+    LogManager.shutdown()
+  }
+
+  ctx.getConfiguration().getRootLogger().addAppender(fileAppender, null, null)
+  ctx.updateLoggers()
+
+  // logger.info("hello!")
+
+  logger
+
 @main def mandelbrot(role: String, args: String*): Unit =
+
+  // val logger = LoggerFactory.getLogger(classOf[Activity].getName)
+  val logger = setupLogging()
+
   val topic = role match {
     case "consumer"             => args(0)
     case "data-writer-consumer" => args(0)
@@ -32,8 +79,8 @@ given ExecutionContext = ExecutionContext.global
   }
 
   if (role.equals("producer"))
-    println(f"<< PRODUCER >> starting producer from config: \"$frameConfigFile\"")
-    val activity = new Activity(Role.Producer, UUID.randomUUID().toString())
+    logger.info(f"<< PRODUCER >> starting producer from config: \"$frameConfigFile\"")
+    val activity = new Activity(Role.Producer, UUID.randomUUID().toString(), logger)
     // Future {
     //   Thread.sleep(10000)
     //   activity.uploadJar("./target/scala-3.3.0/mandelbrot-generator_3-0.1.0-SNAPSHOT.jar")
@@ -41,32 +88,32 @@ given ExecutionContext = ExecutionContext.global
     activity.producer("./target/scala-3.5.0/mandelbrot-generator_3-0.1.0-SNAPSHOT.jar", frameConfigFile)
     //Producer.produceGridPoints(topic, iterations)
   else if (role.equals("consumer"))
-    println(f"<< CONSUMER >> listening to \"$topic\"")
-    println("Attempting to bring up metrics server...")
+    logger.info(f"<< CONSUMER >> listening to \"$topic\"")
+    logger.info("Attempting to bring up metrics server...")
     val statsServer = HTTPServer.Builder()
         .withPort(9180)
         //.withDaemonThreads(true)
         .build()
-    println(s"Metrics Server is up on port ${statsServer.getPort()}")
+    logger.info(s"Metrics Server is up on port ${statsServer.getPort()}")
 
-    val activity = new Activity(Role.Consumer, UUID.randomUUID().toString())
+    val activity = new Activity(Role.Consumer, UUID.randomUUID().toString(), logger)
     Future {
       Thread.sleep(10000)
       activity.uploadJar("./target/scala-3.5.0/mandelbrot-generator_3-0.1.0-SNAPSHOT.jar")
     }
 
-    println("Waiting for work...")
+    logger.info("Waiting for work...")
 
     activity.consumeJar(topic)
     statsServer.close()
   else if (role.equals("data-writer-consumer"))
-    println(f"<< DATA-WRITER >> listnening to \"$topic\"")
-    val activity = new Activity(Role.DataWriter, UUID.randomUUID().toString())
+    logger.info(f"<< DATA-WRITER >> listnening to \"$topic\"")
+    val activity = new Activity(Role.DataWriter, UUID.randomUUID().toString(), logger)
     activity.consumeJar(topic)
     //DataWriter.consume(topic)
   else if (role.equals("console"))
-      println("<< CONSOLE >>")
-      val activity = new Activity(Role.Console)
+      logger.info("<< CONSOLE >>")
+      val activity = new Activity(Role.Console, null, logger)
       val command: String = null
       val args: Seq[String] = null
       var running = true
@@ -115,10 +162,11 @@ class StaleJarException extends Exception
   * @param role
   * @param kafkaGroupId default is a different group per instantiation to allow for multiple consumers to read from one source of truth for jar updates.
   */
-class Activity(var role: Role, var kafkaGroupId: String = UUID.randomUUID().toString()):
+class Activity(var role: Role, var kafkaGroupId: String = UUID.randomUUID().toString(), inLogger: Logger):
 
-  val logger = LoggerFactory.getLogger(classOf[Activity].getName)
-  
+  // val logger = LoggerFactory.getLogger(classOf[Activity].getName)
+  val logger = inLogger
+
   def kafkaProducer(transactionId: String): KafkaProducer[String, Array[Byte]] = 
     val producerProps = new Properties()
     
@@ -200,7 +248,7 @@ class Activity(var role: Role, var kafkaGroupId: String = UUID.randomUUID().toSt
       sysProducer.commitTransaction()
       sysProducer.close()
     } catch {
-      case e: Exception => println(s"Exception encountered: ${e.getClass()} ${e.getMessage()}")
+      case e: Exception => logger.error(s"Exception encountered: ${e.getClass()} ${e.getMessage()}")
       sysProducer.abortTransaction()
       sysProducer.close()
     }
@@ -243,10 +291,10 @@ class Activity(var role: Role, var kafkaGroupId: String = UUID.randomUUID().toSt
             clazz.getDeclaredMethod("consume", classOf[String]).invoke(null, params(0))
           } catch {
             case e: Exception => 
-              println(s"<ERR> Caller encountered issue with the consumer: <<${e.getClass().getName()} -> ${e.getMessage()}>>")
-              println(s"<ERR> Stack trace: ")
-              e.getStackTrace().foreach(t => println(s"<ERR> $t"))
-              println(s"<ERR> Caused by: ${e.getCause().getClass()}")
+              logger.error(s"<ERR> Caller encountered issue with the consumer: <<${e.getClass().getName()} -> ${e.getMessage()}>>")
+              logger.error(s"<ERR> Stack trace: ")
+              e.getStackTrace().foreach(t => logger.debug(s"<ERR> $t"))
+              logger.error(s"<ERR> Caused by: ${e.getCause().getClass()}")
           }
         }
 
@@ -256,7 +304,7 @@ class Activity(var role: Role, var kafkaGroupId: String = UUID.randomUUID().toSt
             val clazz = this.classLoader("/tmp/out.jar").loadClass("rrt.Producer")
             clazz.getDeclaredMethod("produceGridPoints", classOf[String], classOf[KafkaProducer[String,String]]).invoke(null, params(0), null)
           } catch {
-            case e: Exception => println(s"Encountered issue setting up producer: <<${e.getClass().getName()} -> ${e.getMessage()}>>")
+            case e: Exception => logger.error(s"Encountered issue setting up producer: <<${e.getClass().getName()} -> ${e.getMessage()}>>")
           }
         }
 
@@ -265,7 +313,7 @@ class Activity(var role: Role, var kafkaGroupId: String = UUID.randomUUID().toSt
             val clazz = this.classLoader("/tmp/out.jar").loadClass("rrt.DataWriter")
             clazz.getDeclaredMethod("consume", classOf[String]).invoke(null, params(0))
           } catch {
-            case e: Exception => println(s"Encountered issue setting up data writer consumer: <<${e.getClass().getName()} -> ${e.getMessage()}>>")
+            case e: Exception => logger.error(s"Encountered issue setting up data writer consumer: <<${e.getClass().getName()} -> ${e.getMessage()}>>")
           }
         }
     }

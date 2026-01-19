@@ -40,8 +40,10 @@ def setupLogging() =
     .build()
 
   var fileAppenderBuilder: FileAppender.Builder[?] = FileAppender.newBuilder()
-  fileAppenderBuilder.setName("output") // todo get this from environment
-  fileAppenderBuilder.withFileName("outlog.log") // todo get this from environment
+  val mlogName = sys.env.getOrElse("MLOG_NAME", "/tmp/output")
+  val mlogFilePath = sys.env.getOrElse("MLOG_FILE_PATH", "/tmp/output.log")
+  fileAppenderBuilder.setName(mlogName)
+  fileAppenderBuilder.withFileName(mlogFilePath)
   fileAppenderBuilder.withLayout(layout)
   fileAppenderBuilder.setConfiguration(ctx.getConfiguration())
 

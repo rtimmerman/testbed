@@ -66,7 +66,7 @@ spec:
     spec:
       terminationGracePeriodSeconds: 5
       containers:
-        - image: rrt-general-services:32000/operator:1.0
+        - image: localhost:32000/operator:1.0
           imagePullPolicy: Always
           name: data-writer-consumer-0-container
           env:
@@ -74,11 +74,14 @@ spec:
             - {name: TOPIC, value:  result}
             - {name: TRUSTSTORE_PATH, value: /root/mandelbrot-generator/test.ts}
             - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
+            - {name: MLOG_NAME, value: dw-consumer-0-log}
+            - {name: MLOG_FILE_PATH, value: /data/dw-consumer-0.log}
           ports:
             - containerPort: 9091
           volumeMounts:
           - mountPath: /root/mandelbrot-generator
             name: application-vol
+          - mountPath: /data
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -96,6 +99,11 @@ spec:
           server: rrt-general-services.dcs.bbk.ac.uk
           path: /home/roderick/testbed/compute-layer/mandelbrot-generator
           readOnly: true
+      - name: data-vol
+        nfs:
+          server: localhost
+          path: /home/roderick/experiment-data
+          readOnly: false
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -121,7 +129,7 @@ spec:
     spec:
       terminationGracePeriodSeconds: 5
       containers:
-        - image: rrt-general-services:32000/operator:1.0
+        - image: localhost:32000/operator:1.0
           imagePullPolicy: Always
           name: consumer-0-container
           env:
@@ -129,12 +137,16 @@ spec:
             - {name: TOPIC, value:  test-0}
             - {name: TRUSTSTORE_PATH, value: /root/mandelbrot-generator/test.ts}
             - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
+            - {name: MLOG_NAME, value: consumer-0-log}
+            - {name: MLOG_FILE_PATH, value: /data/consumer-0.log}
           ports:
             - containerPort: 9091
             - containerPort: 9180
           volumeMounts:
           - mountPath: /root/mandelbrot-generator
             name: application-vol
+          - mountPath: /data
+            name: data-vol
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -149,9 +161,14 @@ spec:
       volumes:
       - name: application-vol
         nfs:
-          server: rrt-general-services.dcs.bbk.ac.uk
+          server: localhost
           path: /home/roderick/testbed/compute-layer/mandelbrot-generator
           readOnly: true
+      - name: data-vol
+        nfs:
+          server: localhost
+          path: /home/roderick/experiment-data
+          readOnly: false
 
 ---
 apiVersion: apps/v1

@@ -164,7 +164,7 @@ object DataWriter extends LoggingTrait, KafkaTrait {
   def mongoDbClient(): MongoClient = {
     // connect to the mongodb instance
 
-    println("attempting to connect")
+    logger.info("attempting to connect")
 
     val uri =
       "mongodb://mongos-1-svc:27017/mandelbrot?authSource=$external&authMechanism=MONGODB-X509"

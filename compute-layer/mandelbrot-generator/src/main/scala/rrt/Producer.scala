@@ -117,7 +117,7 @@ object Producer extends KafkaTrait {
         case _ => 0
     }
 
-    println(f"max escape iteration = ${julia.max}")
+    logger.info(f"max escape iteration = ${julia.max}")
 
     // -- uncomment to preview julia plot (graphically)
     julia.sliding(64, 64).foreach(row =>
@@ -126,7 +126,7 @@ object Producer extends KafkaTrait {
         case x if x > 0 => List("+","-",".")(x % 3)
         case _ => " "
       ))
-      println
+      logger.info("")
       )
 
     val kronLength: Int = (64 / sqrt(nBoxes)).toInt

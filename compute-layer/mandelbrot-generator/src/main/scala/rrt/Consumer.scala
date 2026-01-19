@@ -144,7 +144,7 @@ object Consumer extends KafkaTrait {
   }
 
   def consume(topic: String) = {
-    println(s"Consuming from ${topic}")
+    logger.info(s"Consuming from ${topic}")
 
     val consumer = initConsumer(topic, "0")
     val sysConsumer = initConsumer("system", s"system-${UUID.randomUUID().toString()}")

@@ -24,7 +24,7 @@ spec:
       hostname: kafka-topic-server
       terminationGracePeriodSeconds: 5
       containers:
-        - image: rrt-general-services:32000/kafka-topic-server:4.0
+        - image: localhost:32000/kafka-topic-server:4.0
           imagePullPolicy: Always
           name: kafka-topic-server
           ports:
@@ -96,7 +96,7 @@ spec:
       volumes:
       - name: application-vol
         nfs:
-          server: rrt-general-services.dcs.bbk.ac.uk
+          server: localhost
           path: /home/roderick/testbed/compute-layer/mandelbrot-generator
           readOnly: true
       - name: data-vol
@@ -195,7 +195,7 @@ spec:
     spec:
       terminationGracePeriodSeconds: 5
       containers:
-        - image: rrt-general-services:32000/operator:1.0
+        - image: localhost:32000/operator:1.0
           imagePullPolicy: Always
           name: consumer-1-container
           env:
@@ -222,7 +222,7 @@ spec:
       volumes:
       - name: application-vol
         nfs:
-          server: rrt-general-services.dcs.bbk.ac.uk
+          server: localhost
           path: /home/roderick/testbed/compute-layer/mandelbrot-generator
           readOnly: true
 
@@ -251,7 +251,7 @@ spec:
     spec:
       terminationGracePeriodSeconds: 5
       containers:
-        - image: rrt-general-services:32000/operator:1.0
+        - image: localhost:32000/operator:1.0
           imagePullPolicy: Always
           name: consumer-2-container
           env:
@@ -278,7 +278,7 @@ spec:
       volumes:
       - name: application-vol
         nfs:
-          server: rrt-general-services.dcs.bbk.ac.uk
+          server: localhost
           path: /home/roderick/testbed/compute-layer/mandelbrot-generator
           readOnly: true
 
@@ -307,7 +307,7 @@ spec:
     spec:
       terminationGracePeriodSeconds: 5
       containers:
-        - image: rrt-general-services:32000/operator:1.0
+        - image: localhost:32000/operator:1.0
           imagePullPolicy: Always
           name: consumer-3-container
           env:
@@ -334,7 +334,7 @@ spec:
       volumes:
       - name: application-vol
         nfs:
-          server: rrt-general-services.dcs.bbk.ac.uk
+          server: localhost
           path: /home/roderick/testbed/compute-layer/mandelbrot-generator
           readOnly: true
 ---
@@ -362,7 +362,7 @@ spec:
     spec:
       terminationGracePeriodSeconds: 5
       containers:
-        - image: rrt-general-services:32000/operator:1.0
+        - image: localhost:32000/operator:1.0
           imagePullPolicy: Always
           name: consumer-4-container
           env:
@@ -389,7 +389,7 @@ spec:
       volumes:
       - name: application-vol
         nfs:
-          server: rrt-general-services.dcs.bbk.ac.uk
+          server: localhost
           path: /home/roderick/testbed/compute-layer/mandelbrot-generator
           readOnly: true
 ---
@@ -417,7 +417,7 @@ spec:
     spec:
       terminationGracePeriodSeconds: 5
       containers:
-        - image: rrt-general-services:32000/operator:1.0
+        - image: localhost:32000/operator:1.0
           imagePullPolicy: Always
           name: consumer-5-container
           env:
@@ -444,7 +444,7 @@ spec:
       volumes:
       - name: application-vol
         nfs:
-          server: rrt-general-services.dcs.bbk.ac.uk
+          server: localhost
           path: /home/roderick/testbed/compute-layer/mandelbrot-generator
           readOnly: true
 ---
@@ -472,7 +472,7 @@ spec:
     spec:
       terminationGracePeriodSeconds: 6
       containers:
-        - image: rrt-general-services:32000/operator:1.0
+        - image: localhost:32000/operator:1.0
           imagePullPolicy: Always
           name: consumer-6-container
           env:
@@ -499,7 +499,7 @@ spec:
       volumes:
       - name: application-vol
         nfs:
-          server: rrt-general-services.dcs.bbk.ac.uk
+          server: localhost
           path: /home/roderick/testbed/compute-layer/mandelbrot-generator
           readOnly: true
 ---
@@ -527,7 +527,7 @@ spec:
     spec:
       terminationGracePeriodSeconds: 5
       containers:
-        - image: rrt-general-services:32000/operator:1.0
+        - image: localhost:32000/operator:1.0
           imagePullPolicy: Always
           name: consumer-7-container
           env:
@@ -554,7 +554,7 @@ spec:
       volumes:
       - name: application-vol
         nfs:
-          server: rrt-general-services.dcs.bbk.ac.uk
+          server: localhost
           path: /home/roderick/testbed/compute-layer/mandelbrot-generator
           readOnly: true
 ---
@@ -582,7 +582,7 @@ spec:
     spec:
       terminationGracePeriodSeconds: 5
       containers:
-        - image: rrt-general-services:32000/operator:1.0
+        - image: localhost:32000/operator:1.0
           imagePullPolicy: Always
           name: consumer-8-container
           env:
@@ -609,7 +609,7 @@ spec:
       volumes:
       - name: application-vol
         nfs:
-          server: rrt-general-services.dcs.bbk.ac.uk
+          server: localhost
           path: /home/roderick/testbed/compute-layer/mandelbrot-generator
           readOnly: true
 ---
@@ -637,7 +637,7 @@ spec:
     spec:
       terminationGracePeriodSeconds: 5
       containers:
-        - image: rrt-general-services:32000/operator:1.0
+        - image: localhost:32000/operator:1.0
           imagePullPolicy: Always
           name: consumer-9-container
           env:
@@ -664,7 +664,7 @@ spec:
       volumes:
       - name: application-vol
         nfs:
-          server: rrt-general-services.dcs.bbk.ac.uk
+          server: localhost
           path: /home/roderick/testbed/compute-layer/mandelbrot-generator
           readOnly: true
 ---
@@ -692,7 +692,7 @@ spec:
     spec:
       terminationGracePeriodSeconds: 5
       containers:
-        - image: rrt-general-services:32000/operator:1.0
+        - image: localhost:32000/operator:1.0
           imagePullPolicy: Always
           name: consumer-10-container
           env:
@@ -719,7 +719,7 @@ spec:
       volumes:
       - name: application-vol
         nfs:
-          server: rrt-general-services.dcs.bbk.ac.uk
+          server: localhost
           path: /home/roderick/testbed/compute-layer/mandelbrot-generator
           readOnly: true
 ---
@@ -747,7 +747,7 @@ spec:
     spec:
       terminationGracePeriodSeconds: 5
       containers:
-        - image: rrt-general-services:32000/operator:1.0
+        - image: localhost:32000/operator:1.0
           imagePullPolicy: Always
           name: consumer-11-container
           env:
@@ -774,7 +774,7 @@ spec:
       volumes:
       - name: application-vol
         nfs:
-          server: rrt-general-services.dcs.bbk.ac.uk
+          server: localhost
           path: /home/roderick/testbed/compute-layer/mandelbrot-generator
           readOnly: true
 ---
@@ -802,7 +802,7 @@ spec:
     spec:
       terminationGracePeriodSeconds: 5
       containers:
-        - image: rrt-general-services:32000/operator:1.0
+        - image: localhost:32000/operator:1.0
           imagePullPolicy: Always
           name: consumer-12-container
           env:
@@ -829,7 +829,7 @@ spec:
       volumes:
       - name: application-vol
         nfs:
-          server: rrt-general-services.dcs.bbk.ac.uk
+          server: localhost
           path: /home/roderick/testbed/compute-layer/mandelbrot-generator
           readOnly: true
 ---
@@ -857,7 +857,7 @@ spec:
     spec:
       terminationGracePeriodSeconds: 5
       containers:
-        - image: rrt-general-services:32000/operator:1.0
+        - image: localhost:32000/operator:1.0
           imagePullPolicy: Always
           name: consumer-13-container
           env:
@@ -884,7 +884,7 @@ spec:
       volumes:
       - name: application-vol
         nfs:
-          server: rrt-general-services.dcs.bbk.ac.uk
+          server: localhost
           path: /home/roderick/testbed/compute-layer/mandelbrot-generator
           readOnly: true
 ---
@@ -912,7 +912,7 @@ spec:
     spec:
       terminationGracePeriodSeconds: 5
       containers:
-        - image: rrt-general-services:32000/operator:1.0
+        - image: localhost:32000/operator:1.0
           imagePullPolicy: Always
           name: consumer-14-container
           env:
@@ -939,7 +939,7 @@ spec:
       volumes:
       - name: application-vol
         nfs:
-          server: rrt-general-services.dcs.bbk.ac.uk
+          server: localhost
           path: /home/roderick/testbed/compute-layer/mandelbrot-generator
           readOnly: true
 ---
@@ -966,7 +966,7 @@ spec:
     spec:
       terminationGracePeriodSeconds: 5
       containers:
-        - image: rrt-general-services:32000/operator:1.0
+        - image: localhost:32000/operator:1.0
           imagePullPolicy: Always
           name: consumer-15-container
           env:
@@ -993,7 +993,7 @@ spec:
       volumes:
       - name: application-vol
         nfs:
-          server: rrt-general-services.dcs.bbk.ac.uk
+          server: localhost
           path: /home/roderick/testbed/compute-layer/mandelbrot-generator
           readOnly: true
 ---
@@ -1018,7 +1018,7 @@ spec:
     spec:
       terminationGracePeriodSeconds: 5
       containers:
-        - image: rrt-general-services:32000/operator:1.0
+        - image: localhost:32000/operator:1.0
           imagePullPolicy: Always
           name: producer-shell
           env:
@@ -1042,7 +1042,7 @@ spec:
       volumes:
       - name: application-vol
         nfs:
-          server: rrt-general-services.dcs.bbk.ac.uk
+          server: localhost
           path: /home/roderick/testbed/compute-layer/mandelbrot-generator
           readOnly: true
 

@@ -1160,12 +1160,16 @@ spec:
           name: producer-shell
           env:
             - {name: ROLE, value: producer-shell}
+            - {name: MLOG_NAME, value: producer-log}
+            - {name: MLOG_FILE_PATH, value: /data/producer.log}
           ports:
             - containerPort: 9091
             - containerPort: 9180
           volumeMounts:
           - mountPath: /root/mandelbrot-generator
             name: application-vol
+          - mountPath: /data
+            name: data-vol
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -1182,6 +1186,12 @@ spec:
           server: dauntless
           path: /workspace/testbed/compute-layer/mandelbrot-generator
           readOnly: true
+      - name: data-vol
+        nfs:
+          server: dauntless
+          path: /experiment-data
+          readOnly: false
+
 
 ### Services ###
 

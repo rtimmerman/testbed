@@ -1,0 +1,1362 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: kafka-topic-server
+  labels:
+    purpose: kafka-topic-server
+    role: kafka
+  namespace: dev
+spec:
+  selector:
+    matchLabels:
+      role: kafka
+      purpose: kafka-topic-server
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        purpose: kafka-topic-server
+        role: kafka
+    spec:
+      hostname: kafka-topic-server
+      terminationGracePeriodSeconds: 5
+      containers:
+        - image: localhost:32000/kafka-topic-server:4.0
+          imagePullPolicy: Always
+          name: kafka-topic-server
+          ports:
+            - containerPort: 9092
+            - containerPort: 2181
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                - key: role
+                  operator: In
+                  values:
+                    - rrt-general-services
+                    - debugger
+                    - monolith
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: data-writer-consumer-0
+  labels:
+    purpose: data-writer-consumer
+    role: data-writer-consumer-0
+  namespace: dev
+spec:
+  selector:
+    matchLabels:
+      purpose: data-writer-consumer
+      role: data-writer-consumer-0
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        purpose: data-writer-consumer
+        role: data-writer-consumer-0
+    spec:
+      terminationGracePeriodSeconds: 5
+      containers:
+        - image: localhost:32000/operator:1.0
+          imagePullPolicy: Always
+          name: data-writer-consumer-0-container
+          env:
+            - {name: ROLE, value: data-writer-consumer}
+            - {name: TOPIC, value:  result}
+            - {name: TRUSTSTORE_PATH, value: /root/mandelbrot-generator/test.ts}
+            - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
+            - {name: MLOG_NAME, value: dw-consumer-0-log}
+            - {name: MLOG_FILE_PATH, value: /data/dw-consumer-0.log}
+          ports:
+            - containerPort: 9091
+          volumeMounts:
+          - mountPath: /root/mandelbrot-generator
+            name: application-vol
+          - mountPath: /data/
+            name: data-vol
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                - key: role
+                  operator: In
+                  values:
+                    - rrt-general-services
+                    - debugger
+                    - monolith
+      volumes:
+      - name: application-vol
+        nfs:
+          server: localhost
+          path: /home/roderick/testbed/compute-layer/mandelbrot-generator
+          readOnly: true
+      - name: data-vol
+        nfs:
+          server: localhost
+          path: /home/roderick/experiment-data
+          readOnly: false
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: consumer-0
+  labels:
+    purpose: consumer
+    role: consumer-0
+  namespace: dev
+spec:
+  selector:
+    matchLabels:
+      purpose: consumer
+      role: consumer-0
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        purpose: consumer
+        role: consumer-0
+    spec:
+      terminationGracePeriodSeconds: 5
+      containers:
+        - image: localhost:32000/operator:1.0
+          imagePullPolicy: Always
+          name: consumer-0-container
+          env:
+            - {name: ROLE, value: consumer}
+            - {name: TOPIC, value:  test-0}
+            - {name: TRUSTSTORE_PATH, value: /root/mandelbrot-generator/test.ts}
+            - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
+            - {name: MLOG_NAME, value: consumer-0-log}
+            - {name: MLOG_FILE_PATH, value: /data/consumer-0.log}
+          ports:
+            - containerPort: 9091
+            - containerPort: 9180
+          volumeMounts:
+          - mountPath: /root/mandelbrot-generator
+            name: application-vol
+          - mountPath: /data
+            name: data-vol
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                - key: role
+                  operator: In
+                  values:
+                    - compute-node-1
+                    - debugger
+                    - monolith
+      volumes:
+      - name: application-vol
+        nfs:
+          server: dauntless
+          path: /workspace/testbed/compute-layer/mandelbrot-generator
+          readOnly: true
+      - name: data-vol
+        nfs:
+          server: dauntless
+          path: /experiment-data
+          readOnly: false
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: consumer-1
+  labels:
+    purpose: consumer
+    role: consumer-1
+  namespace: dev
+spec:
+  selector:
+    matchLabels:
+      purpose: consumer
+      role: consumer-1
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        purpose: consumer
+        role: consumer-1
+    spec:
+      terminationGracePeriodSeconds: 5
+      containers:
+        - image: localhost:32000/operator:1.0
+          imagePullPolicy: Always
+          name: consumer-1-container
+          env:
+            - {name: ROLE, value: consumer}
+            - {name: TOPIC, value:  test-1}
+            - {name: TRUSTSTORE_PATH, value: /root/mandelbrot-generator/test.ts}
+            - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
+          ports:
+            - containerPort: 9091
+            - containerPort: 9180
+          volumeMounts:
+          - mountPath: /root/mandelbrot-generator
+            name: application-vol
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                - key: role
+                  operator: In
+                  values:
+                    - compute-node-2
+                    - monolith
+      volumes:
+      - name: application-vol
+        nfs:
+          server: localhost
+          path: /home/roderick/testbed/compute-layer/mandelbrot-generator
+          readOnly: true
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: consumer-2
+  labels:
+    purpose: consumer
+    role: consumer-2
+  namespace: dev
+spec:
+  selector:
+    matchLabels:
+      purpose: consumer
+      role: consumer-2
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        purpose: consumer
+        role: consumer-2
+    spec:
+      terminationGracePeriodSeconds: 5
+      containers:
+        - image: localhost:32000/operator:1.0
+          imagePullPolicy: Always
+          name: consumer-2-container
+          env:
+            - {name: ROLE, value: consumer}
+            - {name: TOPIC, value:  test-2}
+            - {name: TRUSTSTORE_PATH, value: /root/mandelbrot-generator/test.ts}
+            - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
+          ports:
+            - containerPort: 9091
+            - containerPort: 9180
+          volumeMounts:
+          - mountPath: /root/mandelbrot-generator
+            name: application-vol
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                - key: role
+                  operator: In
+                  values:
+                    - compute-node-3
+                    - monolith
+      volumes:
+      - name: application-vol
+        nfs:
+          server: localhost
+          path: /home/roderick/testbed/compute-layer/mandelbrot-generator
+          readOnly: true
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: consumer-3
+  labels:
+    purpose: consumer
+    role: consumer-3
+  namespace: dev
+spec:
+  selector:
+    matchLabels:
+      purpose: consumer
+      role: consumer-3
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        purpose: consumer
+        role: consumer-3
+    spec:
+      terminationGracePeriodSeconds: 5
+      containers:
+        - image: localhost:32000/operator:1.0
+          imagePullPolicy: Always
+          name: consumer-3-container
+          env:
+            - {name: ROLE, value: consumer}
+            - {name: TOPIC, value:  test-3}
+            - {name: TRUSTSTORE_PATH, value: /root/mandelbrot-generator/test.ts}
+            - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
+          ports:
+            - containerPort: 9091
+            - containerPort: 9180
+          volumeMounts:
+          - mountPath: /root/mandelbrot-generator
+            name: application-vol
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                - key: role
+                  operator: In
+                  values:
+                    - compute-node-4
+                    - monolith
+      volumes:
+      - name: application-vol
+        nfs:
+          server: localhost
+          path: /home/roderick/testbed/compute-layer/mandelbrot-generator
+          readOnly: true
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: consumer-4
+  labels:
+    purpose: consumer
+    role: consumer-4
+  namespace: dev
+spec:
+  selector:
+    matchLabels:
+      purpose: consumer
+      role: consumer-4
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        purpose: consumer
+        role: consumer-4
+    spec:
+      terminationGracePeriodSeconds: 5
+      containers:
+        - image: localhost:32000/operator:1.0
+          imagePullPolicy: Always
+          name: consumer-4-container
+          env:
+            - {name: ROLE, value: consumer}
+            - {name: TOPIC, value:  test-4}
+            - {name: TRUSTSTORE_PATH, value: /root/mandelbrot-generator/test.ts}
+            - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
+          ports:
+            - containerPort: 9091
+            - containerPort: 9180
+          volumeMounts:
+          - mountPath: /root/mandelbrot-generator
+            name: application-vol
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                - key: role
+                  operator: In
+                  values:
+                    - compute-node-5
+                    - monolith
+      volumes:
+      - name: application-vol
+        nfs:
+          server: localhost
+          path: /home/roderick/testbed/compute-layer/mandelbrot-generator
+          readOnly: true
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: consumer-5
+  labels:
+    purpose: consumer
+    role: consumer-5
+  namespace: dev
+spec:
+  selector:
+    matchLabels:
+      purpose: consumer
+      role: consumer-5
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        purpose: consumer
+        role: consumer-5
+    spec:
+      terminationGracePeriodSeconds: 5
+      containers:
+        - image: localhost:32000/operator:1.0
+          imagePullPolicy: Always
+          name: consumer-5-container
+          env:
+            - {name: ROLE, value: consumer}
+            - {name: TOPIC, value:  test-5}
+            - {name: TRUSTSTORE_PATH, value: /root/mandelbrot-generator/test.ts}
+            - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
+          ports:
+            - containerPort: 9091
+            - containerPort: 9180
+          volumeMounts:
+          - mountPath: /root/mandelbrot-generator
+            name: application-vol
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                - key: role
+                  operator: In
+                  values:
+                    - compute-node-6
+                    - monolith
+      volumes:
+      - name: application-vol
+        nfs:
+          server: localhost
+          path: /home/roderick/testbed/compute-layer/mandelbrot-generator
+          readOnly: true
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: consumer-6
+  labels:
+    purpose: consumer
+    role: consumer-6
+  namespace: dev
+spec:
+  selector:
+    matchLabels:
+      purpose: consumer
+      role: consumer-6
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        purpose: consumer
+        role: consumer-6
+    spec:
+      terminationGracePeriodSeconds: 6
+      containers:
+        - image: localhost:32000/operator:1.0
+          imagePullPolicy: Always
+          name: consumer-6-container
+          env:
+            - {name: ROLE, value: consumer}
+            - {name: TOPIC, value:  test-6}
+            - {name: TRUSTSTORE_PATH, value: /root/mandelbrot-generator/test.ts}
+            - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
+          ports:
+            - containerPort: 9091
+            - containerPort: 9180
+          volumeMounts:
+          - mountPath: /root/mandelbrot-generator
+            name: application-vol
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                - key: role
+                  operator: In
+                  values:
+                    - compute-node-7
+                    - monolith
+      volumes:
+      - name: application-vol
+        nfs:
+          server: localhost
+          path: /home/roderick/testbed/compute-layer/mandelbrot-generator
+          readOnly: true
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: consumer-7
+  labels:
+    purpose: consumer
+    role: consumer-7
+  namespace: dev
+spec:
+  selector:
+    matchLabels:
+      purpose: consumer
+      role: consumer-7
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        purpose: consumer
+        role: consumer-7
+    spec:
+      terminationGracePeriodSeconds: 5
+      containers:
+        - image: localhost:32000/operator:1.0
+          imagePullPolicy: Always
+          name: consumer-7-container
+          env:
+            - {name: ROLE, value: consumer}
+            - {name: TOPIC, value:  test-7}
+            - {name: TRUSTSTORE_PATH, value: /root/mandelbrot-generator/test.ts}
+            - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
+          ports:
+            - containerPort: 9091
+            - containerPort: 9180
+          volumeMounts:
+          - mountPath: /root/mandelbrot-generator
+            name: application-vol
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                - key: role
+                  operator: In
+                  values:
+                    - compute-node-8
+                    - monolith
+      volumes:
+      - name: application-vol
+        nfs:
+          server: localhost
+          path: /home/roderick/testbed/compute-layer/mandelbrot-generator
+          readOnly: true
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: consumer-8
+  labels:
+    purpose: consumer
+    role: consumer-8
+  namespace: dev
+spec:
+  selector:
+    matchLabels:
+      purpose: consumer
+      role: consumer-8
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        purpose: consumer
+        role: consumer-8
+    spec:
+      terminationGracePeriodSeconds: 5
+      containers:
+        - image: localhost:32000/operator:1.0
+          imagePullPolicy: Always
+          name: consumer-8-container
+          env:
+            - {name: ROLE, value: consumer}
+            - {name: TOPIC, value:  test-8}
+            - {name: TRUSTSTORE_PATH, value: /root/mandelbrot-generator/test.ts}
+            - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
+          ports:
+            - containerPort: 9091
+            - containerPort: 9180
+          volumeMounts:
+          - mountPath: /root/mandelbrot-generator
+            name: application-vol
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                - key: role
+                  operator: In
+                  values:
+                    - compute-node-9
+                    - monolith
+      volumes:
+      - name: application-vol
+        nfs:
+          server: localhost
+          path: /home/roderick/testbed/compute-layer/mandelbrot-generator
+          readOnly: true
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: consumer-9
+  labels:
+    purpose: consumer
+    role: consumer-9
+  namespace: dev
+spec:
+  selector:
+    matchLabels:
+      purpose: consumer
+      role: consumer-9
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        purpose: consumer
+        role: consumer-9
+    spec:
+      terminationGracePeriodSeconds: 5
+      containers:
+        - image: localhost:32000/operator:1.0
+          imagePullPolicy: Always
+          name: consumer-9-container
+          env:
+            - {name: ROLE, value: consumer}
+            - {name: TOPIC, value:  test-9}
+            - {name: TRUSTSTORE_PATH, value: /root/mandelbrot-generator/test.ts}
+            - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
+          ports:
+            - containerPort: 9091
+            - containerPort: 9180
+          volumeMounts:
+          - mountPath: /root/mandelbrot-generator
+            name: application-vol
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                - key: role
+                  operator: In
+                  values:
+                    - compute-node-10
+                    - monolith
+      volumes:
+      - name: application-vol
+        nfs:
+          server: localhost
+          path: /home/roderick/testbed/compute-layer/mandelbrot-generator
+          readOnly: true
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: consumer-10
+  labels:
+    purpose: consumer
+    role: consumer-10
+  namespace: dev
+spec:
+  selector:
+    matchLabels:
+      purpose: consumer
+      role: consumer-10
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        purpose: consumer
+        role: consumer-10
+    spec:
+      terminationGracePeriodSeconds: 5
+      containers:
+        - image: localhost:32000/operator:1.0
+          imagePullPolicy: Always
+          name: consumer-10-container
+          env:
+            - {name: ROLE, value: consumer}
+            - {name: TOPIC, value:  test-10}
+            - {name: TRUSTSTORE_PATH, value: /root/mandelbrot-generator/test.ts}
+            - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
+          ports:
+            - containerPort: 9091
+            - containerPort: 9180
+          volumeMounts:
+          - mountPath: /root/mandelbrot-generator
+            name: application-vol
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                - key: role
+                  operator: In
+                  values:
+                    - compute-node-11
+                    - monolith
+      volumes:
+      - name: application-vol
+        nfs:
+          server: localhost
+          path: /home/roderick/testbed/compute-layer/mandelbrot-generator
+          readOnly: true
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: consumer-11
+  labels:
+    purpose: consumer
+    role: consumer-11
+  namespace: dev
+spec:
+  selector:
+    matchLabels:
+      purpose: consumer
+      role: consumer-11
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        purpose: consumer
+        role: consumer-11
+    spec:
+      terminationGracePeriodSeconds: 5
+      containers:
+        - image: localhost:32000/operator:1.0
+          imagePullPolicy: Always
+          name: consumer-11-container
+          env:
+            - {name: ROLE, value: consumer}
+            - {name: TOPIC, value:  test-11}
+            - {name: TRUSTSTORE_PATH, value: /root/mandelbrot-generator/test.ts}
+            - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
+          ports:
+            - containerPort: 9091
+            - containerPort: 9180
+          volumeMounts:
+          - mountPath: /root/mandelbrot-generator
+            name: application-vol
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                - key: role
+                  operator: In
+                  values:
+                    - compute-node-12
+                    - monolith
+      volumes:
+      - name: application-vol
+        nfs:
+          server: localhost
+          path: /home/roderick/testbed/compute-layer/mandelbrot-generator
+          readOnly: true
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: consumer-12
+  labels:
+    purpose: consumer
+    role: consumer-12
+  namespace: dev
+spec:
+  selector:
+    matchLabels:
+      purpose: consumer
+      role: consumer-12
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        purpose: consumer
+        role: consumer-12
+    spec:
+      terminationGracePeriodSeconds: 5
+      containers:
+        - image: localhost:32000/operator:1.0
+          imagePullPolicy: Always
+          name: consumer-12-container
+          env:
+            - {name: ROLE, value: consumer}
+            - {name: TOPIC, value:  test-12}
+            - {name: TRUSTSTORE_PATH, value: /root/mandelbrot-generator/test.ts}
+            - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
+          ports:
+            - containerPort: 9091
+            - containerPort: 9180
+          volumeMounts:
+          - mountPath: /root/mandelbrot-generator
+            name: application-vol
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                - key: role
+                  operator: In
+                  values:
+                    - compute-node-13
+                    - monolith
+      volumes:
+      - name: application-vol
+        nfs:
+          server: localhost
+          path: /home/roderick/testbed/compute-layer/mandelbrot-generator
+          readOnly: true
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: consumer-13
+  labels:
+    purpose: consumer
+    role: consumer-13
+  namespace: dev
+spec:
+  selector:
+    matchLabels:
+      purpose: consumer
+      role: consumer-13
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        purpose: consumer
+        role: consumer-13
+    spec:
+      terminationGracePeriodSeconds: 5
+      containers:
+        - image: localhost:32000/operator:1.0
+          imagePullPolicy: Always
+          name: consumer-13-container
+          env:
+            - {name: ROLE, value: consumer}
+            - {name: TOPIC, value:  test-13}
+            - {name: TRUSTSTORE_PATH, value: /root/mandelbrot-generator/test.ts}
+            - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
+          ports:
+            - containerPort: 9091
+            - containerPort: 9180
+          volumeMounts:
+          - mountPath: /root/mandelbrot-generator
+            name: application-vol
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                - key: role
+                  operator: In
+                  values:
+                    - compute-node-14
+                    - monolith
+      volumes:
+      - name: application-vol
+        nfs:
+          server: localhost
+          path: /home/roderick/testbed/compute-layer/mandelbrot-generator
+          readOnly: true
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: consumer-14
+  labels:
+    purpose: consumer
+    role: consumer-14
+  namespace: dev
+spec:
+  selector:
+    matchLabels:
+      purpose: consumer
+      role: consumer-14
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        purpose: consumer
+        role: consumer-14
+    spec:
+      terminationGracePeriodSeconds: 5
+      containers:
+        - image: localhost:32000/operator:1.0
+          imagePullPolicy: Always
+          name: consumer-14-container
+          env:
+            - {name: ROLE, value: consumer}
+            - {name: TOPIC, value:  test-14}
+            - {name: TRUSTSTORE_PATH, value: /root/mandelbrot-generator/test.ts}
+            - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
+          ports:
+            - containerPort: 9091
+            - containerPort: 9180
+          volumeMounts:
+          - mountPath: /root/mandelbrot-generator
+            name: application-vol
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                - key: role
+                  operator: In
+                  values:
+                    - compute-node-15
+                    - monolith
+      volumes:
+      - name: application-vol
+        nfs:
+          server: localhost
+          path: /home/roderick/testbed/compute-layer/mandelbrot-generator
+          readOnly: true
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: consumer-15
+  labels:
+    purpose: consumer
+    role: consumer-15
+  namespace: dev
+spec:
+  selector:
+    matchLabels:
+      role: consumer-15
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        purpose: consumer
+        role: consumer-15
+    spec:
+      terminationGracePeriodSeconds: 5
+      containers:
+        - image: localhost:32000/operator:1.0
+          imagePullPolicy: Always
+          name: consumer-15-container
+          env:
+            - {name: ROLE, value: consumer}
+            - {name: TOPIC, value:  test-15}
+            - {name: TRUSTSTORE_PATH, value: /root/mandelbrot-generator/test.ts}
+            - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
+          ports:
+            - containerPort: 9091
+            - containerPort: 9180
+          volumeMounts:
+          - mountPath: /root/mandelbrot-generator
+            name: application-vol
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                - key: role
+                  operator: In
+                  values:
+                    - compute-node-16
+                    - monolith
+      volumes:
+      - name: application-vol
+        nfs:
+          server: localhost
+          path: /home/roderick/testbed/compute-layer/mandelbrot-generator
+          readOnly: true
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: producer-shell
+  labels:
+    purpose: producer-shell
+  namespace: dev
+spec:
+  selector:
+    matchLabels:
+      purpose: producer-shell
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        purpose: producer-shell
+    spec:
+      terminationGracePeriodSeconds: 5
+      containers:
+        - image: localhost:32000/operator:1.0
+          imagePullPolicy: Always
+          name: producer-shell
+          env:
+            - {name: ROLE, value: producer-shell}
+          ports:
+            - containerPort: 9091
+            - containerPort: 9180
+          volumeMounts:
+          - mountPath: /root/mandelbrot-generator
+            name: application-vol
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                - key: role
+                  operator: In
+                  values:
+                    - rrt-general-services
+                    - monolith
+      volumes:
+      - name: application-vol
+        nfs:
+          server: localhost
+          path: /home/roderick/testbed/compute-layer/mandelbrot-generator
+          readOnly: true
+
+### Services ###
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kafka-topic-server
+  namespace: dev
+spec:
+  selector:
+    purpose: kafka-topic-server
+  ports:
+    - port: 9092
+      targetPort: 9092
+  type: LoadBalancer
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: data-writer-consumer-0
+  namespace: dev
+spec:
+  selector:
+    role: data-writer-consumer-0
+  ports:
+    - port: 9091
+      targetPort: 9091
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: consumer-0
+  namespace: dev
+spec:
+  selector:
+    role: consumer-0
+  ports:
+    - port: 9091
+      targetPort: 9091
+      name: node-exporter
+    - port: 9180
+      targetPort: 9180
+      name: custom-metrics
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: consumer-1
+  namespace: dev
+spec:
+  selector:
+    role: consumer-1
+  ports:
+    - port: 9091
+      targetPort: 9091
+      name: node-exporter
+    - port: 9180
+      targetPort: 9180
+      name: custom-metrics
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: consumer-2
+  namespace: dev
+spec:
+  selector:
+    role: consumer-2
+  ports:
+    - port: 9091
+      targetPort: 9091
+      name: node-exporter
+    - port: 9180
+      targetPort: 9180
+      name: custom-metrics
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: consumer-3
+  namespace: dev
+spec:
+  selector:
+    role: consumer-3
+  ports:
+    - port: 9091
+      targetPort: 9091
+      name: node-exporter
+    - port: 9180
+      targetPort: 9180
+      name: custom-metrics
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: consumer-4
+  namespace: dev
+spec:
+  selector:
+    role: consumer-4
+  ports:
+    - port: 9091
+      targetPort: 9091
+      name: node-exporter
+    - port: 9180
+      targetPort: 9180
+      name: custom-metrics
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: consumer-5
+  namespace: dev
+spec:
+  selector:
+    role: consumer-5
+  ports:
+    - port: 9091
+      targetPort: 9091
+      name: node-exporter
+    - port: 9180
+      targetPort: 9180
+      name: custom-metrics
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: consumer-6
+  namespace: dev
+spec:
+  selector:
+    role: consumer-6
+  ports:
+    - port: 9091
+      targetPort: 9091
+      name: node-exporter
+    - port: 9180
+      targetPort: 9180
+      name: custom-metrics
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: consumer-7
+  namespace: dev
+spec:
+  selector:
+    role: consumer-7
+  ports:
+    - port: 9091
+      targetPort: 9091
+      name: node-exporter
+    - port: 9180
+      targetPort: 9180
+      name: custom-metrics
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: consumer-8
+  namespace: dev
+spec:
+  selector:
+    role: consumer-8
+  ports:
+    - port: 9091
+      targetPort: 9091
+      name: node-exporter
+    - port: 9180
+      targetPort: 9180
+      name: custom-metrics
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: consumer-9
+  namespace: dev
+spec:
+  selector:
+    role: consumer-9
+  ports:
+    - port: 9091
+      targetPort: 9091
+      name: node-exporter
+    - port: 9180
+      targetPort: 9180
+      name: custom-metrics
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: consumer-10
+  namespace: dev
+spec:
+  selector:
+    role: consumer-10
+  ports:
+    - port: 9091
+      targetPort: 9091
+      name: node-exporter
+    - port: 9180
+      targetPort: 9180
+      name: custom-metrics
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: consumer-11
+  namespace: dev
+spec:
+  selector:
+    role: consumer-11
+  ports:
+    - port: 9091
+      targetPort: 9091
+      name: node-exporter
+    - port: 9180
+      targetPort: 9180
+      name: custom-metrics
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: consumer-12
+  namespace: dev
+spec:
+  selector:
+    role: consumer-12
+  ports:
+    - port: 9091
+      targetPort: 9091
+      name: node-exporter
+    - port: 9180
+      targetPort: 9180
+      name: custom-metrics
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: consumer-13
+  namespace: dev
+spec:
+  selector:
+    role: consumer-13
+  ports:
+    - port: 9091
+      targetPort: 9091
+      name: node-exporter
+    - port: 9180
+      targetPort: 9180
+      name: custom-metrics
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: consumer-14
+  namespace: dev
+spec:
+  selector:
+    role: consumer-14
+  ports:
+    - port: 9091
+      targetPort: 9091
+      name: node-exporter
+    - port: 9180
+      targetPort: 9180
+      name: custom-metrics
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: consumer-15
+  namespace: dev
+spec:
+  selector:
+    role: consumer-15
+  ports:
+    - port: 9091
+      targetPort: 9091
+      name: node-exporter
+    - port: 9180
+      targetPort: 9180
+      name: custom-metrics
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: producer-shell
+  namespace: dev
+spec:
+  selector:
+    purpose: producer-shell
+  ports:
+    - port: 9091
+      targetPort: 9091
+  type: ClusterIP

@@ -98,12 +98,12 @@ spec:
       - name: application-vol
         nfs:
           server: localhost
-          path: /home/roderick/testbed/compute-layer/mandelbrot-generator
+          path: /workspace/testbed/compute-layer/mandelbrot-generator
           readOnly: true
       - name: data-vol
         nfs:
           server: localhost
-          path: /home/roderick/experiment-data
+          path: /experiment-data
           readOnly: false
 ---
 apiVersion: apps/v1

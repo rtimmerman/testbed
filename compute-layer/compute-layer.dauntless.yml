@@ -204,12 +204,16 @@ spec:
             - {name: TOPIC, value:  test-1}
             - {name: TRUSTSTORE_PATH, value: /root/mandelbrot-generator/test.ts}
             - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
+            - {name: MLOG_NAME, value: consumer-1-log}
+            - {name: MLOG_FILE_PATH, value: /data/consumer-1.log}
           ports:
             - containerPort: 9091
             - containerPort: 9180
           volumeMounts:
           - mountPath: /root/mandelbrot-generator
             name: application-vol
+          - mountPath: /data
+            name: data-vol
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -223,9 +227,14 @@ spec:
       volumes:
       - name: application-vol
         nfs:
-          server: localhost
-          path: /home/roderick/testbed/compute-layer/mandelbrot-generator
+          server: dauntless
+          path: /workspace/testbed/compute-layer/mandelbrot-generator
           readOnly: true
+      - name: data-vol
+        nfs:
+          server: dauntless
+          path: /experiment-data
+          readOnly: false
 
 ---
 apiVersion: apps/v1
@@ -260,12 +269,16 @@ spec:
             - {name: TOPIC, value:  test-2}
             - {name: TRUSTSTORE_PATH, value: /root/mandelbrot-generator/test.ts}
             - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
+            - {name: MLOG_NAME, value: consumer-2-log}
+            - {name: MLOG_FILE_PATH, value: /data/consumer-2.log}
           ports:
             - containerPort: 9091
             - containerPort: 9180
           volumeMounts:
           - mountPath: /root/mandelbrot-generator
             name: application-vol
+          - mountPath: /data
+            name: data-vol
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -279,9 +292,14 @@ spec:
       volumes:
       - name: application-vol
         nfs:
-          server: localhost
-          path: /home/roderick/testbed/compute-layer/mandelbrot-generator
+          server: dauntless
+          path: /workspace/testbed/compute-layer/mandelbrot-generator
           readOnly: true
+      - name: data-vol
+        nfs:
+          server: dauntless
+          path: /experiment-data
+          readOnly: false
 
 ---
 apiVersion: apps/v1
@@ -316,12 +334,16 @@ spec:
             - {name: TOPIC, value:  test-3}
             - {name: TRUSTSTORE_PATH, value: /root/mandelbrot-generator/test.ts}
             - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
+            - {name: MLOG_NAME, value: consumer-3-log}
+            - {name: MLOG_FILE_PATH, value: /data/consumer-3.log}
           ports:
             - containerPort: 9091
             - containerPort: 9180
           volumeMounts:
           - mountPath: /root/mandelbrot-generator
             name: application-vol
+          - mountPath: /data
+            name: data-vol
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -335,9 +357,14 @@ spec:
       volumes:
       - name: application-vol
         nfs:
-          server: localhost
-          path: /home/roderick/testbed/compute-layer/mandelbrot-generator
+          server: dauntless
+          path: /workspace/testbed/compute-layer/mandelbrot-generator
           readOnly: true
+      - name: data-vol
+        nfs:
+          server: dauntless
+          path: /experiment-data
+          readOnly: false
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -371,12 +398,16 @@ spec:
             - {name: TOPIC, value:  test-4}
             - {name: TRUSTSTORE_PATH, value: /root/mandelbrot-generator/test.ts}
             - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
+            - {name: MLOG_NAME, value: consumer-4-log}
+            - {name: MLOG_FILE_PATH, value: /data/consumer-4.log}
           ports:
             - containerPort: 9091
             - containerPort: 9180
           volumeMounts:
           - mountPath: /root/mandelbrot-generator
             name: application-vol
+          - mountPath: /data
+            name: data-vol
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -390,9 +421,14 @@ spec:
       volumes:
       - name: application-vol
         nfs:
-          server: localhost
-          path: /home/roderick/testbed/compute-layer/mandelbrot-generator
+          server: dauntless
+          path: /workspace/testbed/compute-layer/mandelbrot-generator
           readOnly: true
+      - name: data-vol
+        nfs:
+          server: dauntless
+          path: /experiment-data
+          readOnly: false
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -426,12 +462,17 @@ spec:
             - {name: TOPIC, value:  test-5}
             - {name: TRUSTSTORE_PATH, value: /root/mandelbrot-generator/test.ts}
             - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
+            - {name: MLOG_NAME, value: consumer-5-log}
+            - {name: MLOG_FILE_PATH, value: /data/consumer-5.log}
           ports:
             - containerPort: 9091
             - containerPort: 9180
           volumeMounts:
           - mountPath: /root/mandelbrot-generator
             name: application-vol
+          - mountPath: /data
+            name: data-vol
+
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -445,9 +486,14 @@ spec:
       volumes:
       - name: application-vol
         nfs:
-          server: localhost
-          path: /home/roderick/testbed/compute-layer/mandelbrot-generator
+          server: dauntless
+          path: /workspace/testbed/compute-layer/mandelbrot-generator
           readOnly: true
+      - name: data-vol
+        nfs:
+          server: dauntless
+          path: /experiment-data
+          readOnly: false
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -481,12 +527,16 @@ spec:
             - {name: TOPIC, value:  test-6}
             - {name: TRUSTSTORE_PATH, value: /root/mandelbrot-generator/test.ts}
             - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
+            - {name: MLOG_NAME, value: consumer-6-log}
+            - {name: MLOG_FILE_PATH, value: /data/consumer-6.log}
           ports:
             - containerPort: 9091
             - containerPort: 9180
           volumeMounts:
           - mountPath: /root/mandelbrot-generator
             name: application-vol
+          - mountPath: /data
+            name: data-vol
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -500,9 +550,14 @@ spec:
       volumes:
       - name: application-vol
         nfs:
-          server: localhost
-          path: /home/roderick/testbed/compute-layer/mandelbrot-generator
+          server: dauntless
+          path: /workspace/testbed/compute-layer/mandelbrot-generator
           readOnly: true
+      - name: data-vol
+        nfs:
+          server: dauntless
+          path: /experiment-data
+          readOnly: false
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -536,12 +591,16 @@ spec:
             - {name: TOPIC, value:  test-7}
             - {name: TRUSTSTORE_PATH, value: /root/mandelbrot-generator/test.ts}
             - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
+            - {name: MLOG_NAME, value: consumer-7-log}
+            - {name: MLOG_FILE_PATH, value: /data/consumer-7.log}
           ports:
             - containerPort: 9091
             - containerPort: 9180
           volumeMounts:
           - mountPath: /root/mandelbrot-generator
             name: application-vol
+          - mountPath: /data
+            name: data-vol
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -555,9 +614,14 @@ spec:
       volumes:
       - name: application-vol
         nfs:
-          server: localhost
-          path: /home/roderick/testbed/compute-layer/mandelbrot-generator
+          server: dauntless
+          path: /workspace/testbed/compute-layer/mandelbrot-generator
           readOnly: true
+      - name: data-vol
+        nfs:
+          server: dauntless
+          path: /experiment-data
+          readOnly: false
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -591,12 +655,16 @@ spec:
             - {name: TOPIC, value:  test-8}
             - {name: TRUSTSTORE_PATH, value: /root/mandelbrot-generator/test.ts}
             - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
+            - {name: MLOG_NAME, value: consumer-8-log}
+            - {name: MLOG_FILE_PATH, value: /data/consumer-8.log}
           ports:
             - containerPort: 9091
             - containerPort: 9180
           volumeMounts:
           - mountPath: /root/mandelbrot-generator
             name: application-vol
+          - mountPath: /data
+            name: data-vol
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -610,9 +678,14 @@ spec:
       volumes:
       - name: application-vol
         nfs:
-          server: localhost
-          path: /home/roderick/testbed/compute-layer/mandelbrot-generator
+          server: dauntless
+          path: /workspace/testbed/compute-layer/mandelbrot-generator
           readOnly: true
+      - name: data-vol
+        nfs:
+          server: dauntless
+          path: /experiment-data
+          readOnly: false
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -646,12 +719,16 @@ spec:
             - {name: TOPIC, value:  test-9}
             - {name: TRUSTSTORE_PATH, value: /root/mandelbrot-generator/test.ts}
             - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
+            - {name: MLOG_NAME, value: consumer-9-log}
+            - {name: MLOG_FILE_PATH, value: /data/consumer-9.log}
           ports:
             - containerPort: 9091
             - containerPort: 9180
           volumeMounts:
           - mountPath: /root/mandelbrot-generator
             name: application-vol
+          - mountPath: /data
+            name: data-vol
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -665,9 +742,14 @@ spec:
       volumes:
       - name: application-vol
         nfs:
-          server: localhost
-          path: /home/roderick/testbed/compute-layer/mandelbrot-generator
+          server: dauntless
+          path: /workspace/testbed/compute-layer/mandelbrot-generator
           readOnly: true
+      - name: data-vol
+        nfs:
+          server: dauntless
+          path: /experiment-data
+          readOnly: false
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -701,12 +783,16 @@ spec:
             - {name: TOPIC, value:  test-10}
             - {name: TRUSTSTORE_PATH, value: /root/mandelbrot-generator/test.ts}
             - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
+            - {name: MLOG_NAME, value: consumer-10-log}
+            - {name: MLOG_FILE_PATH, value: /data/consumer-10.log}
           ports:
             - containerPort: 9091
             - containerPort: 9180
           volumeMounts:
           - mountPath: /root/mandelbrot-generator
             name: application-vol
+          - mountPath: /data
+            name: data-vol
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -720,9 +806,14 @@ spec:
       volumes:
       - name: application-vol
         nfs:
-          server: localhost
-          path: /home/roderick/testbed/compute-layer/mandelbrot-generator
+          server: dauntless
+          path: /workspace/testbed/compute-layer/mandelbrot-generator
           readOnly: true
+      - name: data-vol
+        nfs:
+          server: dauntless
+          path: /experiment-data
+          readOnly: false
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -756,12 +847,16 @@ spec:
             - {name: TOPIC, value:  test-11}
             - {name: TRUSTSTORE_PATH, value: /root/mandelbrot-generator/test.ts}
             - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
+            - {name: MLOG_NAME, value: consumer-11-log}
+            - {name: MLOG_FILE_PATH, value: /data/consumer-11.log}
           ports:
             - containerPort: 9091
             - containerPort: 9180
           volumeMounts:
           - mountPath: /root/mandelbrot-generator
             name: application-vol
+          - mountPath: /data
+            name: data-vol
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -775,9 +870,14 @@ spec:
       volumes:
       - name: application-vol
         nfs:
-          server: localhost
-          path: /home/roderick/testbed/compute-layer/mandelbrot-generator
+          server: dauntless
+          path: /workspace/testbed/compute-layer/mandelbrot-generator
           readOnly: true
+      - name: data-vol
+        nfs:
+          server: dauntless
+          path: /experiment-data
+          readOnly: false
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -811,12 +911,16 @@ spec:
             - {name: TOPIC, value:  test-12}
             - {name: TRUSTSTORE_PATH, value: /root/mandelbrot-generator/test.ts}
             - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
+            - {name: MLOG_NAME, value: consumer-12-log}
+            - {name: MLOG_FILE_PATH, value: /data/consumer-12.log}
           ports:
             - containerPort: 9091
             - containerPort: 9180
           volumeMounts:
           - mountPath: /root/mandelbrot-generator
             name: application-vol
+          - mountPath: /data
+            name: data-vol
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -830,9 +934,14 @@ spec:
       volumes:
       - name: application-vol
         nfs:
-          server: localhost
-          path: /home/roderick/testbed/compute-layer/mandelbrot-generator
+          server: dauntless
+          path: /workspace/testbed/compute-layer/mandelbrot-generator
           readOnly: true
+      - name: data-vol
+        nfs:
+          server: dauntless
+          path: /experiment-data
+          readOnly: false
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -866,12 +975,16 @@ spec:
             - {name: TOPIC, value:  test-13}
             - {name: TRUSTSTORE_PATH, value: /root/mandelbrot-generator/test.ts}
             - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
+            - {name: MLOG_NAME, value: consumer-13-log}
+            - {name: MLOG_FILE_PATH, value: /data/consumer-13.log}
           ports:
             - containerPort: 9091
             - containerPort: 9180
           volumeMounts:
           - mountPath: /root/mandelbrot-generator
             name: application-vol
+          - mountPath: /data
+            name: data-vol
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -885,9 +998,14 @@ spec:
       volumes:
       - name: application-vol
         nfs:
-          server: localhost
-          path: /home/roderick/testbed/compute-layer/mandelbrot-generator
+          server: dauntless
+          path: /workspace/testbed/compute-layer/mandelbrot-generator
           readOnly: true
+      - name: data-vol
+        nfs:
+          server: dauntless
+          path: /experiment-data
+          readOnly: false
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -921,12 +1039,16 @@ spec:
             - {name: TOPIC, value:  test-14}
             - {name: TRUSTSTORE_PATH, value: /root/mandelbrot-generator/test.ts}
             - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
+            - {name: MLOG_NAME, value: consumer-14-log}
+            - {name: MLOG_FILE_PATH, value: /data/consumer-14.log}
           ports:
             - containerPort: 9091
             - containerPort: 9180
           volumeMounts:
           - mountPath: /root/mandelbrot-generator
             name: application-vol
+          - mountPath: /data
+            name: data-vol
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -940,9 +1062,14 @@ spec:
       volumes:
       - name: application-vol
         nfs:
-          server: localhost
-          path: /home/roderick/testbed/compute-layer/mandelbrot-generator
+          server: dauntless
+          path: /workspace/testbed/compute-layer/mandelbrot-generator
           readOnly: true
+      - name: data-vol
+        nfs:
+          server: dauntless
+          path: /experiment-data
+          readOnly: false
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -975,12 +1102,16 @@ spec:
             - {name: TOPIC, value:  test-15}
             - {name: TRUSTSTORE_PATH, value: /root/mandelbrot-generator/test.ts}
             - {name: KEYSTORE_PATH, value: /root/mandelbrot-generator/test.ks}
+            - {name: MLOG_NAME, value: consumer-15-log}
+            - {name: MLOG_FILE_PATH, value: /data/consumer-15.log}
           ports:
             - containerPort: 9091
             - containerPort: 9180
           volumeMounts:
           - mountPath: /root/mandelbrot-generator
             name: application-vol
+          - mountPath: /data
+            name: data-vol
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -994,9 +1125,14 @@ spec:
       volumes:
       - name: application-vol
         nfs:
-          server: localhost
-          path: /home/roderick/testbed/compute-layer/mandelbrot-generator
+          server: dauntless
+          path: /workspace/testbed/compute-layer/mandelbrot-generator
           readOnly: true
+      - name: data-vol
+        nfs:
+          server: dauntless
+          path: /experiment-data
+          readOnly: false
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -1043,8 +1179,8 @@ spec:
       volumes:
       - name: application-vol
         nfs:
-          server: localhost
-          path: /home/roderick/testbed/compute-layer/mandelbrot-generator
+          server: dauntless
+          path: /workspace/testbed/compute-layer/mandelbrot-generator
           readOnly: true
 
 ### Services ###

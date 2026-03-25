@@ -7,6 +7,9 @@ ycsb*
 *.key
 *.idea
 **/*.metals/
+**/metals.sbt
+**/.scala-build
+project/*
 *.log
 .bsp/
 **/*.bloop/
@@ -14,13 +17,15 @@ ycsb*
 *.tgz
 #target/
 data/
-.vscode
+**/.vscode
 *.sw[op]
 **/target/
 *.png
 *.jp*g
 *.jar
-kafka/kafka*
-
-node_modules
+**/kafka/kafka*
+**/node_modules
+**/.venv/
+.venv/
+.venv/*
 

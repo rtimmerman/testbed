@@ -35,7 +35,7 @@ object WorkConfig extends Tag("rrt.tags.WorkConfig")
 object Dimensionality extends Tag("rrt.tags.Dimensionality")
 object Matrix extends Tag("rrt.tags.Matrix")
 
-class ProducerSpec extends AnyFlatSpec with Matchers {
+class ProducerSpec extends AnyFlatSpec with Matchers with LoggingTrait {
   "A producer instance" should "be able to support customisable canvas plots" in {
     val params = ProducerParams(1, 100,"test",-2,2,2,-2,1000,1000, 16)
 
@@ -292,24 +292,27 @@ class ProducerSpec extends AnyFlatSpec with Matchers {
     assert(2 == Math.round(dimension)) // 1 - indicates
 
     // position one (0) of the tuple is the dimension, position two is the center point.
-    assert(
-      2 > Producer.getJuliaDimension(
-        Producer.juliaCentre(Producer.createSpaceFromPoint(Complex(0, -0.4), ball=100).flatten),
-        100,
-        64
+    val dim = Producer.getJuliaDimension(
+        c = Producer.juliaCentre(Producer.createSpaceFromPoint(Complex(0, -0.4), ball=100).flatten),
+        iterations = 100,
+        nBoxes = 64
       )
-    )
+     
+    logger.atInfo.log(s"lowest dimension using 64 boxes is: $dim")
+    assert(2 > dim)
 
     val ctr2 = Producer.juliaCentre(Producer.createSpaceFromPoint(Complex(-1.3, -1.3), ball=100).flatten)
-    println(ctr2)
-    println("Average dimension testing----")
-    val avgDim = List(4, 16, 64).map(n => Producer.getJuliaDimension(
-        ctr2,
-        1000,
-        n
-      )).sum / 3.0
-    println(f"Avg Dim: $avgDim")
+    logger.atInfo.log(ctr2)
+    logger.atInfo.log("Average dimension testing----")
+    var dims =  List(4, 16, 64).map(n => Producer.getJuliaDimension(
+        c = ctr2,
+        iterations = 1000,
+        nBoxes = n
+    ))
 
+    val avgDim = dims.sum / 3.0
+    logger.atInfo.log(f"Average Dimension is: $avgDim")
+    logger.atInfo.log(f"Last dimension for 64 boxes is: ${dims.min}")
   }
 
   "Producer" should "be able to send work to Kafka" taggedAs(Kafka) in {

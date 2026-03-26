@@ -284,11 +284,11 @@ class ProducerSpec extends AnyFlatSpec with Matchers {
         queue.append(workI.next)
   }
 
-  "Producer" should "be able to find the julia dimension from a set of coordinate points" taggedAs(Dimensionality)in {
+  "Producer" should "be able to find the julia dimension from a set of coordinate points" taggedAs Dimensionality in {
     // val configFile = System.getProperty("user.dir") + "/src/test/resources/test-work.yml"
     val space = Producer.createSpaceFromPoint(Complex(0, 0), ball=16).flatten
     val ctr = Producer.juliaCentre(space)
-    val dimension = Producer.getJuliaDimension(ctr, 100, 4)
+    val dimension = Producer.getJuliaDimension(c = ctr, iterations=100, nBoxes=4)
     assert(2 == Math.round(dimension)) // 1 - indicates
 
     // position one (0) of the tuple is the dimension, position two is the center point.

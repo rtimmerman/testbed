@@ -28,4 +28,4 @@ data/
 **/.venv/
 .venv/
 .venv/*
-
+**/sbt.json

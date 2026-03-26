@@ -131,6 +131,8 @@ kind: Service
 metadata:
   name: prometheus-svc
   namespace: dev
+  labels:
+    role: prometheus
 spec:
   type: LoadBalancer
   selector:
@@ -191,6 +193,8 @@ kind: Service
 metadata:
   name: grafana-svc
   namespace: dev
+  labels:
+    role: grafana
 spec:
   type: LoadBalancer
   selector:

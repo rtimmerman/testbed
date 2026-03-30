@@ -29,6 +29,13 @@ policy:
     # try_interval_sec: 1_800 # 30 minutes
     try_interval_sec: 3600 # 3 minutes
 
+  # Use this config allow movement towards or away-from a stable mandelbrot region.
+  julia:
+    max_tries: 4
+    max_eval_units: 4
+    try_interval_sec: 3600 # e.g. 7200 = 2 hours (let each plot take 7200 seonds to cool down)
+    dimension_tendency: max # the higher the better (prefer higher connectivity).
+
   # none (or no) policy by-passes rebalancing algorithms
   # none:
   #  active: true

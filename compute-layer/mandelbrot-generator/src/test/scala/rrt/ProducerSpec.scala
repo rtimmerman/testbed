@@ -302,7 +302,7 @@ class ProducerSpec extends AnyFlatSpec with Matchers with LoggingTrait {
     assert(2 > dim)
 
     val ctr2 = Producer.juliaCentre(Producer.createSpaceFromPoint(Complex(-1.3, -1.3), ball=100).flatten)
-    logger.atInfo.log(ctr2)
+    logger.atInfo.log(f"Julia set central coordinate: ${ctr2.toString()}")
     logger.atInfo.log("Average dimension testing----")
     var dims =  List(4, 16, 64).map(n => Producer.getJuliaDimension(
         c = ctr2,

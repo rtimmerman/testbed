@@ -3,7 +3,7 @@ topicPrefix: test
 iterations: 1000
 coordinate: 0.1982-1.1003i
 zoomPc: 100
-neighbourhoodSize: 100
+neighbourhoodSize: 64 # must be a power of 4
 partitions: 16
 
 monitor:

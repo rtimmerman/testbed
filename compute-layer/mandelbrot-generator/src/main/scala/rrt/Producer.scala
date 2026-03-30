@@ -289,7 +289,13 @@ object Producer extends KafkaTrait {
           DispatchResult(
             message = s"Sent ${batch.length} entries to topic: $topic)",
             juliaDimensionResult = params match
-              // case p: ProducerParamsV2 => getJuliaDimension(batch, p.iterations, p.neighbourhoodSize)
+              case p: ProducerParamsV2 => {
+                val ctr = Producer.juliaCentre(batch)
+                JuliaDimensionResult(
+                  getJuliaDimension(ctr, p.iterations, p.neighbourhoodSize),
+                  ctr
+                )
+              }
               case _ => JuliaDimensionResult(-1, null)
           )
         }

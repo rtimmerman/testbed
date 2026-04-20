@@ -1,11 +1,11 @@
 version: 2
 topicPrefix: test
-paritions: 16
+partitions: 16
 iterations: 1000
 coordinate: 0+0i
 #coordinate: 0.1982-1.1003i
 zoomPc: 100
-neighbourhoodSize: 1600
+neighbourhoodSize: 1024 # for rebalancing this must be a power of 4
 
 monitor:
   prometheus_api_url: http://rrt-general-services:31697/api/v1/query_range
@@ -34,7 +34,7 @@ policy:
     max_tries: 4
     max_eval_units: 4
     try_interval_sec: 3600 # e.g. 7200 = 2 hours (let each plot take 7200 seonds to cool down)
-    dimension_tendency: max # the higher the better (prefer higher connectivity).
+    dimension_tendency: Max # the higher the better (prefer higher connectivity).
 
   # none (or no) policy by-passes rebalancing algorithms
   # none:

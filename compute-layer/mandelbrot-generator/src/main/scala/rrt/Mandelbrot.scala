@@ -88,7 +88,7 @@ def setupLogging() =
       logger.trace(
          e.getMessage()
          + "\n"
-         + ExceptionUtils.getStackFrames(e)
+         + ExceptionUtils.getStackTrace(e)
       )
     }
   

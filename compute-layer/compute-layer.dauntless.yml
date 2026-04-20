@@ -1161,7 +1161,7 @@ spec:
           env:
             - {name: ROLE, value: producer-shell}
             - {name: MLOG_NAME, value: producer-log}
-            - {name: MLOG_FILE_PATH, value: /data/producer.log}
+            - {name: MLOG_FILE_PATH, value: /data/producer-shell.log}
           ports:
             - containerPort: 9091
             - containerPort: 9180

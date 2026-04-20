@@ -47,8 +47,6 @@ def setupLogging() =
   fileAppenderBuilder.withLayout(layout)
   fileAppenderBuilder.setConfiguration(ctx.getConfiguration())
 
-  // System.getenv()
-
   var fileAppender = fileAppenderBuilder.build()
   fileAppender.start()
 
@@ -59,8 +57,6 @@ def setupLogging() =
 
   ctx.getConfiguration().getRootLogger().addAppender(fileAppender, null, null)
   ctx.updateLoggers()
-
-  // logger.info("hello!")
 
   logger
 
@@ -80,6 +76,19 @@ def setupLogging() =
     case _ => ""
   }
 
+  try
+    run(role, topic, frameConfigFile, logger)
+  catch
+    case e: Exception => {
+      logger.error(s"Unfortunately, an exception will halt execution: ${e.getMessage()}")
+      logger.debug(
+        e.getMessage()
+        + "\n"
+        + e.getStackTrace().map(_.toString).reduce((carry, s: String) => carry + s + "\n")
+      )
+    }
+  
+def run(role: String, topic: String, frameConfigFile: String, logger: Logger): Unit =
   if (role.equals("producer"))
     logger.info(f"<< PRODUCER >> starting producer from config: \"$frameConfigFile\"")
     val activity = new Activity(Role.Producer, UUID.randomUUID().toString(), logger)
@@ -325,4 +334,5 @@ class Activity(var role: Role, var kafkaGroupId: String = UUID.randomUUID().toSt
      clazz.getDeclaredMethod("produceGridPoints", classOf[String], classOf[KafkaProducer[String,String]]).invoke(null, frameConfigFile, null)
 
   def classLoader(classJarPackage: String): URLClassLoader = 
-    new URLClassLoader(Array(new java.io.File(classJarPackage).toURI.toURL), this.getClass().getClassLoader())
+    new URLClassLoader(Array(new java.io.File(classJarPackage).toURI.toURL), this.getClass().getClassLoader()
+)

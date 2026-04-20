@@ -80,8 +80,8 @@ def setupLogging() =
     run(role, topic, frameConfigFile, logger)
   catch
     case e: Exception => {
-      logger.error(s"Unfortunately, an exception will halt execution: ${e.getMessage()}")
-      logger.debug(
+      logger.error(s"Unfortunately, an exception will halt execution: ${e.getClass.toString}; message: ${e.getMessage()}")
+      logger.trace(
         e.getMessage()
         + "\n"
         + e.getStackTrace().map(_.toString).reduce((carry, s: String) => carry + s + "\n")

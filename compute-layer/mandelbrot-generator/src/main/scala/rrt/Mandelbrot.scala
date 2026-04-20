@@ -24,6 +24,8 @@ import org.apache.logging.log4j.core.LoggerContext
 import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.core.layout.PatternLayout
 import org.apache.logging.log4j.Logger
+import java.io.StringWriter
+import org.apache.commons.lang3.exception.ExceptionUtils
 
 given ExecutionContext = ExecutionContext.global
 
@@ -81,10 +83,12 @@ def setupLogging() =
   catch
     case e: Exception => {
       logger.error(s"Unfortunately, an exception will halt execution: ${e.getClass.toString}; message: ${e.getMessage()}")
+      
+      
       logger.trace(
-        e.getMessage()
-        + "\n"
-        + e.getStackTrace().map(_.toString).reduce((carry, s: String) => carry + s + "\n")
+         e.getMessage()
+         + "\n"
+         + ExceptionUtils.getStackFrames(e)
       )
     }
   

@@ -33,7 +33,7 @@ policy:
   julia:
     max_tries: 4
     max_eval_units: 4
-    try_interval_sec: 3600 # e.g. 7200 = 2 hours (let each plot take 7200 seonds to cool down)
+    try_interval_sec: 1200 # e.g. 7200 = 2 hours (let each plot take 7200 seonds to cool down)
     dimension_tendency: Max # the higher the better (prefer higher connectivity).
 
   # none (or no) policy by-passes rebalancing algorithms

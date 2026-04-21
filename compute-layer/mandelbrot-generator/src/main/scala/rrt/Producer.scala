@@ -22,6 +22,7 @@ import rrt.ProducerParamsV2Extension._
 import rrt.linalg.ArrayExtension.kronecker
 
 import rrt.policy.Julia as JuliaPolicy
+import rrt.policy.JuliaDimensionResult
 import rrt.policy.Adjustable
 
 object Producer extends KafkaTrait {
@@ -71,8 +72,6 @@ object Producer extends KafkaTrait {
         .map(a => a.slice((x * width), (x * width) + width + 1))
         .flatten
   
-  case class JuliaDimensionResult(dim: Double, centre: rrt.Complex)
-
   def juliaCentre(grp: Array[Map[String, Double]]): Complex =
     val nums = grp.map(rrt.Complex.fromMap)
     val min = nums.reduce((a, b) => if a.r < b.r then a else b)
@@ -309,17 +308,20 @@ object Producer extends KafkaTrait {
       params match
         case p: ProducerParamsV2 if p.usingPerformancePolicy =>
           // wait for a set time interval or ascertain that alk the workers have finished.
+          logger.info(s"Waiting for ${p.policy.performancePolicy.tryIntervalSec} before evaluating performance")
           Thread.sleep(p.policy.performancePolicy.tryIntervalSec * 1000)
           // evaluate performance here
           val lastPerformance = PerformanceEvaluator.getLastPerformance(params.asInstanceOf[ProducerParamsV2])
           // PerformanceEvaluator.orderByPerformance(lastPerformance)
           // rebalance here
           if (workIterator.hasNext)
+            logger.info(s"Rebalanced work weights across the cluster, submitting new work request")
             workQueue.append(PerformanceEvaluator.rebalance(
               workIterator.next, 
               weights = PerformanceEvaluator.orderByPerformance(lastPerformance),
               nodePartitionMap = (0 to 15).map(i => (p.monitor.registeredConsumerNameTemplate.format(i), i)).toMap
             ))
+            logger.info(s"Work request submitted")
         case _ =>
           if (workIterator.hasNext)
             workQueue.append(workIterator.next)

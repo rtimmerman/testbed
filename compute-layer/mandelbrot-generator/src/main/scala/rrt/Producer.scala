@@ -191,7 +191,8 @@ object Producer extends KafkaTrait {
         space = p.sizeX * p.sizeY
 
     val observer: Adjustable[JuliaDimensionResult] = params match
-      case p: ProducerParamsV2 if p.usingJuliaPolicy => JuliaPolicy[JuliaDimensionResult](p)
+      case p: ProducerParamsV2 if p.usingJuliaPolicy => JuliaPolicy(p)
+
       case _ => null
 
     val evalUnits = params match
@@ -337,24 +338,6 @@ object Producer extends KafkaTrait {
       case o: Adjustable[JuliaDimensionResult] =>
         gridWorkStream(producerFactory, o.onPostDispatchEvaluation())
       case null =>
-
-    /*
-    params match
-      // Julia Dimension based Optimisation Hypothesis Test (run by run)
-      // let's test the hypothesis for julia, here is the re-entrant code for that
-      case p: ProducerParamsV2 if p.policy.performancePolicy != null && p.policy.performancePolicy.maxTries > 0 =>
-        logger.info("Julia re-positioning (hypothesis test)")
-        val closestCentre = results.map {r => r.juliaDimensionResult}.reduce { (a, b) => if a.dim > b.dim then a else b }
-        val p2 = p.copy(
-          coordinate = closestCentre.centre.toString,
-          policy = ProducerWorkPolicy(performancePolicy(maxTries = p.policy.performancePolicy.maxTries - 1, tryIntervalSec = p.policy.performancePolicy.tryIntervalSec))
-        )
-        // wait before submitting work again.
-        logger.info(s"Ready to send work for new coordinate ${p2.coordinate} (after ${p2.policy.performancePolicy.tryIntervalSec} seconds)")
-        Thread.sleep(p.policy.performancePolicy.tryIntervalSec * 1000)
-        gridWorkStream(producerFactory, p2)
-      case _ =>
-      */
 
     logger.info("Done")
 

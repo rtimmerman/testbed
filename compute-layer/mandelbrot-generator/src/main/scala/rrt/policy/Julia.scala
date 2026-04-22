@@ -7,13 +7,14 @@ import rrt.ProducerParamsV2
 import rrt.ProducerParamsV2Extension._
 import rrt.ProducerWorkPolicy
 import rrt.JuliaPolicy
+import rrt.LoggingTrait
 
 enum JuliaStrategy:
     case STABILITY, INSTABILITY
 
-class Julia[R](val params: ProducerParamsV2, var dispatchResults: List[DispatchResult[R]] = List()) extends Adjustable[R]:
+class Julia(val params: ProducerParamsV2, var dispatchResults: List[DispatchResult[JuliaDimensionResult]] = List()) extends Adjustable[JuliaDimensionResult], LoggingTrait:
     
-    override def afterDispatch(msg: String, fn: () => R): Unit = 
+    override def afterDispatch(msg: String, fn: () => JuliaDimensionResult): Unit = 
         dispatchResults = dispatchResults ::: List(DispatchResult(msg, fn()))
 
     /**
@@ -23,26 +24,34 @@ class Julia[R](val params: ProducerParamsV2, var dispatchResults: List[DispatchR
      * data set.
      */
     def onPostDispatchEvaluation(): ProducerParamsV2 =
-        Thread.sleep(params.policy.juliaPolicy.tryIntervalSec * 1000)
+        val waitTime = params.policy.juliaPolicy.tryIntervalSec * 1000
+        logger.info(s"Dispatch complete, waiting ${waitTime} secs for work to complete")
+        Thread.sleep(waitTime)
     
-        val closestCentre: JuliaDimensionResult = dispatchResults match
-            case r: List[DispatchResult[JuliaDimensionResult]] => r.map {r => r.juliaDimensionResult}.reduce { (a, b) => if a.dim > b.dim then a else b }
-        
-        closestCentre match
-            case cc: JuliaDimensionResult =>
-                params.copy(
-                    coordinate = cc.centre.toString,
-                    policy = ProducerWorkPolicy(
-                        juliaPolicy = JuliaPolicy(
-                            maxTries = params.policy.juliaPolicy.maxTries - 1,
-                            maxEvalUnits = params.policy.juliaPolicy.maxEvalUnits,
-                            tryIntervalSec = params.policy.juliaPolicy.tryIntervalSec,
-                            dimTendency = params.policy.juliaPolicy.dimTendency
-                        ),
-                            performancePolicy=null,
-                        nonePolicy = null
-                    )
-                )
-            case _ => params
+        logger.info("Finding result nearest to stable region...")
+        val closestCentre: JuliaDimensionResult = dispatchResults
+            .map {r => r.juliaDimensionResult}
+            .maxBy {_.dim}
+
+        logger.info(s"Closest centre given is ${closestCentre.centre.toString}")
+        // update the parameters to have one less try, rebalancing can change the dimTendency, but for now
+        // change the kubernetes capacity instead.
+        // move the centre to the one closest to stability
+        val updatedParams = params.copy(
+            coordinate = closestCentre.centre.toString,
+            policy = ProducerWorkPolicy(
+                juliaPolicy = JuliaPolicy(
+                    maxTries = params.policy.juliaPolicy.maxTries - 1,
+                    maxEvalUnits = params.policy.juliaPolicy.maxEvalUnits,
+                    tryIntervalSec = params.policy.juliaPolicy.tryIntervalSec,
+                    dimTendency = params.policy.juliaPolicy.dimTendency
+                ),
+                    performancePolicy=null,
+                nonePolicy = null
+            )
+        )
+
+        logger.info("sending updated map accorindg to new centre")
+        updatedParams
 
 

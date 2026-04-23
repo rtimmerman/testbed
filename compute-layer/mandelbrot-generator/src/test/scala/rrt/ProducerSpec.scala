@@ -288,6 +288,9 @@ class ProducerSpec extends AnyFlatSpec with Matchers with LoggingTrait {
     // val configFile = System.getProperty("user.dir") + "/src/test/resources/test-work.yml"
     val space = Producer.createSpaceFromPoint(Complex(0, 0), ball=16).flatten
     val ctr = Producer.juliaCentre(space)
+    logger.info(s"julia center is: ${ctr}")
+    assert(ctr.r == 0)
+    assert(ctr.i == 0)
     val dimension = Producer.getJuliaDimension(c = ctr, iterations=100, nBoxes=4)
     assert(2 == Math.round(dimension)) // 1 - indicates
 

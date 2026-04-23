@@ -75,9 +75,10 @@ object Producer extends KafkaTrait {
   
   def juliaCentre(grp: Array[Map[String, Double]]): Complex =
     val nums = grp.map(rrt.Complex.fromMap)
-    val min = nums.reduce((a, b) => if a.r < b.r then a else b)
-    val max = nums.reduce((a, b) => if a.i > b.i then a else b)
-    val centre = rrt.Complex((min.r + max.r) / 2, (min.i + max.i) / 2) //<- find the midpoint using averages between real and imaginary parts separately
+    val r = nums.map(_.r).min + (nums.map(_.r).min - nums.map(_.r).max).abs / 2
+    val i = nums.map(_.i).min + (nums.map(_.i).min - nums.map(_.i).max).abs / 2
+
+    val centre = rrt.Complex(r, i) //<- find the midpoint using averages between real and imaginary parts separately
     logger.atDebug.log(f"Julia center found: $centre")
     centre
 
@@ -150,11 +151,9 @@ object Producer extends KafkaTrait {
     logger.atInfo.log(f"Dimension: $D")
     D
 
-  def getParams(configFilePath: String): ProducerParams | ProducerParamsV2 =
+  def getParams(configFilePath: String): ProducerParamsV2 =
     var mapper = new ObjectMapper(new YAMLFactory())
-    mapper.readValue(new File(configFilePath), classOf[ProducerParams]) match
-      case p if p.version == 2 => mapper.readValue(new File(configFilePath), classOf[ProducerParamsV2])
-      case p => p
+    mapper.readValue(new File(configFilePath), classOf[ProducerParamsV2])
 
   /**
    * This function is responsible for processing a work request given as a set of parameters.
@@ -225,21 +224,6 @@ object Producer extends KafkaTrait {
       // var centreDimensionMap: scala.collection.mutable.Map[String, JuliaDimensionResult] = scala.collection.mutable.Map()
       def dispatch(batch: Array[Map[String, Double]], number: Int): Future[DispatchResult[JuliaDimensionResult]] =
         val topic = s"${params.topicPrefix}-${number}"
-
-        // TODO: move this, as this ends up executing immediately and then failing right away
-        observer match
-          case Some(o) =>
-            o.afterDispatch("Re-evaluating with new julia z...", () => {
-              params match
-                case p: ProducerParamsV2 if p.usingJuliaPolicy =>
-                  val centre = juliaCentre(batch)
-                  JuliaDimensionResult(
-                    getJuliaDimension(centre, p.iterations, p.neighbourhoodSize),
-                    centre
-                  )
-                case _ => JuliaDimensionResult(-1, null)
-            })
-          case None => null
 
         Future {
           val kafkaProducer = producerFactory(s"transaction-$number")

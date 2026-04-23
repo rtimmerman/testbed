@@ -15,7 +15,7 @@ enum JuliaStrategy:
 class Julia(val params: ProducerParamsV2, var dispatchResults: List[DispatchResult[JuliaDimensionResult]] = List()) extends Adjustable[JuliaDimensionResult], LoggingTrait:
     
     override def afterDispatch(msg: String, fn: () => JuliaDimensionResult): Unit = 
-        dispatchResults = dispatchResults ::: List(DispatchResult(msg, fn()))
+        dispatchResults :::= List(DispatchResult(msg, fn()))
 
     /**
      * After all dispatches have occurred, after a period a time (presumably after the entire

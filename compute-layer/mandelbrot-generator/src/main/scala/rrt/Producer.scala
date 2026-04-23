@@ -23,6 +23,7 @@ import rrt.linalg.ArrayExtension.kronecker
 
 import rrt.policy.Julia as JuliaPolicy
 import rrt.policy.JuliaDimensionResult
+import rrt.policy.DispatchResult
 import rrt.policy.Adjustable
 
 object Producer extends KafkaTrait {
@@ -132,25 +133,14 @@ object Producer extends KafkaTrait {
     val boxlayout = (0 until nBoxes).map(i => i.toDouble).toArray.sliding(nBoxes, nBoxes).toArray.kronecker(kronLength, kronLength)
     val boxAlloc = boxlayout.flatten.map {i => i.toInt}
     assert(boxAlloc.length >= julia.length, f"Julia length: ${julia.length} >= Box Allocations length = ${boxAlloc.length}")
-    // println(boxlayout.prettyString)
-    // println(boxAlloc.toList)
-
     logger.atInfo.log(f"Box Allocation test: End Box Alloc = ${boxAlloc(julia.length - 1)}, Box alloc length = ${boxAlloc.length}, Julia Length = ${julia.length}, iterations=${iterations}")
-    // println(julia.toList)
 
     val boxes = Array.ofDim[Int](boxAlloc(boxAlloc.length - 1) + 1)
     for (i <- Range(0, julia.length))
       val boxIndex = boxAlloc(i)
-      // logger.atInfo.log(f"box #: $boxIndex")
-      // logger.atInfo.log(f"julia val #: ${julia(i)}")
       val valid = (v: Double) => (v != 0)
-      // julia(i) match
-      //   case v if valid(v) =>
-      //     println(f"${julia(i)} --> ${boxAlloc(i)}")
-      //     boxAlloc(i) += 1
-      //   case _ =>
+
       if (valid(julia(i).toDouble))
-        // println(f"${julia(i)} --> ${boxAlloc(i)}")
         boxes(boxAlloc(i)) += 1
 
     val nR = boxes.filter((b) => b > 0).length
@@ -166,34 +156,26 @@ object Producer extends KafkaTrait {
       case p if p.version == 2 => mapper.readValue(new File(configFilePath), classOf[ProducerParamsV2])
       case p => p
 
+  /**
+   * This function is responsible for processing a work request given as a set of parameters.
+   * 
+   */
   def gridWorkStream(
       producerFactory: (String) => (Producer[String, String]),
-      params: ProducerParams | ProducerParamsV2
-  ): Unit =
+      params: ProducerParamsV2
+  ): List[rrt.policy.DispatchResult[JuliaDimensionResult]] =
     val runUUID = UUID.randomUUID()
 
     var b: Array[Array[Map[String,Double]]] = null
     var space = 0
 
-    params match
-      case p: ProducerParamsV2 =>
-        logger.info(s"Started run (UUID: $runUUID})")
-        logger.info(s"Received v2 parameter set")
-        // val params = mapper.readValue(new File(frameConfigFile), classOf[ProducerParamsV2]): ProducerParamsV2
-        logger.info(params.getClass.toString)
-        b = createSpaceFromPoint(rrt.Complex.fromString(p.coordinate), p.zoomPc, p.neighbourhoodSize)
-        space = p.neighbourhoodSize * p.neighbourhoodSize
-        logger.info(s"Run: (Zoom %: ${p.zoomPc} | initial entry: ${rrt.Complex.fromMap(b(0)(0))})")
-      case p: ProducerParams =>
-        logger.info(s"Received v1 parameter set")
-        // val params = paramsBase
-        b = createSpace(p.sizeX, p.sizeY, p.minR, p.maxR, p.minI, p.maxI)
-        space = p.sizeX * p.sizeY
+    logger.info(s"Received v2 parameter set")
+    logger.info(params.getClass.toString)
+    b = createSpaceFromPoint(rrt.Complex.fromString(params.coordinate), params.zoomPc, params.neighbourhoodSize)
+    space = params.neighbourhoodSize * params.neighbourhoodSize
+    logger.info(s"Run: (Zoom %: ${params.zoomPc} | initial entry: ${rrt.Complex.fromMap(b(0)(0))})")
 
-    val observer: Adjustable[JuliaDimensionResult] = params match
-      case p: ProducerParamsV2 if p.usingJuliaPolicy => JuliaPolicy(p)
-
-      case _ => null
+    val observer: Option[Adjustable[JuliaDimensionResult]] = if (params.usingJuliaPolicy) Some(JuliaPolicy(params)) else None
 
     val evalUnits = params match
       case p: ProducerParamsV2 if p.usingPerformancePolicy => p.policy.performancePolicy.maxEvalUnits
@@ -202,7 +184,6 @@ object Producer extends KafkaTrait {
     
     val workset = b.map(_.sliding(evalUnits, evalUnits).toArray).toArray
 
-    case class DispatchResult(message: String, juliaDimensionResult: JuliaDimensionResult)
     // perf-eval loop
 
     def workGenerator(workset: Array[Array[Array[Map[String,Double]]]]) =
@@ -218,14 +199,15 @@ object Producer extends KafkaTrait {
     // val workIterator = workset.iterator
 
     val workQueue: Queue[Array[Array[Map[String, Double]]]] = Queue(workIterator.next)
+
+    var dispatchResults: Seq[DispatchResult[JuliaDimensionResult]] = List()
     while (!workQueue.isEmpty)
       val work = workQueue.removeLast()
       logger.atInfo().log(s"Workset size: ${work.length}")
+
       val batches = partition(
         work,
-        params match 
-          case p: ProducerParamsV2 => p.partitions
-          case p: ProducerParams => p.partitions
+        params.partitions
       )
 
       logger.info("<< Batch Allocations >>")
@@ -241,16 +223,15 @@ object Producer extends KafkaTrait {
       var lot = 0
 
       // var centreDimensionMap: scala.collection.mutable.Map[String, JuliaDimensionResult] = scala.collection.mutable.Map()
-      def dispatch(batch: Array[Map[String, Double]], number: Int): Future[DispatchResult] =
-        val topic = params match
-          case p: ProducerParamsV2 => s"${p.topicPrefix}-${number}"
-          case p: ProducerParams => s"${p.topicPrefix}-${number}"
+      def dispatch(batch: Array[Map[String, Double]], number: Int): Future[DispatchResult[JuliaDimensionResult]] =
+        val topic = s"${params.topicPrefix}-${number}"
 
+        // TODO: move this, as this ends up executing immediately and then failing right away
         observer match
-          case o: Adjustable[JuliaDimensionResult] =>
+          case Some(o) =>
             o.afterDispatch("Re-evaluating with new julia z...", () => {
               params match
-                case p: ProducerParamsV2 =>
+                case p: ProducerParamsV2 if p.usingJuliaPolicy =>
                   val centre = juliaCentre(batch)
                   JuliaDimensionResult(
                     getJuliaDimension(centre, p.iterations, p.neighbourhoodSize),
@@ -258,7 +239,7 @@ object Producer extends KafkaTrait {
                   )
                 case _ => JuliaDimensionResult(-1, null)
             })
-          case null =>
+          case None => null
 
         Future {
           val kafkaProducer = producerFactory(s"transaction-$number")
@@ -274,9 +255,7 @@ object Producer extends KafkaTrait {
                   Consumer.encodedPayload(
                       "%f".format(entry.getOrElse("r", 0)),
                       "%f".format(entry.getOrElse("i", 0)),
-                      params match
-                        case p: ProducerParamsV2 => p.iterations.toString()
-                        case p: ProducerParams => p.iterations.toString(),
+                      params.iterations.toString(),
                       runUUID.toString()
                     )
                   )
@@ -289,7 +268,7 @@ object Producer extends KafkaTrait {
           DispatchResult(
             message = s"Sent ${batch.length} entries to topic: $topic)",
             juliaDimensionResult = params match
-              case p: ProducerParamsV2 => {
+              case p: ProducerParamsV2 if p.usingJuliaPolicy => {
                 val ctr = Producer.juliaCentre(batch)
                 JuliaDimensionResult(
                   getJuliaDimension(ctr, p.iterations, p.neighbourhoodSize),
@@ -300,19 +279,18 @@ object Producer extends KafkaTrait {
           )
         }
         
-      logger.info("Dispatching...")
+      logger.info("Dispatching...") 
       val dispatchFuture = (0 to batches.length - 1).map(i => dispatch(batches(i), i))
-      Await.result(Future.sequence(dispatchFuture), scala.concurrent.duration.Duration.Inf)
-
+      dispatchResults = Await.result(Future.sequence(dispatchFuture), scala.concurrent.duration.Duration.Inf)
       
       // **** Load Balancing ****
       params match
-        case p: ProducerParamsV2 if p.usingPerformancePolicy =>
+        case p if p.usingPerformancePolicy =>
           // wait for a set time interval or ascertain that alk the workers have finished.
           logger.info(s"Waiting for ${p.policy.performancePolicy.tryIntervalSec} before evaluating performance")
           Thread.sleep(p.policy.performancePolicy.tryIntervalSec * 1000)
           // evaluate performance here
-          val lastPerformance = PerformanceEvaluator.getLastPerformance(params.asInstanceOf[ProducerParamsV2])
+          val lastPerformance = PerformanceEvaluator.getLastPerformance(params)
           // PerformanceEvaluator.orderByPerformance(lastPerformance)
           // rebalance here
           if (workIterator.hasNext)
@@ -331,22 +309,43 @@ object Producer extends KafkaTrait {
         // rebalance the work according to a chosen strategy (e.g. could be frame by frame based action of Julia set based optimation)
     // ---- end of perf-eval loop ----
     logger.info("Dispatch complete")
+    dispatchResults.toList
 
-    // **** post dispatch evaluation (for hypothesis tests) ****
-    
-    observer match
-      case o: Adjustable[JuliaDimensionResult] =>
-        gridWorkStream(producerFactory, o.onPostDispatchEvaluation())
-      case null =>
-
-    logger.info("Done")
 
   def produceGridPoints(frameConfigFile: String, kafkaProducer: KafkaProducer[String, String] = null) = {
-    gridWorkStream((transactionId: String) => {
-      val producer = initProducer(transactionId)
-      producer.initTransactions
-      producer
-    }, Producer.getParams(frameConfigFile))
+    // fixed to support only ProducerParamsV2 for now.
+    val params = Producer.getParams(frameConfigFile).asInstanceOf[ProducerParamsV2]
+    
+    // initial run
+    if (params.isInstanceOf[ProducerParamsV2])
+      var result = gridWorkStream(
+        (transactionId: String) => {
+          val producer = initProducer(transactionId)
+          producer.initTransactions
+          producer
+        },
+        params
+      )
+
+      // when using the juliaPolicy, the entire work stream needs to be re-run
+      if (params.usingJuliaPolicy)
+        var runsRemaining = params.policy.juliaPolicy.maxTries.toInt
+        while runsRemaining > 0 do
+          logger.info(s"Re-running: ${runsRemaining - 1 } run/s to go...")
+          val policy = rrt.policy.Julia(params, result)
+          val rerunParams = policy.onPostDispatchEvaluation()
+          result = gridWorkStream(
+            (transactionId: String) => {
+              val producer = initProducer(transactionId)
+              producer.initTransactions
+              producer
+            },
+            params
+          )
+
+          runsRemaining -= 1
+
+      logger.info("All done!")
 
     // evaluate performance (cwt)
     // 1. Connect to prometheus load balancer and extract statistics (e.g. run the dwell time query as grafana does - maybe grafana api may assist)

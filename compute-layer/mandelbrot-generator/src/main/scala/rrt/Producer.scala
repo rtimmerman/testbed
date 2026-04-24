@@ -74,7 +74,7 @@ object Producer extends KafkaTrait {
         .flatten
   
   def juliaCentre(grp: Array[Map[String, Double]]): Complex =
-    val nums = grp.map(rrt.Complex.fromMap)
+    val nums = grp.map(rrt.Complex.fromMap(_))
     val r = nums.map(_.r).min + (nums.map(_.r).min - nums.map(_.r).max).abs / 2
     val i = nums.map(_.i).min + (nums.map(_.i).min - nums.map(_.i).max).abs / 2
 

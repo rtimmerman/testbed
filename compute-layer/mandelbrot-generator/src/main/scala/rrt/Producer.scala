@@ -250,6 +250,8 @@ object Producer extends KafkaTrait {
             kafkaProducer.commitTransaction()
           })
           kafkaProducer.close
+
+          logger.info(s"Creating dispatch result: batch contains ${batch.length} entries.")
           DispatchResult(
             message = s"Sent ${batch.length} entries to topic: $topic)",
             juliaDimensionResult = params match

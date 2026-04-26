@@ -26,6 +26,7 @@ import rrt.policy.Julia as JuliaPolicy
 import rrt.policy.JuliaDimensionResult
 import rrt.policy.DispatchResult
 import rrt.policy.Adjustable
+import org.apache.commons.lang3.exception.ExceptionUtils
 
 object Producer extends KafkaTrait {
   type Space = Array[Array[Map[String, Double]]];
@@ -76,12 +77,20 @@ object Producer extends KafkaTrait {
   
   def juliaCenter(grp: Array[Map[String, Double]]): Complex =
     val nums = grp.map(Complex.fromMap(_))
-    val r = nums.map(_.r).min + (nums.map(_.r).min - nums.map(_.r).max).abs / 2
-    val i = nums.map(_.i).min + (nums.map(_.i).min - nums.map(_.i).max).abs / 2
-
-    val centre = Complex(r, i) //<- find the midpoint using averages between real and imaginary parts separately
-    logger.atDebug.log(f"Julia center found: $centre")
-    centre
+    try
+      val r = nums.map(_.r).min + (nums.map(_.r).min - nums.map(_.r).max).abs / 2
+      val i = nums.map(_.i).min + (nums.map(_.i).min - nums.map(_.i).max).abs / 2
+      val center = Complex(r, i) //<- find the midpoint using averages between real and imaginary parts separately
+      logger.atDebug.log(f"Julia center found: $center")
+      return center
+    catch
+      case e => {
+        logger.error(s"Julia Center calculation received exception: ${e.getClass()} message: ${e.getMessage()}")
+        logger.info(s"Number of coordinates submitted: ${nums.length}")
+        logger.debug(s"Sample output (first coordinate): ${nums(0).toString()}")
+        logger.trace(ExceptionUtils.getStackTrace(e))
+        throw e // bubble to exception
+      }
 
   def getJuliaDimension(c: Complex, iterations: Int, nBoxes: Int): Double =
     import math._

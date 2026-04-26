@@ -19,6 +19,7 @@ import rrt.external.PerformanceEvaluator
 import scala.collection.mutable.Queue
 
 import rrt.ProducerParamsV2Extension._
+import rrt.linalg.Complex
 import rrt.linalg.ArrayExtension.kronecker
 
 import rrt.policy.Julia as JuliaPolicy
@@ -29,7 +30,7 @@ import rrt.policy.Adjustable
 object Producer extends KafkaTrait {
   type Space = Array[Array[Map[String, Double]]];
 
-  def createSpaceFromPoint(c: rrt.Complex, zoomPc: Integer = 100, ball: Integer = 1000, canvasDimensions: Map[String, Int] = Map("minR" -> -2, "maxR" -> 2, "minI" -> -2, "maxI" -> 2)): Space = {
+  def createSpaceFromPoint(c: Complex, zoomPc: Integer = 100, ball: Integer = 1000, canvasDimensions: Map[String, Int] = Map("minR" -> -2, "maxR" -> 2, "minI" -> -2, "maxI" -> 2)): Space = {
     val scale = 1 / (zoomPc.toDouble / 100)
     val linspace = (x1: BigDecimal, x2: BigDecimal, count: BigDecimal) => (x1 * scale to x2 * scale by (((x1  * scale) - (x2 * scale)).abs / (count)))
     val R = linspace(canvasDimensions("minR"), canvasDimensions("maxR"), BigDecimal(ball))
@@ -73,12 +74,12 @@ object Producer extends KafkaTrait {
         .map(a => a.slice((x * width), (x * width) + width + 1))
         .flatten
   
-  def juliaCentre(grp: Array[Map[String, Double]]): Complex =
-    val nums = grp.map(rrt.Complex.fromMap(_))
+  def juliaCenter(grp: Array[Map[String, Double]]): Complex =
+    val nums = grp.map(Complex.fromMap(_))
     val r = nums.map(_.r).min + (nums.map(_.r).min - nums.map(_.r).max).abs / 2
     val i = nums.map(_.i).min + (nums.map(_.i).min - nums.map(_.i).max).abs / 2
 
-    val centre = rrt.Complex(r, i) //<- find the midpoint using averages between real and imaginary parts separately
+    val centre = Complex(r, i) //<- find the midpoint using averages between real and imaginary parts separately
     logger.atDebug.log(f"Julia center found: $centre")
     centre
 
@@ -97,9 +98,9 @@ object Producer extends KafkaTrait {
 
     val z_plane = (BigDecimal(-2) until BigDecimal(2) by res)
       .map((i) => (BigDecimal(-2) until BigDecimal(2) by res)
-      .map((r) => rrt.Complex(r,i)))
+      .map((r) => Complex(r,i)))
 
-    lazy val m: (rrt.Complex, Int) => Int = (z, n) => {
+    lazy val m: (Complex, Int) => Int = (z, n) => {
       val z2 = (z ** 2) + c
       z2.abs() match
         case v if v >= blowup => iterations - n
@@ -170,9 +171,9 @@ object Producer extends KafkaTrait {
 
     logger.info(s"Received v2 parameter set")
     logger.info(params.getClass.toString)
-    b = createSpaceFromPoint(rrt.Complex.fromString(params.coordinate), params.zoomPc, params.neighbourhoodSize)
+    b = createSpaceFromPoint(Complex.fromString(params.coordinate), params.zoomPc, params.neighbourhoodSize)
     space = params.neighbourhoodSize * params.neighbourhoodSize
-    logger.info(s"Run: (Zoom %: ${params.zoomPc} | initial entry: ${rrt.Complex.fromMap(b(0)(0))})")
+    logger.info(s"Run: (Zoom %: ${params.zoomPc} | initial entry: ${Complex.fromMap(b(0)(0))})")
 
     val observer: Option[Adjustable[JuliaDimensionResult]] = if (params.usingJuliaPolicy) Some(JuliaPolicy(params)) else None
 
@@ -253,7 +254,7 @@ object Producer extends KafkaTrait {
             message = s"Sent ${batch.length} entries to topic: $topic)",
             juliaDimensionResult = params match
               case p: ProducerParamsV2 if p.usingJuliaPolicy => {
-                val ctr = Producer.juliaCentre(batch)
+                val ctr = Producer.juliaCenter(batch)
                 JuliaDimensionResult(
                   getJuliaDimension(ctr, p.iterations, p.neighbourhoodSize),
                   ctr

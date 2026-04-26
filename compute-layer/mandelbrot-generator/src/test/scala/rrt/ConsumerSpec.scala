@@ -5,6 +5,7 @@ import org.scalatest.matchers.should.Matchers
 import scala.concurrent.{Await,Future}
 import io.prometheus.client.exporter.HTTPServer
 import scala.concurrent.duration.*
+import rrt.linalg.Complex
 
 class ConsumerSpec extends AnyFlatSpec with Matchers {
   "Complex number" should "be able to generate product" in {

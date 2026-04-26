@@ -1,7 +1,7 @@
 package rrt.policy
 
 import rrt.policy.Adjustable
-import rrt.Complex
+import rrt.linalg.Complex
 import rrt.external.PerformanceEvaluator
 import rrt.ProducerParamsV2
 import rrt.ProducerParamsV2Extension._

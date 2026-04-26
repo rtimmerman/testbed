@@ -1,6 +1,6 @@
 package rrt.model.wavelet
 
-import rrt.Complex
+import rrt.linalg.Complex
 
 /**
   * Morelet Wavelet transforms (Real)
@@ -17,10 +17,10 @@ class Morlet():
 
         real.map((t) => t.toDouble).map { t => 
           // println(f"$t: ${rrt.Complex(t, 0) * rrt.Complex(Math.PI, 0) ** rrt.Complex(Math.PI / 4, 0)}")
-          rrt.Complex(norm, 0)
-            * rrt.Complex(t, 0) * rrt.Complex(Math.PI, 0) ** rrt.Complex(Math.PI / 4, 0)
-            * rrt.Complex(Math.exp(-0.5*Math.pow(t, 2)), 0)
-            * ((rrt.Complex(Math.E, 0) ** (rrt.Complex(param, 0) * rrt.Complex(t, 0) * Complex(0, 1))) - rrt.Complex(admCoeff, 0))
+          Complex(norm, 0)
+            * Complex(t, 0) * Complex(Math.PI, 0) ** Complex(Math.PI / 4, 0)
+            * Complex(Math.exp(-0.5*Math.pow(t, 2)), 0)
+            * ((Complex(Math.E, 0) ** (Complex(param, 0) * Complex(t, 0) * Complex(0, 1))) - Complex(admCoeff, 0))
         }
 
 object Morlet:

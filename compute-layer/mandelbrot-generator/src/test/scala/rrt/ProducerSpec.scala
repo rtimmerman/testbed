@@ -25,6 +25,9 @@ import org.mockito.MockedStatic
 import scala.collection.mutable.Queue
 import rrt.ProducerParamsV2Extension.usingPerformancePolicy
 import rrt.ProducerParamsV2Extension.usingNoPolicy
+import rrt.Producer.juliaCenter
+import rrt.linalg.Complex
+import rrt.linalg.MapExtension.asComplex
 
 
 object ParameterSpace extends Tag("rrt.tags.ParameterSpace")
@@ -55,7 +58,7 @@ class ProducerSpec extends AnyFlatSpec with Matchers with LoggingTrait {
   }
 
   "Producer" should "be able to produce neighbour points of fixed size around locus" in {
-    val c = rrt.Complex(0, 0)
+    val c = Complex(0, 0)
     val space = Producer.createSpaceFromPoint(c)
     // left most should be -2-2i
     assert(space(0)(0)("r") == -2)
@@ -71,7 +74,7 @@ class ProducerSpec extends AnyFlatSpec with Matchers with LoggingTrait {
   }
 
   "Producer" should "generate space able to support points of fixed size around locus" in {
-    val c = rrt.Complex(-1, -1)
+    val c = Complex(-1, -1)
     val space = Producer.createSpaceFromPoint(c)
     // left most should be -2-2i
     assert(space(0)(0)("r") == -3)
@@ -151,7 +154,7 @@ class ProducerSpec extends AnyFlatSpec with Matchers with LoggingTrait {
 
     if (paramsBase.version == 2)
         val params = mapper.readValue(yamlText, classOf[ProducerParamsV2]): ProducerParamsV2
-        b = Producer.createSpaceFromPoint(rrt.Complex.fromString(params.coordinate), params.zoomPc, params.neighbourhoodSize)
+        b = Producer.createSpaceFromPoint(Complex.fromString(params.coordinate), params.zoomPc, params.neighbourhoodSize)
         space = params.neighbourhoodSize * params.neighbourhoodSize
     else
         val params = paramsBase
@@ -164,7 +167,7 @@ class ProducerSpec extends AnyFlatSpec with Matchers with LoggingTrait {
   }
 
   "Producer" should "correctly center on a given coordinate in v2 jobs" taggedAs(Navigation) in {
-    val locus = rrt.Complex.fromString("-0.19821982198219823-1.1003100310031004i")
+    val locus = Complex.fromString("-0.19821982198219823-1.1003100310031004i")
 
     val space = Producer.createSpaceFromPoint(locus, 200_000, 160)
     val ctr = space(80)(80)
@@ -175,7 +178,7 @@ class ProducerSpec extends AnyFlatSpec with Matchers with LoggingTrait {
     // this code previews the outcome
     space.foreach(i => {
       i.foreach(r => {
-        val z = rrt.Complex(BigDecimal(r.get("r").get), BigDecimal(r.get("i").get))
+        val z = Complex(BigDecimal(r.get("r").get), BigDecimal(r.get("i").get))
         val n = Consumer.process(z, z, 100)
         if (n > -1) {
           print(List('*', '-', '+', '/')(n % 4))
@@ -284,10 +287,27 @@ class ProducerSpec extends AnyFlatSpec with Matchers with LoggingTrait {
         queue.append(workI.next)
   }
 
+  "Producer" should "succeed in find the midpoint with a partition of julia coordinates" taggedAs Dimensionality in {
+    val space = Producer.createSpaceFromPoint(Complex(0, 0), ball = 16).flatten
+
+    assert(space.map(_.asComplex()).contains(Complex(-2, -2)))
+    // assert((-2, -2) == (space(0)("r"), space(0)("i")))
+    
+    val centerPointInSpace = space(space.length / 2)
+    assert((0, 0) == (centerPointInSpace("r"), centerPointInSpace("i")))
+
+    val ctr = juliaCenter(space)
+    assert(Math.pow(17, 2) == space.length)
+    assert((0, 0) == (ctr.r, ctr.i))
+
+    val ctr2 =juliaCenter(Producer.createSpaceFromPoint(Complex(-2, 6), ball = 16).flatten)
+    assert((-2, 6) == (ctr2.r, ctr2.i))
+  }
+
   "Producer" should "be able to find the julia dimension from a set of coordinate points" taggedAs Dimensionality in {
     // val configFile = System.getProperty("user.dir") + "/src/test/resources/test-work.yml"
     val space = Producer.createSpaceFromPoint(Complex(0, 0), ball=16).flatten
-    val ctr = Producer.juliaCentre(space)
+    val ctr = Producer.juliaCenter(space)
     logger.info(s"julia center is: ${ctr}")
     assert(ctr.r == 0)
     assert(ctr.i == 0)
@@ -296,7 +316,7 @@ class ProducerSpec extends AnyFlatSpec with Matchers with LoggingTrait {
 
     // position one (0) of the tuple is the dimension, position two is the center point.
     val dim = Producer.getJuliaDimension(
-        c = Producer.juliaCentre(Producer.createSpaceFromPoint(Complex(0, -0.4), ball=100).flatten),
+        c = Producer.juliaCenter(Producer.createSpaceFromPoint(Complex(0, -0.4), ball=100).flatten),
         iterations = 100,
         nBoxes = 64
       )
@@ -304,7 +324,7 @@ class ProducerSpec extends AnyFlatSpec with Matchers with LoggingTrait {
     logger.atInfo.log(s"lowest dimension using 64 boxes is: $dim")
     assert(2 > dim)
 
-    val ctr2 = Producer.juliaCentre(Producer.createSpaceFromPoint(Complex(-1.3, -1.3), ball=100).flatten)
+    val ctr2 = Producer.juliaCenter(Producer.createSpaceFromPoint(Complex(-1.3, -1.3), ball=100).flatten)
     logger.atInfo.log(f"Julia set central coordinate: ${ctr2.toString()}")
     logger.atInfo.log("Average dimension testing----")
     var dims =  List(4, 16, 64).map(n => Producer.getJuliaDimension(

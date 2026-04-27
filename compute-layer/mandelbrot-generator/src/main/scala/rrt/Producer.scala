@@ -234,6 +234,7 @@ object Producer extends KafkaTrait {
       // var centreDimensionMap: scala.collection.mutable.Map[String, JuliaDimensionResult] = scala.collection.mutable.Map()
       def dispatch(batch: Array[Map[String, Double]], number: Int): Future[DispatchResult[JuliaDimensionResult]] =
         val topic = s"${params.topicPrefix}-${number}"
+        logger.info(s"This batch (# $number) contains ${batch.length} entries.")
 
         Future {
           val kafkaProducer = producerFactory(s"transaction-$number")
@@ -260,11 +261,11 @@ object Producer extends KafkaTrait {
           })
           kafkaProducer.close
 
-          logger.info(s"Creating dispatch result: batch contains ${batch.length} entries.")
+          logger.info(s"(Batch # $number) Creating dispatch result")
           DispatchResult(
-            message = s"Sent ${batch.length} entries to topic: $topic)",
+            message = s"(Batch # $number) Sent ${batch.length} entries to topic: $topic)",
             juliaDimensionResult = params match
-              case p: ProducerParamsV2 if p.usingJuliaPolicy => {
+              case p: ProducerParamsV2 if p.usingJuliaPolicy && batch.length > 0 => {
                 val ctr = Producer.juliaCenter(batch)
                 JuliaDimensionResult(
                   getJuliaDimension(ctr, p.iterations, p.neighbourhoodSize),
@@ -276,7 +277,10 @@ object Producer extends KafkaTrait {
         }
         
       logger.info("Dispatching...") 
-      val dispatchFuture = (0 to batches.length - 1).map(i => dispatch(batches(i), i))
+      val dispatchFuture = (0 to batches.length - 1).map(i => {
+        logger.info(s"Batch $i / ${batches.length}")
+        dispatch(batches(i), i)
+      })
       dispatchResults = Await.result(Future.sequence(dispatchFuture), scala.concurrent.duration.Duration.Inf)
       
       // **** Load Balancing ****

@@ -331,7 +331,7 @@ object Producer extends KafkaTrait {
       if (params.usingJuliaPolicy)
         var runsRemaining = params.policy.juliaPolicy.maxTries.toInt
         while runsRemaining > 0 do
-          logger.info(s"Re-running: ${runsRemaining - 1 } run/s to go...")
+          logger.info(s"Re-running: ${runsRemaining} run/s to go...")
           val policy = rrt.policy.Julia(params, result)
           val rerunParams = policy.onPostDispatchEvaluation()
           result = gridWorkStream(

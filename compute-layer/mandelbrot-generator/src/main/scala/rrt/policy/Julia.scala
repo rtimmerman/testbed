@@ -25,7 +25,7 @@ class Julia(val params: ProducerParamsV2, var dispatchResults: List[DispatchResu
      */
     def onPostDispatchEvaluation(): ProducerParamsV2 =
         val waitTime = params.policy.juliaPolicy.tryIntervalSec * 1000
-        logger.info(s"Dispatch complete, waiting ${waitTime} secs for work to complete")
+        logger.info(s"Dispatch complete, waiting ${waitTime} microseconds for work to complete")
         Thread.sleep(waitTime)
     
         logger.info("Finding result nearest to stable region...")

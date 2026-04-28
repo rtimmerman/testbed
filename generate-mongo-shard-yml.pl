@@ -117,7 +117,7 @@ data:
 
     print("installing cartToPol fn");
 
-      var out = db.system.js.save({
+      var out = db.system.js.insertOne({
         _id: 'cartToPol',
         value: function (x, y, width, height) {
             return {
@@ -131,7 +131,7 @@ data:
 
     print("installing mandelbrot fn");
 
-    var out = db.system.js.save({
+    var out = db.system.js.insertOne({
       _id: 'mandelbrot',
       value: function (z, c, iterations) {
           if (iterations == 0) {
@@ -162,7 +162,7 @@ metadata:
   namespace: dev
 data:
   app-support-pri.sh: |
-    pip3 install psutil
+    #pip3 install psutil
     mkdir -p /filestore/data/%ID%-pri
     mongod --bind_ip_all &
     sleep 3

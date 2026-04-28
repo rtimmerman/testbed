@@ -316,7 +316,7 @@ data:
     mongod --bind_ip_all &
     #mongo --norc --nodb --tls --tlsCertificateKeyFile /kickstart/config-server.pem --tlsCAFile /kickstart/root-ca.pem /kickstart/add-user.js
     mongosh --norc /kickstart/add-user.js
-    killall mongod
+    kill -9 $(ps aux | grep mongod | grep bind_ip_all | awk '{print $2}')
     mongod --configsvr \
     --replSet configServerRS \
     --tlsMode requireTLS \

@@ -64,7 +64,7 @@ data:
 
     print("installing cartToPol fn");
 
-      var out = db.system.js.save({
+      var out = db.system.js.insertOne({
         _id: 'cartToPol',
         value: function (x, y, width, height) {
             return {
@@ -78,7 +78,7 @@ data:
 
     print("installing mandelbrot fn");
 
-    var out = db.system.js.save({
+    var out = db.system.js.insertOne({
       _id: 'mandelbrot',
       value: function (z, c, iterations) {
           if (iterations == 0) {
@@ -109,7 +109,7 @@ metadata:
   namespace: dev
 data:
   app-support-pri.sh: |
-    pip3 install psutil
+    #pip3 install psutil
     mkdir -p /filestore/data/duncan-pri
     mongod --bind_ip_all &
     sleep 3
@@ -132,14 +132,14 @@ data:
     tar -zxf /filestore/node_exporter-1.0.1.linux-amd64.tar.gz
     ./node_exporter-1.0.1.linux-amd64/node_exporter --web.listen-address=0.0.0.0:9091
   app-support-sec-1.sh: |
-    pip3 install psutil
+    #pip3 install psutil
     mkdir -p /filestore/data/duncan-sec-1
     mongod --clusterAuthMode x509 --tlsMode requireTLS --tlsCertificateKeyFile /kickstart/duncan-sec-1.pem --tlsCAFile /kickstart/root-ca.pem --shardsvr --replSet duncan.rs --bind_ip_all --dbpath /filestore/data/duncan-sec-1 &
     cd $HOME
     tar -zxf /filestore/node_exporter-1.0.1.linux-amd64.tar.gz
     ./node_exporter-1.0.1.linux-amd64/node_exporter --web.listen-address=0.0.0.0:9091
   app-support-sec-2.sh: |
-    pip3 install psutil
+    #pip3 install psutil
     mkdir -p /filestore/data/duncan-sec-2
     mongod --clusterAuthMode x509 --tlsMode requireTLS --tlsCertificateKeyFile /kickstart/duncan-sec-2.pem --tlsCAFile /kickstart/root-ca.pem --shardsvr --replSet duncan.rs --bind_ip_all --dbpath /filestore/data/duncan-sec-2 &
     cd $HOME

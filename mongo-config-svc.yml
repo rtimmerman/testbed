@@ -43,7 +43,7 @@ spec:
             defaultMode: 0777
         - name: filestore
           nfs:
-            server: ${HOST}
+            server: ${HOSTNAME}
             path: /experiment-data
             readOnly: false
       # nodeSelector:
@@ -129,7 +129,7 @@ spec:
             defaultMode: 0777
         - name: filestore
           nfs:
-            server: ${HOST}
+            server: ${HOSTNAME}
             path: /experiment-data
             readOnly: false
           # - '/var/lib/mongod'
@@ -221,7 +221,7 @@ spec:
             defaultMode: 0777
         - name: filestore
           nfs:
-            server: ${HOST}
+            server: ${HOSTNAME}
             path: /experiment-data
             readOnly: false
             #     nodeSelector:

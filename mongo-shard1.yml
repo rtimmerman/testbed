@@ -982,7 +982,7 @@ spec:
         volumes:
           - name: filestore
             nfs:
-              server: ${HOST}
+              server: ${HOSTNAME}
               path: /experiment-data
               readOnly: false
         affinity:
@@ -1044,7 +1044,7 @@ spec:
             defaultMode: 0777
         - name: filestore
           nfs:
-            server: ${HOST}
+            server: ${HOSTNAME}
             path: /experiment-data
             readOnly: false
         # - name: filestore
@@ -1112,7 +1112,7 @@ spec:
             defaultMode: 0777
         - name: filestore
           nfs:
-            server: ${HOST}
+            server: ${HOSTNAME}
             path: /experiment-data
             readOnly: false
       affinity:

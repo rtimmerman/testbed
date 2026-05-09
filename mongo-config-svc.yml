@@ -114,9 +114,9 @@ spec:
             - '--tlsCAFile'
             - '/kickstart/root-ca.pem'
             - '--tlsAllowInvalidCertificates'
+            - '--dbpath /filestore/data/config-svr-2'
             - '--bind_ip'
             - '*'
-            - '--dbpath /filestore/data/config-svr-2'
           volumeMounts:
             - name: kickstart-dir
               mountPath: /kickstart/
@@ -205,9 +205,9 @@ spec:
             - '--tlsCAFile'
             - '/kickstart/root-ca.pem'
             - '--sslAllowInvalidCertificates'
+            - '--dbpath /filestore/data/config-svr-3'
             - '--bind_ip'
             - '*'
-            - '--dbpath /filestore/data/config-svr-3'
             #- '/var/lib/mongod'
           volumeMounts:
             - name: kickstart-dir
@@ -300,8 +300,8 @@ data:
     --tlsCertificateKeyFile /kickstart/config-server.pem \
     --tlsCAFile /kickstart/root-ca.pem \
     --tlsAllowInvalidCertificates \
+    --dbpath /filestore/data/config-svr-1 \
     --bind_ip \* \
-    --dbpath /filestore/data/config-svr-1
   add-user.js: |
     // wait for mongod to be present...
     var conn;

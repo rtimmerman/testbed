@@ -34,11 +34,18 @@ spec:
           volumeMounts:
             - name: kickstart-dir
               mountPath: /kickstart/
+            - name: filestore
+              mountPath: /filestore/
       volumes:
         - name: kickstart-dir
           configMap:
             name: rs-config
             defaultMode: 0777
+        - name: filestore
+          nfs:
+            server: ${HOST}
+            path: /experiment-data
+            readOnly: false
       # nodeSelector:
       #   role: general-services
       affinity:
@@ -109,15 +116,22 @@ spec:
             - '--tlsAllowInvalidCertificates'
             - '--bind_ip'
             - '*'
-            # - '--dbpath'
+            - '--dbpath /filestore/data/config-svr-2'
           volumeMounts:
             - name: kickstart-dir
               mountPath: /kickstart/
+            - name: filestore
+              mountPath: /filestore/
       volumes:
         - name: kickstart-dir
           configMap:
             name: rs-config
             defaultMode: 0777
+        - name: filestore
+          nfs:
+            server: ${HOST}
+            path: /experiment-data
+            readOnly: false
           # - '/var/lib/mongod'
           #      nodeSelector:
           #cloud.google.com/gke-nodepool: default-pool
@@ -193,16 +207,23 @@ spec:
             - '--sslAllowInvalidCertificates'
             - '--bind_ip'
             - '*'
-            #- '--dbpath'
+            - '--dbpath /filestore/data/config-svr-3'
             #- '/var/lib/mongod'
           volumeMounts:
             - name: kickstart-dir
               mountPath: /kickstart/
+            - name: filestore
+              mountPath: /filestore/
       volumes:
         - name: kickstart-dir
           configMap:
             name: rs-config
             defaultMode: 0777
+        - name: filestore
+          nfs:
+            server: ${HOST}
+            path: /experiment-data
+            readOnly: false
             #     nodeSelector:
             #cloud.google.com/gke-nodepool: default-pool
       affinity:
@@ -279,7 +300,8 @@ data:
     --tlsCertificateKeyFile /kickstart/config-server.pem \
     --tlsCAFile /kickstart/root-ca.pem \
     --tlsAllowInvalidCertificates \
-    --bind_ip \*
+    --bind_ip \* \
+    --dbpath /filestore/data/config-svr-1
   add-user.js: |
     // wait for mongod to be present...
     var conn;

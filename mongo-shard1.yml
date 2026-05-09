@@ -110,7 +110,7 @@ metadata:
 data:
   app-support-pri.sh: |
     #pip3 install psutil
-    mkdir -p /filestore/data/arnold-pri
+    # mkdir -p /filestore/data/arnold-pri # ideally this should available via NFS
     mongod --bind_ip_all &
     sleep 3
     mongosh --norc /kickstart/add-user.js
@@ -133,14 +133,14 @@ data:
     ./node_exporter-1.0.1.linux-amd64/node_exporter --web.listen-address=0.0.0.0:9091
   app-support-sec-1.sh: |
     #pip3 install psutil
-    mkdir -p /filestore/data/arnold-sec-1
+    # mkdir -p /filestore/data/arnold-sec-1
     mongod --clusterAuthMode x509 --tlsMode requireTLS --tlsCertificateKeyFile /kickstart/arnold-sec-1.pem --tlsCAFile /kickstart/root-ca.pem --shardsvr --replSet arnold.rs --bind_ip_all --dbpath /filestore/data/arnold-sec-1 &
     cd $HOME
     tar -zxf /filestore/node_exporter-1.0.1.linux-amd64.tar.gz
     ./node_exporter-1.0.1.linux-amd64/node_exporter --web.listen-address=0.0.0.0:9091
   app-support-sec-2.sh: |
     #pip3 install psutil
-    mkdir -p /filestore/data/arnold-sec-2
+    # mkdir -p /filestore/data/arnold-sec-2
     mongod --clusterAuthMode x509 --tlsMode requireTLS --tlsCertificateKeyFile /kickstart/arnold-sec-2.pem --tlsCAFile /kickstart/root-ca.pem --shardsvr --replSet arnold.rs --bind_ip_all --dbpath /filestore/data/arnold-sec-2 &
     cd $HOME
     tar -zxf /filestore/node_exporter-1.0.1.linux-amd64.tar.gz
@@ -977,6 +977,14 @@ spec:
                 mountPath: /config/
               - name: kickstart-arnold
                 mountPath: /kickstart/
+              - mount: filestore
+                mountPath: /filestore/
+        volumes:
+          - name: filestore
+            nfs:
+              server: ${HOST}
+              path: /experiment-data
+              readOnly: false
         affinity:
           nodeAffinity:
             requiredDuringSchedulingIgnoredDuringExecution:
@@ -1027,13 +1035,18 @@ spec:
           volumeMounts:
             - name: kickstart-arnold
               mountPath: /kickstart/
-            # - name: filestore
-              # mountPath: /filestore/
+            - name: filestore
+              mountPath: /filestore/
       volumes:
         - name: kickstart-arnold
           configMap:
             name: kickstart-arnold
             defaultMode: 0777
+        - name: filestore
+          nfs:
+            server: ${HOST}
+            path: /experiment-data
+            readOnly: false
         # - name: filestore
           # hostPath:
           #  path: /home/roderick/experiment-data
@@ -1088,12 +1101,20 @@ spec:
           volumeMounts:
             - name: kickstart-arnold
               mountPath: /kickstart/
+            - name: filestore
+              mountPath: filestore
+
+
       volumes:
         - name: kickstart-arnold
           configMap:
             name: kickstart-arnold
             defaultMode: 0777
-
+        - name: filestore
+          nfs:
+            server: ${HOST}
+            path: /experiment-data
+            readOnly: false
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:

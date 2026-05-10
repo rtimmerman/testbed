@@ -363,6 +363,11 @@ data:
     });
 
     printjson(result);
+  waitscript.sh: |
+    nc -z config-server-svc-1 27019 \
+    && nc -z config-server-svc-2 27019 \
+    && nc -z config-server-svc-3 27019; \
+    mongosh --tls --tlsAllowInvalidCertificates --tlsCertificateKeyFile /kickstart/config-server.pem --tlsCAFile /kickstart/root-ca.pem --host config-server-svc-1 --authenticationDatabase '$external' --authenticationMechanism MONGODB-X509 --port 27019 /kickstart/shard-configdb.js 
   waitscript.pl: |
     use Socket;
 
@@ -963,7 +968,8 @@ spec:
   containers:
     - name: configurator-container
       image: mongo
-      command: ['/usr/bin/perl', '/kickstart/waitscript.pl']
+      # command: ['/usr/bin/perl', '/kickstart/waitscript.pl']
+      command: ['/bin/sh', '/kickstart/waitscript.sh']
       volumeMounts:
         - name: kickstart-dir
           mountPath: /kickstart/

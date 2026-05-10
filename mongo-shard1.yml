@@ -959,8 +959,11 @@ spec:
             configMap:
               name: kickstart-arnold
               defaultMode: 0777
-            #persistentVolumeClaim:
-            #  claimName: filestore 
+          - name: filestore
+            nfs:
+              server: ${HOSTNAME}
+              path: /experiment-data
+              readOnly: false
         containers:
           - image: localhost:32000/mongo-cst:1.0
             imagePullPolicy: Always
@@ -979,12 +982,6 @@ spec:
                 mountPath: /kickstart/
               - name: filestore
                 mountPath: /filestore/
-        volumes:
-          - name: filestore
-            nfs:
-              server: ${HOSTNAME}
-              path: /experiment-data
-              readOnly: false
         affinity:
           nodeAffinity:
             requiredDuringSchedulingIgnoredDuringExecution:

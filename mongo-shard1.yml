@@ -977,7 +977,7 @@ spec:
                 mountPath: /config/
               - name: kickstart-arnold
                 mountPath: /kickstart/
-              - mount: filestore
+              - name: filestore
                 mountPath: /filestore/
         volumes:
           - name: filestore

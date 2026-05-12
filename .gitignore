@@ -22,7 +22,7 @@ data/
 **/target/
 *.png
 *.jp*g
-*.jar
+**/*.jar
 **/kafka/kafka*
 **/node_modules
 **/.venv/

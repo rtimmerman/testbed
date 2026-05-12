@@ -962,7 +962,7 @@ spec:
           - name: filestore
             nfs:
               server: ${HOSTNAME}
-              path: /experiment-data
+              path: /filestore/data/arnold-pri
               readOnly: false
         containers:
           - image: localhost:32000/mongo-cst:1.0
@@ -1042,7 +1042,7 @@ spec:
         - name: filestore
           nfs:
             server: ${HOSTNAME}
-            path: /experiment-data
+            path: /filestore/data/arnold-sec-1
             readOnly: false
         # - name: filestore
           # hostPath:
@@ -1110,7 +1110,7 @@ spec:
         - name: filestore
           nfs:
             server: ${HOSTNAME}
-            path: /experiment-data
+            path: /filestore/data/arnold-sec-2
             readOnly: false
       affinity:
         nodeAffinity:

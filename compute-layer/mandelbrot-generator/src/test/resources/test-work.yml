@@ -25,3 +25,8 @@ policy:
     max_eval_units: 15000
     # The time between each try
     try_interval_sec: 10 # 10 secs (for testing)
+  julia:
+    max_tries: 4
+    max_eval_units: 4
+    try_interval_sec: 1 # e.g. set purposefully low for testing
+    dimension_tendency: Max # the higher the better (prefer higher connectivity).    

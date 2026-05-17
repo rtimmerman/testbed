@@ -81,3 +81,7 @@ object MapExtension:
     extension (m: Map[String, Double])
         def asComplex() =
             Complex(m("r"), m("i"))
+
+object StringExtension:
+    extension (s: String)
+        inline def asComplex: Complex = Complex.fromString(s)

@@ -33,13 +33,13 @@ class Julia(val params: ProducerParamsV2, var dispatchResults: List[DispatchResu
         logger.info("Finding result nearest to stable region...")
 
         val nodeCenterDimensions: List[JuliaDimensionResult] = dispatchResults.map(_.juliaDimensionResult)
-        val closestCentre: JuliaDimensionResult = nodeCenterDimensions.maxBy(_.dim)
+        val closestCenter: JuliaDimensionResult = nodeCenterDimensions.maxBy(_.dim)
 
         // determine zoom-out factor
         // if the all of the dimensions in the set are less than 1 then zoom out of the set
-        val zoom: Int = if (closestCentre.dim < 1) {
+        val zoom: Int = if (closestCenter.dim < 1) {
             val zoom = params.zoomPc / 1e3
-            logger.info(s"The closest dimension is less than 1 (${closestCentre.dim}) indicating dusting or tending to infinity, zooming out to find stability ")
+            logger.info(s"The closest dimension is less than 1 (${closestCenter.dim}) indicating dusting or tending to infinity, zooming out to find stability ")
             logger.info(s"Previous zoom: ${params.zoomPc}, new zoom: ${zoom}")
             zoom.toInt
         } else { // zoom out by factor of 1000
@@ -52,19 +52,20 @@ class Julia(val params: ProducerParamsV2, var dispatchResults: List[DispatchResu
                 .sum()
                 / nodeCenterDimensions.length
             val dimensionSD = Math.sqrt(dimensionVariance)
+            logger.info(s"Dimension standard deviation: $dimensionSD")
 
             val zoom = params.zoomPc * 1e3
             logger.info(s"Zooming in: from ${params.zoomPc} to new zoom level: ${zoom}")
             // if the s.d is over 50% then variance is considerable so zoom-in
-            if (dimensionSD / dimensionMean >= 0.5) zoom.toInt else params.zoomPc
+            if (dimensionSD >= 0.01) zoom.toInt else params.zoomPc
         }
 
-        logger.info(s"Closest centre given is ${closestCentre.centre.toString}")
+        logger.info(s"Closest center given is ${closestCenter.center.toString}")
         // update the parameters to have one less try, rebalancing can change the dimTendency, but for now
         // change the kubernetes capacity instead.
         // move the centre to the one closest to stability
         val updatedParams = params.copy(
-            coordinate = closestCentre.centre.toString,
+            coordinate = closestCenter.center.toString,
             zoomPc = zoom,
             policy = ProducerWorkPolicy(
                 juliaPolicy = JuliaPolicy(

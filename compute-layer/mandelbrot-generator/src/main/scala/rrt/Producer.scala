@@ -340,7 +340,7 @@ object Producer extends KafkaTrait {
               producer.initTransactions
               producer
             },
-            params
+            rerunParams
           )
 
           runsRemaining -= 1
